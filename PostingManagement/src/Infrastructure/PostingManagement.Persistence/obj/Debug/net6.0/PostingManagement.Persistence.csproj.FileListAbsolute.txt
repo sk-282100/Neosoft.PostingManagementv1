@@ -1,0 +1,34 @@
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Persistence.deps.json
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Persistence.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Persistence.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Application.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Domain.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Application.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Domain.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.csproj.AssemblyReference.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.AssemblyInfoInputs.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.AssemblyInfo.cs
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.csproj.CoreCompileInputs.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.csproj.CopyComplete
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\refint\PostingManagement.Persistence.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\ref\PostingManagement.Persistence.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Persistence.deps.json
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Persistence.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Persistence.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Application.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Domain.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Application.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\bin\Debug\net6.0\PostingManagement.Domain.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.csproj.AssemblyReference.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.AssemblyInfoInputs.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.AssemblyInfo.cs
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.csproj.CopyComplete
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\refint\PostingManagement.Persistence.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\PostingManagement.Persistence.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Persistence\obj\Debug\net6.0\ref\PostingManagement.Persistence.dll

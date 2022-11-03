@@ -1,0 +1,38 @@
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.deps.json
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.runtimeconfig.json
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Application.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Domain.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Application.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Domain.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.csproj.AssemblyReference.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.AssemblyInfoInputs.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.AssemblyInfo.cs
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.csproj.CoreCompileInputs.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.csproj.CopyComplete
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\refint\PostingManagement.Auth.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.genruntimeconfig.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\ref\PostingManagement.Auth.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.deps.json
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.runtimeconfig.json
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Auth.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Application.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Domain.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Application.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\bin\Debug\net6.0\PostingManagement.Domain.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.csproj.AssemblyReference.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.AssemblyInfoInputs.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.AssemblyInfo.cs
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.csproj.CoreCompileInputs.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.csproj.CopyComplete
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\refint\PostingManagement.Auth.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\PostingManagement.Auth.genruntimeconfig.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Infrastructure\PostingManagement.Auth\obj\Debug\net6.0\ref\PostingManagement.Auth.dll

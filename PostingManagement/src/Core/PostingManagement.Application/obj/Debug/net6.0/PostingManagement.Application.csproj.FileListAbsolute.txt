@@ -1,0 +1,30 @@
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Application.deps.json
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Application.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Application.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Domain.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Domain.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.csproj.AssemblyReference.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.AssemblyInfoInputs.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.AssemblyInfo.cs
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.csproj.CoreCompileInputs.cache
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.csproj.CopyComplete
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\refint\PostingManagement.Application.dll
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.pdb
+D:\Projects\Neo\PM training\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\ref\PostingManagement.Application.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Application.deps.json
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Application.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Application.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Domain.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\bin\Debug\net6.0\PostingManagement.Domain.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.csproj.AssemblyReference.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.AssemblyInfoInputs.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.AssemblyInfo.cs
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.csproj.CoreCompileInputs.cache
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.csproj.CopyComplete
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\refint\PostingManagement.Application.dll
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\PostingManagement.Application.pdb
+C:\Users\user\Downloads\Posting Management v1\Posting Management v1\PostingManagement\PostingManagement\src\Core\PostingManagement.Application\obj\Debug\net6.0\ref\PostingManagement.Application.dll
