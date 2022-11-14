@@ -31,7 +31,7 @@ namespace PostingManagement.UI.Services.HomeService
         //        new MediaTypeWithQualityHeaderValue("application/json"));
         //}
 
-
+         
 
         public async Task<string>  DemoService()
         {
