@@ -35,7 +35,7 @@ namespace PostingManagement.UI.Controllers
                 this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please enter the security code as a number.");
                 return View(model);
             }
-            return RedirectToAction("ExcelUpload", "Posting");
+            return RedirectToAction("EmployeeMasterUpload", "Posting");
             // Save model
             //using (var httpClient = new HttpClient(_clientHandler))
             //{
