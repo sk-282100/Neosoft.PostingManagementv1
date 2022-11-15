@@ -1,0 +1,270 @@
+﻿@model PostingManagement.UI.Models.ExcelUploadViewModel
+
+@{
+    ViewData["Title"] = "BranchMasterUpload";
+}
+@*
+<h1>BranchMasterUpload</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="BranchMasterUpload">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FileType" class="control-label"></label>
+                <select asp-for="FileType" class="form-control" >
+                    <option value="BranchMaster">BranchMaster</option>
+                    <option value="EmployeeMaster">EmployeeMaster</option>
+                    <option value="InterRegionalPromotion">InterRegionalPromotion</option>
+                    <option value="InterRegionRequestTransfer">InterRegionRequestTransfer</option>
+                    <option value="InterZonalPromotion">InterZonalPromotion</option>
+                    <option value="InterZonalRequestTransfer">InterZonalRequestTransfer</option>
+                    <option value="RegionMaster">RegionMaster</option>
+                    <option value="ZoneMaster">ZoneMaster</option>
+                    <option value="DepartmentMaster">DepartmentMaster</option>
+
+                </select>
+                <span asp-validation-for="FileType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExcelFile" class="control-label"></label>
+                
+                <input asp-for="ExcelFile" type="file" style="width:100%" class="form-control custome-file-input" />
+                <span asp-validation-for="ExcelFile" class="text-danger" id="ResumePathError"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+*@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>@ViewData["Title"] - UI.PostingManagement</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    
+    <!-- Vendor CSS Files -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!---Partial View Ajax Call->
+   <!-- Template Main CSS File -->
+    <link href="css/style.css" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a asp-action="MainView" class="logo d-flex align-items-center">
+                <img src="img/logo.png" alt="">
+                <span class="d-none d-lg-block">PostingManagement</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>Kevin Anderson</h6>
+                            <span>Web Designer</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Need Help?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->@*<a href="c:\users\user\source\repos\neo.postingmanagementtool\postingmanagement\ui.postingmanagement\views\shared\error.cshtml">c:\users\user\source\repos\neo.postingmanagementtool\postingmanagement\ui.postingmanagement\views\shared\error.cshtml</a>
+        *@
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-heading">Pages</li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-action="ExcelUpload" asp-controller="Posting">
+                    <i class="bi bi-person"></i>
+                    <span>Excel Upload</span>
+                </a>
+            </li><!-- End Branch Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" >
+                    <i class="bi bi-person"></i>
+                    <span>Requests</span>
+                </a>
+            </li><!-- End Inter Zonal Page Nav -->
+
+            
+        </ul>
+    </aside><!-- End Sidebar-->
+
+
+    <main id="main" class="main">
+
+
+            
+            <div class="pagetitle">
+                <h1>Dashboard</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Pages</li>
+                        <li class="breadcrumb-item ">Dashboard</li>
+                        <li class="breadcrumb-item active">ExcelUpload</li>
+                    </ol>
+                </nav>
+
+                <div class="container">
+
+                    <h1>ExcelUpload</h1>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4">
+                        <form enctype="multipart/form-data" asp-action="ExcelUpload">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="FileType" class="control-label"></label>
+                                    <select asp-for="FileType" class="form-control">
+                                        <option value="BranchMaster">BranchMaster</option>
+                                        <option value="EmployeeMaster">EmployeeMaster</option>
+                                        <option value="InterRegionalPromotion">InterRegionalPromotion</option>
+                                        <option value="InterRegionRequestTransfer">InterRegionRequestTransfer</option>
+                                        <option value="InterZonalPromotion">InterZonalPromotion</option>
+                                        <option value="InterZonalRequestTransfer">InterZonalRequestTransfer</option>
+                                        <option value="RegionMaster">RegionMaster</option>
+                                        <option value="ZoneMaster">ZoneMaster</option>
+                                        <option value="DepartmentMaster">DepartmentMaster</option>
+
+                                    </select>
+                                    <span asp-validation-for="FileType" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ExcelFile" class="control-label"></label>
+
+                                    <input asp-for="ExcelFile" type="file" style="width:100%" class="form-control custome-file-input" />
+                                    <span asp-validation-for="ExcelFile" class="text-danger" id="ResumePathError"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div><!-- End Page Title -->
+        @if (ViewBag.ExcelUploadResponse!=null){
+            @if (ViewBag.ExcelUploadResponse.UploadStatus == "Success")
+            {
+                <h4 class="txt-success p-3 d-flex align-items-center">@ViewBag.ExcelUploadResponse.SuccessCount</h4>
+            }
+            else 
+            {
+                <h4 class="txt-danger p-3 d-flex align-items-center">Uploading Failed</h4>
+
+            };
+        }
+        
+
+
+
+        
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>PostingManagement</span></strong>. All Rights Reserved
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    @*<a asp-route="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>*@
+</body>
+
+</html>
+
+
+
+
+

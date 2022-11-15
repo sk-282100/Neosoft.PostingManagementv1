@@ -20,8 +20,7 @@ namespace WebApplication1.Controllers
          var result =  await homeService.DemoService();
             ViewBag.Result = result;
             return View();
-        }     
-          
+        }
 
         public IActionResult Privacy()
         {
