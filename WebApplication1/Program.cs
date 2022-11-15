@@ -1,3 +1,5 @@
+using PostingManagement.UI.Services.ExcelUploadService.Contracts;
+using PostingManagement.UI.Services.ExcelUploadService;
 using PostingManagement.UI.Services.HomeService;
 using PostingManagement.UI.Services.HomeService.Contracts;
 
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeService, Homeservice>();
+builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 //builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<HttpClientHandler>();
 var app = builder.Build();
