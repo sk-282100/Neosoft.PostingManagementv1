@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
             ViewBag.Result = result;
             return View();
         }
-
+          
         public IActionResult Privacy()
         {
             return View();
