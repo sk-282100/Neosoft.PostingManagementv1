@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj": {}
+    "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj": {
+    "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj",
         "projectName": "PostingManagement.Application",
-        "projectPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Application\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,15 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.devexpress.com/3iBiihdRyg39797kuly9xfj5tByxAoGIk1l1jetQ3Txc5idPMA/api": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {
-                "projectPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj"
+              "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj"
               }
             }
           }
@@ -109,20 +110,21 @@
         }
       }
     },
-    "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {
+    "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
         "projectName": "PostingManagement.Domain",
-        "projectPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Domain\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -130,8 +132,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.devexpress.com/3iBiihdRyg39797kuly9xfj5tByxAoGIk1l1jetQ3Txc5idPMA/api": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -174,20 +176,21 @@
         }
       }
     },
-    "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj": {
+    "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj",
         "projectName": "PostingManagement.Infrastructure",
-        "projectPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\PostingManagement.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -195,15 +198,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.devexpress.com/3iBiihdRyg39797kuly9xfj5tByxAoGIk1l1jetQ3Txc5idPMA/api": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj": {
-                "projectPath": "D:\\Projects\\Neo\\PM training\\Project\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj"
+              "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Application\\PostingManagement.Application.csproj"
               }
             }
           }

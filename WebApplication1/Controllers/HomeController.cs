@@ -17,11 +17,11 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> Index()
         {
-         var result =  await homeService.DemoService();
+            var result = await homeService.DemoService();
             ViewBag.Result = result;
             return View();
         }
-
+          
         public IActionResult Privacy()
         {
             return View();

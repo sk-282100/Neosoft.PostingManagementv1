@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeService, Homeservice>();
+builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 //builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<HttpClientHandler>();

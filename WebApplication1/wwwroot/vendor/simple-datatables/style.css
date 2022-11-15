@@ -35,10 +35,15 @@
 
 .dataTable-info {
 	margin: 7px 0;
+
+/* PAGER */
+.dataTable-pagination ul {
+
 }
 
 /* PAGER */
 .dataTable-pagination ul {
+
 	margin: 0;
 	padding-left: 0;
 }
@@ -171,3 +176,4 @@
 	content: " ";
 	display: table;
 }
+

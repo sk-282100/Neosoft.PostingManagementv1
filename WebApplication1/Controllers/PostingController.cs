@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models;
+using PostingManagement.UI.Models.ExcelFileTypes;
 using PostingManagement.UI.Services.ExcelUploadService.Contracts;
 
 namespace PostingManagement.UI.Controllers
@@ -14,8 +15,9 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ExcelUpload()
+        public async Task<IActionResult> EmployeeMasterUpload()
         {
+            ViewBag.ExcelUploadFiletype = "EmployeeMaster";
             return View();
         }
 
@@ -24,11 +26,8 @@ namespace PostingManagement.UI.Controllers
         {
             string uploadedBy = "AdminDarshan";
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
-            
-                ViewBag.ExcelUploadResponse= responseModel.Data;
-            
-            
+            ViewBag.ExcelUploadResponse = responseModel.Data;
             return View();
-        }
+        }         
     }
 }

@@ -70,6 +70,7 @@ h6 {
     display: flex;
 }
 
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -102,6 +103,7 @@ h6 {
         visibility: visible;
         opacity: 1;
     }
+
 
 /*--------------------------------------------------------------
 # Override some default Bootstrap stylings
@@ -413,7 +415,6 @@ h6 {
         cursor: pointer;
         color: #012970;
     }
-
     .header .search-bar {
         min-width: 360px;
         padding: 0 20px;

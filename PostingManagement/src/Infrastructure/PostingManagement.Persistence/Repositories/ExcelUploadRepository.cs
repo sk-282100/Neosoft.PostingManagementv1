@@ -19,7 +19,7 @@ namespace PostingManagement.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-
+        
         public async Task<ExcelUploadResult> AddAsync<T>(string uploadedBy, List<T> excelData ,string fileName) 
         {
             DataTable dataTable = new DataTable(typeof(T).Name);

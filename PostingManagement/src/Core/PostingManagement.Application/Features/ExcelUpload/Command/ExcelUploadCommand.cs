@@ -13,7 +13,6 @@ namespace PostingManagement.Application.Features.ExcelUpload.Command
     {
         public string UploadedBy { get; set; }
         public string FileName { get;set; }
-        public List<T> ExcelDataList { get; set; }
-        
+        public List<T> ExcelDataList { get; set; }        
     }
 }

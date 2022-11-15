@@ -16,7 +16,7 @@ namespace PostingManagement.Application.Features.ExcelUpload.BaseExcelUploadComm
     {
         private readonly IExcelUploadRepository _repository;
         private readonly IMapper _mapper;
-        public BaseExcelUploadCommandHandler(IExcelUploadRepository repository,IMapper mapper)
+        public BaseExcelUploadCommandHandler(IExcelUploadRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -24,7 +24,7 @@ namespace PostingManagement.Application.Features.ExcelUpload.BaseExcelUploadComm
 
         public async Task<Response<ExcelUploadDto>> Handle(ExcelUploadCommand<T> request, CancellationToken cancellationToken)
         {
-            ExcelUploadResult excelUploadResult = await _repository.AddAsync(request.UploadedBy, request.ExcelDataList,request.FileName);
+            ExcelUploadResult excelUploadResult = await _repository.AddAsync(request.UploadedBy, request.ExcelDataList, request.FileName);
 
             return new Response<ExcelUploadDto>(_mapper.Map<ExcelUploadDto>(excelUploadResult), "");
         }
