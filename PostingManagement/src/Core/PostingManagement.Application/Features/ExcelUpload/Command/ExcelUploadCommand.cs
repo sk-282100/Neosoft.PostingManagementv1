@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Features.ExcelUpload.Command
 {
-    public class ExcelUploadCommand<T> : IRequest<Response<ExcelUploadDto>>
+    public  class ExcelUploadCommand<T>:IRequest<Response<ExcelUploadDto>>
     {
         public string UploadedBy { get; set; }
-        public string FileName { get; set; }
-        public List<T> ExcelDataList { get; set; }
-
+        public string FileName { get;set; }
+        public List<T> ExcelDataList { get; set; }        
     }
 }

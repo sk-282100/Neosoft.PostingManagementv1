@@ -1,3 +1,4 @@
+
 ﻿using PostingManagement.Application.Features.ExcelUpload.Command;
 using PostingManagement.Domain.Entities;
 using System;
@@ -10,6 +11,7 @@ namespace PostingManagement.Application.Contracts.Persistence
 {
     public interface IExcelUploadRepository
     {
-        public Task<ExcelUploadResult> AddAsync<T>(string uploadedBy, List<T> excelData, string fileName);
+        public Task<ExcelUploadResult> AddAsync<T>(string uploadedBy, List<T> excelData,string fileName);
+        public Task<List<UploadHistoryDetails>> GetUploadHistoryList(int FileTypeCode);
     }
 }

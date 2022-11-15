@@ -9,6 +9,8 @@ using PostingManagement.Application.Features.Events.Commands.UpdateEvent;
 using PostingManagement.Application.Features.Events.Queries.GetEventDetail;
 using PostingManagement.Application.Features.Events.Queries.GetEventsExport;
 using PostingManagement.Application.Features.Events.Queries.GetEventsList;
+using PostingManagement.Application.Features.ExcelUpload.Command;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Application.Features.Orders.GetOrdersForMonth;
 using PostingManagement.Domain.Entities;
 
@@ -34,6 +36,10 @@ namespace PostingManagement.Application.Profiles
             CreateMap<Category, StoredProcedureDto>();
 
             CreateMap<Order, OrdersForMonthDto>();
+
+            CreateMap<ExcelUploadResult, ExcelUploadDto>().ReverseMap();
+
+            CreateMap<UploadHistoryDetails, GetUploadHistoryDto>().ReverseMap();
 
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
         }

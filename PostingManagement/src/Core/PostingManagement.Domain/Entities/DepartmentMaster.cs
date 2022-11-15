@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PostingManagement.Domain.Entities
 {
-    public class ExcelUploadRequest<T> where T : class 
+    public class DepartmentMaster
     {
-        public string FileName { get; set; }
-        public List<T> FileData { get; set; }
+        public int DepartmentCode { get; set; }
+        public string DepartmentName { get; set; } = null!;
     }
 }

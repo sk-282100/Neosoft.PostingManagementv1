@@ -28,11 +28,6 @@ namespace PostingManagement.UI.Controllers
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
             ViewBag.ExcelUploadResponse = responseModel.Data;
             return View();
-        }
-        [HttpGet]
-        public IActionResult ShowEmployeeMaster()
-        {
-            return View();
-        }
+        }         
     }
 }
