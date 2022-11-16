@@ -42,7 +42,7 @@ function OnSuccess(response) {
                 }, {
                     data: null,
                     "mRender": function (data, type, full) {
-                        return '<a class="btn btn-success btn-sm" href=# data-historyid='+data.historyId+'>View Record</a>';
+                        return '<a class="btn btn-success btn-sm" href=# data-historyid='+data.historyId+'>View</a>';
                         
                     }
                 }],
