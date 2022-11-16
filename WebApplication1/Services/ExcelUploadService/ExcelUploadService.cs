@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using OfficeOpenXml;
 using PostingManagement.UI.Exceptions;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.ExcelFileTypes;
+using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.ExcelUploadService.Contracts;
 using System.Data.Common;
 using System.Reflection;
@@ -19,6 +21,18 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
+        public async Task<Response<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode)
+        {
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetUploadHistoryList?fileTypeCode=" + fileTypeCode))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var uploadResult = JsonConvert.DeserializeObject<Response<List<UploadHistoryDetails>>>(apiResponse);
+                    return uploadResult;
+                }
+            }
+        }
         public async Task<ExcelUploadResponseModel> UploadExcel(ExcelUploadViewModel model, string uploadedBy)
         {
             try

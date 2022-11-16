@@ -26,6 +26,8 @@ namespace PostingManagement.Persistence
         public DbSet<Order> Orders { get; set; }
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
