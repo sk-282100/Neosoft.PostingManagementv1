@@ -17,7 +17,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> EmployeeMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "EmployeeMaster";
+            ViewBag.ExcelUploadFiletype = "Employee Master";
             ViewBag.ExcelFileTypeCode = 3;
             return View("ExcelUploadView");
         }
@@ -25,7 +25,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> BranchMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "BranchMaster";
+            ViewBag.ExcelUploadFiletype = "Branch Master";
             ViewBag.ExcelFileTypeCode = 1;
             return View("ExcelUploadView");
         }
@@ -33,7 +33,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> DepartmentMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "DepartmentMaster";
+            ViewBag.ExcelUploadFiletype = "Department Master";
             ViewBag.ExcelFileTypeCode = 2;
             return View("ExcelUploadView");
         }
@@ -41,7 +41,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> ZoneMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "ZoneMaster";
+            ViewBag.ExcelUploadFiletype = "Zone Master";
             ViewBag.ExcelFileTypeCode = 9;
             return View("ExcelUploadView");
         }
@@ -49,7 +49,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> RegionMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "RegionMaster";
+            ViewBag.ExcelUploadFiletype = "Region Master";
             ViewBag.ExcelFileTypeCode = 8;
             return View("ExcelUploadView");
         }
@@ -57,7 +57,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterZonalRequestTransferUpload()
         {
-            ViewBag.ExcelUploadFiletype = "InterZonalRequestTransfer";
+            ViewBag.ExcelUploadFiletype = "Inter Zonal Request Transfer";
             ViewBag.ExcelFileTypeCode = 7;
             return View("ExcelUploadView");
         }
@@ -65,14 +65,14 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterZonalPromotionUpload()
         {
-            ViewBag.ExcelUploadFiletype = "InterZonalPromotion";
+            ViewBag.ExcelUploadFiletype = "Inter Zonal Promotion";
             ViewBag.ExcelFileTypeCode = 6;
             return View("ExcelUploadView");
         }
         [HttpGet]
         public async Task<IActionResult> InterRegionRequestTransferUpload()
         {
-            ViewBag.ExcelUploadFiletype = "InterRegionRequestTransfer";
+            ViewBag.ExcelUploadFiletype = "Inter Region Request Transfer";
             ViewBag.ExcelFileTypeCode = 5;
             return View("ExcelUploadView");
         }
@@ -80,7 +80,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterRegionalPromotionUpload()
         {
-            ViewBag.ExcelUploadFiletype = "InterRegionalPromotion";
+            ViewBag.ExcelUploadFiletype = "Inter Regional Promotion";
             ViewBag.ExcelFileTypeCode = 4;
             return View("ExcelUploadView");
         }
@@ -93,11 +93,13 @@ namespace PostingManagement.UI.Controllers
             ViewBag.ExcelUploadResponse = responseModel.Data;
             return View("ExcelUploadView");
         }
+
         [HttpPost]
         public async Task<IActionResult> ShowUploadHistory(int id)
         {
             var historyList = await _service.GetUploadHistories(id);
-            return PartialView("ShowUploadHistory",historyList.Data);
+            //return PartialView("ShowUploadHistory",historyList.Data);
+            return Json(historyList.Data);
         }
     }
 }
