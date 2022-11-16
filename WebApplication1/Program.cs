@@ -3,6 +3,7 @@ using PostingManagement.UI.Services.ExcelUploadService;
 using PostingManagement.UI.Services.HomeService;
 using PostingManagement.UI.Services.HomeService.Contracts;
 using DNTCaptcha.Core;
+using PostingManagement.UI.Middleware;
 using PostingManagement.UI.Services.LoginService.Contracts;
 using PostingManagement.UI.Services.LoginService;
 
@@ -51,7 +52,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCustomExceptionHandler();
 app.UseAuthorization();
 
 app.UseSession();
