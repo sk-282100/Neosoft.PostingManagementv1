@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PostingManagement.UI.Models.UploadHistoryDetails>
+
+ 
+@if(Model!=null){
+    <h4>Upload History</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HistoryId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfRows)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InsertedRows)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UploadStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HistoryId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfRows)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InsertedRows)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UploadStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
