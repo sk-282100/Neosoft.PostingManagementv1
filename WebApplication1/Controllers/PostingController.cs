@@ -117,11 +117,13 @@ namespace PostingManagement.UI.Controllers
             ViewBag.ExcelUploadResponse = responseModel.Data;
             return View("ExcelUploadView");
         }
+
         [HttpPost]
         public async Task<IActionResult> ShowUploadHistory(int id)
         {
             var historyList = await _service.GetUploadHistories(id);
-            return PartialView("ShowUploadHistory",historyList.Data);
+            //return PartialView("ShowUploadHistory",historyList.Data);
+            return Json(historyList.Data);
         }
     }
 }
