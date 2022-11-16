@@ -27,7 +27,7 @@ namespace PostingManagement.UI.Controllers
             string uploadedBy = "AdminDarshan";
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
             ViewBag.ExcelUploadResponse = responseModel.Data;
-            return View();
+            return RedirectToAction("EmployeeMasterUpload");
         }         
     }
 }
