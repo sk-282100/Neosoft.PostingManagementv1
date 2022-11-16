@@ -3,6 +3,7 @@ using PostingManagement.UI.Services.ExcelUploadService;
 using PostingManagement.UI.Services.HomeService;
 using PostingManagement.UI.Services.HomeService.Contracts;
 using DNTCaptcha.Core;
+using PostingManagement.UI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCustomExceptionHandler();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -33,6 +33,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> DepartmentMasterUpload()
         {
+           
             ViewBag.ExcelUploadFiletype = "DepartmentMaster";
             ViewBag.ExcelFileTypeCode = 2;
             return View("ExcelUploadView");
