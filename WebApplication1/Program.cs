@@ -3,6 +3,8 @@ using PostingManagement.UI.Services.ExcelUploadService;
 using PostingManagement.UI.Services.HomeService;
 using PostingManagement.UI.Services.HomeService.Contracts;
 using DNTCaptcha.Core;
+using PostingManagement.UI.Services.LoginService.Contracts;
+using PostingManagement.UI.Services.LoginService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeService, Homeservice>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 //builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<HttpClientHandler>();
+builder.Services.AddSession();
 
 builder.Services.AddDNTCaptcha(options =>
 {
@@ -49,6 +53,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
