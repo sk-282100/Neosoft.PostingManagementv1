@@ -25,6 +25,7 @@ namespace PostingManagement.Persistence
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<LoginModel> LoginTbl { get; set; }
 
         public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
 
