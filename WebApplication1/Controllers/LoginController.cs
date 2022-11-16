@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using PostingManagement.UI.Models;
+using PostingManagement.UI.Models.Responses;
+using PostingManagement.UI.Services.LoginService.Contracts;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -10,12 +12,14 @@ namespace PostingManagement.UI.Controllers
     {
         private readonly IDNTCaptchaValidatorService _validatorService;
         private readonly DNTCaptchaOptions _captchaOptions;
+        private readonly ILoginService _loginService;
         readonly HttpClientHandler _clientHandler = new HttpClientHandler();
 
-        public LoginController(IDNTCaptchaValidatorService validatorService, IOptions<DNTCaptchaOptions> options)
+        public LoginController(IDNTCaptchaValidatorService validatorService, IOptions<DNTCaptchaOptions> options, ILoginService loginService)
         {
             _validatorService = validatorService;
             _captchaOptions = options == null ? throw new ArgumentNullException(nameof(options)) : options.Value;
+            _loginService = loginService;
         }
 
         [HttpGet]
@@ -27,27 +31,31 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpPost]
-
-        public IActionResult Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
             if (!_validatorService.HasRequestValidCaptchaEntry(Language.English, DisplayMode.SumOfTwoNumbers))
             {
                 this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please enter the security code as a number.");
                 return View(model);
             }
-            return RedirectToAction("EmployeeMasterUpload", "Posting");
-            // Save model
-            //using (var httpClient = new HttpClient(_clientHandler))
-            //{
-            //    StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-            //    using (var response = await httpClient.PutAsync("https://localhost:5000/api/v1/Employee", content))
-            //    {
-            //        string apiResponse = await response.Content.ReadAsStringAsync();
-            //        employee = JsonConvert.DeserializeObject<Employee>(apiResponse);
-
-            //    }
-            //}
-            //return RedirectToAction(nameof(Login), new { name = model.Username });
+            LoginResponseModel response = await  _loginService.Login(model);
+            if(response.IsAuthenticated == true)
+            {
+                HttpContext.Session.SetString("Username", response.UserName);
+                //HttpContext.Session.SetString("Role", response.Role);
+                return RedirectToAction("EmployeeMasterUpload", "Posting");
+            }
+            else
+            {
+                return View(model);
+            }                        
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Remove("Username");
+            //HttpContext.Session.Remove("Role");
+            return RedirectToAction("Login");
         }
     }
 }

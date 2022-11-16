@@ -1,87 +1,109 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models;
+using Microsoft.AspNetCore.Http;
 using PostingManagement.UI.Models.ExcelFileTypes;
 using PostingManagement.UI.Services.ExcelUploadService.Contracts;
+using PostingManagement.UI.CustomActionFilters;
 
 namespace PostingManagement.UI.Controllers
 {
-
+    [LoginFilter]
     public class PostingController : Controller
     {
         private readonly IExcelUploadService _service;
-        public PostingController(IExcelUploadService service)
+        private readonly IHttpContextAccessor _httpContext;
+        public PostingController(IExcelUploadService service, IHttpContextAccessor httpContext)
         {
             _service = service;
+            _httpContext = httpContext;
         }
 
         [HttpGet]
         public async Task<IActionResult> EmployeeMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Employee Master";
-            ViewBag.ExcelFileTypeCode = 3;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "EmployeeMaster");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 3);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> BranchMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Branch Master";
-            ViewBag.ExcelFileTypeCode = 1;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "BranchMaster");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 1);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> DepartmentMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Department Master";
-            ViewBag.ExcelFileTypeCode = 2;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "DepartmentMaster");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 2);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> ZoneMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Zone Master";
-            ViewBag.ExcelFileTypeCode = 9;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "ZoneMaster");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 9);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> RegionMasterUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Region Master";
-            ViewBag.ExcelFileTypeCode = 8;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "RegionMaster");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 8);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> InterZonalRequestTransferUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Inter Zonal Request Transfer";
-            ViewBag.ExcelFileTypeCode = 7;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "InterZonalRequestTransfer");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 7);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> InterZonalPromotionUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Inter Zonal Promotion";
-            ViewBag.ExcelFileTypeCode = 6;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "InterZonalPromotion");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 6);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
             return View("ExcelUploadView");
         }
         [HttpGet]
         public async Task<IActionResult> InterRegionRequestTransferUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Inter Region Request Transfer";
-            ViewBag.ExcelFileTypeCode = 5;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "InterRegionRequestTransfer");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 5);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
         [HttpGet]
         public async Task<IActionResult> InterRegionalPromotionUpload()
         {
-            ViewBag.ExcelUploadFiletype = "Inter Regional Promotion";
-            ViewBag.ExcelFileTypeCode = 4;
+            HttpContext.Session.SetString("ExcelUploadFiletype", "InterRegionalPromotion");
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", 4);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
             return View("ExcelUploadView");
         }
 
@@ -90,6 +112,8 @@ namespace PostingManagement.UI.Controllers
         {
             string uploadedBy = "AdminDarshan";
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             ViewBag.ExcelUploadResponse = responseModel.Data;
             return View("ExcelUploadView");
         }
