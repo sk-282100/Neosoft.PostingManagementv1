@@ -50,7 +50,7 @@ namespace PostingManagement.UI.Controllers
                 return View(model);
             }                        
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Remove("Username");

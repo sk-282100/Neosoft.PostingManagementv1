@@ -1,4 +1,4 @@
-﻿@model PostingManagement.UI.Models.ExcelUploadViewModel
+﻿@*@model PostingManagement.UI.Models.ExcelUploadViewModel
 
 @{
     ViewData["Title"] = "EmployeeMasterUpload";
@@ -65,4 +65,75 @@
 
 </div><!-- End Customers Card -->
 
+
+*@
+
+@model PostingManagement.UI.Models.ExcelUploadViewModel
+
+@{
+    ViewData["Title"] = "EmployeeMasterUpload";
+    Layout = "~/Views/Shared/MainView.cshtml";
+    var ExcelFileTypeCode = ViewBag.ExcelFileTypeCode;
+}
+
+
+<script src="~/js/UploadHistory.js"></script>
+<input type="hidden" id="excelUploadType" value=@ExcelFileTypeCode />
+
+
+
+
+<div class="col-xxl-4 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+
+            <h5 class="card-title">@ViewBag.ExcelUploadFiletype <span></span></h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form enctype="multipart/form-data" asp-action="ExcelUpload" id="ExcelUploadForm" >
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="FileType" value="@ViewBag.ExcelUploadFiletype" style="width:100%" class="form-control" hidden />
+                            @*                            <span asp-validation-for="FileType" class="text-danger" ></span>
+                            *@
+                        </div>
+                        <div style="display:inline-flex;">
+                            <div class="form-group">
+                                <input id="ExcelFile" asp-for="ExcelFile" type="file" accept=".xlsx" style="width:100%" class="form-control custome-file-input" />
+                                <span asp-validation-for="ExcelFile" class="text-danger" hidden></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Upload" class="btn btn-success" style="margin-left:10px" />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- End Customers Card -->
+
+<div class="col-xxl-4 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+
+            <h5 class="card-title"> Upload History <span></span></h5>
+            <hr />
+            <div id="assign">
+                <partial name="ShowUploadHistory">
+            </div>
+        </div>
+    </div>
+
+</div><!-- End Customers Card -->
+<script>
+   
+</script>
 

@@ -109,7 +109,26 @@
     </main><!-- End #main -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <script>
+        $(document).ready(function () {
+            $("#loginForm").submit(function () {
+                var isValid = true;
 
+                if ($("#username").val().trim().length == 0) {
+                    isValid = false;
+                    //$.notify("UserName cannot be empty!", "error");
+                    alert("UserName cannot be empty!");
+                }
+                else if ($("#password").val().trim().length == 0) {
+                    isValid = false;
+                    //$.notify("Password cannot be empty!", "error");
+                    alert("Password cannot be empty!");
+                }
+
+                return isValid;
+            });
+        });
+    </script>
 </body>
 
 </html>

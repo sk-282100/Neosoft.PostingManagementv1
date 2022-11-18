@@ -114,7 +114,7 @@ namespace PostingManagement.UI.Controllers
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
-            ViewBag.ExcelUploadResponse = responseModel.Data;
+            ViewBag.ExcelUploadResponse = responseModel==null?null: responseModel.Data;
             return View("ExcelUploadView");
         }
 
@@ -125,5 +125,7 @@ namespace PostingManagement.UI.Controllers
             //return PartialView("ShowUploadHistory",historyList.Data);
             return Json(historyList.Data);
         }
+
+       
     }
 }

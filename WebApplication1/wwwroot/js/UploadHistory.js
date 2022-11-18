@@ -49,3 +49,35 @@ function OnSuccess(response) {
             
         });
 };
+
+$(document).ready(function () {
+    $('#ExcelUploadForm').submit(function () {
+        var isValid = true;
+        if ($('#ExcelFile').val() == '') {
+            isValid = false;
+            $.notify("Please Upload the Excel File !!!", "error");
+
+        }
+        return isValid;
+    });
+
+
+    $('#ExcelFile').change( function () {
+        if (this.files[0].size > 5242880 && this.files[0].type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+            $.notify("Please Upload the File in Excel (.xlsx) formate with less than 5Mb file size", "error")
+            this.value = null;
+        }
+        else if (this.files[0].size > 5242880) {
+            $.notify("Please upload the Excel File Which is less than 5MB in size", "error");
+            this.files[0] = null;
+        }
+        else if (this.files[0].type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+            $.notify("Please Upload the Excel File in .xlsx format", "error")
+            this.value = null;
+        }
+        else {
+            $.notify("Your File Uploaded Successfully", "success");
+            return false;
+        }
+    });
+});
