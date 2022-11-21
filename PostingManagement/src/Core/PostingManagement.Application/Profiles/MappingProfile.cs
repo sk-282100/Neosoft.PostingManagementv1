@@ -12,6 +12,7 @@ using PostingManagement.Application.Features.Events.Queries.GetEventsList;
 using PostingManagement.Application.Features.ExcelUpload.Command;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Application.Features.Orders.GetOrdersForMonth;
+using PostingManagement.Application.Features.Roles.Commands.EditRole;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Application.Profiles
@@ -42,6 +43,8 @@ namespace PostingManagement.Application.Profiles
             CreateMap<UploadHistoryDetails, GetUploadHistoryDto>().ReverseMap();
 
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
+
+            CreateMap<Role, EditRoleCommand>().ReverseMap();
         }
     }
 }
