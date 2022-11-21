@@ -80,8 +80,21 @@
 <script src="~/js/UploadHistory.js"></script>
 <input type="hidden" id="excelUploadType" value=@ExcelFileTypeCode />
 
+@if (@ViewBag.ExcelUploadResponse != null)
+{
+    if (@ViewBag.ExcelUploadResponse.Succeeded == false)
+    {
+        <input type="hidden" value="@ViewBag.ExcelUploadResponse.Message" id="excelResponse" />
+    }
+    else{
+        <input type="hidden" value="noResponse" id="excelResponse" />
+    }
+}
+else
+{
+    <input type="hidden" value="noResponse" id="excelResponse" />
 
-
+}
 
 <div class="col-xxl-4 col-xl-12">
 

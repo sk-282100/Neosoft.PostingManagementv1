@@ -42,7 +42,7 @@ function OnSuccess(response) {
                 }, {
                     data: null,
                     "mRender": function (data, type, full) {
-                        return '<a class="btn btn-success btn-sm" href=# data-historyid='+data.historyId+'>View</a>';
+                        return '<a class="btn btn-success btn-sm" href=/Error/Error401 data-historyid='+data.historyId+'>View</a>';
                         
                     }
                 }],
@@ -75,9 +75,15 @@ $(document).ready(function () {
             $.notify("Please Upload the Excel File in .xlsx format", "error")
             this.value = null;
         }
-        else {
-            $.notify("Your File Uploaded Successfully", "success");
-            return false;
-        }
+        //else {
+        //    $.notify("Your File Uploaded Successfully", "success");
+        //    return false;
+        //}
     });
+});
+$(function () {
+    let message = $('#excelResponse').val();
+    if (message != "noResponse") {
+        $.notify("Invalid Excel file! Columns does not match!!", "error");
+    }
 });

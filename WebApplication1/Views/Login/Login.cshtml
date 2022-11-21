@@ -19,13 +19,16 @@
 
     <!-- Template Main CSS File -->
     <link href="css/LoginPage.css" rel="stylesheet">
-
-
+        
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
+    
+        
+        
 </head>
 
 <body>
-
-    <main>
+    <main>        
+        
         <div class="container">
 
             <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -53,14 +56,13 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                                         <p class="text-center small">Enter your username &amp; password to login</p>
                                     </div>
-
-                                    <form class="row g-3 needs-validation" asp-action="Login" novalidate>
+                                    @*@using (Html.BeginForm("Login","Login", FormMethod.Post, ))*@
+                                    <form class="row g-3 needs-validation" asp-action="Login" id="loginForm" novalidate>
 
                                         <div class="col-12">
                                             <label for="UserName" class="form-label">Username</label>
-                                            <div class="input-group has-validation">
-                                               
-                                                <input for="UserName" type="text" name="username" class="form-control" required>
+                                            <div class="input-group has-validation">                                               
+                                                <input id="username" for="UserName" type="text" name="username" class="form-control" required>
                                                 <div class="invalid-feedback">Please enter your username.</div>
                                             </div>
                                         </div>
@@ -68,7 +70,7 @@
 
                                         <div class="col-12">
                                             <label asp-for="Password" class="form-label">Password</label>
-                                            <input asp-for="Password" type="password" name="password" id="Password" class="form-control" required>
+                                            <input asp-for="Password" type="password" name="password" id="password" class="form-control" required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
 
@@ -78,7 +80,7 @@
                                                          asp-captcha-generator-language="English"
                                                          asp-captcha-generator-display-mode="SumOfTwoNumbers"
                                                          asp-use-relative-urls="true"
-                                                         asp-placeholder="Enter the Captcha"
+                                                         asp-placeholder="Enter the Captcha"                                                         
                                                          asp-validation-error-message="Please enter the Captcha"
                                                          asp-font-name="Tahoma"
                                                          asp-font-size="20"
@@ -109,22 +111,34 @@
     </main><!-- End #main -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    @if (@ViewBag.LoginResponse != null)
+    {
+            if (@ViewBag.LoginResponse.IsAuthenticated == false) {
+            <input type="hidden" value="@ViewBag.LoginResponse.Message" id="loginResponse"/>
+           }  
+    }
+    else{
+        <input type="hidden" value="noResponse" id="loginResponse" />
+    }
     <script>
-        $(document).ready(function () {
-            $("#loginForm").submit(function () {
-                var isValid = true;
-
+        $(function(){
+            let message = $('#loginResponse').val();
+            if (message != "noResponse"){                
+                $.notify("Invalid Username and Password!!", "error");
+            }
+        });
+        $(document).ready(function () {  
+            
+            $("#loginForm").submit(function () {                  
+                var isValid = true;                            
                 if ($("#username").val().trim().length == 0) {
-                    isValid = false;
-                    //$.notify("UserName cannot be empty!", "error");
-                    alert("UserName cannot be empty!");
+                    isValid = false;                    
+                    $("#username").notify("UserName cannot be empty!", "error");                    
                 }
                 else if ($("#password").val().trim().length == 0) {
                     isValid = false;
-                    //$.notify("Password cannot be empty!", "error");
-                    alert("Password cannot be empty!");
-                }
-
+                    $("#password").notify("Password cannot be empty!", "error");                    
+                }                              
                 return isValid;
             });
         });
