@@ -21,7 +21,7 @@ namespace PostingManagement.Persistence
             services.AddScoped<IExcelUploadRepository, ExcelUploadRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
-
+            services.AddScoped<IRoleRepository, RoleRepository>();
             return services;
         }
     }
