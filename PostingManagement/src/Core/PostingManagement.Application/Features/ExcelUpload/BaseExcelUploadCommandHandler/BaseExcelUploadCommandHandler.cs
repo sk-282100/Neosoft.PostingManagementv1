@@ -26,7 +26,7 @@ namespace PostingManagement.Application.Features.ExcelUpload.BaseExcelUploadComm
         {
             ExcelUploadResult excelUploadResult = await _repository.AddAsync(request.UploadedBy, request.ExcelDataList, request.FileName);
             var result = _mapper.Map<ExcelUploadDto>(excelUploadResult);
-            return new Response<ExcelUploadDto>() { Succeeded=true,Data=result};
+            return new Response<ExcelUploadDto>() { Succeeded=true, Data=result};
         }
 
     }

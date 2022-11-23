@@ -26,6 +26,7 @@ function OnSuccess(response) {
             bPaginate: true,
             data: response,
             columns: [
+                { data: 'batchId'},
                 { data: 'fileName' },
                 { data: 'date' },
                 { data: 'numberOfRows' },

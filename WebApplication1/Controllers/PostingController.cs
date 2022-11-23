@@ -123,6 +123,7 @@ namespace PostingManagement.UI.Controllers
         {
             var historyList = await _service.GetUploadHistories(id);
             //return PartialView("ShowUploadHistory",historyList.Data);
+            Console.WriteLine(historyList.Data);
             return Json(historyList.Data);
         }
 
