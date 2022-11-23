@@ -1,0 +1,50 @@
+﻿@model PostingManagement.UI.Models.AccountModels.CreateUserRequestModel
+
+@{
+    ViewData["Title"] = "CreateUserName";
+    Layout = "MainView";
+}
+<script src="~/js/createuserrole.js"></script>
+<h1>Create UserName</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateUserName">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group my-3">
+                <label asp-for="RoleId" class="control-label"></label>
+                @if(ViewBag.Roles != null){
+                    @Html.DropDownListFor(model =>model.RoleId ,ViewBag.Roles as SelectList,new { @class="form-control" })
+                }
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+            <div class="form-group my-3">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group m-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+
+            <h5 class="card-title"> All User Details <span></span></h5>
+            <hr />
+            <div id="assign">
+                <partial name="ShowUserRoleDetails">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

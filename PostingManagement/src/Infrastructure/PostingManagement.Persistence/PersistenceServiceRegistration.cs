@@ -20,6 +20,8 @@ namespace PostingManagement.Persistence
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IExcelUploadRepository, ExcelUploadRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+
             return services;
         }
     }
