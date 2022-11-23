@@ -25,7 +25,6 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            ViewBag.LoginResponse= null;            
             string[] banks = new string[] { "Union Bank of India", "Coorpation Bank" };
             ViewBag.BankList = new SelectList(banks, "BankName");
             return View();
@@ -48,8 +47,6 @@ namespace PostingManagement.UI.Controllers
             }
             else
             {
-                ViewBag.LoginResponse = response==null?null:response;
-                
                 return View(model);
             }                        
         }

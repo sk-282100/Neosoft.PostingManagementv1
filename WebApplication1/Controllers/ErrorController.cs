@@ -31,27 +31,21 @@ namespace PostingManagement.UI.Controllers
             }
             return View("Default");
         }
-
-        [HttpGet]
-        [Route("Error/Error401")]
         public IActionResult Eror401()
         {
             _logger.LogInformation("Error401 action method initiated");
             return View("Error401");
         }
-        [Route("Error/Error404")]
         public IActionResult Eror404()
         {
             _logger.LogInformation("Error404 action method initiated");
             return View("Error404");
         }
-        [Route("Error/Error500")]
         public IActionResult Eror500()
         {
             _logger.LogInformation("Error405 action method initiated");
             return View("Error500");
         }
-        [Route("Error/Error503")]
         public IActionResult Error503()
         {
             _logger.LogInformation("Error action method initiated");

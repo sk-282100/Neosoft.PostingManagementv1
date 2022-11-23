@@ -37,39 +37,39 @@ namespace PostingManagement.UI.Services.ExcelUploadService
         {
             try
             {
-                if (model.FileType == "Branch Master")
+                if (model.FileType == "BranchMaster")
                 {
                     return await BranchMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Employee Master")
+                else if (model.FileType == "EmployeeMaster")
                 {
                     return await EmployeeMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Regional Promotion")
+                else if (model.FileType == "InterRegionalPromotion")
                 {
                     return await InterRegionalPromotionFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Region Request Transfer")
+                else if (model.FileType == "InterRegionRequestTransfer")
                 {
                     return await InterRegionRequestTransferFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Zonal Promotion")
+                else if (model.FileType == "InterZonalPromotion")
                 {
                     return await InterZonalPromotionFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Zonal Request Transfer")
+                else if (model.FileType == "InterZonalRequestTransfer")
                 {
                     return await InterZonalRequestTransferFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Region Master")
+                else if (model.FileType == "RegionMaster")
                 {
                     return await RegionMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Zone Master")
+                else if (model.FileType == "ZoneMaster")
                 {
                     return await ZoneMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Department Master")
+                else if (model.FileType == "DepartmentMaster")
                 {
                     return await DepartmentMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
