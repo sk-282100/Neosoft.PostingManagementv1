@@ -14,6 +14,8 @@
             alert(response.d);
         }
     });
+
+    
 });
 function OnSuccess(response) {
     $("#userRoleDetails").DataTable(
@@ -33,10 +35,11 @@ function OnSuccess(response) {
                     data: 'uId',
                     "mRender": function (data, type, full) {
                        
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data +'" >Edit</a><a class="btn btn-danger btn-sm " href="/AccountView/DeleteUserName?id='+data+'" >Delete</a> ';
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data +'" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete('+data+')" >Delete</button> ';
                        
                     }
                 }
             ],
         });
 };
+
