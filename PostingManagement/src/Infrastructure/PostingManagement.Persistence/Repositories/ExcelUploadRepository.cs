@@ -36,7 +36,7 @@ namespace PostingManagement.Persistence.Repositories
                 var values = new object[Props.Length];
                 for (int i = 0; i < Props.Length; i++)
                 {
-                    if(Props[i].PropertyType == typeof(DateTime))
+                    if(Props[i].PropertyType == typeof(DateTime) || Props[i].PropertyType == typeof(DateTime?))
                     {
                         DateTime date= (DateTime)Props[i].GetValue(item, null);
                         values[i] = date.ToShortDateString();
