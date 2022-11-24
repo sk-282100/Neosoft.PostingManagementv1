@@ -19,8 +19,7 @@ namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHi
         public async Task<Response<List<GetUploadHistoryDto>>> Handle(GetUploadHistoryQuery request, CancellationToken cancellationToken)
         {
             var historyList = await _repository.GetUploadHistoryList( request.FileTypeCode);
-            var responseData = _mapper.Map<List<GetUploadHistoryDto>>(historyList);
-            
+            var responseData = _mapper.Map<List<GetUploadHistoryDto>>(historyList);            
             return new Response<List<GetUploadHistoryDto>>() { Data=responseData ,Succeeded=true};
         }
     }

@@ -6,6 +6,8 @@ namespace PostingManagement.UI.Models
     {
  
         public int HistoryId { get; set; }
+        [Display(Name = "Batch ID")]
+        public int BatchId { get; set; }        
         [Display(Name ="File Name")]
         public string? FileName { get; set; }
         [Display(Name = "Uploaded Date")]

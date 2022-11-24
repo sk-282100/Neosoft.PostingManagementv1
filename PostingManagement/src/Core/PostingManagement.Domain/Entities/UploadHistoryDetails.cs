@@ -11,6 +11,7 @@ namespace PostingManagement.Domain.Entities
     {
         [Key]
         public int HistoryId { get; set; }
+        public int BatchId { get; set; }
         public string FileName { get; set; }
         public DateTime Date { get; set; }
         public int NumberOfRows { get; set; }

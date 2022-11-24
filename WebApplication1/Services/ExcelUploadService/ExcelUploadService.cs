@@ -102,7 +102,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 using (var package = new ExcelPackage(stream))
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-
                     //Checking the format of the Excel file 
                     for (int col = 1; col <= 2; col++)
                     {

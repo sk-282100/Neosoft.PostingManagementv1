@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace PostingManagement.Application.Features.ExcelUpload.Command
 {
     public class ExcelUploadDto
-    {
+    {        
         public int SuccessCount { get; set; }
         public string UploadStatus { get; set; }
+        public int BatchId { get; set; }
     }
 }
