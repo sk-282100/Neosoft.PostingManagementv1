@@ -27,7 +27,11 @@ namespace PostingManagement.Persistence
         public DbSet<Message> Messages { get; set; }
         public DbSet<LoginModel> LoginTbl { get; set; }
         public DbSet<Role> RoleTable { get; set; }
-
+        public DbSet<BranchMaster> BranchMasterDataTable { get; set; }
+        public DbSet<RegionMaster> RegionMasterDataTable { get; set; }
+        public DbSet<ZoneMaster> ZoneMasterDataTable { get; set; }
+        public DbSet<DepartmentMaster> DepartmentMasterDataTable { get; set; }
+        
         public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
 
         private IDbContextTransaction _transaction;
