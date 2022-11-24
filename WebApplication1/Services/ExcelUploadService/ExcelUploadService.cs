@@ -1,4 +1,6 @@
 ﻿
+using Nancy;
+using Nancy.Json;
 using Newtonsoft.Json;
 using OfficeOpenXml;
 using PostingManagement.UI.Exceptions;
@@ -9,6 +11,7 @@ using PostingManagement.UI.Services.ExcelUploadService.Contracts;
 using System.Data.Common;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Nodes;
 
 namespace PostingManagement.UI.Services.ExcelUploadService
 {
@@ -851,7 +854,8 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> EmployeeMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
-            if (excelFile == null) {
+            if (excelFile == null)
+            {
                 return null;
             }
             else
@@ -954,6 +958,20 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                             }
                         }
                     }
+                }
+            }
+        }
+
+        public async Task<string> GetUploadedRecordsByBatchId(int batchId, int fileTypeCode)
+        {
+            var request = new UploadedRecords() { BatchId = batchId, FileTypeCode = fileTypeCode };
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/GetUploadHistoryList?fileTypeCode=", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    return apiResponse;
                 }
             }
         }

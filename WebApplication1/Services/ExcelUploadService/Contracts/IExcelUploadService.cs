@@ -8,5 +8,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService.Contracts
         public Task<ExcelUploadResponseModel> UploadExcel(ExcelUploadViewModel model, string uploadedBy);
         public  Task<Response<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode);
 
+        public Task<string>GetUploadedRecordsByBatchId(int batchId, int fileTypeCode);
+
     }
 }
