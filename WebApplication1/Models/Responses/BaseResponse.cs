@@ -4,18 +4,18 @@ namespace PostingManagement.UI.Models.Responses
 {
 
 
-    public class Response<T>
+    public class BaseResponse<T>
     {
-        public Response()
+        public BaseResponse()
         {
         }
-        public Response(T data, string message = null)
+        public BaseResponse(T data, string message = null)
         {
             Succeeded = true;
             Message = message;
             Data = data;
         }
-        public Response(string message)
+        public BaseResponse(string message)
         {
             Succeeded = false;
             Message = message;
@@ -26,7 +26,7 @@ namespace PostingManagement.UI.Models.Responses
         public T Data { get; set; }
     }
 
-    public class PagedResponse<T> : Response<T>
+    public class PagedResponse<T> : BaseResponse<T>
     {
         public int TotalCount { get; set; }
         public int Page { get; set; }

@@ -10,7 +10,7 @@ namespace PostingManagement.Application.Features.Roles.Commands.EditRole
 {
     public class EditRoleCommand : IRequest<Response<bool>>
     {
-        public int RoleId { get; set; }
+        public string RoleId { get; set; }
         public string RoleName { get; set; }
     }
 }

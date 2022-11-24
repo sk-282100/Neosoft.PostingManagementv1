@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Features.Roles.Queries.GetRoleById
 {
-    public class GetRoleByIdQuery : IRequest<Response<Role>>
+    public class GetRoleByIdQuery : IRequest<Response<GetRoleByIdDto>>
     {
-        public int RoleId { get; set; }
+        public string RoleId { get; set; }
     }
 }
