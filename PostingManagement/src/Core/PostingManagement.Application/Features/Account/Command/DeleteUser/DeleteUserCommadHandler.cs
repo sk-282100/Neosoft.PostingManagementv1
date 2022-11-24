@@ -1,25 +1,24 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Features.Account.Command.DeleteUser
 {
     public class DeleteUserCommadHandler : IRequestHandler<DeleteUserCommand, Response<bool>>
     {
         private readonly IAccountRepository _repository;
-        public DeleteUserCommadHandler(IAccountRepository repository)
+        private readonly IDataProtector _protector;
+        public DeleteUserCommadHandler(IAccountRepository repository,IDataProtectionProvider provider)
         {
             _repository = repository;
+            _protector = provider.CreateProtector("");
         }
 
         public async Task<Response<bool>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            bool response =await _repository.DeleteUser(request.UserId, request.DeleteBy);
+            int id = Convert.ToInt32(_protector.Unprotect(request.UserId));
+            bool response =await _repository.DeleteUser(id, request.DeleteBy);
             if (response)
             {
                 return new Response<bool>() { Succeeded = true, Data = response,Message="Requested User Deleted successfully " };

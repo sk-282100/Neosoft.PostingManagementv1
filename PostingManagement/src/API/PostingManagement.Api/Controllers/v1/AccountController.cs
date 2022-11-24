@@ -5,6 +5,7 @@ using PostingManagement.Application.Features.Account.Command.DeleteUser;
 using PostingManagement.Application.Features.Account.Command.EditUser;
 using PostingManagement.Application.Features.Account.Queries.GetAllUser;
 using PostingManagement.Application.Features.Account.Queries.GetUserById;
+using PostingManagement.Application.Features.Account.Queries.IsUserNamePresent;
 
 namespace PostingManagement.Api.Controllers.v1
 {
@@ -53,7 +54,7 @@ namespace PostingManagement.Api.Controllers.v1
         }
 
         [HttpGet("GetUserById")]
-        public async Task<IActionResult> GetUserDetailsById(int Id)
+        public async Task<IActionResult> GetUserDetailsById(string Id)
         {
             GetUserByIdQuery request = new GetUserByIdQuery() { UId=Id};
             var response = await _mediator.Send(request);
@@ -61,6 +62,13 @@ namespace PostingManagement.Api.Controllers.v1
             {
                  return NotFound(response);
             } ;
+            return Ok(response);
+        }
+        [HttpGet("IsUserNamePresent")]
+        public async Task<IActionResult> IsUserNamePresent(string userName)
+        {
+            IsUserNamePresentQuery request = new IsUserNamePresentQuery() { UserName = userName };
+            var response = await _mediator.Send(request);
             return Ok(response);
         }
 

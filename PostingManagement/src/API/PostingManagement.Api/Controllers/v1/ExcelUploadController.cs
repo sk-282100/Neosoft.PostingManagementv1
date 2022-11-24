@@ -106,12 +106,12 @@ namespace PostingManagement.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("GetAllRecords")]
-        public async Task<IActionResult> GetExcelData(int fileTypeCode, int batchId)
-        {
-            var request = new GetExcelDataQuery();
-            var response = await _mediator.Send(request);
-            return Ok();
-        }
+        //[HttpGet("GetAllRecords")]
+        //public async Task<IActionResult> GetExcelData(int fileTypeCode, int batchId)
+        //{
+        //    var request = new GetExcelDataQuery();
+        //    var response = await _mediator.Send(request);
+        //    return Ok();
+        //}
     }
 }

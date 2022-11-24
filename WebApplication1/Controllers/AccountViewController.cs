@@ -14,7 +14,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateUserName( )
+        public async Task<IActionResult> CreateUserName()
         {
             List<RoleViewModel> roles = new List<RoleViewModel>()
             {
@@ -35,7 +35,7 @@ namespace PostingManagement.UI.Controllers
             return RedirectToAction("CreateUserName");
         }
         
-        public async Task<IActionResult> DeleteUserName(int id)
+        public async Task<IActionResult> DeleteUserName(string id)
         {
             var deletedBy = "Sumit";
             await _accountService.DeleteUserDetails(id, deletedBy);
@@ -43,7 +43,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditUserRoleDetails(int id)
+        public async Task<IActionResult> EditUserRoleDetails(string id)
         {
             var model = await _accountService.GetUserById(id);
             List<RoleViewModel> roles = new List<RoleViewModel>()
@@ -69,10 +69,17 @@ namespace PostingManagement.UI.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> ShowUserRoleDetails()
-        {
+            {
             var userList = await _accountService.GetAllUserDetails();
             
             return Json(userList.Data);
+        }
+        [HttpGet]
+        public async Task<IActionResult> IsUserNamePresent(string userName)
+        {
+            var response = await _accountService.IsUserNamePresent(userName);
+
+            return Json(response.Data);
         }
 
     }

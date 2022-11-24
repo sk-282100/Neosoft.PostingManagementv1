@@ -6,6 +6,8 @@ using DNTCaptcha.Core;
 using PostingManagement.UI.Middleware;
 using PostingManagement.UI.Services.LoginService.Contracts;
 using PostingManagement.UI.Services.LoginService;
+using PostingManagement.UI.Services.AccountServices.Contracts;
+using PostingManagement.UI.Services.AccountServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeService, Homeservice>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IAccountService,AccountService>();
 //builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<HttpClientHandler>();
