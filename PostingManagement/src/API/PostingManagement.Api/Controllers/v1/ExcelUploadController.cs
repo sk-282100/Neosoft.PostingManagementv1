@@ -108,7 +108,7 @@ namespace PostingManagement.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpPost ("GetAllRecords")]
+        [HttpGet ("GetAllRecords")]
         public async Task<IActionResult> GetExcelData(int fileTypeCode, int batchId)
         {
             var request = new object();
@@ -124,6 +124,7 @@ namespace PostingManagement.Api.Controllers.v1
                     else
                         response = result;
                     return Ok(response);
+
                 case 2:
                     request = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
@@ -132,15 +133,51 @@ namespace PostingManagement.Api.Controllers.v1
                     else
                         response = result;
                     return Ok(response);
+
                 case 3:
+                    request = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<EmployeeMaster>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
 
                 case 4:
+                    request = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterRegionalPromotion>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
 
                 case 5:
+                    request = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterRegionRequestTransfer>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
 
                 case 6:
+                    request = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterZonalPromotion>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
 
                 case 7:
+                    request = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterZonalRequestTransfer>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
 
                 case 8:
                     request = new GetExcelDataQuery<RegionMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };

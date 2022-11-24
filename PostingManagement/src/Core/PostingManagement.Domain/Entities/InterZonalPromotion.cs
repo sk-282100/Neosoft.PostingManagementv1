@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace PostingManagement.Domain.Entities
 {
     public class InterZonalPromotion
     {
+        public int BatchId { get; set; }
+        [Key]
         public int EmployeeId { get; set; }
         public string ZonePreference1 { get; set; } = null!;
         public string Zone1RegionPreference1 { get; set; } = null!;

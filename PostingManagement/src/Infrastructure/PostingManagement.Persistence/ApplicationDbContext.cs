@@ -31,7 +31,12 @@ namespace PostingManagement.Persistence
         public DbSet<RegionMaster> RegionMasterDataTable { get; set; }
         public DbSet<ZoneMaster> ZoneMasterDataTable { get; set; }
         public DbSet<DepartmentMaster> DepartmentMasterDataTable { get; set; }
-        
+        public DbSet<EmployeeMaster> EmployeeMasterTbl { get; set; }
+        public DbSet<InterRegionalPromotion> InterRegionalPromotionTbl { get; set; }
+        public DbSet<InterRegionRequestTransfer> InterRegionRequestTransferTbl { get; set; }
+        public DbSet<InterZonalPromotion> InterZonalPromotionTbl { get; set; }
+        public DbSet<InterZonalRequestTransfer> InterZonalRequestTransferTbl { get; set; }
+
         public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
 
         private IDbContextTransaction _transaction;

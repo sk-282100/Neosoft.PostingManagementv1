@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace PostingManagement.Domain.Entities
 {
     public class InterZonalRequestTransfer
     {
+        public int BatchId { get; set; }
+        [Key]
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; } = null!;
         public string Gender { get; set; } = null!;
