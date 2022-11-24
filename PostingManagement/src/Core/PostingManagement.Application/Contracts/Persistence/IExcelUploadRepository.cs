@@ -13,5 +13,6 @@ namespace PostingManagement.Application.Contracts.Persistence
     {
         public Task<ExcelUploadResult> AddAsync<T>(string uploadedBy, List<T> excelData,string fileName);
         public Task<List<UploadHistoryDetails>> GetUploadHistoryList(int FileTypeCode);
+        public Task<List<T>> GetAllRecords<T>(int fileTypeCode, int batchId);
     }
 }

@@ -21,7 +21,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> EmployeeMasterUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "EmployeeMaster");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Employee Master");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 3);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
@@ -31,7 +31,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> BranchMasterUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "BranchMaster");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Branch Master");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 1);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
@@ -41,7 +41,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> DepartmentMasterUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "DepartmentMaster");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Department Master");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 2);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
@@ -51,7 +51,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> ZoneMasterUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "ZoneMaster");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Zone Master");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 9);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
@@ -61,7 +61,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> RegionMasterUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "RegionMaster");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Region Master");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 8);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
@@ -71,7 +71,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterZonalRequestTransferUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "InterZonalRequestTransfer");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Inter-Zonal Request Transfer");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 7);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
@@ -81,7 +81,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterZonalPromotionUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "InterZonalPromotion");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Inter-Zonal Promotion");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 6);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
@@ -90,7 +90,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterRegionRequestTransferUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "InterRegionRequestTransfer");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Inter-Region Request Transfer");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 5);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
@@ -100,7 +100,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> InterRegionalPromotionUpload()
         {
-            HttpContext.Session.SetString("ExcelUploadFiletype", "InterRegionalPromotion");
+            HttpContext.Session.SetString("ExcelUploadFiletype", "Inter-Regional Promotion");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 4);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
@@ -114,7 +114,7 @@ namespace PostingManagement.UI.Controllers
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
-            ViewBag.ExcelUploadResponse = responseModel==null?null: responseModel.Data;
+            ViewBag.ExcelUploadResponse = responseModel==null?null: responseModel;
             return View("ExcelUploadView");
         }
 
@@ -123,6 +123,7 @@ namespace PostingManagement.UI.Controllers
         {
             var historyList = await _service.GetUploadHistories(id);
             //return PartialView("ShowUploadHistory",historyList.Data);
+            Console.WriteLine(historyList.Data);
             return Json(historyList.Data);
         }
 

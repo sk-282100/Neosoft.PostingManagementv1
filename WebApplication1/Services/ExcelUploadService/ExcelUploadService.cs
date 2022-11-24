@@ -37,39 +37,39 @@ namespace PostingManagement.UI.Services.ExcelUploadService
         {
             try
             {
-                if (model.FileType == "BranchMaster")
+                if (model.FileType == "Branch Master")
                 {
                     return await BranchMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "EmployeeMaster")
+                else if (model.FileType == "Employee Master")
                 {
                     return await EmployeeMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "InterRegionalPromotion")
+                else if (model.FileType == "Inter-Regional Promotion")
                 {
                     return await InterRegionalPromotionFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "InterRegionRequestTransfer")
+                else if (model.FileType == "Inter-Region Request Transfer")
                 {
                     return await InterRegionRequestTransferFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "InterZonalPromotion")
+                else if (model.FileType == "Inter-Zonal Promotion")
                 {
                     return await InterZonalPromotionFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "InterZonalRequestTransfer")
+                else if (model.FileType == "Inter-Zonal Request Transfer")
                 {
                     return await InterZonalRequestTransferFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "RegionMaster")
+                else if (model.FileType == "Region Master")
                 {
                     return await RegionMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "ZoneMaster")
+                else if (model.FileType == "Zone Master")
                 {
                     return await ZoneMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "DepartmentMaster")
+                else if (model.FileType == "Department Master")
                 {
                     return await DepartmentMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
@@ -102,7 +102,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 using (var package = new ExcelPackage(stream))
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-
                     //Checking the format of the Excel file 
                     for (int col = 1; col <= 2; col++)
                     {
