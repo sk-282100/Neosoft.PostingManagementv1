@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Domain.Entities
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalPromotionRecords
 {
-    public class InterRegionalPromotion
-    {        
+    public class InterRegionalPromotionRecordsDto
+    {
+        public int BatchId { get; set; }
         [Key]
         public int EmployeeId { get; set; }
         public string CurrentScale { get; set; } = null!;

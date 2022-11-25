@@ -21,14 +21,14 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
-        public async Task<BaseResponse<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode)
+        public async Task<Response<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode)
         {
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetUploadHistoryList?fileTypeCode=" + fileTypeCode))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    var uploadResult = JsonConvert.DeserializeObject<BaseResponse<List<UploadHistoryDetails>>>(apiResponse);
+                    var uploadResult = JsonConvert.DeserializeObject<Response<List<UploadHistoryDetails>>>(apiResponse);
                     return uploadResult;
                 }
             }
@@ -229,7 +229,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         ZoneMaster obj = new ZoneMaster();
 
                         #region ZoneMaster object assigned
-                        obj.ZoneCode = Convert.ToInt32(worksheet.Cells[row, 1].Value);
+                        obj.ZoneCode = Convert.ToString(worksheet.Cells[row, 1].Value);
                         obj.ZoneName = Convert.ToString(worksheet.Cells[row, 2].Value).Trim();
                         obj.State = Convert.ToString(worksheet.Cells[row, 3].Value).Trim();
                         obj.StateId = Convert.ToInt32(worksheet.Cells[row, 4].Value);
@@ -317,9 +317,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         RegionMaster obj = new RegionMaster();
 
                         #region regionMaster object assigned
-                        obj.RegionCode = Convert.ToInt32(worksheet.Cells[row, 1].Value);
+                        obj.RegionCode = Convert.ToString(worksheet.Cells[row, 1].Value);
                         obj.RegionName = Convert.ToString(worksheet.Cells[row, 2].Value).Trim();
-                        obj.ZoneCode = Convert.ToInt32(worksheet.Cells[row, 3].Value);
+                        obj.ZoneCode = Convert.ToString(worksheet.Cells[row, 3].Value);
                         obj.ZoneName = Convert.ToString(worksheet.Cells[row, 4].Value).Trim();
                         obj.State = Convert.ToString(worksheet.Cells[row, 5].Value).Trim();
                         obj.StateId = Convert.ToInt32(worksheet.Cells[row, 6].Value);
@@ -470,7 +470,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
         {
             string[] excelColumns = new string[]
                         {
-                "EMPLID","ZONE_PREFERENCE1","ZONE_1_REGION_PREFERENCE1","ZONE_1_REGION_PREFERENCE2","ZONE_1_REGION_PREFERENCE3","ZONE_PREFERENCE2","ZONE_2_REGION_PREFERENCE1","ZONE_2_REGION_PREFERENCE2","ZONE_2_REGION_PREFERENCE3","ZONE_PREFERENCE3","ZONE_3_REGION_PREFERENCE1","ZONE_3_REGION_PREFERENCE2","ZONE_3_REGION_PREFERENCE3","ZONE_PREFERENCE4","ZONE_PREFERENCE5"
+                "EMPLID","ZONE_PREFERENCE1","ZONE_1_REGION_PREFERENCE1","ZONE_1_REGION_PREFERENCE2","ZONE_1_REGION_PREFERENCE3","ZONE_PREFERENCE2","ZONE_2_REGION_PREFERENCE1","ZONE_2_REGION_PREFERENCE2","ZONE_2_REGION_PREFERENCE3","ZONE_PREFERENCE3","ZONE_3_REGION_PREFERENCE1","ZONE_3_REGION_PREFERENCE2","ZONE_3_REGION_PREFERENCE3","ZONE_PREFERENCE4","ZONE_4_REGION_PREFERENCE1","ZONE_4_REGION_PREFERENCE2","ZONE_4_REGION_PREFERENCE3","ZONE_PREFERENCE5","ZONE_5_REGION_PREFERENCE1","ZONE_5_REGION_PREFERENCE2","ZONE_5_REGION_PREFERENCE3"
                         };
             List<InterZonalPromotion> InterZonalPromotionList = new List<InterZonalPromotion>();
 
@@ -570,7 +570,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
         {
             string[] excelColumns = new string[]
                         {
-                "EMPLID","TRANSFER_SEQ_NO","GENDER","DIRECT_PROMOTEE","SCALE","TRANSFER_TYPE","NAME","DESIGNATION","LOCATION_NAME","CURRENT_RO","FROM_ZONE","REQUIRED_STATE","APPLIED_ZONE","DATE_OF_JOINING","APPLICATION_DATE","REGION_BEFORE_AMALGAMATION","REGION_DATE_BEFORE_AMALGMATION","TIME_SPENT_AWAY_FROM_REGION","REGION_AFTER_AMALGAMATION","REGION_DATE_AFTER_AMALGMATION","APPLIED_REGION_1","APPLIED_REGION_2","APPLIED_REGION_3","DT_OF_PROMOTION_TO_PRSNT_SCALE","DATE_OF_REVERSION","EMPLID","DATE_OF_MARRIAGE","TEMPORARY_TRANSFER_DETAILS","ASSEST_AND_LIABILITIES_DETAILS","STATUS_OF_SUBMISSION","COMMENTS","REQUEST_TYPE","TRANSFER_REASON"
+                "EMPLID","TRANSFER_SEQ_NO","GENDER","DIRECT_PROMOTEE","SCALE","TRANSFER_TYPE","NAME","DESIGNATION","LOCATION_NAME","CURRENT_RO","FROM_ZONE","REQUIRED_STATE","APPLIED_ZONE","DATE_OF_JOINING","APPLICATION_DATE","REGION_BEFORE_AMALGAMATION","REGION_DATE_BEFORE_AMALGMATION","TIME_SPENT_AWAY_FROM_REGION","REGION_AFTER_AMALGAMATION","REGION_DATE_AFTER_AMALGMATION","APPLIED_REGION_1","APPLIED_REGION_2","APPLIED_REGION_3","DT_OF_PROMOTION_TO_PRSNT_SCALE","DATE_OF_REVERSION","DATE_OF_MARRIAGE","TEMPORARY_TRANSFER_DETAILS","ASSEST_AND_LIABILITIES_DETAILS","STATUS_OF_SUBMISSION","COMMENTS","REQUEST_TYPE","TRANSFER_REASON"
                         };
             List<InterRegionRequestTransfer> InterRegionRequestTransferList = new List<InterRegionRequestTransfer>();
 
@@ -863,7 +863,8 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> EmployeeMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
-            if (excelFile == null) {
+            if (excelFile == null)
+            {
                 return null;
             }
             else

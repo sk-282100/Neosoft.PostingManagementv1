@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
 using PostingManagement.UI.Models;
+using PostingManagement.UI.Models.Responses;
 using System.Net.Http;
 using System.Text;
 

@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalRequestRecords
 {
-    public class GetEmployeeMasterDataQueryHandler : BaseGetExcelDataQueryHandler<EmployeeMaster>
+    public class GetInterZonalRequestDataQueryHandler : BaseGetExcelDataQueryHandler<InterZonalRequestTransfer>
     {
-        public GetEmployeeMasterDataQueryHandler(IExcelUploadRepository repository, IMapper mapper) : base(repository, mapper)
+        public GetInterZonalRequestDataQueryHandler(IExcelUploadRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
     }

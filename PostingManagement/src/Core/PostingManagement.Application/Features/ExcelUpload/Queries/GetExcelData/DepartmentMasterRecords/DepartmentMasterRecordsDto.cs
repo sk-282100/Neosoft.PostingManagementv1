@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Domain.Entities
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.DepartmentMasterRecords
 {
-    public class DepartmentMaster
-    {        
+    public class DepartmentMasterRecordsDto
+    {
+        public int BatchId { get; set; }
         [Key]
         public int DepartmentCode { get; set; }
         public string DepartmentName { get; set; } = null!;

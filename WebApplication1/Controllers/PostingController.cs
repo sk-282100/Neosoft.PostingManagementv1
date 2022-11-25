@@ -6,6 +6,7 @@ using PostingManagement.UI.Services.ExcelUploadService.Contracts;
 using PostingManagement.UI.CustomActionFilters;
 using Newtonsoft.Json;
 
+
 namespace PostingManagement.UI.Controllers
 {
     [LoginFilter]
@@ -45,7 +46,7 @@ namespace PostingManagement.UI.Controllers
             HttpContext.Session.SetString("ExcelUploadFiletype", "Department Master");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 2);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
-            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
@@ -85,7 +86,7 @@ namespace PostingManagement.UI.Controllers
             HttpContext.Session.SetString("ExcelUploadFiletype", "Inter-Zonal Promotion");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 6);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
-            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
         [HttpGet]
@@ -104,7 +105,7 @@ namespace PostingManagement.UI.Controllers
             HttpContext.Session.SetString("ExcelUploadFiletype", "Inter-Regional Promotion");
             HttpContext.Session.SetInt32("ExcelFileTypeCode", 4);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
-            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");            
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
             return View("ExcelUploadView");
         }
 
@@ -112,10 +113,10 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> ExcelUpload(ExcelUploadViewModel model)
         {
             string uploadedBy = "AdminDarshan";
-            ExcelUploadResponseModel responseModel = await _service.UploadExcel(model,uploadedBy);
+            ExcelUploadResponseModel responseModel = await _service.UploadExcel(model, uploadedBy);
             ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
-            ViewBag.ExcelUploadResponse = responseModel==null?null: responseModel;
+            ViewBag.ExcelUploadResponse = responseModel == null ? null : responseModel;
             return View("ExcelUploadView");
         }
 
@@ -127,92 +128,128 @@ namespace PostingManagement.UI.Controllers
             return Json(historyList.Data);
         }
         [HttpGet]
-        public async Task<IActionResult> GetUploadedDataByBatchId()
+        public async Task<IActionResult> GetUploadedDataByBatchId(int id)
         {
             int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
-            var result = await _service.GetUploadedRecordsByBatchId(2, fileTypeCode);
+            HttpContext.Session.SetInt32("batchId", id);
+
             switch (fileTypeCode)
             {
                 case 1:
-                    var response = JsonConvert.DeserializeObject<List<BranchMaster>>(result);
-                    return View(response);
+                    return RedirectToAction("GetBranchMasterUploadedRecords");
 
-                    //case 2:
-                    //    request = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //        response = JsonConvert.DeserializeObject<List<DepartmentMaster>>((string)result);
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
+                case 2:
+                    return RedirectToAction("GetDepartmentMasterUploadedRecords");
 
-                    //case 3:
-                    //    request = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //        response = JsonConvert.DeserializeObject<List<EmployeeMaster>>((string)result);
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
+                case 3:
+                    return RedirectToAction("GetEmployeeMasterUploadedRecords");
 
-                    //case 4:
-                    //    request = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //        response = JsonConvert.DeserializeObject<List<InterRegionalPromotion>>((string)result);
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
+                case 4:
+                    return RedirectToAction("InterRegionalPromotionUploadedRecords");
 
-                    //case 5:
-                    //    request = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //        response = JsonConvert.DeserializeObject<List<InterRegionRequestTransfer>>((string)result);
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
+                case 5:
+                    return RedirectToAction("InterRegionRequestTransferUploadedRecords");
 
-                    //case 6:
-                    //    request = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //        response = JsonConvert.DeserializeObject<List<InterZonalPromotion>>((string)result);
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
+                case 6:
+                    return RedirectToAction("GetInterZonalPromotionUploadedRecords");
 
-                    //case 7:
-                    //    request = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //        response = JsonConvert.DeserializeObject<List<InterZonalRequestTransfer>>((string)result);
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
+                case 7:
+                    return RedirectToAction("GetInterZonalRequestTransferUploadedRecords");
 
-                    //case 8:
-                    //    request = new GetExcelDataQuery<RegionMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //    {
-                    //        response = JsonConvert.DeserializeObject<List<RegionMaster>>(Convert.ToString(result));
-                    //    }
-                    //    else
-                    //        response = result;
-                    //    return Ok(response);
-                    //case 9:
-                    //    request = new GetExcelDataQuery<ZoneMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
-                    //    result = await _mediator.Send(request);
-                    //    if (result.GetType() == (typeof(object)))
-                    //    {
-                    //        response = JsonConvert.DeserializeObject<List<ZoneMaster>>(Convert.ToString(result));
-                    //    }
-                    //    else
-                    //        response = result;                    
+                case 8:
+                    return RedirectToAction("GetRegionMasterUploadedRecords");
+
+                case 9:
+                    return RedirectToAction("GetZoneMasterUploadedRecords");
+
             }
-            return View();
+            return BadRequest();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetInterZonalPromotionUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<InterZonalPromotion>>(result);
+            return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetInterZonalRequestTransferUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<InterZonalRequestTransfer>>(result);
+            return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRegionMasterUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(1, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<RegionMaster>>(result);
+            return View(response);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetZoneMasterUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(2, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<ZoneMaster>>(result);
+            return View(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetBranchMasterUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<BranchMaster>>(result);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentMasterUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<DepartmentMaster>>(result);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEmployeeMasterUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<EmployeeMaster>>(result);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> InterRegionalPromotionUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<InterRegionalPromotion>>(result);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> InterRegionRequestTransferUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<InterRegionRequestTransfer>>(result);
+            return Json(response);
+        }
     }
 }

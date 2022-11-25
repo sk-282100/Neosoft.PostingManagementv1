@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Domain.Entities
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.EmployeeMasterRecords
 {
-    public class EmployeeMaster
-    {        
+    public class EmployeeMasterRecordsDto
+    {
+        public int BatchId { get; set; }
         [Key]
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; } = null!;

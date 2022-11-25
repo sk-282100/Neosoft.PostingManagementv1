@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.UI.Models.ExcelFileTypes 
-{ 
-    public class InterZonalPromotion
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalPromotionRecords
+{
+    public class InterZonalPromotionRecordsDto
     {
         public int BatchId { get; set; }
         [Key]

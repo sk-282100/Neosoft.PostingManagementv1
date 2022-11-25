@@ -9,6 +9,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.DepartmentMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.EmployeeMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalPromotionRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalRequestRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalPromotionRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalRequestRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.RegionMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
 
 namespace PostingManagement.Persistence
 {
@@ -27,15 +36,15 @@ namespace PostingManagement.Persistence
         public DbSet<Message> Messages { get; set; }
         public DbSet<LoginModel> LoginTbl { get; set; }
         public DbSet<Role> RoleTable { get; set; }
-        public DbSet<BranchMaster> BranchMasterDataTable { get; set; }
-        public DbSet<RegionMaster> RegionMasterDataTable { get; set; }
-        public DbSet<ZoneMaster> ZoneMasterDataTable { get; set; }
-        public DbSet<DepartmentMaster> DepartmentMasterDataTable { get; set; }
-        public DbSet<EmployeeMaster> EmployeeMasterTbl { get; set; }
-        public DbSet<InterRegionalPromotion> InterRegionalPromotionTbl { get; set; }
-        public DbSet<InterRegionRequestTransfer> InterRegionRequestTransferTbl { get; set; }
-        public DbSet<InterZonalPromotion> InterZonalPromotionTbl { get; set; }
-        public DbSet<InterZonalRequestTransfer> InterZonalRequestTransferTbl { get; set; }
+        public DbSet<BranchMasterRecordsDto> BranchMasterDataTable { get; set; }
+        public DbSet<RegionMasterRecordsDto> RegionMasterDataTable { get; set; }
+        public DbSet<ZoneMasterRecordsDto> ZoneMasterDataTable { get; set; }
+        public DbSet<DepartmentMasterRecordsDto> DepartmentMasterDataTable { get; set; }
+        public DbSet<EmployeeMasterRecordsDto> EmployeeMasterTbl { get; set; }
+        public DbSet<InterRegionalPromotionRecordsDto> InterRegionalPromotionTbl { get; set; }
+        public DbSet<InterRegionalRequestRecordsDto> InterRegionRequestTransferTbl { get; set; }
+        public DbSet<InterZonalPromotionRecordsDto> InterZonalPromotionTbl { get; set; }
+        public DbSet<InterZonalRequestRecordsDto> InterZonalRequestTransferTbl { get; set; }
 
         public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
 
