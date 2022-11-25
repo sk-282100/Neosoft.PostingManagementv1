@@ -1,0 +1,54 @@
+﻿@model PostingManagement.UI.Models.RoleModel
+
+@{
+    ViewData["Title"] = "EditRole";
+    Layout = "~/Views/Shared/MainView.cshtml";
+
+}
+
+<h1>Edit Role</h1>
+
+<hr />
+<div class="col-xxl-4 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="EditRole">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div style="display:inline-flex;">
+                            <div class="form-group">
+                                <input asp-for="RoleName" class="form-control" />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Edit" class="btn btn-warning" style="margin-left:10px" />
+                            </div>
+                            <div class="form-group" style="visibility: hidden">
+                                <label asp-for="RoleId" class="control-label"></label>
+                                <input asp-for="RoleId" class="form-control" />
+                                <span asp-validation-for="RoleId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="col-xxl-4 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+            <div id="assign">
+                <partial name="getallroles" />
+            </div>
+        </div>
+    </div>
+</div>*@
+

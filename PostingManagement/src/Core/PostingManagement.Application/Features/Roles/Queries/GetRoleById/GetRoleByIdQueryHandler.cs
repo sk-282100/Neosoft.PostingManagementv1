@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Features.Events.Queries.GetEventDetail;
 using PostingManagement.Application.Responses;
@@ -11,23 +13,31 @@ using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Features.Roles.Queries.GetRoleById
 {
-    public class GetRoleByIdQueryHandler : IRequestHandler<GetRoleByIdQuery, Response<Role>>
+    public class GetRoleByIdQueryHandler : IRequestHandler<GetRoleByIdQuery, Response<GetRoleByIdDto>>
     {
         private readonly IRoleRepository _roleRepository;
-        public GetRoleByIdQueryHandler(IRoleRepository roleRepository)
+        private readonly IDataProtector _protector;
+        private readonly IMapper _mapper;
+        
+        public GetRoleByIdQueryHandler(IRoleRepository roleRepository,IDataProtectionProvider provider,IMapper mapper)
         {
             _roleRepository = roleRepository;
+            _protector = provider.CreateProtector("");   
+            _mapper = mapper;   
         }
-        public async Task<Response<Role>> Handle(GetRoleByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<GetRoleByIdDto>> Handle(GetRoleByIdQuery request, CancellationToken cancellationToken)
         {
-            Role role = await _roleRepository.GetRoleById(request.RoleId);
+            string id = _protector.Unprotect(request.RoleId);
+
+            Role role = await _roleRepository.GetRoleById(Convert.ToInt32(id));
             if(role != null)
             {
-                return new Response<Role>() { Data = role, Succeeded = true };
+                var rolesDto = _mapper.Map<GetRoleByIdDto>(role);
+                return new Response<GetRoleByIdDto>() { Data = rolesDto, Succeeded = true };
             }
             else
             {
-                return new Response<Role>() { Message = "Role Does not Exists", Succeeded = false };
+                return new Response<GetRoleByIdDto>() { Message = "Role Does not Exists", Succeeded = false };
             }
         }
     }

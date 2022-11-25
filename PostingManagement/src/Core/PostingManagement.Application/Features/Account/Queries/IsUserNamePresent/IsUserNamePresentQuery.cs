@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Application.Features.Roles.Commands.DeleteRole
+namespace PostingManagement.Application.Features.Account.Queries.IsUserNamePresent
 {
-    public class DeleteRoleCommand : IRequest<Response<bool>>
+    public class IsUserNamePresentQuery :IRequest<Response<bool>>
     {
-        public string RoleId { get; set; }
+        public string UserName { get; set; }
     }
 }

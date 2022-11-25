@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PostingManagement.Application.Features.Account.Queries;
+using PostingManagement.Application.Features.Account.Queries.GetUserById;
 using PostingManagement.Application.Features.Categories.Commands.CreateCategory;
 using PostingManagement.Application.Features.Categories.Commands.StoredProcedure;
 using PostingManagement.Application.Features.Categories.Queries.GetCategoriesList;
@@ -13,6 +15,8 @@ using PostingManagement.Application.Features.ExcelUpload.Command;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Application.Features.Orders.GetOrdersForMonth;
 using PostingManagement.Application.Features.Roles.Commands.EditRole;
+using PostingManagement.Application.Features.Roles.Queries.GetAllRoles;
+using PostingManagement.Application.Features.Roles.Queries.GetRoleById;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Application.Profiles
@@ -42,9 +46,13 @@ namespace PostingManagement.Application.Profiles
 
             CreateMap<UploadHistoryDetails, GetUploadHistoryDto>().ReverseMap();
 
+           
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
+            CreateMap<UserDetails, UserDetailsDto>().ConvertUsing<UserDetailsCustomMapper>();
 
             CreateMap<Role, EditRoleCommand>().ReverseMap();
+            CreateMap<Role, GetAllRolesDto>().ConvertUsing<GetAllRolesDtoCustomMapper>();
+            CreateMap<Role, GetRoleByIdDto>().ConvertUsing<GetRolesByIdCustomMapper>();
         }
     }
 }

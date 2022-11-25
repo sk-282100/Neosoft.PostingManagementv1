@@ -1,0 +1,39 @@
+﻿@model PostingManagement.UI.Models.AccountModels.UserViewModel
+
+@{
+    ViewData["Title"] = "EditUserRoleDetails";
+    Layout = "MainView";
+}
+
+<h1>EditUserRoleDetails</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditUserRoleDetails">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="UId" class="form-control" type="hidden" />
+                <span asp-validation-for="UId" class="text-danger"></span>
+            </div>
+            <div class="form-group m-3">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group m-3">
+                <label asp-for="RoleId" class="control-label"></label>
+                @if (ViewBag.Roles != null)
+                {
+                    @Html.DropDownListFor(model =>model.RoleId ,ViewBag.Roles as SelectList,new { @class="form-control" })
+                }
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary m-4" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
