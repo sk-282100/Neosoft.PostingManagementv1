@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Features.Roles.Queries.GetAllRoles
 {
-    public class GetAllRolesQuery : IRequest<Response<List<Role>>>
+    public class GetAllRolesQuery : IRequest<Response<List<GetAllRolesDto>>>
     {
     }
 }

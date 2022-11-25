@@ -25,9 +25,10 @@ namespace PostingManagement.Api.Controllers.v1
             var response = await _mediator.Send(command);
             return Ok(response);
         }
-        [HttpPost("DeleteRole")]
-        public async Task<IActionResult> DeleteUserRole(DeleteRoleCommand command)
+        [HttpDelete("DeleteRole")]
+        public async Task<IActionResult> DeleteUserRole(string id)
         {
+            DeleteRoleCommand command = new DeleteRoleCommand() { RoleId=id};
             var response = await _mediator.Send(command);
             return Ok(response);
         }
@@ -38,7 +39,7 @@ namespace PostingManagement.Api.Controllers.v1
             return Ok(response);
         }
         [HttpGet("GetRoleById")]       
-        public async Task<IActionResult> GetRoleById(int id)
+        public async Task<IActionResult> GetRoleById(string id)
         {
             GetRoleByIdQuery query = new GetRoleByIdQuery { RoleId = id };
             var response = await _mediator.Send(query);

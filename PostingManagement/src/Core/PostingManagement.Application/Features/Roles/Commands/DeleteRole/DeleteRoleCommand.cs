@@ -10,6 +10,6 @@ namespace PostingManagement.Application.Features.Roles.Commands.DeleteRole
 {
     public class DeleteRoleCommand : IRequest<Response<bool>>
     {
-        public int RoleId { get; set; }
+        public string RoleId { get; set; }
     }
 }

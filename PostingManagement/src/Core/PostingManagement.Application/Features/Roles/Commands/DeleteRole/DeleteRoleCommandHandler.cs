@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Features.Roles.Commands.AddRole;
 using PostingManagement.Application.Responses;
@@ -14,14 +15,19 @@ namespace PostingManagement.Application.Features.Roles.Commands.DeleteRole
 {
     public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand, Response<bool>>
     {
-        private IRoleRepository _roleRepository;        
-        public DeleteRoleCommandHandler(IRoleRepository roleRepository)
+        private IRoleRepository _roleRepository;    
+       
+        private IDataProtector _protector;
+        public DeleteRoleCommandHandler(IRoleRepository roleRepository,IDataProtectionProvider provider)
         {
-            _roleRepository = roleRepository;            
+            _roleRepository = roleRepository;
+            _protector = provider.CreateProtector(""); 
+               
         }
         public async Task<Response<bool>> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
         {
-            Role role = await _roleRepository.GetRoleById(request.RoleId);
+            string id = _protector.Unprotect(request.RoleId);
+            Role role = await _roleRepository.GetRoleById(Convert.ToInt32(id));
             if(role != null)
             {
                 bool result = await _roleRepository.DeleteAsync(role);

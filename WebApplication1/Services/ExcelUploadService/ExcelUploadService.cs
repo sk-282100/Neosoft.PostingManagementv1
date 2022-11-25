@@ -21,14 +21,14 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
-        public async Task<Response<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode)
+        public async Task<BaseResponse<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode)
         {
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetUploadHistoryList?fileTypeCode=" + fileTypeCode))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    var uploadResult = JsonConvert.DeserializeObject<Response<List<UploadHistoryDetails>>>(apiResponse);
+                    var uploadResult = JsonConvert.DeserializeObject<BaseResponse<List<UploadHistoryDetails>>>(apiResponse);
                     return uploadResult;
                 }
             }
