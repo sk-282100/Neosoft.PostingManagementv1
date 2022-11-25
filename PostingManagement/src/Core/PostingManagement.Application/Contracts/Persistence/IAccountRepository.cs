@@ -12,7 +12,7 @@ namespace PostingManagement.Application.Contracts.Persistence
         public Task<bool> AddUser(string userName, int RoleId,string createdBy);
         public Task<bool> DeleteUser(int UserRoleId ,string deletedBy);
         public Task<bool> UpdateUser(int uId, string userName, int roleId, string updatedBy);
-        public Task<List<UserDetails>> GetAllUserDetails();
+        public Task<List<UserDetailsVm>> GetAllUserDetails();
         public Task<UserDetails> GetUserDetailsById(int UserRoleId);
         public Task<bool> IsUserNamePresent(string userName);
 

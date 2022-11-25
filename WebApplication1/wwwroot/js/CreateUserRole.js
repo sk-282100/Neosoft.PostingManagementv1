@@ -15,42 +15,48 @@
         }
     });
 
-
-    $('#UserName').blur(function () {
-        if ($(this).val() == "") {
-            $(this).notify("User name is required !!!","error");
-        }
-        if ($(this).val().length >= 1) {
-            var userName = this.value;
-            $.ajax({
-                type: "GET",
-                url: "/AccountView/IsUserNamePresent?userName=" + this.value,
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    if (response == true) {
-                        $('#UserName').notify(" This User name is already Present!!!", "error");
-                        $('#UserName').val('');
-                    }
-                },
-                failure: function (response) {
-                    alert(response.d);
-                },
-                error: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-    });
-
     $('#CreateUserNameForm').submit(function () {
         var isValid = true;
-        if ($('#UserName').val() == '') {
+        var inputValue = $('#UserName').val().trim();
+        if ($('#RoleId').val()=='') {
+            isValid = false;
+            $('#RoleId').notify("Please select the Role", "error");
+        }
+
+        if (inputValue == '') {
             isValid = false;
             $('#UserName').notify("User name is required !!!", "error");
-
         }
+        else if (inputValue != "")
+            {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/AccountView/IsUserNamePresent?userName=" + inputValue,
+                    data: '{}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response == true) {
+                            $('#UserName').notify(" This User name is already Present!!!", "error");
+                            isValid = false;
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                    },
+                    error: function (response) {
+                        alert(response.d);
+                    }
+                });
+            }
+
+        //var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
+        //if (!regx.test('#UserName')) {
+        //    isValid = false;
+        //    $('#UserName').notify("User name should in correct format!!!", "error");
+        //}
+        
         return isValid;
     });
 
@@ -67,7 +73,7 @@ function OnSuccess(response) {
             data: response,
             columns: [
                 
-                { data: 'roleId' },
+                { data: 'role' },
                 { data: 'userName' },
              
                 {

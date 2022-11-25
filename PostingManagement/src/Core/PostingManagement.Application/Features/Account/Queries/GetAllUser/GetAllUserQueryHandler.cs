@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
 using PostingManagement.Application.Contracts.Persistence;
+using PostingManagement.Application.Features.Account.Queries.GetUserById;
 using PostingManagement.Application.Responses;
 
 namespace PostingManagement.Application.Features.Account.Queries.GetAllUser
 {
-    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, Response<List<UserDetailsDto>>>
+    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, Response<List<GetAllUserDetailsDto>>>
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
-
 
         public GetAllUserQueryHandler(IAccountRepository accountRepository,IMapper mapper)
         {
@@ -17,12 +17,12 @@ namespace PostingManagement.Application.Features.Account.Queries.GetAllUser
             _mapper = mapper;
         }
 
-        public async Task<Response<List<UserDetailsDto>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<GetAllUserDetailsDto>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
             var userDetailsList = await _accountRepository.GetAllUserDetails();
-            List<UserDetailsDto> result = _mapper.Map<List<UserDetailsDto>>(userDetailsList);
+            List<GetAllUserDetailsDto> result = _mapper.Map<List<GetAllUserDetailsDto>>(userDetailsList);
 
-            return new Response<List<UserDetailsDto>>() { Succeeded = true ,Data=result};
+            return new Response<List<GetAllUserDetailsDto>>() { Succeeded = true ,Data=result};
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.DataProtection;
-using PostingManagement.Application.Features.Account.Queries;
+using PostingManagement.Application.Features.Account.Queries.GetUserById;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Application.Profiles

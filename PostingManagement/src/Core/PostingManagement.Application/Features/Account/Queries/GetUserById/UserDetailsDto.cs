@@ -1,4 +1,4 @@
-﻿namespace PostingManagement.Application.Features.Account.Queries
+﻿namespace PostingManagement.Application.Features.Account.Queries.GetUserById
 {
     public class UserDetailsDto
     {
