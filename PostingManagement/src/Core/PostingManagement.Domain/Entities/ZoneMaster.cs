@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace PostingManagement.Domain.Entities
 {
     public class ZoneMaster
     {
+        public int BatchId { get; set; }
+        [Key]
         public int ZoneCode { get; set; }
         public string ZoneName { get; set; } = null!;
         public string State { get; set; } = null!;

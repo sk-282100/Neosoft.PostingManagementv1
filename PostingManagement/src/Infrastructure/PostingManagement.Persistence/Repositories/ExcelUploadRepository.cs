@@ -4,10 +4,13 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PostingManagement.Application.Contracts.Persistence;
+using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Persistence.Repositories
@@ -19,49 +22,90 @@ namespace PostingManagement.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-        public Task<List<T>> GetAllRecords<T>(int fileTypeCode, int batchId)
+        public async Task<string> GetAllRecords<T>(int fileTypeCode, int batchId)
         {
             if (fileTypeCode == 1)
-            {
-
+            {                                
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var branchMasterList = _dbContext.Set<BranchMaster>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToList();                
+                if (branchMasterList.Count > 0)
+                {                    
+                    return JsonConvert.SerializeObject(branchMasterList); 
+                }                
             }
             else if (fileTypeCode == 2)
-            {
-
+            {                
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var departmentMasterList = await _dbContext.Set<DepartmentMaster>().FromSqlRaw("EXEC STP_DepartmentMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (departmentMasterList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(departmentMasterList);
+                }                
             }
             else if(fileTypeCode == 3)
             {
-
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var employeeMasterList = await _dbContext.Set<EmployeeMaster>().FromSqlRaw("EXEC STP_EmployeeMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (employeeMasterList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(employeeMasterList);
+                }                
             }
             else if (fileTypeCode == 4)
             {
-
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var interRegionalPromotionList = await _dbContext.Set<InterRegionalPromotion>().FromSqlRaw("EXEC STP_InterRegionalPromotionTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (interRegionalPromotionList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(interRegionalPromotionList);
+                }                
             }
             else if (fileTypeCode == 5)
             {
-
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var interRegionalRequestList = await _dbContext.Set<InterRegionRequestTransfer>().FromSqlRaw("EXEC STP_InterRegionRequestTransferTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (interRegionalRequestList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(interRegionalRequestList);
+                }                
             }
             else if (fileTypeCode == 6)
             {
-
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var interZonalPromotionList = await _dbContext.Set<InterZonalPromotion>().FromSqlRaw("EXEC STP_InterZonalPromotionTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (interZonalPromotionList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(interZonalPromotionList);
+                }                
             }
             else if (fileTypeCode == 7)
             {
-
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var interZonalRequestList = await _dbContext.Set<InterZonalRequestTransfer>().FromSqlRaw("EXEC STP_InterZonalRequestTransferTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (interZonalRequestList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(interZonalRequestList);
+                }                
             }
             else if (fileTypeCode == 8)
-            {
-
+            {                
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var regionMasterList = await _dbContext.Set<RegionMaster>().FromSqlRaw("EXEC STP_RegionMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (regionMasterList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(regionMasterList);
+                }                
             }
             else if (fileTypeCode == 9)
-            {
-
-            }
-            else
-            {
-
-            }
-            return null;
+            {                
+                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
+                var zoneMasterList = await _dbContext.Set<ZoneMaster>().FromSqlRaw("EXEC STP_ZoneMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                if (zoneMasterList.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(zoneMasterList);
+                }                
+            }            
+            return "No Records Found!";         
         }
         public async Task<ExcelUploadResult> AddAsync<T>(string uploadedBy, List<T> excelData ,string fileName) 
         {
@@ -175,7 +219,7 @@ namespace PostingManagement.Persistence.Repositories
             var fileTypeCodeParameter = new SqlParameter() { ParameterName = "@fileTypeCode", SqlDbType = SqlDbType.Int,  Value = fileTypeCode };
 
             //var historyList = _dbContext.UploadHistoryDetails.ToList();
-            var historyList =await _dbContext.Set<UploadHistoryDetails>().FromSqlRaw("EXEC STP_GetUploadHistoryDetails @fileTypeCode", fileTypeCodeParameter).ToListAsync();
+            var historyList = await _dbContext.Set<UploadHistoryDetails>().FromSqlRaw("EXEC STP_GetUploadHistoryDetails @fileTypeCode", fileTypeCodeParameter).ToListAsync();
             return historyList;
         }
     }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +9,9 @@ using System.Threading.Tasks;
 namespace PostingManagement.Domain.Entities
 {
     public class RegionMaster
-    {
+    {        
+        public int BatchId { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RegionCode { get; set; }
         public string RegionName { get; set; } = null!;
         public int ZoneCode { get; set; }

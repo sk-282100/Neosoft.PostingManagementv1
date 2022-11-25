@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PostingManagement.Application.Features.ExcelUpload.Command;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Domain.Entities;
 
@@ -106,12 +108,99 @@ namespace PostingManagement.Api.Controllers.v1
             return Ok(response);
         }
 
-        //[HttpGet("GetAllRecords")]
-        //public async Task<IActionResult> GetExcelData(int fileTypeCode, int batchId)
-        //{
-        //    var request = new GetExcelDataQuery();
-        //    var response = await _mediator.Send(request);
-        //    return Ok();
-        //}
+        [HttpGet ("GetAllRecords")]
+        public async Task<IActionResult> GetExcelData(int fileTypeCode, int batchId)
+        {
+            var request = new object();
+            var result = new object();
+            var response = new object();
+            switch (fileTypeCode)
+            {                
+                case 1:
+                    request = new GetExcelDataQuery<BranchMaster>() { FileTypeCode = fileTypeCode,BatchId = batchId};
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<BranchMaster>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 2:
+                    request = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<DepartmentMaster>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 3:
+                    request = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<EmployeeMaster>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 4:
+                    request = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterRegionalPromotion>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 5:
+                    request = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterRegionRequestTransfer>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 6:
+                    request = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterZonalPromotion>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 7:
+                    request = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                        response = JsonConvert.DeserializeObject<List<InterZonalRequestTransfer>>((string)result);
+                    else
+                        response = result;
+                    return Ok(response);
+
+                case 8:
+                    request = new GetExcelDataQuery<RegionMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                    {
+                        response = JsonConvert.DeserializeObject<List<RegionMaster>>(Convert.ToString(result));
+                    }
+                    else
+                        response = result;
+                    return Ok(response);
+                case 9:
+                    request = new GetExcelDataQuery<ZoneMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
+                    result = await _mediator.Send(request);
+                    if (result.GetType() == (typeof(object)))
+                    {
+                        response = JsonConvert.DeserializeObject<List<ZoneMaster>>(Convert.ToString(result));
+                    }
+                    else
+                        response = result;
+                    return Ok(response);
+            }
+            return Ok();            
+        }
     }
 }

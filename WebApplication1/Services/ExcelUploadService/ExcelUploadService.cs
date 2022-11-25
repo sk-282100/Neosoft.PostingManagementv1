@@ -33,6 +33,19 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
         }
+        public async Task<string> GetUploadedRecordsByBatchId(int batchId, int fileTypeCode)
+        {
+            var request = new UploadedRecords() { BatchId = batchId, FileTypeCode = fileTypeCode };
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetAllRecords?fileTypeCode=" + request.FileTypeCode + "&batchId=" + request.BatchId))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    return apiResponse;
+                }
+            }
+        }
         public async Task<ExcelUploadResponseModel> UploadExcel(ExcelUploadViewModel model, string uploadedBy)
         {
             try

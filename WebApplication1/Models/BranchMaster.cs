@@ -5,7 +5,7 @@ namespace PostingManagement.UI.Models
 {
     public class BranchMaster
     {
-
+        public int BatchId { get; set; }
         public string OldBranchCode { get; set; }
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string BranchCode { get; set; }

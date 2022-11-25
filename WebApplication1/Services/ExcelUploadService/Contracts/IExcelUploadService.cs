@@ -6,7 +6,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService.Contracts
     public interface IExcelUploadService
     {
         public Task<ExcelUploadResponseModel> UploadExcel(ExcelUploadViewModel model, string uploadedBy);
-        public  Task<BaseResponse<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode);
-
+        public  Task<Response<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode);
+        public Task<string> GetUploadedRecordsByBatchId(int batchId, int fileTypeCode);
     }
 }
