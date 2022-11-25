@@ -65,6 +65,11 @@ namespace PostingManagement.Persistence.Repositories
 
         }
 
+        public async Task<bool> IsUserNamePresent(string userName)
+        {
+            return _context.UserDetailsTbl.Any(x => x.UserName == userName && x.DeletedBy == null);
+        }
+
         private string GeneratePassword(int length = 12)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  

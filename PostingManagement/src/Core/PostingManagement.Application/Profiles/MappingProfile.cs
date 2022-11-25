@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PostingManagement.Application.Features.Account.Queries.GetAllUser;
+using PostingManagement.Application.Features.Account.Queries;
 using PostingManagement.Application.Features.Account.Queries.GetUserById;
 using PostingManagement.Application.Features.Categories.Commands.CreateCategory;
 using PostingManagement.Application.Features.Categories.Commands.StoredProcedure;
@@ -45,10 +45,10 @@ namespace PostingManagement.Application.Profiles
             CreateMap<ExcelUploadResult, ExcelUploadDto>().ReverseMap();
 
             CreateMap<UploadHistoryDetails, GetUploadHistoryDto>().ReverseMap();
-            CreateMap<UserDetails, UserDetailsDto>();
 
-            CreateMap<UserDetails, GetUserByIdDto>();
+           
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
+            CreateMap<UserDetails, UserDetailsDto>().ConvertUsing<UserDetailsCustomMapper>();
 
             CreateMap<Role, EditRoleCommand>().ReverseMap();
             CreateMap<Role, GetAllRolesDto>().ConvertUsing<GetAllRolesDtoCustomMapper>();
