@@ -14,5 +14,6 @@ namespace PostingManagement.Application.Contracts.Persistence
         public Task<Role> GetRoleById (int roleId);
         public Task<bool> DeleteAsync(Role role);
         public Task<List<Role>> GetAllRoles();
+        public Task<bool> IsRoleAlreadyExist(string roleName);
     }
 }

@@ -36,8 +36,7 @@ namespace PostingManagement.UI.Controllers
         public async Task <IActionResult> Addrole(RoleModel roleModel )
         {
             var response = await roleService.AddRole(roleModel);
-            ViewBag.AddRoleResponse = response == null ? null : response;
-            
+            ViewBag.AddRoleResponse = response == null ? null : response;            
             return View();
            
         }
@@ -58,6 +57,14 @@ namespace PostingManagement.UI.Controllers
         {
             var role = await roleService.EditRole(roleModel);
             return RedirectToAction("Addrole");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> IsRoleAlreadyExist(string roleName)
+        {
+            var response = await roleService.IsRoleAlreadyExist(roleName);
+            Console.WriteLine(response.Data);
+            return Json(response.Data);  
         }
     }
 }

@@ -6,6 +6,7 @@ using PostingManagement.Application.Features.Roles.Commands.DeleteRole;
 using PostingManagement.Application.Features.Roles.Commands.EditRole;
 using PostingManagement.Application.Features.Roles.Queries.GetAllRoles;
 using PostingManagement.Application.Features.Roles.Queries.GetRoleById;
+using PostingManagement.Application.Features.Roles.Queries.IsRoleAlreadyExist;
 
 namespace PostingManagement.Api.Controllers.v1
 {
@@ -52,5 +53,16 @@ namespace PostingManagement.Api.Controllers.v1
             var response = await _mediator.Send(query);
             return Ok(response);
         }
+
+        [HttpGet("IsRoleAlreadyExist")]
+         public async Task<IActionResult> IsRoleAlreadyExist(string roleName)
+         {
+            IsRoleAlreadyExistQuery query = new IsRoleAlreadyExistQuery { RoleName = roleName};
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        } 
+        
+        
+       
     }
 }
