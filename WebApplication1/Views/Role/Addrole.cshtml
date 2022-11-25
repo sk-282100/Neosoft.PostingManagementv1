@@ -1,0 +1,94 @@
+﻿@model PostingManagement.UI.Models.RoleModel
+
+@{
+    ViewData["Title"] = "Addrole";
+    Layout = "~/Views/Shared/MainView.cshtml";
+    var Roleid = ViewBag.Roleid;
+
+}
+
+<h1>Add New Role</h1>
+<hr />
+<script src="~/js/Role.js"></script>
+@*<input type="hidden" id="" value=@Roleid/>
+@if(@ViewBag.AddRoleResponse.Data == true)
+{
+    
+  <input type="hidden" value="@ViewBag.AddRoleResponse.Message" id="roleResponse" />
+    
+    @*else
+    {
+        <input type="hidden" value="noResponse" id="roleResponse" />
+    }*@
+@*}
+else
+{
+    <input type="hidden" value="noResponse" id="roleResponse" />
+
+}
+*@
+
+<div class="col-xxl-4 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Addrole">
+                        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                        @*<div class="form-group">
+                        <label asp-for="RoleId" class="control-label"></label>
+                        <input asp-for="RoleId" class="form-control" />
+                        <span asp-validation-for="RoleId" class="text-danger"></span>
+                        </div>*@
+                        <div style="display:inline-flex;">
+                            <div class="form-group">
+@*                                <label asp-for="rolename" class="control-label"></label>
+*@                                <input asp-for="RoleName" class="form-control" />
+                                <span asp-validation-for="RoleName"  class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input id="addRoleId" type="submit" value="Save" class="btn btn-success" style="margin-left:10px" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xxl-4 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+            <div id="assign">
+                <partial name="GetAllRoles" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    function Delete(id) {
+        Swal.fire({
+            title: 'Are you sure you want to Delete Role?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/Role/RemoveRole?id=' + id;
+            }
+        });
+    }
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
