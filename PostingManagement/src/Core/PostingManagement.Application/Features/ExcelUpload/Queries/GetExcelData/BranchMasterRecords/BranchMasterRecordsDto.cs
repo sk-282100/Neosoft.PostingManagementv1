@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Domain.Entities
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords
 {
-    public class BranchMaster
-    {        
+    public class BranchMasterRecordsDto
+    {
+        public int BatchId { get; set; }
         public string OldBranchCode { get; set; }
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string BranchCode { get; set; }

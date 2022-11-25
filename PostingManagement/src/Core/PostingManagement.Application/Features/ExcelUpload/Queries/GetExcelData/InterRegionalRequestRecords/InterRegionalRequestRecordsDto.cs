@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.UI.Models.ExcelFileTypes
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalRequestRecords
 {
-    public class InterRegionRequestTransfer
+    public class InterRegionalRequestRecordsDto
     {
         public int BatchId { get; set; }
         [Key]

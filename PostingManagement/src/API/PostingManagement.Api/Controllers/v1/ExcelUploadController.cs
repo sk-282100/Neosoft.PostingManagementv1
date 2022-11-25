@@ -3,6 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostingManagement.Application.Features.ExcelUpload.Command;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.DepartmentMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.EmployeeMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalPromotionRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalRequestRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalPromotionRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalRequestRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.RegionMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Domain.Entities;
 
@@ -108,19 +117,19 @@ namespace PostingManagement.Api.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet ("GetAllRecords")]
+        [HttpGet("GetAllRecords")]
         public async Task<IActionResult> GetExcelData(int fileTypeCode, int batchId)
         {
             var request = new object();
             var result = new object();
             var response = new object();
             switch (fileTypeCode)
-            {                
+            {
                 case 1:
-                    request = new GetExcelDataQuery<BranchMaster>() { FileTypeCode = fileTypeCode,BatchId = batchId};
+                    request = new GetExcelDataQuery<BranchMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<BranchMaster>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<BranchMasterRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -129,7 +138,7 @@ namespace PostingManagement.Api.Controllers.v1
                     request = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<DepartmentMaster>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<DepartmentMasterRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -138,7 +147,7 @@ namespace PostingManagement.Api.Controllers.v1
                     request = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<EmployeeMaster>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<EmployeeMasterRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -147,7 +156,7 @@ namespace PostingManagement.Api.Controllers.v1
                     request = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<InterRegionalPromotion>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<InterRegionalPromotionRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -156,7 +165,7 @@ namespace PostingManagement.Api.Controllers.v1
                     request = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<InterRegionRequestTransfer>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<InterRegionalRequestRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -165,7 +174,7 @@ namespace PostingManagement.Api.Controllers.v1
                     request = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<InterZonalPromotion>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<InterZonalPromotionRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -174,7 +183,7 @@ namespace PostingManagement.Api.Controllers.v1
                     request = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
-                        response = JsonConvert.DeserializeObject<List<InterZonalRequestTransfer>>((string)result);
+                        response = JsonConvert.DeserializeObject<List<InterZonalRequestRecordsDto>>((string)result);
                     else
                         response = result;
                     return Ok(response);
@@ -184,7 +193,7 @@ namespace PostingManagement.Api.Controllers.v1
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
                     {
-                        response = JsonConvert.DeserializeObject<List<RegionMaster>>(Convert.ToString(result));
+                        response = JsonConvert.DeserializeObject<List<RegionMasterRecordsDto>>(Convert.ToString(result));
                     }
                     else
                         response = result;
@@ -194,13 +203,13 @@ namespace PostingManagement.Api.Controllers.v1
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
                     {
-                        response = JsonConvert.DeserializeObject<List<ZoneMaster>>(Convert.ToString(result));
+                        response = JsonConvert.DeserializeObject<List<ZoneMasterRecordsDto>>(Convert.ToString(result));
                     }
                     else
                         response = result;
                     return Ok(response);
             }
-            return Ok();            
+            return Ok();
         }
     }
 }

@@ -1,17 +1,16 @@
-﻿using MessagePack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.UI.Models.ExcelFileTypes
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords
 {
-    public class ZoneMaster
+    public class ZoneMasterRecordsDto
     {
         public int BatchId { get; set; }
-        [System.ComponentModel.DataAnnotations.Key]
+        [Key]
         public string ZoneCode { get; set; }
         public string ZoneName { get; set; } = null!;
         public string State { get; set; } = null!;

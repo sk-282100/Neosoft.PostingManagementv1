@@ -1,4 +1,5 @@
-﻿using PostingManagement.UI.Models.AccountModels;
+﻿
+using PostingManagement.UI.Models.AccountModels;
 using PostingManagement.UI.Models.Responses;
 
 namespace PostingManagement.UI.Services.AccountServices.Contracts

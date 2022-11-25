@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords
 {
-    public class GetInterZonalPromotionDataQueryHandler : BaseGetExcelDataQueryHandler<InterZonalPromotion>
+    public class GetBranchMasterDataQueryHandler : BaseGetExcelDataQueryHandler<BranchMaster>
     {
-        public GetInterZonalPromotionDataQueryHandler(IExcelUploadRepository repository, IMapper mapper) : base(repository, mapper)
+        public GetBranchMasterDataQueryHandler(IExcelUploadRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
     }

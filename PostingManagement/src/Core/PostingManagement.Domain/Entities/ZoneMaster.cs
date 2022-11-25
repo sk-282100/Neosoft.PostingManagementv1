@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace PostingManagement.Domain.Entities
 {
     public class ZoneMaster
-    {
-        public int BatchId { get; set; }
+    {        
         [Key]
         public int ZoneCode { get; set; }
         public string ZoneName { get; set; } = null!;

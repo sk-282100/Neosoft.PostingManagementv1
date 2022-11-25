@@ -1,6 +1,4 @@
-﻿
-using PostingManagement.Application.Responses;
-using PostingManagement.UI.Models;
+﻿using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.Responses;
 
 namespace PostingManagement.UI.Services.RoleService

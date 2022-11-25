@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData
+namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterRegionalPromotionRecords
 {
     public class GetInterRegionPromotionDataQueryHandler : BaseGetExcelDataQueryHandler<InterRegionalPromotion>
     {
