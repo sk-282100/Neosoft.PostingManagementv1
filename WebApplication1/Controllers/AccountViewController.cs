@@ -1,28 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.AccountModels;
 using PostingManagement.UI.Services.AccountServices.Contracts;
+using PostingManagement.UI.Services.RoleService;
 
 namespace PostingManagement.UI.Controllers
 {
     public class AccountViewController : Controller
     {
         private readonly IAccountService _accountService;
-        public AccountViewController(IAccountService accountService)
+        private readonly IRoleService _roleService;
+        public AccountViewController(IAccountService accountService,IRoleService roleService)
         {
             _accountService = accountService;
+            _roleService = roleService;
         }
 
         [HttpGet]
         public async Task<IActionResult> CreateUserName()
         {
-            List<RoleViewModel> roles = new List<RoleViewModel>()
-            {
-                new RoleViewModel(){RoleId = 1,RoleName ="CO"},
-                new RoleViewModel(){RoleId = 2,RoleName ="ZO"},
-                new RoleViewModel(){RoleId = 3,RoleName ="RO"}
-
-            };
+            List<RoleModel> roles = await _roleService.GetAllRoles();
             ViewBag.Roles = new SelectList(roles,"RoleId","RoleName");
             return View();
         }
@@ -43,19 +41,17 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditUserRoleDetails(string id)
+        public async Task<IActionResult> EditUserRoleDetails(string id,string currentRole)
         {
             var model = await _accountService.GetUserById(id);
-            List<RoleViewModel> roles = new List<RoleViewModel>()
-            {
-                new RoleViewModel(){RoleId = 1,RoleName ="CO"},
-                new RoleViewModel(){RoleId = 2,RoleName ="ZO"},
-                new RoleViewModel(){RoleId = 3,RoleName ="RO"}
+            
+            List<RoleModel> roles = await _roleService.GetAllRoles();
 
-            };
             ViewBag.Roles = new SelectList(roles, "RoleId", "RoleName");
+            ViewBag.UserCurrentRole = currentRole;
             return View(model.Data);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditUserRoleDetails(UserViewModel model)
         {
@@ -67,6 +63,7 @@ namespace PostingManagement.UI.Controllers
             await _accountService.UpdateUserDetails(request);
             return RedirectToAction("CreateUserName");
         }
+
         [HttpGet]
         public async Task<IActionResult> ShowUserRoleDetails()
             {
@@ -74,6 +71,7 @@ namespace PostingManagement.UI.Controllers
             
             return Json(userList.Data);
         }
+
         [HttpGet]
         public async Task<IActionResult> IsUserNamePresent(string userName)
         {

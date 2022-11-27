@@ -20,10 +20,12 @@ namespace PostingManagement.Application.Features.Account.Command.EditUser
         public async Task<Response<bool>> Handle(EditUserCommad request, CancellationToken cancellationToken)
         {
             int id = Convert.ToInt32(_protector.Unprotect(request.UId));
+            int roleId = Convert.ToInt32(_protector.Unprotect(request.RoleId));
+
             var userDetails = await _accountRepository.GetUserDetailsById(id);
             if (userDetails != null)
             {
-                bool response = await _accountRepository.UpdateUser(id, request.UserName, request.RoleId, request.UpdatedBy);
+                bool response = await _accountRepository.UpdateUser(id, request.UserName,roleId, request.UpdatedBy);
                 if (response)
                 {
                     return new Response<bool>() { Succeeded = true, Data = response, Message = "Requested User Update successfully " };

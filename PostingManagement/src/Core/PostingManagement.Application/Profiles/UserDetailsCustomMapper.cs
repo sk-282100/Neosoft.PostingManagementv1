@@ -17,9 +17,10 @@ namespace PostingManagement.Application.Profiles
         {
             UserDetailsDto dto = new UserDetailsDto()
             {
+                RoleId = _protector.Protect(source.RoleId.ToString()),
                 UId = _protector.Protect(source.UId.ToString()),
-                UserName = source.UserName,
-                RoleId = source.RoleId
+                UserName = source.UserName
+                
             };
             return dto;
         }

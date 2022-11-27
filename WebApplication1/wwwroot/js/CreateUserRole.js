@@ -15,17 +15,17 @@
         }
     });
 
-    $('#CreateUserNameForm').submit(function () {
-        var isValid = true;
+    $('#CreateUserBtn').click(function () {
+       
         var inputValue = $('#UserName').val().trim();
-        if ($('#RoleId').val()=='') {
-            isValid = false;
+        if ($('#RoleId').val() == '') {
             $('#RoleId').notify("Please select the Role", "error");
+            
         }
 
         if (inputValue == '') {
-            isValid = false;
             $('#UserName').notify("User name is required !!!", "error");
+            
         }
         else if (inputValue != "")
             {
@@ -39,7 +39,12 @@
                     success: function (response) {
                         if (response == true) {
                             $('#UserName').notify(" This User name is already Present!!!", "error");
-                            isValid = false;
+                           
+                        }
+                        else if (response == false ) {
+                            if ($('#RoleId').val() != '') {
+                                $('#CreateUserNameForm').submit();
+                            }
                         }
                     },
                     failure: function (response) {
@@ -57,7 +62,7 @@
         //    $('#UserName').notify("User name should in correct format!!!", "error");
         //}
         
-        return isValid;
+      
     });
 
     
@@ -80,7 +85,7 @@ function OnSuccess(response) {
                     data: null,
                     "mRender": function (data, type, full) {
                         var id ="'"+ data.uId+"'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole='+data.role+'" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
                        
                     }
                 }
