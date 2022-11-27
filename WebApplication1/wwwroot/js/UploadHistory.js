@@ -43,13 +43,13 @@ function OnSuccess(response) {
                 }, {
                     data: null,
                     "mRender": function (data, type, full) {
-                        return '<a class="btn btn-success btn-sm" href=/Error/Error401 data-historyid='+data.historyId+'>View</a>';
-                        
+                        return '<a id="viewButton" class="btn btn-success btn-sm" onclick=ViewRecords('+ data.batchId +')>View</a>';
                     }
                 }],
             
         });
 };
+
 
 $(document).ready(function () {
     $('#ExcelUploadForm').submit(function () {
