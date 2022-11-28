@@ -64,8 +64,6 @@
     </div>
 
 </div><!-- End Customers Card -->
-
-
 *@
 
 @model PostingManagement.UI.Models.ExcelUploadViewModel
@@ -76,8 +74,8 @@
     var ExcelFileTypeCode = ViewBag.ExcelFileTypeCode;
 }
 
-
 <script src="~/js/UploadHistory.js"></script>
+<script src="~/js/getuploadedrecords.js"></script>
 <input type="hidden" id="excelUploadType" value=@ExcelFileTypeCode />
 
 @if (@ViewBag.ExcelUploadResponse != null)
@@ -145,8 +143,25 @@ else
         </div>
     </div>
 
-</div><!-- End Customers Card -->
-<script>
-   
-</script>
+</div> <!-- End Customers Card -->
+
+
+
+<div id="recordsDiv" class="col-xxl-4 col-xl-12" style="display: none">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+
+            <h5 class="card-title"> Records <span></span></h5>
+            <hr />
+            <div id="assign">
+                <partial name="GetEmployeeMasterUploadedRecords">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 

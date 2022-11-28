@@ -6,7 +6,6 @@ using PostingManagement.UI.Services.ExcelUploadService.Contracts;
 using PostingManagement.UI.CustomActionFilters;
 using Newtonsoft.Json;
 
-
 namespace PostingManagement.UI.Controllers
 {
     [LoginFilter]
@@ -166,6 +165,15 @@ namespace PostingManagement.UI.Controllers
             return BadRequest();
         }
         [HttpGet]
+        public async Task<IActionResult> GetEmployeeMasterUploadedRecords()
+        {
+            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
+            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
+            var response = JsonConvert.DeserializeObject<List<EmployeeMaster>>(result);
+            return Json(response);
+        }
+        [HttpGet]
         public async Task<IActionResult> GetInterZonalPromotionUploadedRecords()
         {
             int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
@@ -220,17 +228,7 @@ namespace PostingManagement.UI.Controllers
             var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
             var response = JsonConvert.DeserializeObject<List<DepartmentMaster>>(result);
             return Json(response);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetEmployeeMasterUploadedRecords()
-        {
-            int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
-            int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
-            var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
-            var response = JsonConvert.DeserializeObject<List<EmployeeMaster>>(result);
-            return Json(response);
-        }
+        }        
 
         [HttpGet]
         public async Task<IActionResult> InterRegionalPromotionUploadedRecords()
