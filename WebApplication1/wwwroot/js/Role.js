@@ -34,13 +34,81 @@ $(function () {
             alert(response.d);
         }
     });
-    $('#RoleName').blur(function () {
-        if ($(this).val() == "") {
-            $(this).notify("Role name is required !!!", "error");
+
+    
+});
+$(document).ready(function () {
+    $('#addRoleForm').submit(function () {
+
+        debugger
+        var isValid = true;
+        var inputValue = $('#RoleName').val().trim();
+        var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
+
+        if (inputValue == '') {
+            isValid = false;
+            $('#RoleName').notify("Role name is required !!!", "error");
         }
 
-    });       
+
+        //else if (!regx.test('#RoleName')) {
+        //    isValid = false;
+        //    $('#RoleName').notify("User name should in correct format!!!", "error");
+        //}
+
+        else if (inputValue != "") {
+
+            $.ajax({
+                type: "GET",
+                url: "/Role/IsRoleAlreadyExist?roleName=" + inputValue,
+                contentType: "application/json; charset=utf-8",
+                data: '{}',
+                dataType: "json",
+                success: function (response) {
+                    if (response == true) {
+                        $('#RoleName').notify(" This Role name is already Present!!!", "error");
+                        isValid = false;
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d);
+                },
+                error: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+        else if (false) {
+            console.log("hi");
+        }
+
+        return isValid;
+    });
+
 });
+
+
+
+
+    //$('#RoleName').blur(function () {
+    //    var inputValue = $(this).val().trim();
+    //    if (inputValue == "") {
+    //        $(this).notify("Role name is required !!!", "error");
+    //    }
+    //    if (inputValue == '#RoleName') {
+    //        $(this).notify("Role name is required !!!", "error");
+    //    }
+/*});*/
+
+        //var isValid = false;
+        //var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
+        //if (!regx.test('#RoleName')) {
+        //    isValid = false;
+        //    $('#RoleName').notify("Role name should in correct format!!!", "error");
+        //}
+        //return isValid;
+
+
 function OnSuccess(response) {
     $("#getallrolesId").DataTable(
         {

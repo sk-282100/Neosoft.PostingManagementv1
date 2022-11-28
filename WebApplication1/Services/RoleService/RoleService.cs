@@ -86,5 +86,18 @@ namespace PostingManagement.UI.Services.RoleService
                 }
             }
         }
+        public async Task<Response<bool>> IsRoleAlreadyExist(string roleName)
+        {
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/Role/IsRoleAlreadyExist?roleName=" + roleName))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var uploadResult = JsonConvert.DeserializeObject<Response<bool>>(apiResponse);
+
+                    return uploadResult;
+                }
+            }
+        }
     }
 }

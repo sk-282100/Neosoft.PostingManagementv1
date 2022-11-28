@@ -42,5 +42,9 @@ namespace PostingManagement.Persistence.Repositories
         {
             return await _applicationDbContext.RoleTable.Where(x => x.RoleName == roleName).FirstOrDefaultAsync();
         }
+        public async Task<bool> IsRoleAlreadyExist(string roleName)
+        {
+            return await _applicationDbContext.RoleTable.AnyAsync(x => x.RoleName == roleName);
+        }
     }
 }
