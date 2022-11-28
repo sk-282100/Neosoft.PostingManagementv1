@@ -4,10 +4,11 @@
     ViewData["Title"] = "CreateUserName";
     Layout = "MainView";
 }
+<script src="~/js/createuserrole.js?v=1.2"></script>
+
 <h1 class="card-title">Create User</h1>
 
 <hr />
-<script src="~/js/createuserrole.js?v=1.2"></script>
 <div class="col-xxl-4 col-xl-12">
 
     <div class="card info-card customers-card">
@@ -20,11 +21,11 @@
                     <form asp-action="CreateUserName" id="CreateUserNameForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div style="display:inline-flex;" class="w-100">
-                            <div class="form-group my-3 " style="width:20%">
+                            <div class="form-group my-3 " style="width:20% ;margin-right:2%">
                                 <label class="control-label">Roles</label>
                                 @if (ViewBag.Roles != null)
                                 {
-                                    @Html.DropDownListFor(model =>model.RoleId ,ViewBag.Roles as SelectList,new { @class="form-select me-3" })
+                                    @Html.DropDownListFor(model =>model.RoleId ,ViewBag.Roles as SelectList,"--select Roles--",new { @class="form-select me-3" })
                                 }
                                 
                             </div>
@@ -34,7 +35,7 @@
 @*                                <span asp-validation-for="UserName" class="text-danger"></span>
 *@                            </div>
                             <div class="form-group m-3 d-flex align-items-end ">
-                                <input type="submit" value="Save" class="btn btn-success" />
+                                <input type="button" value="Save" id="CreateUserBtn" class="btn btn-success" />
                             </div>
                         </div>
                     </form>
@@ -52,29 +53,12 @@
             <h5 class="card-title"> All User Details <span></span></h5>
             <hr />
             <div>
-                <partial name="ShowUserRoleDetails">
+                <partial name="_ShowUserRoleDetails">
             </div>
         </div>
     </div>
 </div>
-<script>
-    //function onDelete(data) {
-    //    debugger;
 
-    //    Swal.fire({
-    //        title: 'Are you sure you want to Delete User?',
-    //        icon: 'warning',
-    //        showCancelButton: true,
-    //        confirmButtonColor: '#3085d6',
-    //        cancelButtonColor: '#d33',
-    //        confirmButtonText: 'Yes!'
-    //    }).then((result) => {
-    //        if (result.isConfirmed) {
-    //            window.location.href = '/AccountView/DeleteUserName?id=' + data;
-    //        }
-    //    });
-    //}
-</script>
 
 @section Scripts {
     @{

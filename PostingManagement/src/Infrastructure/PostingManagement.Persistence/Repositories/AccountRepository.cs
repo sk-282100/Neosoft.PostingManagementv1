@@ -41,9 +41,18 @@ namespace PostingManagement.Persistence.Repositories
 
         }
 
-        public async Task<List<UserDetails>> GetAllUserDetails()
+        public async Task<List<UserDetailsVm>> GetAllUserDetails()
         {
-            var userDetails = await _context.UserDetailsTbl.Where(x=>x.DeletedBy == null).ToListAsync();
+            var userDetails = await (from user in _context.UserDetailsTbl
+                                    join role in _context.RoleTable on user.RoleId equals role.RoleId 
+                                    where user.DeletedBy == null
+                                    select new UserDetailsVm
+                                    {
+                                        UId = user.UId,
+                                        UserName = user.UserName,
+                                        Role = role.RoleName
+                                    }).ToListAsync();
+                                                           ;
             return userDetails;
         }
 

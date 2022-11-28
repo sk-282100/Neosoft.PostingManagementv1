@@ -15,43 +15,54 @@
         }
     });
 
-
-    $('#UserName').blur(function () {
-        if ($(this).val() == "") {
-            $(this).notify("User name is required !!!","error");
+    $('#CreateUserBtn').click(function () {
+       
+        var inputValue = $('#UserName').val().trim();
+        if ($('#RoleId').val() == '') {
+            $('#RoleId').notify("Please select the Role", "error");
+            
         }
-        if ($(this).val().length >= 1) {
-            var userName = this.value;
-            $.ajax({
-                type: "GET",
-                url: "/AccountView/IsUserNamePresent?userName=" + this.value,
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    if (response == true) {
-                        $('#UserName').notify(" This User name is already Present!!!", "error");
-                        $('#UserName').val('');
-                    }
-                },
-                failure: function (response) {
-                    alert(response.d);
-                },
-                error: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-    });
 
-    $('#CreateUserNameForm').submit(function () {
-        var isValid = true;
-        if ($('#UserName').val() == '') {
-            isValid = false;
+        if (inputValue == '') {
             $('#UserName').notify("User name is required !!!", "error");
-
+            
         }
-        return isValid;
+        else if (inputValue != "")
+            {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/AccountView/IsUserNamePresent?userName=" + inputValue,
+                    data: '{}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response == true) {
+                            $('#UserName').notify(" This User name is already Present!!!", "error");
+                           
+                        }
+                        else if (response == false ) {
+                            if ($('#RoleId').val() != '') {
+                                $('#CreateUserNameForm').submit();
+                            }
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                    },
+                    error: function (response) {
+                        alert(response.d);
+                    }
+                });
+            }
+
+        //var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
+        //if (!regx.test('#UserName')) {
+        //    isValid = false;
+        //    $('#UserName').notify("User name should in correct format!!!", "error");
+        //}
+        
+      
     });
 
     
@@ -67,14 +78,14 @@ function OnSuccess(response) {
             data: response,
             columns: [
                 
-                { data: 'roleId' },
+                { data: 'role' },
                 { data: 'userName' },
              
                 {
                     data: null,
                     "mRender": function (data, type, full) {
                         var id ="'"+ data.uId+"'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole='+data.role+'" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
                        
                     }
                 }

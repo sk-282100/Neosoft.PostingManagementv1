@@ -36,7 +36,7 @@ namespace PostingManagement.UI.Services.AccountServices
             }
         }
 
-        public async Task<Response<List<UserViewModel>>> GetAllUserDetails()
+        public async Task<Response<List<GetAllUserVm>>> GetAllUserDetails()
         {
             //Client Handler Part
             using (var httpClient = new HttpClient(_clientHandler))
@@ -44,7 +44,7 @@ namespace PostingManagement.UI.Services.AccountServices
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/Account/GetAllUser"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<Response<List<UserViewModel>>>(apiResponse);
+                    var result = JsonConvert.DeserializeObject<Response<List<GetAllUserVm>>>(apiResponse);
                     return result;
                 }
             }
@@ -103,7 +103,6 @@ namespace PostingManagement.UI.Services.AccountServices
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 
-
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/Account/IsUserNamePresent?userName=" + userName))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
