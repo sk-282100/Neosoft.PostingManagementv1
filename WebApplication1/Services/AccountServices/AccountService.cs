@@ -1,9 +1,4 @@
-﻿
-
-using MediatR;
-using Nancy;
-using Newtonsoft.Json;
-using PostingManagement.UI.Models;
+﻿using Newtonsoft.Json;
 using PostingManagement.UI.Models.AccountModels;
 using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.AccountServices.Contracts;
@@ -102,7 +97,6 @@ namespace PostingManagement.UI.Services.AccountServices
             //Client Handler Part
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/Account/IsUserNamePresent?userName=" + userName))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

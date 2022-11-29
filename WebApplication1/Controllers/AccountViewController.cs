@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.AccountModels;
-using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.AccountServices.Contracts;
 using PostingManagement.UI.Services.RoleService;
 

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using PostingManagement.UI.Models;
-using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.LoginService.Contracts;
 using System.Text;
 

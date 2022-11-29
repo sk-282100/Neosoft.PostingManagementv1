@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PostingManagement.Domain.Entities;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.Responses;
-using System.Net.Http;
 using System.Text;
 
 namespace PostingManagement.UI.Services.RoleService

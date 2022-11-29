@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using PostingManagement.UI.Models;
-using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.LoginService.Contracts;
 
 namespace PostingManagement.UI.Controllers
@@ -36,7 +35,7 @@ namespace PostingManagement.UI.Controllers
         {
             if (!_validatorService.HasRequestValidCaptchaEntry(Language.English, DisplayMode.SumOfTwoNumbers))
             {
-                this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please enter the security code as a number.");
+                this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please entry the Valid Captcha");
                 return View(model);
             }
             LoginResponseModel response = await  _loginService.Login(model);
