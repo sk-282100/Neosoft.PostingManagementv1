@@ -15,6 +15,41 @@
     });
 }
 function GetRecords(response) {
+    $('#itemModel').modal('show');
+    if ($("#excelUploadType").val() == 3) {
+        GetEmployeeMasterRecords(response);        
+    }
+    else if ($("#excelUploadType").val() == 2)
+    {        
+        GetDepartmentMasterRecords(response);        
+    }    
+};
+function GetDepartmentMasterRecords(response) {
+    if ($.fn.dataTable.isDataTable('#departmentMasterRecords')) {
+        $('#departmentMasterRecords').DataTable().destroy();
+    }
+    $("#departmentMasterRecords").DataTable(
+        {
+            bLengthChange: true,
+            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            bFilter: true,
+            bSort: true,
+            bPaginate: true,
+            data: response,
+            columns: [
+                { data: 'batchId' },
+                { data: 'departmentCode' },
+                { data: 'departmentName' }
+            ],
+
+        });
+    $("#departmentMasterRecords").show();
+    ShowRecords();
+}
+function GetEmployeeMasterRecords(response) {
+    if ($.fn.dataTable.isDataTable('#employeeMasterRecords')) {
+        $('#employeeMasterRecords').DataTable().destroy();
+    }
     $("#employeeMasterRecords").DataTable(
         {
             bLengthChange: true,
@@ -52,12 +87,9 @@ function GetRecords(response) {
             ],
 
         });
+    $("#employeeMasterRecords").show();
     ShowRecords();
-};
-
-//$(document).ready(function () {
-//    $("#recordsDiv").hide();
-//});
+}
 function ShowRecords() {
     $("#recordsDiv").show();
 }

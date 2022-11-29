@@ -30,7 +30,7 @@ namespace PostingManagement.Persistence.Repositories
 
         public async Task<List<Role>> GetAllRoles()
         {
-            return await _applicationDbContext.RoleTable.ToListAsync();
+            return await _applicationDbContext.RoleTable.OrderByDescending(x=>x.RoleId).ToListAsync();
         }
 
         public async Task<Role> GetRoleById(int roleId)

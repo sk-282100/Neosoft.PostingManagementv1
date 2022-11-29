@@ -10,7 +10,7 @@ namespace PostingManagement.Domain.Entities
     public class ZoneMaster
     {        
         [Key]
-        public int ZoneCode { get; set; }
+        public string ZoneCode { get; set; }
         public string ZoneName { get; set; } = null!;
         public string State { get; set; } = null!;
         public int StateId { get; set; }

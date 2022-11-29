@@ -1,25 +1,8 @@
-﻿//$(document).ready(function () {
-//    $("#addRoleId").click(function () {      //There another attribute should be used
-        
-//        $.ajax({
-//            url: "@Url.Action("GetAllRoles", "Home")",
-//            type: "post",
-//            data: { id: getId },
-
-//            success: function (data) {
-//                console.log(data);
-//                // $("#test").load("/Home/GetAllAssignedRole");
-//                $("#assign").replaceWith(data)
-//            },
-//            error: function () {
-//                alert("Fails 1");
-//            }
-//        });
-//    });
-//});
-
-$(function () {
-
+﻿$(function () {
+    //     let status = $('#roleResponse').val();
+    //if (status != "noResponse") {
+    //    $.notify("Role added Successfully", {type="success" align: "center", verticalAlign: "top" });
+    //}
     $.ajax({
         type: "GET",
         url: "/Role/GetAllRoles",
@@ -35,27 +18,23 @@ $(function () {
         }
     });
 
-    
-});
-$(document).ready(function () {
-    $('#addRoleForm').submit(function () {
+    $('#addRoleId').click(function () {
 
-        debugger
-        var isValid = true;
+        var regx = new RegExp(/^[A-Z][\w_@*]{1,15}$/);
         var inputValue = $('#RoleName').val().trim();
-        var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
 
         if (inputValue == '') {
-            isValid = false;
             $('#RoleName').notify("Role name is required !!!", "error");
         }
-
-
-        //else if (!regx.test('#RoleName')) {
-        //    isValid = false;
-        //    $('#RoleName').notify("User name should in correct format!!!", "error");
-        //}
-
+        else if (inputValue.length < 2) {
+            $('#RoleName').notify("Role Name should contain more than 1 characters", "error");
+        }
+        else if (inputValue.length > 15) {
+            $('#RoleName').notify("Role Name should not contain more than 15 characters", "error");
+        }
+        else if (!regx.test(inputValue)) {
+            $('#RoleName').notify("Role Name should start with Uppercase alphabatical character and \n it contain only aplhanumeric and _ @ *", "error");
+        }
         else if (inputValue != "") {
 
             $.ajax({
@@ -69,6 +48,11 @@ $(document).ready(function () {
                         $('#RoleName').notify(" This Role name is already Present!!!", "error");
                         isValid = false;
                     }
+                    else if (response == false) {
+                        if ($('#RoleId').val() != '') {
+                            $('#addRoleForm').submit();
+                        }
+                    }
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -78,36 +62,9 @@ $(document).ready(function () {
                 }
             });
         }
-        else if (false) {
-            console.log("hi");
-        }
-
-        return isValid;
     });
 
 });
-
-
-
-
-    //$('#RoleName').blur(function () {
-    //    var inputValue = $(this).val().trim();
-    //    if (inputValue == "") {
-    //        $(this).notify("Role name is required !!!", "error");
-    //    }
-    //    if (inputValue == '#RoleName') {
-    //        $(this).notify("Role name is required !!!", "error");
-    //    }
-/*});*/
-
-        //var isValid = false;
-        //var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
-        //if (!regx.test('#RoleName')) {
-        //    isValid = false;
-        //    $('#RoleName').notify("Role name should in correct format!!!", "error");
-        //}
-        //return isValid;
-
 
 function OnSuccess(response) {
     $("#getallrolesId").DataTable(
@@ -116,6 +73,7 @@ function OnSuccess(response) {
             lengthMenu: [[5, 10, -1], [5, 10, "All"]],
             bFilter: true,
             bSort: true,
+            order:[],
             bPaginate: true,
             data: response,
             columns: [
@@ -137,11 +95,11 @@ function OnSuccess(response) {
 };
 
 $(function () {
-    let message = $('#roleResponse').val();
-    if (message != "noResponse") {
-        $.notify(message, "success");
+    var status = $('#addRoleResponse').val();
+    if (status == "true") {
+        $.notify("Role Name added Successfully", "success");
     }
-});
+})
 
 
 

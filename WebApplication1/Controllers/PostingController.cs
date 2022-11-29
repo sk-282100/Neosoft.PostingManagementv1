@@ -170,7 +170,7 @@ namespace PostingManagement.UI.Controllers
             int fileTypeCode = Convert.ToInt32(HttpContext.Session.GetInt32("ExcelFileTypeCode"));
             int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
             var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
-            var response = JsonConvert.DeserializeObject<List<EmployeeMaster>>(result);
+            var response = JsonConvert.DeserializeObject<List<EmployeeMaster>>(result);            
             return Json(response);
         }
         [HttpGet]

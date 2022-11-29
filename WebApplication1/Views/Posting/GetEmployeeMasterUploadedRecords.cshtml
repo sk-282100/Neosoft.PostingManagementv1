@@ -1,87 +1,140 @@
-﻿@model IEnumerable<PostingManagement.UI.Models.ExcelFileTypes.EmployeeMaster>
+﻿<div class="modal fade" id="itemModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"> Records </h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>                
+            </div>
+            <div class="modal-body no-padding">
+                <div style=" margin:0 auto;">
+                    <div class="table-responsive">
+                        <table id="employeeMasterRecords" style="display: none">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Batch Id
+                                    </th>
+                                    <th>
+                                        Employee Id
+                                    </th>
+                                    <th>
+                                        Employee Name
+                                    </th>
+                                    <th>
+                                        Location
+                                    </th>
+                                    <th>
+                                        Location Desired
+                                    </th>
+                                    <th>
+                                        Department Ro
+                                    </th>
+                                    <th>
+                                        Region Code
+                                    </th>
+                                    <th>
+                                        Region Name
+                                    </th>
+                                    <th>
+                                        Zone Code
+                                    </th>
+                                    <th>
+                                        Zone Name
+                                    </th>
+                                    <th>
+                                        Job Code
+                                    </th>
+                                    <th>
+                                        Designation
+                                    </th>
+                                    <th>
+                                        Role Start Date
+                                    </th>
+                                    <th>
+                                        Scale Code
+                                    </th>
+                                    <th>
+                                        Scale
+                                    </th>
+                                    <th>
+                                        Ubi Job Role
+                                    </th>
+                                    <th>
+                                        Bank Name
+                                    </th>
+                                    <th>
+                                        Birth Date
+                                    </th>
+                                    <th>
+                                        Sex
+                                    </th>
+                                    <th>
+                                        Disability
+                                    </th>
+                                    <th>
+                                        Location Start Date
+                                    </th>
+                                    <th>
+                                        Domicile Zone
+                                    </th>
+                                    <th>
+                                        Ro Start Date
+                                    </th>
+                                    <th>
+                                        Last Promotion Date
+                                    </th>
+                                    <th>
+                                        Zo Start Date
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody> </tbody>
+                        </table>
+                        <table id="departmentMasterRecords" style="display: none">
+                            <thead>
+                                <tr>
+                                    <th>Batch Id</th>
+                                    <th>Department Code</th>
+                                    <th>Department Name</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>                   
+                </div>
+                <style>
+                    tr.even {
+                        background-color: #F5F5F5 !important;
+                    }
+                </style>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 
 
-<table id="employeeMasterRecords" class="display" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Batch Id
-            </th>
-            <th>
-                Employee Id
-            </th>
-            <th>
-                Employee Name
-            </th>
-            <th>
-                Location
-            </th>
-            <th>
-                Location Desired
-            </th>
-            <th>
-                Department Ro
-            </th>
-            <th>
-                Region Code
-            </th>
-            <th>
-                Region Name
-            </th>
-            <th>
-                Zone Code
-            </th>
-            <th>
-                Zone Name
-            </th>
-            <th>
-                Job Code
-            </th>
-            <th>
-                Designation
-            </th>
-            <th>
-                Role Start Date
-            </th>
-            <th>
-                Scale Code
-            </th>
-            <th>
-                Scale
-            </th>
-            <th>
-                Ubi Job Role
-            </th>
-            <th>
-                Bank Name
-            </th>
-            <th>
-                Birth Date
-            </th>
-            <th>
-                Sex
-            </th>
-            <th>
-                Disability
-            </th>
-            <th>
-                Location Start Date
-            </th>
-            <th>
-                Domicile Zone
-            </th>
-            <th>
-                Ro Start Date
-            </th>
-            <th>
-                Last Promotion Date
-            </th>
-            <th>
-                Zo Start Date
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody> </tbody>
-</table>
+<div class="modal fade" id="itemModel2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"> Reason Of Failure </h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body no-padding">
+                <div style=" margin:0 auto;">
+                    <div id="failureReason">  </div>
+                </div>
+                <style>
+                    tr.even {
+                        background-color: #F5F5F5 !important;
+                    }
+                </style>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 

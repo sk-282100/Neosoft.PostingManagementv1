@@ -84,8 +84,9 @@
     {
         <input type="hidden" value="@ViewBag.ExcelUploadResponse.Message" id="excelResponse" />
     }
-    else{
-        <input type="hidden" value="noResponse" id="excelResponse" />
+    else if (@ViewBag.ExcelUploadResponse.Succeeded == true)
+    {
+        <input type="hidden" value="@ViewBag.ExcelUploadResponse.Message" id="excelResponse" />
     }
 }
 else
@@ -148,19 +149,9 @@ else
 
 
 <div id="recordsDiv" class="col-xxl-4 col-xl-12" style="display: none">
-
-    <div class="card info-card customers-card">
-
-        <div class="card-body">
-
-            <h5 class="card-title"> Records <span></span></h5>
-            <hr />
-            <div id="assign">
-                <partial name="GetEmployeeMasterUploadedRecords">
-            </div>
-        </div>
+    <div id="assign">
+        <partial name="GetEmployeeMasterUploadedRecords">
     </div>
-
 </div>
 
 

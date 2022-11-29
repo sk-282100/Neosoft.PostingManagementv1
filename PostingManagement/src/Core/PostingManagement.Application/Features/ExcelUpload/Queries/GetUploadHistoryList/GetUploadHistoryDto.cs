@@ -17,5 +17,6 @@ namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHi
         public int NumberOfRows { get; set; }
         public int InsertedRows { get; set; }
         public string UploadStatus { get; set; }
+        public string? ReasonOfFailure { get; set; }
     }
 }

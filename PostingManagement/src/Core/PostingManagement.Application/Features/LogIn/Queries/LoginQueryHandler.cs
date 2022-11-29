@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
 using System;
@@ -12,12 +13,14 @@ namespace PostingManagement.Application.Features.LogIn.Queries
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginResponseDto>
     {
+        private readonly IDataProtector _dataProtector;
         private readonly ILoginRepository _repository;
         private readonly IMapper _mapper;
-        public LoginQueryHandler(IMapper mapper, ILoginRepository repository)
+        public LoginQueryHandler(IMapper mapper, ILoginRepository repository, IDataProtectionProvider provider)
         {
             _mapper = mapper;
             _repository = repository;
+            _dataProtector = provider.CreateProtector("");
         }
 
         public async Task<LoginResponseDto> Handle(LoginQuery request, CancellationToken cancellationToken)
@@ -25,18 +28,19 @@ namespace PostingManagement.Application.Features.LogIn.Queries
 
             var response = new LoginResponseDto();
             var userDetails = await _repository.GetDetailsByUsername(request.UserName);
+            var password = _dataProtector.Unprotect(userDetails.Password);
             if (userDetails == null)
             {
                 response.IsAuthenticated = false;
                 response.Message = "User is not  present";
                 return response;
             }
-            else if (userDetails.Password == request.Password)
+            else if (password == request.Password)
             {
                 response.IsAuthenticated = true;
                 response.Message = "User is authenticated successfully";
                 response.UserName = userDetails.UserName;
-                response.Role = userDetails.Role;
+                response.Role = await _repository.GetRoleByid(userDetails.RoleId);
                 return response;
             }
 

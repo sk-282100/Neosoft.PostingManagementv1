@@ -4,6 +4,15 @@
     ViewData["Title"] = "CreateUserName";
     Layout = "MainView";
 }
+
+
+@*else
+{
+    <input type="hidden" value="noResponse" id="addUserResponse" />
+
+}*@
+<input type="hidden" value=@ViewBag.CreateUserResponse id="addUserResponse" />
+
 <script src="~/js/createuserrole.js?v=1.2"></script>
 
 <h1 class="card-title">Create User</h1>
@@ -15,25 +24,26 @@
 
         <div class="card-body">
 
-            
+
             <div class="row">
                 <div class="col w-100">
                     <form asp-action="CreateUserName" id="CreateUserNameForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div style="display:inline-flex;" class="w-100">
                             <div class="form-group my-3 " style="width:20% ;margin-right:2%">
-                                <label class="control-label">Roles</label>
+                                <label class="control-label">Roles *</label>
                                 @if (ViewBag.Roles != null)
                                 {
                                     @Html.DropDownListFor(model =>model.RoleId ,ViewBag.Roles as SelectList,"--select Roles--",new { @class="form-select me-3" })
                                 }
-                                
+
                             </div>
                             <div class="form-group my-3">
-                                <label class="control-label">UserName</label>
+                                <label class="control-label">User Name *</label>
                                 <input asp-for="UserName" class="form-control" />
-@*                                <span asp-validation-for="UserName" class="text-danger"></span>
-*@                            </div>
+                                @*                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                *@
+                            </div>
                             <div class="form-group m-3 d-flex align-items-end ">
                                 <input type="button" value="Save" id="CreateUserBtn" class="btn btn-success" />
                             </div>
@@ -58,6 +68,12 @@
         </div>
     </div>
 </div>
+<script>
+    //let status = $('#addUserResponse').val();
+    //if (status != "noResponse") {
+    //    $.notify("User Name added Successfully", {type="success" align: "center", verticalAlign: "top" });
+    // }
+</script>
 
 
 @section Scripts {

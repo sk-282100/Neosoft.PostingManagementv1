@@ -16,10 +16,10 @@ namespace PostingManagement.UI.Controllers
             this.roleService = roleService;
             _clientHandler = clientHandler;
         }
-        
+
         [Route("Role/GetAllRoles")]
         [HttpGet]
-        public async Task <IActionResult> GetAllRoles()
+        public async Task<IActionResult> GetAllRoles()
         {
             var responseList = await roleService.GetAllRoles();
             return Json(responseList);
@@ -27,20 +27,31 @@ namespace PostingManagement.UI.Controllers
         [Route("Role/Addrole")]
         [HttpGet]
         public async Task<IActionResult> Addrole()
-        
         {
+            if (TempData.ContainsKey("addRoleResponse"))
+            {
+                ViewBag.AddRoleResponse = TempData["addRoleResponse"].ToString();
+            }
             return View();
         }
 
         [HttpPost]
-        public async Task <IActionResult> Addrole(RoleModel roleModel )
+        public async Task<IActionResult> Addrole(RoleModel roleModel)
         {
             var response = await roleService.AddRole(roleModel);
-            ViewBag.AddRoleResponse = response == null ? null : response;            
-            return View();
-           
+            if (response.Data != null)
+            {
+                TempData["addRoleResponse"] = response.Data == true ? "true" : "false";
+            }
+            else
+            {
+                TempData["addRoleResponse"] = "false";
+
+            }
+            return RedirectToAction("Addrole");
+
         }
-        
+
         public async Task<IActionResult> RemoveRole(string id)
         {
             var response = await roleService.RemoveRole(id);
@@ -64,7 +75,7 @@ namespace PostingManagement.UI.Controllers
         {
             var response = await roleService.IsRoleAlreadyExist(roleName);
             Console.WriteLine(response.Data);
-            return Json(response.Data);  
+            return Json(response.Data);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿$(function () {
-    
+
     $.ajax({
         type: "GET",
-        url: "/AccountView/ShowUserRoleDetails/" ,
+        url: "/AccountView/ShowUserRoleDetails/",
         data: '{}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -15,57 +15,61 @@
         }
     });
 
+
+
     $('#CreateUserBtn').click(function () {
-       
+
         var inputValue = $('#UserName').val().trim();
+
         if ($('#RoleId').val() == '') {
             $('#RoleId').notify("Please select the Role", "error");
-            
         }
 
+        var regx = new RegExp(/^[a-zA-Z][\w.-_]{2,15}$/);
         if (inputValue == '') {
             $('#UserName').notify("User name is required !!!", "error");
-            
         }
-        else if (inputValue != "")
-            {
+        else if (inputValue.length < 3) {
+            $('#UserName').notify("Username should contain more than 2 characters", "error");
+        }
+        else if (inputValue.length > 15) {
+            $('#UserName').notify("Username should not contain more than 15 characters", "error");
+        }
+        else if (!regx.test(inputValue)) {
 
-                $.ajax({
-                    type: "GET",
-                    url: "/AccountView/IsUserNamePresent?userName=" + inputValue,
-                    data: '{}',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response == true) {
-                            $('#UserName').notify(" This User name is already Present!!!", "error");
-                           
-                        }
-                        else if (response == false ) {
-                            if ($('#RoleId').val() != '') {
-                                $('#CreateUserNameForm').submit();
-                            }
-                        }
-                    },
-                    failure: function (response) {
-                        alert(response.d);
-                    },
-                    error: function (response) {
-                        alert(response.d);
+            $('#UserName').notify("Username should start with alphabatical character \n and it contain only aplhanumeric and . - _", "error");
+
+        }
+        else if (inputValue != "") {
+
+            $.ajax({
+                type: "GET",
+                url: "/AccountView/IsUserNamePresent?userName=" + inputValue,
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response == true) {
+                        $('#UserName').notify(" This User name is already Present!!!", "error");
+
                     }
-                });
-            }
+                    else if (response == false) {
+                        if ($('#RoleId').val() != '') {
+                            $('#CreateUserNameForm').submit();
+                        }
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d);
+                },
+                error: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
 
-        //var regx = new RegExp(/^[a-zA-Z][\w.-]{3,15}$/);
-        //if (!regx.test('#UserName')) {
-        //    isValid = false;
-        //    $('#UserName').notify("User name should in correct format!!!", "error");
-        //}
-        
-      
     });
 
-    
 });
 function OnSuccess(response) {
     $("#userRoleDetails").DataTable(
@@ -74,26 +78,27 @@ function OnSuccess(response) {
             lengthMenu: [[5, 10, -1], [5, 10, "All"]],
             bFilter: true,
             bSort: true,
+            order:[],
             bPaginate: true,
             data: response,
             columns: [
-                
+
                 { data: 'role' },
                 { data: 'userName' },
-             
+
                 {
                     data: null,
                     "mRender": function (data, type, full) {
-                        var id ="'"+ data.uId+"'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole='+data.role+'" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
-                       
+                        var id = "'" + data.uId + "'";
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole=' + data.role + '" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
+
                     }
                 }
             ]
         });
 };
 function onDelete(data) {
- 
+
     Swal.fire({
         title: 'Are you sure you want to Delete User?',
         icon: 'warning',
@@ -108,5 +113,10 @@ function onDelete(data) {
     });
 }
 
-
+$(function () {
+    var status = $('#addUserResponse').val();
+    if (status == "true") {
+        $.notify("User Name added Successfully", "success");
+    }
+})
 

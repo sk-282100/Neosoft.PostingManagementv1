@@ -43,13 +43,25 @@ function OnSuccess(response) {
                 }, {
                     data: null,
                     "mRender": function (data, type, full) {
-                        return '<a id="viewButton" class="btn btn-success btn-sm" onclick=ViewRecords('+ data.batchId +')>View</a>';
+                        if (data.uploadStatus.toLowerCase() == "success") {
+                            return '<a id="viewButton" class="btn btn-success btn-sm" onclick=ViewRecords(' + data.batchId + ')>View</a>';
+                        } else if (data.uploadStatus.toLowerCase() == "failed") {
+                            var failedMessage = "'"+ data.reasonOfFailure +"'";
+                            return '<a id="viewButton2" class="btn btn-success btn-sm" onclick="ShowFailureReason(' + failedMessage +')">View</a>';
+                        }
                     }
                 }],
             
         });
 };
 
+function ShowFailureReason(ReasonOfFailure) { 
+    $("#recordsDiv").show();
+    $("#failureReason")[0].innerHTML = ''
+    $("#failureReason").append("<h4 class='text-danger'>" + ReasonOfFailure + "</h4>");
+    //$('#failureReason').val(ReasonOfFailure);
+    $('#itemModel2').modal('show');
+}
 
 $(document).ready(function () {
     $('#ExcelUploadForm').submit(function () {
@@ -84,7 +96,10 @@ $(document).ready(function () {
 });
 $(function () {
     let message = $('#excelResponse').val();
-    if (message != "noResponse") {
+    if (message == "Excel is not in correct format") {
         $.notify("Invalid Excel file! Columns does not match!!", "error");
+    }
+    else if (message == "File Uploaded Successfully") {
+        $.notify("File Uploaded Successfully", "success");
     }
 });
