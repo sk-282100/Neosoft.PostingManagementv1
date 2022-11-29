@@ -11,7 +11,7 @@ namespace PostingManagement.Domain.Entities
     public class RegionMaster
     {                
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int RegionCode { get; set; }
+        public string RegionCode { get; set; }
         public string RegionName { get; set; } = null!;
         public int ZoneCode { get; set; }
         public string ZoneName { get; set; } = null!;

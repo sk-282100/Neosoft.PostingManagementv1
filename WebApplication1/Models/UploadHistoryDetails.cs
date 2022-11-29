@@ -3,8 +3,7 @@
 namespace PostingManagement.UI.Models
 {
     public class UploadHistoryDetails
-    {
- 
+    {        
         public int HistoryId { get; set; }
         [Display(Name = "Batch ID")]
         public int BatchId { get; set; }        
@@ -18,5 +17,6 @@ namespace PostingManagement.UI.Models
         public int InsertedRows { get; set; }
         [Display(Name = "Status")]
         public string UploadStatus { get; set; }
+        public string? ReasonOfFailure { get; set; }
     }
 }

@@ -43,7 +43,7 @@ namespace PostingManagement.UI.Controllers
             if(response.IsAuthenticated == true)
             {
                 HttpContext.Session.SetString("Username", response.UserName);
-                //HttpContext.Session.SetString("Role", response.Role);
+                HttpContext.Session.SetString("UserRole", response.Role);
                 return RedirectToAction("EmployeeMasterUpload", "Posting");
             }
             else
@@ -57,7 +57,7 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Remove("Username");
-            //HttpContext.Session.Remove("Role");
+            HttpContext.Session.Remove("UserRole");
             return RedirectToAction("Login");
         }
     }

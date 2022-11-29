@@ -180,7 +180,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
         {
             string[] excelColumns = new string[]
                         {
-                "ZONECODE","ZONENAME","STATE","STATE_ID","DISTRICT","DISTRICT_ID CITY","CITY_ID"
+                "ZONECODE","ZONENAME","STATE","STATE_ID","DISTRICT","DISTRICT_ID","CITY","CITY_ID"
                         };
             List<ZoneMaster> zoneMasterList = new List<ZoneMaster>();
 

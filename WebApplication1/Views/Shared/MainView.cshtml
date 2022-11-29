@@ -126,12 +126,23 @@
                     </li><!-- End Login Page Nav -->
                 </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " asp-action="CreateUserName" asp-controller="AccountView">
-                    <i class="bi bi-plus-square-dotted"></i>
-                    <span>Create UserName</span>
-                </a>
-            </li>
+            @{
+                if (Context.Session.GetString("UserRole").ToLower() == "admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link " asp-action="CreateUserName" asp-controller="AccountView">
+                            <i class="bi bi-plus-square-dotted"></i>
+                            <span>Create UserName</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-action="AddRole" asp-controller="Role">
+                            <i class="bi bi-plus-square-dotted"></i>
+                            <span>Create New Role</span>
+                        </a>
+                    </li>
+                }
+            }
         </ul>
     </aside><!-- End Sidebar-->
     <main id="main" class="main">

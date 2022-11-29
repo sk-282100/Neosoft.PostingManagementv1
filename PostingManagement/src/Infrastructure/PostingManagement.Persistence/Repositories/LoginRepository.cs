@@ -17,10 +17,16 @@ namespace PostingManagement.Persistence.Repositories
         {
             _context = dbContext;
         }
-        public async Task<LoginModel> GetDetailsByUsername(string username)
+        public async Task<UserDetails> GetDetailsByUsername(string username)
         {
-            var userDetails = await _context.LoginTbl.FirstAsync(x => x.UserName == username);
+            var userDetails = await _context.UserDetailsTbl.FirstAsync(x => x.UserName == username && x.DeletedBy == null);
             return userDetails;
+        }
+
+        public async Task<string> GetRoleByid(int RoleId)
+        {
+            var result = await _context.RoleTable.FirstAsync(x => x.RoleId == RoleId);
+            return result.RoleName;
         }
     }
 }

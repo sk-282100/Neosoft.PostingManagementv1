@@ -23,6 +23,7 @@ function OnSuccess(response) {
             lengthMenu: [[5, 10, -1], [5, 10, "All"]],
             bFilter: true,
             bSort: true,
+            order:[],
             bPaginate: true,
             data: response,
             columns: [

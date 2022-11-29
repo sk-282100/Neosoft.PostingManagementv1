@@ -9,6 +9,7 @@ namespace PostingManagement.Application.Contracts.Persistence
 {
     public interface ILoginRepository
     {
-        public Task<LoginModel> GetDetailsByUsername(string username);
+        public Task<UserDetails> GetDetailsByUsername(string username);
+        public Task<string> GetRoleByid(int RoleId);
     }
 }

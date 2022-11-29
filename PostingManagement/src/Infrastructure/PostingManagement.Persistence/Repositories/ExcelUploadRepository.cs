@@ -74,56 +74,56 @@ namespace PostingManagement.Persistence.Repositories
             {
                 case nameof(BranchMaster):
                     dataTableParameter = new SqlParameter() { ParameterName = "@branchMasterData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "BranchMasterTableType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_BranchMaster_BulkUpload @branchMasterData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_BranchMaster_BulkUpload @branchMasterData,@uploadedBy,@fileName,@batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(EmployeeMaster):
                     dataTableParameter = new SqlParameter() { ParameterName = "@employeeMasterData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "EmployeeMasterTableType" };
-                    result = _dbContext.Database.ExecuteSqlRaw("EXEC STP_EmployeeMasterData_InsertingData @employeeMasterData,@uploadedBy,@fileName,@batchId OUTPUT, @successCount OUTPUT, @status OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_EmployeeMasterData_InsertingData @employeeMasterData,@uploadedBy,@fileName,@batchId OUTPUT, @successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(InterRegionalPromotion):
                     dataTableParameter = new SqlParameter() { ParameterName = "@interRegionPromotionData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "InterRegionalPromotionTableType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterRegionalPromotion_BulkUpload @interRegionPromotionData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterRegionalPromotion_BulkUpload @interRegionPromotionData,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(InterRegionRequestTransfer):
                     dataTableParameter = new SqlParameter() { ParameterName = "@interRegionRequestTransferData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "InterRegionRequestTransferTableType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterRegionRequestTransfer_BulkUpload @interRegionRequestTransferData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterRegionRequestTransfer_BulkUpload @interRegionRequestTransferData,@uploadedBy,@fileName,@batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(InterZonalPromotion):
                     dataTableParameter = new SqlParameter() { ParameterName = "@interZonalPromotionData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "InterZonalPromotionTableType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterZonalPromotion_BulkUpload @interZonalPromotionData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterZonalPromotion_BulkUpload @interZonalPromotionData,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(InterZonalRequestTransfer):
                     dataTableParameter = new SqlParameter() { ParameterName = "@interZonalRequestTransferTableType", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "InterZonalRequestTransferTableType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterZonalRequestTransfer_BulkUpload @interZonalRequestTransferTableType,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InterZonalRequestTransfer_BulkUpload @interZonalRequestTransferTableType,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(RegionMaster):
                     dataTableParameter = new SqlParameter() { ParameterName = "@regionMasterData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "RegionMasterDataType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_RegionMaster_BulkUpload @regionMasterData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_RegionMaster_BulkUpload @regionMasterData,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(ZoneMaster):
                     dataTableParameter = new SqlParameter() { ParameterName = "@zoneMasterData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "ZoneMasterDataType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_ZoneMaster_BulkUpload @zoneMasterData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_ZoneMaster_BulkUpload @zoneMasterData,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 case nameof(DepartmentMaster):
                     dataTableParameter = new SqlParameter() { ParameterName = "@departmentMasterData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "DepartmentMasterDataType" };
-                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_DepartmentMaster_BulkUpload @departmentMasterData,@uploadedBy,@fileName,@successCount OUTPUT, @status OUTPUT, @batchId OUTPUT"
-                   , dataTableParameter, uploadedByParameter, fileNameParameter, successCount, uploadStatus, batchId);
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_DepartmentMaster_BulkUpload @departmentMasterData,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
                 default: throw new ArgumentException("This file type is note present");

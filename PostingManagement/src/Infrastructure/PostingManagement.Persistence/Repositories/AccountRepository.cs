@@ -21,7 +21,7 @@ namespace PostingManagement.Persistence.Repositories
             
             userModel.RoleId = RoleId;
             userModel.UserName = userName;
-            userModel.Password = _protector.Protect( GeneratePassword(8));
+            userModel.Password = _protector.Protect("Pass@123");
             userModel.CreatedBy = createdBy;
             userModel.CreatedOn = DateTime.Now;
             await _context.UserDetailsTbl.AddAsync(userModel);
@@ -51,7 +51,7 @@ namespace PostingManagement.Persistence.Repositories
                                         UId = user.UId,
                                         UserName = user.UserName,
                                         Role = role.RoleName
-                                    }).ToListAsync();
+                                    }).OrderByDescending(x=>x.UId).ToListAsync();
                                                            ;
             return userDetails;
         }
