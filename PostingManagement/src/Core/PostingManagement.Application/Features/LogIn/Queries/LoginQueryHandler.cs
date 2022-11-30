@@ -1,35 +1,24 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
-using PostingManagement.Application.Responses;
 using PostingManagement.Infrastructure.EncryptDecrypt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Features.LogIn.Queries
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginResponseDto>
     {
-        
-        private readonly IDataProtector _dataProtector;
         private readonly ILoginRepository _repository;
-        private readonly IMapper _mapper;
-        public LoginQueryHandler(IMapper mapper, ILoginRepository repository, IDataProtectionProvider provider)
+        public LoginQueryHandler( ILoginRepository repository)
         {
-            _mapper = mapper;
             _repository = repository;
-            _dataProtector = provider.CreateProtector("");
         }
 
         public async Task<LoginResponseDto> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-
             var response = new LoginResponseDto();
+            //Getting user details by Username
             var userDetails = await _repository.GetDetailsByUsername(request.UserName);
+            //Decryting the Password for comparison 
             var password = EncryptionDecryption.DecryptString(userDetails.Password);
             if (userDetails == null)
             {
@@ -49,7 +38,6 @@ namespace PostingManagement.Application.Features.LogIn.Queries
             response.IsAuthenticated = false;
             response.Message = "Something is wrong";
             return response;
-
         }
     }
 }

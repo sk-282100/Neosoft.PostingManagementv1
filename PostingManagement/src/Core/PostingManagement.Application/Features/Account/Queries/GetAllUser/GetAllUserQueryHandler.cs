@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using PostingManagement.Application.Contracts.Persistence;
-using PostingManagement.Application.Features.Account.Queries.GetUserById;
 using PostingManagement.Application.Responses;
 
 namespace PostingManagement.Application.Features.Account.Queries.GetAllUser

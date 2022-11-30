@@ -17,7 +17,6 @@ namespace PostingManagement.Persistence.Repositories
         public async Task<bool> AddAsync(string roleName)
         {
             Role role = new Role { RoleName = roleName };
-            //var r = _applicationDbContext.RoleTable.Add(role);
             _applicationDbContext.RoleTable.Add(role);
             return await _applicationDbContext.SaveChangesAsync() == 1? true : false;            
         }

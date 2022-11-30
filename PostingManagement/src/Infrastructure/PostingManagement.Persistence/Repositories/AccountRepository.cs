@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.DataProtection;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Domain.Entities;
 using PostingManagement.Infrastructure.EncryptDecrypt;
@@ -49,7 +48,6 @@ namespace PostingManagement.Persistence.Repositories
                                         UserName = user.UserName,
                                         Role = role.RoleName
                                     }).OrderByDescending(x=>x.UId).ToListAsync();
-                                                           ;
             return userDetails;
         }
 
@@ -66,6 +64,7 @@ namespace PostingManagement.Persistence.Repositories
             userDetails.RoleId = roleId;
             userDetails.UpdatedBy = updatedBy;
             userDetails.UpdatedOn = DateTime.Now;
+            //Update
             _context.Entry(userDetails).State = EntityState.Modified;
             return _context.SaveChanges() == 1 ? true : false;
 
