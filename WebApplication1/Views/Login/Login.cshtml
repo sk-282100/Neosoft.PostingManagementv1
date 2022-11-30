@@ -19,11 +19,7 @@
 
     <!-- Template Main CSS File -->
     <link href="css/LoginPage.css" rel="stylesheet">
-        
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
-    
-        
-        
+     
 </head>
 
 <body>
@@ -36,12 +32,6 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-                            @* <div class="d-flex justify-content-center py-4">
-                            <a href="#" class="logo d-flex align-items-center w-auto">
-                            <img src="assets/img/logo.png" alt="">
-                            <span class="d-none d-lg-block">Posting Management</span>
-                            </a>
-                            </div><!-- End Logo -->*@
                             <div class="d-flex justify-content-center py-4"> 
                                 <a href="#" class="logo d-flex align-items-center w-auto"> 
                                     <img src="~/img/logo.png" alt=""> 
@@ -56,7 +46,6 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                                         <p class="text-center small">Enter your username &amp; password to login</p>
                                     </div>
-                                    @*@using (Html.BeginForm("Login","Login", FormMethod.Post, ))*@
                                     <form class="row g-3 needs-validation" asp-action="Login" id="loginForm" novalidate>
 
                                         <div class="col-12">
@@ -88,7 +77,7 @@
                                                          asp-back-color="#ccc"
                                                          asp-text-box-class="text-box form-control"
                                                          asp-text-box-template="<div class='input-group'>{0}</div>"
-                                                         asp-validation-message-class="text-danger"
+                                                         asp-validation-message-class="text-danger CaptchaErrorMessage"
                                                          asp-refresh-button-class="fas fa-redo btn-sm"
                                                          asp-show-refresh-button="true" />
                                         </div>
@@ -111,6 +100,9 @@
     </main><!-- End #main -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+    <!-- Passing the ViewBag value by input tag to Js-->
     @if (@ViewBag.LoginResponse != null)
     {
             if (@ViewBag.LoginResponse.IsAuthenticated == false) {
@@ -120,13 +112,22 @@
     else{
         <input type="hidden" value="noResponse" id="loginResponse" />
     }
+
     <script>
+
+        // alert for invalid Captcha message
+        $.notify($(".CaptchaErrorMessage span").html(), "error")
+        $(".CaptchaErrorMessage span").hide()
+
+        // alert for invalid Password and username 
         $(function(){
             let message = $('#loginResponse').val();
             if (message != "noResponse"){                
                 $.notify("Invalid Username and Password!!", "error");
             }
         });
+
+        // Validation for Username and Password
         $(document).ready(function () {  
             
             $("#loginForm").submit(function () {                  
@@ -142,7 +143,9 @@
                 return isValid;
             });
         });
+
     </script>
+
 </body>
 
 </html>

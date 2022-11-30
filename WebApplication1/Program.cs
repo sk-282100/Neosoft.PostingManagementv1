@@ -20,7 +20,6 @@ builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IAccountService,AccountService>();
 builder.Services.AddScoped<IRoleService,RoleService>(); 
-//builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<HttpClientHandler>();
 builder.Services.AddSession();
@@ -28,8 +27,6 @@ builder.Services.AddSession();
 builder.Services.AddDNTCaptcha(options =>
 {
     options.UseCookieStorageProvider(SameSiteMode.Strict)
-    // Don't set this line (remove it) to use the installed system's fonts (FontName = "Tahoma").
-    // Or if you want to use a custom font, make sure that font is present in the wwwroot/fonts folder and also use a good and complete font!
     //.UseCustomFont(Path.Combine(_env.WebRootPath, "fonts", "IRANSans(FaNum)_Bold.ttf")) // This is optional
     .AbsoluteExpiration(minutes: 7)
     .ShowThousandsSeparators(false)

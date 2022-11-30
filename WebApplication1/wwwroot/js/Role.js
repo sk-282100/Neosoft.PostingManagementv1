@@ -1,8 +1,5 @@
 ﻿$(function () {
-    //     let status = $('#roleResponse').val();
-    //if (status != "noResponse") {
-    //    $.notify("Role added Successfully", {type="success" align: "center", verticalAlign: "top" });
-    //}
+   
     $.ajax({
         type: "GET",
         url: "/Role/GetAllRoles",
@@ -63,35 +60,32 @@
             });
         }
     });
-
 });
 
-function OnSuccess(response) {
+function OnSuccess(response){
     $("#getallrolesId").DataTable(
-        {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-            bFilter: true,
-            bSort: true,
-            order:[],
-            bPaginate: true,
-            data: response,
-            columns: [
-                { data: 'roleName' },
-
-                {
-                    data: null,
-                    "mRender": function (data, type, full) {
-                        var id = "'" + data.roleId + "'";
-
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/Role/EditRole?id=' + data.roleId + '" >Edit</a><button class="btn btn-danger btn-sm" id="delete"  onclick="Delete(' + id + ')"  >Delete</a> ';
-
-                    }
-                }
-            ],
-        });
-
-
+    {
+       bLengthChange: true,
+       lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+       bFilter: true,
+       bSort: true,
+       order:[],
+       bPaginate: true,
+       data: response,
+       columns: [
+    
+           { data: 'roleName' },
+           {
+               data: null,
+               "mRender": function (data, type, full) {
+    
+                   var id = "'" + data.roleId + "'";
+                   return '<a class="btn btn-warning btn-sm mx-4" href="/Role/EditRole?id=' + data.roleId + '" >Edit</a><button class="btn btn-danger btn-sm" id="delete"  onclick="Delete(' + id + ')"  >Delete</a> ';
+    
+               }
+           }
+       ],
+    });
 };
 
 $(function () {

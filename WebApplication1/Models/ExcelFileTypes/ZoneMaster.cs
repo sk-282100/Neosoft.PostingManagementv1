@@ -1,17 +1,11 @@
-﻿using MessagePack;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PostingManagement.UI.Models.ExcelFileTypes
 {
     public class ZoneMaster
     {
         public int BatchId { get; set; }
-        [System.ComponentModel.DataAnnotations.Key]
+        [Key]
         public string ZoneCode { get; set; }
         public string ZoneName { get; set; } = null!;
         public string State { get; set; } = null!;

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PostingManagement.Application.Responses;
 using PostingManagement.UI.Models;
-using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.RoleService;
-using System.Reflection;
 
 namespace PostingManagement.UI.Controllers
 {

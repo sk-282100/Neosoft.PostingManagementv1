@@ -6,8 +6,6 @@ using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.ExcelFileTypes;
 using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.ExcelUploadService.Contracts;
-using System.Data.Common;
-using System.Reflection;
 using System.Text;
 
 namespace PostingManagement.UI.Services.ExcelUploadService
