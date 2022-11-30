@@ -21,6 +21,7 @@ namespace PostingManagement.UI.Controllers
             var responseList = await roleService.GetAllRoles();
             return Json(responseList);
         }
+
         [Route("Role/Addrole")]
         [HttpGet]
         public async Task<IActionResult> Addrole()
@@ -54,12 +55,14 @@ namespace PostingManagement.UI.Controllers
             var response = await roleService.RemoveRole(id);
             return RedirectToAction("Addrole");
         }
+
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleService.GetRoleById(id);
             return View(role.Data);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditRole(RoleModel roleModel)
         {

@@ -35,7 +35,7 @@ namespace PostingManagement.UI.Controllers
         {
             if (!_validatorService.HasRequestValidCaptchaEntry(Language.English, DisplayMode.SumOfTwoNumbers))
             {
-                this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please entry the Valid Captcha");
+                this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please enter the Valid Captcha");
                 return View(model);
             }
             LoginResponseModel response = await  _loginService.Login(model);

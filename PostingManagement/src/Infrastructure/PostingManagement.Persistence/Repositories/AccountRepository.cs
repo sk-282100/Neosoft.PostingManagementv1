@@ -2,17 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Domain.Entities;
+using PostingManagement.Infrastructure.EncryptDecrypt;
 
 namespace PostingManagement.Persistence.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly IDataProtector _protector;
-        public AccountRepository(ApplicationDbContext context, IDataProtectionProvider provider)
+        public AccountRepository(ApplicationDbContext context)
         {
             _context = context;
-            _protector = provider.CreateProtector("");
         }
 
         public async Task<bool> AddUser(string userName, int RoleId, string createdBy)
@@ -21,15 +20,13 @@ namespace PostingManagement.Persistence.Repositories
             
             userModel.RoleId = RoleId;
             userModel.UserName = userName;
-            userModel.Password = _protector.Protect("Pass@123");
+            userModel.Password = EncryptionDecryption.EncryptString("Pass@123");
             userModel.CreatedBy = createdBy;
             userModel.CreatedOn = DateTime.Now;
             await _context.UserDetailsTbl.AddAsync(userModel);
 
             return _context.SaveChanges()==1?true:false;
         }
-
-
 
         public async Task<bool> DeleteUser(int UserId, string deletedBy)
         {
@@ -79,21 +76,7 @@ namespace PostingManagement.Persistence.Repositories
             return _context.UserDetailsTbl.Any(x => x.UserName == userName && x.DeletedBy == null);
         }
 
-        private string GeneratePassword(int length = 12)
-        {
-            // Create a string of characters, numbers, special characters that allowed in the password  
-            string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?_-";
-            Random random = new Random();
-
-            // Select one random character at a time from the string  
-            // and create an array of chars  
-            char[] chars = new char[length];
-            for (int i = 0; i < length; i++)
-            {
-                chars[i] = validChars[random.Next(0, validChars.Length)];
-            }
-            return new string(chars);
-        }
+      
     }
 }
 
