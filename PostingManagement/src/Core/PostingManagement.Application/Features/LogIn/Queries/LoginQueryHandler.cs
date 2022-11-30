@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
+using PostingManagement.Infrastructure.EncryptDecrypt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace PostingManagement.Application.Features.LogIn.Queries
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginResponseDto>
     {
+        
         private readonly IDataProtector _dataProtector;
         private readonly ILoginRepository _repository;
         private readonly IMapper _mapper;
@@ -28,7 +30,7 @@ namespace PostingManagement.Application.Features.LogIn.Queries
 
             var response = new LoginResponseDto();
             var userDetails = await _repository.GetDetailsByUsername(request.UserName);
-            var password = _dataProtector.Unprotect(userDetails.Password);
+            var password = EncryptionDecryption.DecryptString(userDetails.Password);
             if (userDetails == null)
             {
                 response.IsAuthenticated = false;
