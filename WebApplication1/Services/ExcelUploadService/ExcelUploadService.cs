@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using OfficeOpenXml;
 using PostingManagement.UI.Exceptions;
+using PostingManagement.UI.Helpers.Constants;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.ExcelFileTypes;
 using PostingManagement.UI.Models.Responses;
@@ -50,39 +51,39 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             //calling the Upload Function for Validation and Upload according to FileType
             try
             {
-                if (model.FileType == "Branch Master")
+                if (model.FileType == ExcelFileUploadName.BranchMaster)
                 {
                     return await BranchMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Employee Master")
+                else if (model.FileType == ExcelFileUploadName.EmployeeMaster)
                 {
                     return await EmployeeMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Regional Promotion")
+                else if (model.FileType == ExcelFileUploadName.InterRegionPromotion)
                 {
                     return await InterRegionalPromotionFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Region Request Transfer")
+                else if (model.FileType == ExcelFileUploadName.InterRegionRequestTransfer)
                 {
                     return await InterRegionRequestTransferFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Zonal Promotion")
+                else if (model.FileType == ExcelFileUploadName.InterZonalPromotion)
                 {
                     return await InterZonalPromotionFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Inter-Zonal Request Transfer")
+                else if (model.FileType == ExcelFileUploadName.InterZonalRequestTranfer)
                 {
                     return await InterZonalRequestTransferFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Region Master")
+                else if (model.FileType == ExcelFileUploadName.RegionMaster)
                 {
                     return await RegionMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Zone Master")
+                else if (model.FileType == ExcelFileUploadName.ZoneMaster)
                 {
                     return await ZoneMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
-                else if (model.FileType == "Department Master")
+                else if (model.FileType == ExcelFileUploadName.DepartmentMaster)
                 {
                     return await DepartmentMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
