@@ -71,7 +71,7 @@
                                                          asp-captcha-generator-display-mode="SumOfTwoNumbers"
                                                          asp-use-relative-urls="true"
                                                          asp-placeholder="Enter the Captcha"                                                         
-                                                         asp-validation-error-message="Please enter the Captcha"
+                                                         asp-validation-error-message="Please enter the Captcha *"
                                                          asp-font-name="Tahoma"
                                                          asp-font-size="20"
                                                          asp-fore-color="#333333"
@@ -137,10 +137,14 @@
                     isValid = false;                    
                     $("#username").notify("UserName cannot be empty!", "error");                    
                 }
-                else if ($("#password").val().trim().length == 0) {
+                if ($("#password").val().trim().length == 0) {
                     isValid = false;
                     $("#password").notify("Password cannot be empty!", "error");                    
-                }                              
+                }  
+                if ($("#DNTCaptchaInputText").val().trim().length == 0) {
+                    isValid = false;
+                    $("#DNTCaptchaInputText").notify("Captcha cannot be empty!", "error");
+                }
                 return isValid;
             });
         });

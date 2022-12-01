@@ -1,6 +1,6 @@
-﻿
-$(function () {
+﻿$(function () {
     let excelUploadType = $('#excelUploadType').val();
+    //Calls Action ShowUploadHistory
     $.ajax({
         type: "POST",
         url: "/Posting/ShowUploadHistory/" + parseInt(excelUploadType),
@@ -16,7 +16,9 @@ $(function () {
         }
     });
 });
+
 function OnSuccess(response) {
+    //Data Table Using Input Table Id 
     $("#uploadHistory").DataTable(
         {
             bLengthChange: true,
@@ -26,7 +28,6 @@ function OnSuccess(response) {
             bPaginate: true,
             data: response,
             columns: [
-                { data: 'batchId'},
                 { data: 'fileName' },
                 { data: 'date' },
                 { data: 'numberOfRows' },
@@ -40,7 +41,8 @@ function OnSuccess(response) {
                             return '<a class="btn btn-danger btn-sm" href=#>' + data.uploadStatus +'</a>';
                         }
                     }
-                }, {
+                },
+                {
                     data: null,
                     "mRender": function (data, type, full) {
                         if (data.uploadStatus.toLowerCase() == "success") {
@@ -59,7 +61,6 @@ function ShowFailureReason(ReasonOfFailure) {
     $("#recordsDiv").show();
     $("#failureReason")[0].innerHTML = ''
     $("#failureReason").append("<h4 class='text-danger'>" + ReasonOfFailure + "</h4>");
-    //$('#failureReason').val(ReasonOfFailure);
     $('#itemModel2').modal('show');
 }
 
@@ -69,11 +70,9 @@ $(document).ready(function () {
         if ($('#ExcelFile').val() == '') {
             isValid = false;
             $.notify("Please Upload the Excel File !!!", "error");
-
         }
         return isValid;
     });
-
 
     $('#ExcelFile').change( function () {
         if (this.files[0].size > 5242880 && this.files[0].type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
@@ -88,12 +87,13 @@ $(document).ready(function () {
             $.notify("Please Upload the Excel File in .xlsx format", "error")
             this.value = null;
         }
-        //else {
-        //    $.notify("Your File Uploaded Successfully", "success");
-        //    return false;
-        //}
+
+        
     });
 });
+
+
+
 $(function () {
     let message = $('#excelResponse').val();
     if (message == "Excel is not in correct format") {

@@ -13,6 +13,7 @@ using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.In
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.RegionMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
+using PostingManagement.Application.Helper.Constants;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Api.Controllers.v1
@@ -125,7 +126,7 @@ namespace PostingManagement.Api.Controllers.v1
             var response = new object();
             switch (fileTypeCode)
             {
-                case 1:
+                case (int)ExcelFileType.BranchMaster:
                     request = new GetExcelDataQuery<BranchMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -134,7 +135,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 2:
+                case (int)ExcelFileType.DepartmentMaster:
                     request = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -143,7 +144,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 3:
+                case (int)ExcelFileType.EmployeeMaster:
                     request = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -152,7 +153,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 4:
+                case (int)ExcelFileType.InterRegionPromotion:
                     request = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -161,7 +162,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 5:
+                case (int)ExcelFileType.InterRegionRequestTransfer:
                     request = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -170,7 +171,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 6:
+                case (int)ExcelFileType.InterZonalPromotion:
                     request = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -179,7 +180,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 7:
+                case (int)ExcelFileType.InterZonalRequestTranfer:
                     request = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -188,7 +189,7 @@ namespace PostingManagement.Api.Controllers.v1
                         response = result;
                     return Ok(response);
 
-                case 8:
+                case (int)ExcelFileType.RegionMaster:
                     request = new GetExcelDataQuery<RegionMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))
@@ -198,7 +199,7 @@ namespace PostingManagement.Api.Controllers.v1
                     else
                         response = result;
                     return Ok(response);
-                case 9:
+                case (int)ExcelFileType.ZoneMaster:
                     request = new GetExcelDataQuery<ZoneMaster>() { FileTypeCode = fileTypeCode, BatchId = batchId };
                     result = await _mediator.Send(request);
                     if (result.GetType() == (typeof(object)))

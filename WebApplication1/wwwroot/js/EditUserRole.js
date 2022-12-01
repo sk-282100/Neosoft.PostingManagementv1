@@ -1,5 +1,5 @@
 ﻿$(function () {
-
+    //Call Action ShowUserDetails
     $.ajax({
         type: "GET",
         url: "/AccountView/ShowUserRoleDetails/",
@@ -16,7 +16,9 @@
     });
 
 });
+
 function OnSuccess(response) {
+    //DataTable Show User Details  Using Input Table Id 
     $("#userRoleDetails").DataTable(
         {
             bLengthChange: true,
@@ -42,8 +44,9 @@ function OnSuccess(response) {
             ]
         });
 };
-function onDelete(data) {
 
+function onDelete(data) {
+    //Swal Alert For Confirmation of Delete User Role
     Swal.fire({
         title: 'Are you sure you want to Delete User?',
         icon: 'warning',

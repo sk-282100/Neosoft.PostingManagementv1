@@ -9,29 +9,8 @@
 
 <h1>Add New Role</h1>
 <hr />
-@*<input type="hidden" id="" value=@Roleid/>
-*@
-@*
-@if(@ViewBag.AddRoleResponse != null)
-{
-    if (@ViewBag.AddRoleResponse.Data == true){
-        <input type="hidden" value="true" id="roleResponse" />
-    }
-    else
-    {
-        <input type="hidden" value="noResponse" id="roleResponse" />
-    }
-}
-else
-{
-    <input type="hidden" value="noResponse" id="roleResponse" />
-
-}
-*@
 <input type="hidden" value=@ViewBag.AddRoleResponse id="addRoleResponse" />
 <script src="~/js/Role.js"></script>
-
-
 <div class="col-xxl-4 col-xl-12">
 
     <div class="card info-card customers-card">
@@ -44,7 +23,7 @@ else
 
                         <div style="display:inline-flex;" class="w-100">
                             <div class="form-group my-3">
-                                <label class="control-label">Role Name *</label>
+                                <label class="control-label">Role Name<i class="text-danger">*</i> </label>
                                 <input asp-for="RoleName" class="form-control" id="RoleName" />
                             </div>
                             <div class="form-group m-3 d-flex align-items-end">
@@ -71,7 +50,7 @@ else
 </div>
 
 <script>
-
+    //Swal Alert For Confirmation Of Delete Role
     function Delete(id) {
         Swal.fire({
             title: 'Are you sure you want to Delete Role?',

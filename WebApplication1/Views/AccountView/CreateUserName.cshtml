@@ -9,7 +9,7 @@
 
 <script src="~/js/createuserrole.js?v=1.2"></script>
 
-<h1 class="card-title">Create User</h1>
+<h1 class="card-title">Create New User</h1>
 
 <hr />
 <div class="col-xxl-4 col-xl-12">
@@ -24,7 +24,7 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div style="display:inline-flex;" class="w-100">
                             <div class="form-group my-3 " style="width:20% ;margin-right:2%">
-                                <label class="control-label">Roles *</label>
+                                <label class="control-label">Roles<i class="text-danger">*</i> </label>
                                 @if (ViewBag.Roles != null)
                                 {
                                     @Html.DropDownListFor(model =>model.RoleId ,ViewBag.Roles as SelectList,"--select Roles--",new { @class="form-select me-3" })
@@ -32,7 +32,7 @@
 
                             </div>
                             <div class="form-group my-3">
-                                <label class="control-label">User Name *</label>
+                                <label class="control-label">User Name<i class="text-danger">*</i> </label>
                                 <input asp-for="UserName" class="form-control" />
                             </div>
                             <div class="form-group m-3 d-flex align-items-end ">
