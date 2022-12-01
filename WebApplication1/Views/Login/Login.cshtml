@@ -49,7 +49,7 @@
                                     <form class="row g-3 needs-validation" asp-action="Login" id="loginForm" novalidate>
 
                                         <div class="col-12">
-                                            <label for="UserName" class="form-label">Username</label>
+                                            <label for="UserName" class="form-label">Username<i class="text-danger">*</i> </label>
                                             <div class="input-group has-validation">                                               
                                                 <input id="username" for="UserName" type="text" name="username" class="form-control" required>
                                                 <div class="invalid-feedback">Please enter your username.</div>
@@ -58,7 +58,7 @@
 
 
                                         <div class="col-12">
-                                            <label asp-for="Password" class="form-label">Password</label>
+                                            <label asp-for="Password" class="form-label">Password<i class="text-danger">*</i> </label>
                                             <input asp-for="Password" type="password" name="password" id="password" class="form-control" required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
@@ -70,7 +70,7 @@
                                                          asp-captcha-generator-display-mode="SumOfTwoNumbers"
                                                          asp-use-relative-urls="true"
                                                          asp-placeholder="Enter the Captcha"                                                         
-                                                         asp-validation-error-message="Please enter the Captcha"
+                                                         asp-validation-error-message="Please enter the Captcha *"
                                                          asp-font-name="Tahoma"
                                                          asp-font-size="20"
                                                          asp-fore-color="#333333"
@@ -136,10 +136,14 @@
                     isValid = false;                    
                     $("#username").notify("UserName cannot be empty!", "error");                    
                 }
-                else if ($("#password").val().trim().length == 0) {
+                if ($("#password").val().trim().length == 0) {
                     isValid = false;
                     $("#password").notify("Password cannot be empty!", "error");                    
-                }                              
+                }  
+                if ($("#DNTCaptchaInputText").val().trim().length == 0) {
+                    isValid = false;
+                    $("#DNTCaptchaInputText").notify("Captcha cannot be empty!", "error");
+                }
                 return isValid;
             });
         });

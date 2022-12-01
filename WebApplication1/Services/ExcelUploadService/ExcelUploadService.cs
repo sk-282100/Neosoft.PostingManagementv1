@@ -45,8 +45,10 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
         }
+
         public async Task<ExcelUploadResponseModel> UploadExcel(ExcelUploadViewModel model, string uploadedBy)
         {
+            //calling the Upload Function for Validation and Upload according to FileType
             try
             {
                 if (model.FileType == ExcelFileUploadName.BranchMaster)
@@ -87,7 +89,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
                 else
                 {
-
                     return new ExcelUploadResponseModel() { Succeeded = false, Message = "File type not found" };
                 }
             }
@@ -99,15 +100,17 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         }
 
+        #region Functions for Excel Format Validation and Upload 
         private async Task<ExcelUploadResponseModel> DepartmentMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel Format
             string[] excelColumns = new string[] {
             "DEPARTMENT_CODE", "DEPARTMENT_NAME"
             };
+            //Intializing List for storing the Excel data 
             List<DepartmentMaster> listDepartmentMaster = new List<DepartmentMaster>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
             using (var stream = new MemoryStream())
             {
                 await excelFile.CopyToAsync(stream);
@@ -123,6 +126,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                     }
 
+                    //Removing the empty Rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -145,6 +149,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Converting Excel data to List 
                     for (int row = 2; row <= rowCount; row++)
                     {
                         DepartmentMaster obj = new DepartmentMaster();
@@ -152,9 +157,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         obj.DepartmentName = Convert.ToString(worksheet.Cells[row, 2].Value).Trim();
 
                         listDepartmentMaster.Add(obj);
-
                     }
 
+                    //create the request for data upload
                     string fileName = excelFile.FileName;
                     ExcelUploadRequest<DepartmentMaster> request = new ExcelUploadRequest<DepartmentMaster>() { FileName = fileName, FileData = listDepartmentMaster };
 
@@ -162,7 +167,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/DepartmentMasterExcelUpload?username=" + name, content))
                         {
@@ -177,10 +181,12 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> ZoneMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel format
             string[] excelColumns = new string[]
                         {
                 "ZONECODE","ZONENAME","STATE","STATE_ID","DISTRICT","DISTRICT_ID","CITY","CITY_ID"
                         };
+            //Intializing List for storing the Excel data 
             List<ZoneMaster> zoneMasterList = new List<ZoneMaster>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -201,6 +207,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                     }
 
+                    //Removing empty Rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -214,7 +221,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                                 isRowEmpty = false;
                                 break;
                             }
-
                         }
                         if (!isRowEmpty)
                             continue;
@@ -223,6 +229,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Converting Excel data to List 
                     for (int row = 2; row <= rowCount; row++)
                     {
                         ZoneMaster obj = new ZoneMaster();
@@ -250,7 +257,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/ZoneMasterExcelUpload?username=" + name, content))
                         {
@@ -265,10 +271,12 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> RegionMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel format
             string[] excelColumns = new string[]
                         {
                 "REGIONCODE","REGION_NAME","ZONECODE","ZONENAME","STATE","STATE_ID","DISTRICT","DISTRICT_ID","CITY","CITY_ID"
                         };
+            //Intializing List for storing the Excel data 
             List<RegionMaster> RegionMasterList = new List<RegionMaster>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -289,6 +297,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                     }
 
+                    //Removing empty Rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -311,6 +320,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Converting Excel data to List 
                     for (int row = 2; row <= rowCount; row++)
                     {
                         RegionMaster obj = new RegionMaster();
@@ -339,7 +349,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/RegionMasterExcelUpload?username=" + name, content))
                         {
@@ -354,10 +363,13 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> InterZonalRequestTransferFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel Format
             string[] excelColumns = new string[]
                         {
                 "EMPLID","NAME","GENDER","DESIGNATION","SCALE","LOCATION_NAME","CURRENT_RO","ZONE_BEFORE_AMALGAMATION","ZONE_DATE_BEFORE_AMALGAMATION","TIME_AWAY_FROM_ZONE","ZONE_AFTER_AMALGAMATION","ZONE_DATE_AFTER_AMALGAMATION","DIRECT_PROMOTEE","TRANSFER_CATEGORY","TEMPORARY_TRANSFER_MONTH","TRANSFER_SEQ_NO","APPLIED_STATE","APPLIED_ZONE","APPLIED_REGION_1","APPLIED_REGION_2","APPLIED_REGION_3","TRANSFER_REASON","APPLICATION_DATE","DIARISED_DATE","STATUS","DATE_OF_PROMOTION","DATE_OF_REVERSION","DISABLED","DATE_OF_MARRIAGE","SPECIALIST_CATEGORY","TRANSFER_TYPE","TEMPORARY_TRANSFER_DETAILS","ASSESTS_AND_LIABILITIES_DETAIL","STATUS_OF_SUBMISSION_OF_APPR","COMMENTS","REQUEST_TYPE"
                         };
+
+            //Intializing List for storing the Excel data 
             List<InterZonalRequestTransfer> InterZonalRequestTransferList = new List<InterZonalRequestTransfer>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -377,6 +389,8 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                             throw new InvalideExcelFormatException("Excel is not in correct format");
                         }
                     }
+
+                    //Removing Empty rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -399,6 +413,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Converting Excel Data to List
                     for (int row = 2; row <= rowCount; row++)
                     {
                         InterZonalRequestTransfer obj = new InterZonalRequestTransfer();
@@ -452,7 +467,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/InterZonalRequestTransferExcelUpload?username=" + name, content))
                         {
@@ -467,10 +481,13 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> InterZonalPromotionFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel Format
             string[] excelColumns = new string[]
                         {
                 "EMPLID","ZONE_PREFERENCE1","ZONE_1_REGION_PREFERENCE1","ZONE_1_REGION_PREFERENCE2","ZONE_1_REGION_PREFERENCE3","ZONE_PREFERENCE2","ZONE_2_REGION_PREFERENCE1","ZONE_2_REGION_PREFERENCE2","ZONE_2_REGION_PREFERENCE3","ZONE_PREFERENCE3","ZONE_3_REGION_PREFERENCE1","ZONE_3_REGION_PREFERENCE2","ZONE_3_REGION_PREFERENCE3","ZONE_PREFERENCE4","ZONE_4_REGION_PREFERENCE1","ZONE_4_REGION_PREFERENCE2","ZONE_4_REGION_PREFERENCE3","ZONE_PREFERENCE5","ZONE_5_REGION_PREFERENCE1","ZONE_5_REGION_PREFERENCE2","ZONE_5_REGION_PREFERENCE3"
                         };
+
+            //Intializing List for storing the Excel data 
             List<InterZonalPromotion> InterZonalPromotionList = new List<InterZonalPromotion>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -491,6 +508,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                     }
 
+                    //Removing Empty Rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -513,6 +531,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Conkverting Excel data to List
                     for (int row = 2; row <= rowCount; row++)
                     {
                         InterZonalPromotion obj = new InterZonalPromotion();
@@ -552,7 +571,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/InterZonalPromotionExcelUpload?username=" + name, content))
                         {
@@ -567,10 +585,12 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> InterRegionRequestTransferFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel  format
             string[] excelColumns = new string[]
                         {
                 "EMPLID","TRANSFER_SEQ_NO","GENDER","DIRECT_PROMOTEE","SCALE","TRANSFER_TYPE","NAME","DESIGNATION","LOCATION_NAME","CURRENT_RO","FROM_ZONE","REQUIRED_STATE","APPLIED_ZONE","DATE_OF_JOINING","APPLICATION_DATE","REGION_BEFORE_AMALGAMATION","REGION_DATE_BEFORE_AMALGMATION","TIME_SPENT_AWAY_FROM_REGION","REGION_AFTER_AMALGAMATION","REGION_DATE_AFTER_AMALGMATION","APPLIED_REGION_1","APPLIED_REGION_2","APPLIED_REGION_3","DT_OF_PROMOTION_TO_PRSNT_SCALE","DATE_OF_REVERSION","DATE_OF_MARRIAGE","TEMPORARY_TRANSFER_DETAILS","ASSEST_AND_LIABILITIES_DETAILS","STATUS_OF_SUBMISSION","COMMENTS","REQUEST_TYPE","TRANSFER_REASON"
                         };
+            //Intializing List for storing the Excel data 
             List<InterRegionRequestTransfer> InterRegionRequestTransferList = new List<InterRegionRequestTransfer>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -590,6 +610,8 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                             throw new InvalideExcelFormatException("Excel is not in correct format");
                         }
                     }
+
+                    //Removing Empty rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -612,6 +634,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Converting Excel data to List
                     for (int row = 2; row <= rowCount; row++)
                     {
                         InterRegionRequestTransfer obj = new InterRegionRequestTransfer();
@@ -662,7 +685,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/InterRegionRequestTransferExcelUpload?username=" + name, content))
                         {
@@ -677,10 +699,12 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> InterRegionalPromotionFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel Format
             string[] excelColumns = new string[]
                         {
                 "EMPLID","CURRENT_SCALE","PROMOTED_SCALE","ACTION","EFFDT","PROMOTION_TYPE"
                         };
+            //Intializing List for storing the Excel data 
             List<InterRegionalPromotion> InterRegionalPromotionList = new List<InterRegionalPromotion>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -701,6 +725,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                     }
 
+                    //Removing Empty Rows
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -723,6 +748,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     }
                     rowCount = worksheet.Dimension.Rows;
 
+                    //Converting Excel data to List
                     for (int row = 2; row <= rowCount; row++)
                     {
                         InterRegionalPromotion obj = new InterRegionalPromotion();
@@ -747,7 +773,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/InterRegionalPromotionExcelUpload?username=" + name, content))
                         {
@@ -762,9 +787,11 @@ namespace PostingManagement.UI.Services.ExcelUploadService
 
         private async Task<ExcelUploadResponseModel> BranchMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
+            //Excel Format
             string[] excelColumns = new string[] {
             "OLD_BRANCH_CODE", "BRANCH_CODE", "BRANCH_NAME", "STATE","STATE_ID","DISTRICT","DISTRICT_ID","CITY","CITY_ID", "AREA","DATE_OF_OPENING","ZONE_NAME","ZONE_CODE","REGION_CODE", "REGION_NAME", "BRANCH_TYPE", "BANK_NAME","ADMINSTRATIVE_FLAG"
             };
+            //Intializing List for storing the Excel data 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using (var stream = new MemoryStream())
@@ -784,7 +811,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                     }
 
-                    //Trim the empty rows from the excel worksheet
+                    //Removing empty rows from excel 
                     var rowCount = worksheet.Dimension.Rows;
                     var maxColumns = worksheet.Dimension.Columns;
                     for (int row = rowCount; row > 1; row--)
@@ -846,7 +873,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                     using (var httpClient = new HttpClient(_clientHandler))
                     {
                         StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                        //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                         string name = uploadedBy;
                         using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/BranchMasterExcelUpload?username=" + name, content))
                         {
@@ -868,10 +894,12 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             }
             else
             {
+                //Excel format
                 string[] excelColumns = new string[]
                             {
                 "EMPLID","EMP_NAME","LOCATION","LOCATION_DESR","DEPT_RO","REGIONCODE","REGION_NAME","ZONECODE","ZONENAME","JOBCODE","DESIGNATION","ROLE_START_DATE","SCALE_CODE","SCALE","UBI_JOB_ROLE","BANK_NAME","BRTH_DT","SEX","DISABILITY","LOCATION_START_DATE","DOMICILE_ZONE","RO_START_DATE","LAST_PROMOTION_DATE","ZO_START_DATE"
                             };
+                //Intializing List for storing the Excel data 
                 List<EmployeeMaster> excelDataList = new List<EmployeeMaster>();
 
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -891,7 +919,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                                 throw new InvalideExcelFormatException("Excel is not in correct format");
                             }
                         }
-
+                        //Removing Empty Rows from Excel 
                         var rowCount = worksheet.Dimension.Rows;
                         var maxColumns = worksheet.Dimension.Columns;
                         for (int row = rowCount; row > 1; row--)
@@ -914,6 +942,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         }
                         rowCount = worksheet.Dimension.Rows;
 
+                        //Converting Excel data to List
                         for (int row = 2; row <= rowCount; row++)
                         {
                             EmployeeMaster obj = new EmployeeMaster();
@@ -956,7 +985,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                         using (var httpClient = new HttpClient(_clientHandler))
                         {
                             StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                            //StringContent name = new StringContent(JsonConvert.SerializeObject(uploadedBy), Encoding.UTF8, "application/json");
                             string name = uploadedBy;
                             using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/EmployeeMasterExcelUpload?username=" + name, content))
                             {
@@ -969,5 +997,6 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
         }
+        #endregion
     }
 }

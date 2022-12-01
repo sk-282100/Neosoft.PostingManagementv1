@@ -1,14 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.DataProtection;
-using PostingManagement.Application.Features.Roles.Queries.GetAllRoles;
 using PostingManagement.Application.Features.Roles.Queries.GetRoleById;
 using PostingManagement.Domain.Entities;
 using PostingManagement.Infrastructure.EncryptDecrypt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PostingManagement.Application.Profiles
 {
@@ -20,7 +13,6 @@ namespace PostingManagement.Application.Profiles
             {
                 RoleId = EncryptionDecryption.EncryptString(source.RoleId.ToString()),
                 RoleName = source.RoleName,
-
             };
 
             return dest;

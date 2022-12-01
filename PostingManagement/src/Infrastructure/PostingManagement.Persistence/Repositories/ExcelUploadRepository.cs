@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PostingManagement.Application.Contracts.Persistence;
@@ -22,6 +14,8 @@ using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.Zo
 using PostingManagement.Application.Helper.Constants;
 using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
+using System.Data;
+using System.Reflection;
 
 namespace PostingManagement.Persistence.Repositories
 {
@@ -43,6 +37,8 @@ namespace PostingManagement.Persistence.Repositories
                 //Setting column names as Property names
                 dataTable.Columns.Add(prop.Name);
             }
+
+            //Converting List of object to data table
             foreach (T item in excelData)
             {
                 var values = new object[Props.Length];
@@ -71,6 +67,7 @@ namespace PostingManagement.Persistence.Repositories
             SqlParameter batchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
             var result = 0;
 
+            //Calling the Store Procedure 
             switch (typeof(T).Name)
             {
                 case nameof(BranchMaster):
@@ -225,8 +222,6 @@ namespace PostingManagement.Persistence.Repositories
         public async Task<List<UploadHistoryDetails>> GetUploadHistoryList(int fileTypeCode)
         {
             var fileTypeCodeParameter = new SqlParameter() { ParameterName = "@fileTypeCode", SqlDbType = SqlDbType.Int, Value = fileTypeCode };
-
-            //var historyList = _dbContext.UploadHistoryDetails.ToList();
             var historyList = await _dbContext.Set<UploadHistoryDetails>().FromSqlRaw("EXEC STP_GetUploadHistoryDetails @fileTypeCode", fileTypeCodeParameter).ToListAsync();
             return historyList;
         }
