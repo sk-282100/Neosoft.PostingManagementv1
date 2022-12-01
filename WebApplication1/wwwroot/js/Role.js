@@ -19,21 +19,25 @@
 
         var regx = new RegExp(/^[A-Z][\w_@*]{1,15}$/);
         var inputValue = $('#RoleName').val().trim();
-
+        //Alert If In Role Name Is Not Entered Any Thing
         if (inputValue == '') {
             $('#RoleName').notify("Role name is required !!!", "error");
         }
+        //Alert If Role Name Length Is Less Than 2 Character
         else if (inputValue.length < 2) {
             $('#RoleName').notify("Role Name should contain more than 1 characters", "error");
         }
+        //Alert If Role Name Length Is More Than 15 
         else if (inputValue.length > 15) {
             $('#RoleName').notify("Role Name should not contain more than 15 characters", "error");
         }
+        //Alert for Role Name Usinh Regular Expression
         else if (!regx.test(inputValue)) {
             $('#RoleName').notify("Role Name should start with Uppercase alphabatical character and \n it contain only aplhanumeric and _ @ *", "error");
         }
+        
         else if (inputValue != "") {
-
+            //Call RoleAlreadyExist Action 
             $.ajax({
                 type: "GET",
                 url: "/Role/IsRoleAlreadyExist?roleName=" + inputValue,
@@ -42,6 +46,7 @@
                 dataType: "json",
                 success: function (response) {
                     if (response == true) {
+                        //Alert For Role Name Which is Already Exist
                         $('#RoleName').notify(" This Role name is already Present!!!", "error");
                         isValid = false;
                     }
@@ -61,7 +66,7 @@
         }
     });
 });
-
+//Data Table Get All Roles  Using Input Table Id 
 function OnSuccess(response){
     $("#getallrolesId").DataTable(
     {
@@ -87,7 +92,7 @@ function OnSuccess(response){
        ],
     });
 };
-
+//Alert If Role Name Added Successfully
 $(function () {
     var status = $('#addRoleResponse').val();
     if (status == "true") {

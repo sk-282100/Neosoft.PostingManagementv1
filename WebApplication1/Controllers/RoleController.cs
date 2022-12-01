@@ -16,6 +16,7 @@ namespace PostingManagement.UI.Controllers
 
         [Route("Role/GetAllRoles")]
         [HttpGet]
+        //Gets All Role 
         public async Task<IActionResult> GetAllRoles()
         {
             var responseList = await roleService.GetAllRoles();
@@ -23,17 +24,19 @@ namespace PostingManagement.UI.Controllers
         }
 
         [Route("Role/Addrole")]
-        [HttpGet]
+        [HttpGet] 
         public async Task<IActionResult> Addrole()
         {
             if (TempData.ContainsKey("addRoleResponse"))
             {
+                //Get the Dynamic ViewBag Using Response As True Or Flase.
                 ViewBag.AddRoleResponse = TempData["addRoleResponse"].ToString();
             }
             return View();
         }
 
         [HttpPost]
+        //Adding New Role.
         public async Task<IActionResult> Addrole(RoleModel roleModel)
         {
             var response = await roleService.AddRole(roleModel);
@@ -50,6 +53,7 @@ namespace PostingManagement.UI.Controllers
 
         }
 
+        //Delete Role.
         public async Task<IActionResult> RemoveRole(string id)
         {
             var response = await roleService.RemoveRole(id);
@@ -57,6 +61,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
+        //Get Role Id For Edit Role.
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleService.GetRoleById(id);
@@ -64,6 +69,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpPost]
+        //Edit Role By Using RoleId
         public async Task<IActionResult> EditRole(RoleModel roleModel)
         {
             var role = await roleService.EditRole(roleModel);
@@ -71,6 +77,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
+        //Check the Role Is Already Exist or Not.
         public async Task<IActionResult> IsRoleAlreadyExist(string roleName)
         {
             var response = await roleService.IsRoleAlreadyExist(roleName);

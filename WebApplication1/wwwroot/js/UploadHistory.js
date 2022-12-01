@@ -1,6 +1,6 @@
-﻿
-$(function () {
+﻿$(function () {
     let excelUploadType = $('#excelUploadType').val();
+    //Calls Action ShowUploadHistory
     $.ajax({
         type: "POST",
         url: "/Posting/ShowUploadHistory/" + parseInt(excelUploadType),
@@ -18,6 +18,7 @@ $(function () {
 });
 
 function OnSuccess(response) {
+    //Data Table Using Input Table Id 
     $("#uploadHistory").DataTable(
         {
             bLengthChange: true,
@@ -86,8 +87,12 @@ $(document).ready(function () {
             $.notify("Please Upload the Excel File in .xlsx format", "error")
             this.value = null;
         }
+
+        
     });
 });
+
+
 
 $(function () {
     let message = $('#excelResponse').val();
