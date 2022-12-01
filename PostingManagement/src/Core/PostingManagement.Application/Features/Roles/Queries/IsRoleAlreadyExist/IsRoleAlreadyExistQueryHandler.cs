@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
 

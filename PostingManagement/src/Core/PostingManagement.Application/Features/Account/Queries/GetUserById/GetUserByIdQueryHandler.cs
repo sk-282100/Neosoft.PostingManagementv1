@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
-using PostingManagement.Infrastructure.EncryptDecrypt;
 
 namespace PostingManagement.Application.Features.Account.Queries.GetUserById
 {
@@ -11,17 +11,19 @@ namespace PostingManagement.Application.Features.Account.Queries.GetUserById
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
+        private readonly IDataProtector _dataProtector;
 
-        public GetUserByIdQueryHandler(IAccountRepository accountRepository, IMapper mapper)
+        public GetUserByIdQueryHandler(IAccountRepository accountRepository, IMapper mapper , IDataProtectionProvider provider)
         {
             _accountRepository = accountRepository;
             _mapper = mapper;
+            _dataProtector = provider.CreateProtector("");
         }
 
         public async Task<Response<UserDetailsDto>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             //Decrypting the UId 
-            int id = Convert.ToInt32(EncryptionDecryption.DecryptString(request.UId));
+            int id = Convert.ToInt32(_dataProtector.Unprotect(request.UId));
 
             UserDetails userDetails = await _accountRepository.GetUserDetailsById(id);
             UserDetailsDto response = _mapper.Map<UserDetailsDto>(userDetails);
