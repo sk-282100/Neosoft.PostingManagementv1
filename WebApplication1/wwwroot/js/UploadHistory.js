@@ -28,7 +28,6 @@ function OnSuccess(response) {
             bPaginate: true,
             data: response,
             columns: [
-                { data: 'batchId'},
                 { data: 'fileName' },
                 { data: 'date' },
                 { data: 'numberOfRows' },
@@ -42,7 +41,8 @@ function OnSuccess(response) {
                             return '<a class="btn btn-danger btn-sm" href=#>' + data.uploadStatus +'</a>';
                         }
                     }
-                }, {
+                },
+                {
                     data: null,
                     "mRender": function (data, type, full) {
                         if (data.uploadStatus.toLowerCase() == "success") {
@@ -70,7 +70,6 @@ $(document).ready(function () {
         if ($('#ExcelFile').val() == '') {
             isValid = false;
             $.notify("Please Upload the Excel File !!!", "error");
-
         }
         return isValid;
     });
@@ -88,9 +87,11 @@ $(document).ready(function () {
             $.notify("Please Upload the Excel File in .xlsx format", "error")
             this.value = null;
         }
+
         
     });
 });
+
 
 
 $(function () {

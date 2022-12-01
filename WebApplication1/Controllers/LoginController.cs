@@ -38,7 +38,7 @@ namespace PostingManagement.UI.Controllers
             //Checks The Captcha Is Valid Or Not.
             if (!_validatorService.HasRequestValidCaptchaEntry(Language.English, DisplayMode.SumOfTwoNumbers))
             {
-                this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please entry the Valid Captcha");
+                this.ModelState.AddModelError(_captchaOptions.CaptchaComponent.CaptchaInputName, "Please enter the Valid Captcha");
                 return View(model);
             }
             //Checking The User Is Authenticated For Role 
