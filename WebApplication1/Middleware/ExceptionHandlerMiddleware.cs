@@ -14,7 +14,7 @@ namespace PostingManagement.UI.Middleware
         {
             _next = next; _logger = logger;
         }
-
+        //Catch Exception globally.
         public async Task Invoke(HttpContext context)
         {
             try
@@ -28,7 +28,7 @@ namespace PostingManagement.UI.Middleware
                 context.Response.Redirect("/ErrorHandler/" + message);
             }
         }
-
+       // Throws Error with the respective Status Code.
         private int ConvertException(HttpContext context, Exception exception)
         {
             HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;

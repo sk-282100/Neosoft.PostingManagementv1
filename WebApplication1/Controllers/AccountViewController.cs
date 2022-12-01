@@ -17,10 +17,11 @@ namespace PostingManagement.UI.Controllers
             _roleService = roleService;
         }
 
-        [HttpGet]
+        [HttpGet]   
         public async Task<IActionResult> CreateUserName()
         {
             List<RoleModel> roles = await _roleService.GetAllRoles();
+            //Dynamic ViewBag Contains the All Role Present.
             ViewBag.Roles = new SelectList(roles, "RoleId", "RoleName");
             if (TempData.ContainsKey("addUserResponse"))
             {
@@ -28,7 +29,9 @@ namespace PostingManagement.UI.Controllers
             }
             return View();
         }
+
         [HttpPost]
+        //Assigns The UserRole 
         public async Task<IActionResult> CreateUserName(CreateUserRequestModel model)
         {
             model.CreatedBy = HttpContext.Session.GetString("Username");
@@ -45,6 +48,7 @@ namespace PostingManagement.UI.Controllers
             return RedirectToAction("CreateUserName");
         }
 
+        //Delete The UserRole By Using RoleId
         public async Task<IActionResult> DeleteUserName(string id)
         {
             var deletedBy = HttpContext.Session.GetString("Username");
@@ -55,6 +59,7 @@ namespace PostingManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUserRoleDetails(string id, string currentRole)
         {
+            //Getting UserRole By Using RoleId 
             var model = await _accountService.GetUserById(id);
 
             List<RoleModel> roles = await _roleService.GetAllRoles();
@@ -65,6 +70,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpPost]
+        //Edit UserRole By Using RoleId
         public async Task<IActionResult> EditUserRoleDetails(UserViewModel model)
         {
             UpdateUserRoleRequestModel request = new();
@@ -77,14 +83,15 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
+        //Show The All UserRole Present
         public async Task<IActionResult> ShowUserRoleDetails()
         {
             var userList = await _accountService.GetAllUserDetails();
-
             return Json(userList.Data);
         }
 
         [HttpGet]
+        //Check the UserRole Is Present By Using User Name
         public async Task<IActionResult> IsUserNamePresent(string userName)
         {
             var response = await _accountService.IsUserNamePresent(userName);

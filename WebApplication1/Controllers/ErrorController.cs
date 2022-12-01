@@ -11,6 +11,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [Route("ErrorHandler/{statusCode}")]
+        //Check/Handles The Status Code And Redirect To Respective Action
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
             _logger.LogInformation("HttpStatusCode action method initiated");
@@ -35,6 +36,7 @@ namespace PostingManagement.UI.Controllers
 
         [HttpGet]
         [Route("Error/Error401")]
+        //Throw Exception When Status Code 401
         public IActionResult Eror401()
         {
             _logger.LogInformation("Error401 action method initiated");
@@ -42,6 +44,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [Route("Error/Error404")]
+        //Throw Exception When Status Code 404
         public IActionResult Eror404()
         {
             _logger.LogInformation("Error404 action method initiated");
@@ -49,6 +52,7 @@ namespace PostingManagement.UI.Controllers
         }
 
         [Route("Error/Error500")]
+        //Throw Exception When Status Code 500
         public IActionResult Eror500()
         {
             _logger.LogInformation("Error405 action method initiated");
@@ -56,12 +60,14 @@ namespace PostingManagement.UI.Controllers
         }
 
         [Route("Error/Error503")]
+        //Throw Exception When Status Code 503
         public IActionResult Error503()
         {
             _logger.LogInformation("Error action method initiated");
             return View("Error503");
         }
 
+        //Throw Exception When Status Code 401
         public IActionResult Default()
         {
             _logger.LogInformation("Default action method initiated");
