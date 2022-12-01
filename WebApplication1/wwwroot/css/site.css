@@ -1286,3 +1286,8 @@ body {
 .mt-30{
     margin-top:30px
 }
+
+.required:after {
+    content: " *";
+    color: red;
+}

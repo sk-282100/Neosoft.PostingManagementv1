@@ -49,7 +49,7 @@
                                     <form class="row g-3 needs-validation" asp-action="Login" id="loginForm" novalidate>
 
                                         <div class="col-12">
-                                            <label for="UserName" class="form-label">Username</label>
+                                            <label for="UserName" class="form-label required">Username</label>
                                             <div class="input-group has-validation">                                               
                                                 <input id="username" for="UserName" type="text" name="username" class="form-control" required>
                                                 <div class="invalid-feedback">Please enter your username.</div>
@@ -58,12 +58,13 @@
 
 
                                         <div class="col-12">
-                                            <label asp-for="Password" class="form-label">Password</label>
+                                            <label asp-for="Password" class="form-label required">Password</label>
                                             <input asp-for="Password" type="password" name="password" id="password" class="form-control" required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
 
                                         <div class="col-12">
+                                            <label asp-for="Password" class="form-label required">Captcha</label>
                                             <dnt-captcha asp-captcha-generator-max="9000"
                                                          asp-captcha-generator-min="1"
                                                          asp-captcha-generator-language="English"
