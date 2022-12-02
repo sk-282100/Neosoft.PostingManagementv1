@@ -1,24 +1,25 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
-using PostingManagement.Infrastructure.EncryptDecrypt;
 
 namespace PostingManagement.Application.Features.Account.Command.EditUser
 {
     public class EditUserCommandHandler : IRequestHandler<EditUserCommad, Response<bool>>
     {
         private readonly IAccountRepository _accountRepository;
-
-        public EditUserCommandHandler(IAccountRepository accountRepository)
+        private readonly IDataProtector _dataProtector;
+        public EditUserCommandHandler(IAccountRepository accountRepository,IDataProtectionProvider provider)
         {
             _accountRepository = accountRepository;
+            _dataProtector = provider.CreateProtector("");
         }
 
         public async Task<Response<bool>> Handle(EditUserCommad request, CancellationToken cancellationToken)
         {
             //Decrypting the UId and RoleId
-            int id = Convert.ToInt32(EncryptionDecryption.DecryptString(request.UId));
-            int roleId = Convert.ToInt32(EncryptionDecryption.DecryptString(request.RoleId));
+            int id = Convert.ToInt32(_dataProtector.Unprotect(request.UId));
+            int roleId = Convert.ToInt32(_dataProtector.Unprotect(request.RoleId));
 
             var userDetails = await _accountRepository.GetUserDetailsById(id);
 

@@ -1,22 +1,24 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
-using PostingManagement.Infrastructure.EncryptDecrypt;
 
 namespace PostingManagement.Application.Features.Roles.Commands.DeleteRole
 {
     public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand, Response<bool>>
     {
-        private IRoleRepository _roleRepository;    
-        public DeleteRoleCommandHandler(IRoleRepository roleRepository)
+        private IRoleRepository _roleRepository;
+        private readonly IDataProtector _dataProtector;
+        public DeleteRoleCommandHandler(IRoleRepository roleRepository,IDataProtectionProvider provider)
         {
             _roleRepository = roleRepository;
+            _dataProtector = provider.CreateProtector("");
                
         }
         public async Task<Response<bool>> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
         {
-            string id = EncryptionDecryption.EncryptString(request.RoleId);
+            string id = _dataProtector.Unprotect(request.RoleId);
             Role role = await _roleRepository.GetRoleById(Convert.ToInt32(id));
 
             //checking if Role is Present then delete the Role 
