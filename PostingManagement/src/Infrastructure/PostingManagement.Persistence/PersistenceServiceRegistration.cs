@@ -22,6 +22,7 @@ namespace PostingManagement.Persistence
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IEmployeeTransferRepository, EmployeeTransferRepository>();
             return services;
         }
     }
