@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "ShowDeshboard";
+    Layout = "MainView";
+}
+
+<script src="~/js/dashboard.js"></script>
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Home</li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="col-12">
+    <div class="card">
+        
+       
+        <div class="card-body">
+            <h5 class="card-title">Excel Upload Reports </h5>
+            <select id="ReportFiletype">
+                <option value="1">Branch Master</option>
+                <option value="2">Department Master</option>
+                <option value="3">Employee Master</option>
+                <option value="4">InterRegion Promotion</option>
+                <option value="5">InterRegion Request Transfer</option>
+                <option value="6">InterZonal Promotion</option>
+                <option value="7">InterZonal Request Tranfer</option>
+                <option value="8">Region Master</option>
+                <option value="9">Zone Master</option>
+            </select>
+            <!-- Line Chart -->
+            <div id="chart"></div>
+
+            <!-- End Line Chart -->
+            
+        </div>
+
+    </div>
+</div>
+
+
