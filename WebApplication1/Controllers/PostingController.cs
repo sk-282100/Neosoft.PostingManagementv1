@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using Newtonsoft.Json.Linq;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -225,7 +226,7 @@ namespace PostingManagement.UI.Controllers
             int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
             var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
             var response = JsonConvert.DeserializeObject<List<InterZonalPromotion>>(result);
-            return View(response);
+            return Json(response);
         }
 
         [HttpGet]
@@ -236,7 +237,7 @@ namespace PostingManagement.UI.Controllers
             int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
             var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
             var response = JsonConvert.DeserializeObject<List<InterZonalRequestTransfer>>(result);
-            return View(response);
+            return Json(response);
         }
 
         [HttpGet]
@@ -247,7 +248,7 @@ namespace PostingManagement.UI.Controllers
             int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
             var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
             var response = JsonConvert.DeserializeObject<List<RegionMaster>>(result);
-            return View(response);
+            return Json(response);
         }
 
         [HttpGet]
@@ -258,7 +259,7 @@ namespace PostingManagement.UI.Controllers
             int batchId = Convert.ToInt32(HttpContext.Session.GetInt32("batchId"));
             var result = await _service.GetUploadedRecordsByBatchId(batchId, fileTypeCode);
             var response = JsonConvert.DeserializeObject<List<ZoneMaster>>(result);
-            return View(response);
+            return Json(response);
         }
 
         [HttpGet]

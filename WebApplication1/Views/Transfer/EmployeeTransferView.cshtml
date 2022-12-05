@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PostingManagement.UI.Models.EmployeeTransferModels.TransferModel>
+
+@{
+    ViewData["Title"] = "GetEmployeesForTransfer";
+    Layout = "~/Views/Shared/MainView.cshtml";
+}
+
+
+<div class="col-xxl-8 col-xl-12">
+
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+
+            <h5 class="card-title">Generate Employee TransferList<span></span></h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <table class="table responsive" id="employeeTransfer">
+                        <thead>
+                            <tr>
+                                <th>EmployeeId</th>
+                                <th>Name</th>  
+                                <th>ScaleName</th>  
+                                <th>Scale</th>  
+                                <th>Designation</th>  
+                                <th>Region</th>  
+                                <th>Zone</th>  
+                                <th>MovementType</th>  
+                                @*<th>De(Select)</th>*@
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/EmployeeTransfer.js"></script>
+
+@*<script>
+    $(document).ready(function () {
+        $('#employeeTransfer').DataTable({
+
+        });
+    });
+</script>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
