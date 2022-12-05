@@ -45,10 +45,10 @@ namespace PostingManagement.Persistence
         public DbSet<InterRegionalRequestRecordsDto> InterRegionRequestTransferTbl { get; set; }
         public DbSet<InterZonalPromotionRecordsDto> InterZonalPromotionTbl { get; set; }
         public DbSet<InterZonalRequestRecordsDto> InterZonalRequestTransferTbl { get; set; }
-
         public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
-
         public DbSet<UserDetails> UserDetailsTbl { get; set; }
+        public DbSet<TransferListVM> TransferListTbl { get; set; }
+        public DbSet<EmployeeDetailsForTransferList> EmployeeDetailsForTransferListTbl { get; set; }
 
         private IDbContextTransaction _transaction;
 
