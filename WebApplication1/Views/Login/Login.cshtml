@@ -78,7 +78,7 @@
                                                          asp-back-color="#ccc"
                                                          asp-text-box-class="text-box form-control"
                                                          asp-text-box-template="<div class='input-group'>{0}</div>"
-                                                         asp-validation-message-class="text-danger CaptchaErrorMessage"
+                                                         asp-validation-message-class="text-danger visually-hidden CaptchaErrorMessage"
                                                          asp-refresh-button-class="fas fa-redo btn-sm"
                                                          asp-show-refresh-button="true" />
                                         </div>
@@ -117,9 +117,9 @@
     <script>
 
         // alert for invalid Captcha message
-        $.notify($(".CaptchaErrorMessage span").html(), "error")
-        $(".CaptchaErrorMessage span").hide()
-
+        $(function(){
+        $.notify($(".CaptchaErrorMessage span").html(), "error");
+        });
         // alert for invalid Password and username 
         $(function(){
             let message = $('#loginResponse').val();
