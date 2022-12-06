@@ -1,4 +1,5 @@
 ﻿
+using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.AccountModels;
 using PostingManagement.UI.Models.Responses;
 
@@ -48,6 +49,12 @@ namespace PostingManagement.UI.Services.AccountServices.Contracts
         /// <returns> object of Response type with true if username is present else false</returns>
         public Task<Response<bool>> IsUserNamePresent(string userName);
 
+        /// <summary>
+        /// Reset Password for Particular Username
+        /// </summary>
+        /// <param name="request">object contains Username and New Password </param>
+        /// <returns> true if Password Update successfully else return false</returns>
+        public Task<Response<bool>> ResetPassword(ResetPasswordRequestModel request);
 
     }
 }

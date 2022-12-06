@@ -74,14 +74,14 @@
                                                          asp-validation-error-message="Please enter the Captcha *"
                                                          asp-font-name="Tahoma"
                                                          asp-font-size="20"
-                                                         asp-fore-color="#333333"
-                                                         asp-back-color="#ccc"
+                                                         asp-fore-color="#444"
+                                                         asp-back-color="#fff"
                                                          asp-text-box-class="text-box form-control"
                                                          asp-text-box-template="<div class='input-group'>{0}</div>"
                                                          asp-validation-message-class="text-danger visually-hidden CaptchaErrorMessage"
-                                                         asp-refresh-button-class="fas fa-redo btn-sm"
-                                                         asp-show-refresh-button="true" />
+                                                          />
                                         </div>
+                                        <div class="col-12"><a asp-action="ResetPassword">Forgot Password ?</a> </div>
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
