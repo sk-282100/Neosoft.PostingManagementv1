@@ -34,13 +34,13 @@ namespace PostingManagement.UI.Models.ExcelFileTypes
         public DateTime DateOfPromotion { get; set; }
         public DateTime DateOfReversion { get; set; }
         public string Disabled { get; set; } = null!;
-        public DateTime? DateOfMarriage { get; set; }
+        public DateTime? DateOfMarriage { get; set; } 
         public string SpecialistCategory { get; set; } = null!;
         public string TransferType { get; set; } = null!;
         public string TemporaryTransferDetails { get; set; } = null!;
         public string AssetsAndLiabilitiesDetail { get; set; } = null!;
         public string StatusOfSubmissionofApproval { get; set; } = null!;
-        public string? Comments { get; set; }
+        public string? Comments { get; set; } = String.Empty;
         public string RequestType { get; set; } = null!;
     }
 }
