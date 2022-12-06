@@ -29,7 +29,7 @@ namespace PostingManagement.Persistence.Repositories
         {
             SqlParameter employeeIdParameter = new SqlParameter() { ParameterName = "@employeeId", SqlDbType = SqlDbType.Int, Value = employeeId };
             SqlParameter movementTypeParameter = new SqlParameter() { ParameterName = "@movementType", SqlDbType = SqlDbType.VarChar, Size = 30, Value = movementType };
-            var result = await _dbContext.Set<EmployeeDetailsForTransferList>().FromSqlRaw("EXEC STP_GetAdditionalEmployeeTransferDataAndPromotionData @employeeId,@movementType", employeeIdParameter, movementTypeParameter).ToListAsync();
+            var result = _dbContext.Set<EmployeeDetailsForTransferList>().FromSqlRaw("EXEC STP_GetAdditionalEmployeeTransferDataAndPromotionData @employeeId,@movementType", employeeIdParameter, movementTypeParameter).ToList();
             return result.FirstOrDefault();
         }
     }
