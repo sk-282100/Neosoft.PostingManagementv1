@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PostingManagement.Application.Features.Account.Command.AddUser;
 using PostingManagement.Application.Features.Account.Command.DeleteUser;
 using PostingManagement.Application.Features.Account.Command.EditUser;
+using PostingManagement.Application.Features.Account.Command.ResetPassword;
 using PostingManagement.Application.Features.Account.Queries.GetAllUser;
 using PostingManagement.Application.Features.Account.Queries.GetUserById;
 using PostingManagement.Application.Features.Account.Queries.IsUserNamePresent;
@@ -69,6 +70,18 @@ namespace PostingManagement.Api.Controllers.v1
         {
             IsUserNamePresentQuery request = new IsUserNamePresentQuery() { UserName = userName };
             var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+
+        [HttpPut("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCommand request)
+        {
+            var response = await _mediator.Send(request);
+            if (response.Succeeded == false && response.Message == "Username is not Exist")
+            {
+                return NotFound(response);
+            }
             return Ok(response);
         }
 

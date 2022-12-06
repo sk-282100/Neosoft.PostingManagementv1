@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using PostingManagement.UI.Models;
+using PostingManagement.UI.Services.AccountServices.Contracts;
 using PostingManagement.UI.Services.LoginService.Contracts;
 
 namespace PostingManagement.UI.Controllers
@@ -12,13 +13,15 @@ namespace PostingManagement.UI.Controllers
         private readonly IDNTCaptchaValidatorService _validatorService;
         private readonly DNTCaptchaOptions _captchaOptions;
         private readonly ILoginService _loginService;
+        private readonly IAccountService _accountService;
         readonly HttpClientHandler _clientHandler = new HttpClientHandler();
 
-        public LoginController(IDNTCaptchaValidatorService validatorService, IOptions<DNTCaptchaOptions> options, ILoginService loginService)
+        public LoginController(IDNTCaptchaValidatorService validatorService, IOptions<DNTCaptchaOptions> options, ILoginService loginService,IAccountService accountService)
         {
             _validatorService = validatorService;
             _captchaOptions = options == null ? throw new ArgumentNullException(nameof(options)) : options.Value;
             _loginService = loginService;
+            _accountService = accountService;
         }
 
         [HttpGet]
@@ -63,6 +66,22 @@ namespace PostingManagement.UI.Controllers
             HttpContext.Session.Remove("Username");
             HttpContext.Session.Remove("UserRole");
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        //Reset Password view
+        public async Task<IActionResult> ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        //Reset Password Method
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequestModel requestModel)
+        {
+            var response = await _accountService.ResetPassword(requestModel);
+            ViewBag.ResetPasswordResponse = response;
+            return View("ResetPasswordStatusView");
         }
     }
 }

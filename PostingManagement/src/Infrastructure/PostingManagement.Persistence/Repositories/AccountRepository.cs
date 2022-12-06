@@ -75,7 +75,13 @@ namespace PostingManagement.Persistence.Repositories
             return _context.UserDetailsTbl.Any(x => x.UserName == userName && x.DeletedBy == null);
         }
 
-      
+        public async Task<bool> ResetPassword(string userName, string newPassword)
+        {
+            var userDetails = await _context.UserDetailsTbl.FirstOrDefaultAsync(x => x.UserName == userName && x.DeletedBy == null);
+            userDetails.Password = EncryptionDecryption.EncryptString(newPassword);
+            _context.Entry(userDetails).State = EntityState.Modified;
+            return _context.SaveChanges() == 1 ? true : false;
+        }
     }
 }
 

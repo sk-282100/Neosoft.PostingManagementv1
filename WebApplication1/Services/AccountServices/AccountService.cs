@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.AccountModels;
 using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.AccountServices.Contracts;
@@ -98,6 +99,22 @@ namespace PostingManagement.UI.Services.AccountServices
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/Account/IsUserNamePresent?userName=" + userName))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<Response<bool>>(apiResponse);
+                    return result;
+                }
+            }
+        }
+
+        public async Task<Response<bool>> ResetPassword(ResetPasswordRequestModel request)
+        {
+            //Client Handler Part
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+                using (var response = await httpClient.PutAsync("https://localhost:5000/api/v1/Account/ResetPassword", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<Response<bool>>(apiResponse);

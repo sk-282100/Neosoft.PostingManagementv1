@@ -46,5 +46,12 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <returns>returns true if user is present</returns>
         public Task<bool> IsUserNamePresent(string userName);
 
+        /// <summary>
+        /// Reset the Password by the UserName
+        /// </summary>
+        /// <param name="userName"> User Name</param>
+        /// <param name="newPassword">user id to be updated</param>
+        /// <returns>returns true if updated successfully</returns>
+        public Task<bool> ResetPassword( string userName, string newPassword);
     }
 }
