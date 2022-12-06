@@ -9,7 +9,8 @@ using PostingManagement.UI.Services.LoginService;
 using PostingManagement.UI.Services.AccountServices.Contracts;
 using PostingManagement.UI.Services.AccountServices;
 using PostingManagement.UI.Services.RoleService;
-
+using PostingManagement.UI.Services.TransferService.Contracts;
+using PostingManagement.UI.Services.TransferService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +22,9 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IAccountService,AccountService>();
 builder.Services.AddScoped<IRoleService,RoleService>(); 
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
+builder.Services.AddScoped<ITransferService, TransferService>();
 builder.Services.AddScoped<HttpClientHandler>();
 builder.Services.AddSession();
-
 builder.Services.AddDNTCaptcha(options =>
 {
     options.UseCookieStorageProvider(SameSiteMode.Strict)

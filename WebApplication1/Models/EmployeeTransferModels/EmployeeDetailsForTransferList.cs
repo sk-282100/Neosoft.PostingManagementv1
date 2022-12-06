@@ -1,13 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PostingManagement.Domain.Entities
+﻿namespace PostingManagement.UI.Models.EmployeeTransferModels
 {
-    [Keyless]
     public class EmployeeDetailsForTransferList
     {
         public int EmployeeId { get; set; }
@@ -41,4 +33,5 @@ namespace PostingManagement.Domain.Entities
         public string Zone5RegionPreference2 { get; set; } = String.Empty;
         public string Zone5RegionPreference3 { get; set; } = String.Empty;
     }
+
 }

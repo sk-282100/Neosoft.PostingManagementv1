@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models.EmployeeTransferModels;
+using PostingManagement.UI.Services.TransferService.Contracts;
 
 namespace PostingManagement.UI.Controllers
 {
     public class TransferController : Controller
     {
+        private readonly ITransferService _transferService;
+        public TransferController(ITransferService transferService)
+        {
+            _transferService = transferService;
+        }
+
         [HttpGet]
         public IActionResult EmployeeTransferView()
         {
@@ -12,15 +19,18 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
-        public async Task <IActionResult> GetEmployeesDataForTransfer()
+        public async Task<IActionResult> GetEmployeesDataForTransfer()
         {
-         
-            List<TransferModel> employeeList = new List<TransferModel>() {
-            new TransferModel(){EmployeeId = 1,Name="Vishal",ScaleName="Scale 1 Officer",Scale=1,Designation="Asst Manager",Region="NaviMumbai",Zone="Mumbai",MovementType="InterRegionRequest"},
-            new TransferModel(){EmployeeId = 2,Name="Darshan",ScaleName="Scale 2 Officer",Scale=2,Designation="Deputy Branch Head",Region="Andheri East",Zone="MumbaiSuburban",MovementType="InterRegionPromotion"},
-            new TransferModel(){EmployeeId = 3,Name="Sumit",ScaleName="Scale 1 Officer",Scale=3,Designation="Deputy Branch Head",Region="Dahisar",Zone="MumbaiSuburban",MovementType="InterRegPromotion"}
-            };
+            List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer();
+
             return Json(employeeList);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAdditionalEmployeeDetails(int employeeId, string movementType)
+        {
+            EmployeeDetailsForTransferList employeeDetails = await _transferService.GetEmployeeAddidtionalDetails(employeeId, movementType);
+            return Json(employeeDetails);
         }
     }
 }
