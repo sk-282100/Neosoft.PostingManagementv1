@@ -1,12 +1,14 @@
-﻿@model IEnumerable<PostingManagement.UI.Models.EmployeeTransferModels.TransferModel>
+﻿@model IEnumerable<PostingManagement.UI.Models.EmployeeTransferModels.EmployeeTransferModel>
 
 @{
     ViewData["Title"] = "GetEmployeesForTransfer";
     Layout = "~/Views/Shared/MainView.cshtml";
 }
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" type="text/css">
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
-
-<div class="col-xxl-8 col-xl-12">
+<div class="col-xxl-12 col-xl-12">
 
     <div class="card info-card customers-card">
 
@@ -15,18 +17,20 @@
             <h5 class="card-title">Generate Employee TransferList<span></span></h5>
             <hr />
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <table class="table responsive" id="employeeTransfer">
                         <thead>
                             <tr>
-                                <th>EmployeeId</th>
+                                <th></th>
+                                <th>Employee Id</th>
                                 <th>Name</th>  
-                                <th>ScaleName</th>  
+                                <th>Scale Name</th>  
                                 <th>Scale</th>  
                                 <th>Designation</th>  
                                 <th>Region</th>  
                                 <th>Zone</th>  
                                 <th>MovementType</th>  
+                                <th></th>
                                 @*<th>De(Select)</th>*@
                             </tr>
                         </thead>

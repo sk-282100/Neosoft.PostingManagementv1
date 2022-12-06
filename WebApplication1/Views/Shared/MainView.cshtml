@@ -10,7 +10,8 @@
     <title>@ViewData["Title"] - UI.PostingManagement</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -27,7 +28,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
 </head>
 
 <body>
@@ -127,7 +128,7 @@
                 </ul>
             </li>
             @{
-                if (Context.Session.GetString("UserRole").ToLower() == "admin")
+                if (Context.Session.GetString("UserRole")?.ToLower() == "admin")
                 {
                     <li class="nav-item">
                         <a class="nav-link " asp-action="CreateUserName" asp-controller="AccountView">
@@ -143,6 +144,12 @@
                     </li>
                 }
             }
+            <li class="nav-item">
+                <a class="nav-link " asp-action="EmployeeTransferView" asp-controller="Transfer">
+                    <i class="bi bi-plus-square-dotted"></i>
+                    <span>Generate Employee Transfer</span> <!--End Add Role -->
+                </a>
+            </li>
         </ul>
     </aside><!-- End Sidebar-->
     <main id="main" class="main">
@@ -160,6 +167,7 @@
     <!-- ======= Footer ======= -->
     <script src="~/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
