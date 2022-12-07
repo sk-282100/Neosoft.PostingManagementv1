@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PostingManagement.UI.CustomActionFilters;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.AccountModels;
 using PostingManagement.UI.Services.AccountServices.Contracts;
@@ -7,6 +8,7 @@ using PostingManagement.UI.Services.RoleService;
 
 namespace PostingManagement.UI.Controllers
 {
+    [LoginFilter]
     public class AccountViewController : Controller
     {
         private readonly IAccountService _accountService;
@@ -36,6 +38,7 @@ namespace PostingManagement.UI.Controllers
         {
             model.CreatedBy = HttpContext.Session.GetString("Username");
             var response = await _accountService.SaveUserDetails(model);
+            //Storing response for Status Alert message
             if (response.Data != null)
             {
                 TempData["addUserResponse"] = response.Data == true ? "true" : "false";
@@ -78,6 +81,7 @@ namespace PostingManagement.UI.Controllers
             request.UserName = model.UserName;
             request.RoleId = model.RoleId;
             request.UpdatedBy = HttpContext.Session.GetString("Username");
+
             await _accountService.UpdateUserDetails(request);
             return RedirectToAction("CreateUserName");
         }
