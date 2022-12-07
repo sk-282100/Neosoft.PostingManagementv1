@@ -125,6 +125,7 @@ namespace PostingManagement.UI.Controllers
         //Upload Excel
         public async Task<IActionResult> ExcelUpload(ExcelUploadViewModel model)
         {
+
             string uploadedBy = HttpContext.Session.GetString("Username");
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model, uploadedBy);
             var excelType = HttpContext.Session.GetString("ExcelUploadFiletype");
