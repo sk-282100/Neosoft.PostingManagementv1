@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PostingManagement.UI.CustomActionFilters;
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 
 namespace PostingManagement.UI.Controllers
 {
+    [LoginFilter]
     public class TransferController : Controller
     {
         private readonly ITransferService _transferService;

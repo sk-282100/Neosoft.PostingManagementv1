@@ -1,6 +1,5 @@
 ﻿using DNTCaptcha.Core;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Services.AccountServices.Contracts;
@@ -29,8 +28,6 @@ namespace PostingManagement.UI.Controllers
         public IActionResult Login()
         {
             ViewBag.LoginResponse= null;            
-            string[] banks = new string[] { "Union Bank of India", "Coorpation Bank" };
-            ViewBag.BankList = new SelectList(banks, "BankName");
             return View();
         }
 
