@@ -41,7 +41,7 @@ function OnSuccess(response) {
     var totalRow = [];
     var uploadDate = new Array();
     for (records of response) {
-        totalRow.push(records.numberOfRows);
+        totalRow.push(parseInt(records.numberOfRows));
         uploadDate.push(records.date);
     }
     var options = {
@@ -82,7 +82,10 @@ function OnSuccess(response) {
         yaxis: {
             title: {
                 text: 'Number of Uploaded Rows'
-            }
+            },
+            labels: {
+                formatter: (value) => { return value.toFixed(0) },
+            },
         },
         noData: {
             text: 'No Records...'
@@ -91,6 +94,7 @@ function OnSuccess(response) {
             x: {
                 format: 'dd/MM/yy HH:mm'
             },
+
         }
     };
     $('#chart').empty();
