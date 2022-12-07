@@ -131,7 +131,7 @@ namespace PostingManagement.UI.Controllers
         {
             string wwPath = this._environment.WebRootPath;
             string contentPath = this._environment.ContentRootPath;
-            string uploadedBy = "AdminDarshan";
+            string uploadedBy = HttpContext.Session.GetString("Username");
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model, uploadedBy);
             var excelType = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelUploadFiletype = excelType;
