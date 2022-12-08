@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,8 +30,40 @@ namespace PostingManagement.Persistence.Repositories
         {
             SqlParameter employeeIdParameter = new SqlParameter() { ParameterName = "@employeeId", SqlDbType = SqlDbType.Int, Value = employeeId };
             SqlParameter movementTypeParameter = new SqlParameter() { ParameterName = "@movementType", SqlDbType = SqlDbType.VarChar, Size = 30, Value = movementType };
-            var result = _dbContext.Set<EmployeeDetailsForTransferList>().FromSqlRaw("EXEC STP_GetAdditionalEmployeeTransferDataAndPromotionData @employeeId,@movementType", employeeIdParameter, movementTypeParameter).ToList();
+            var result = await _dbContext.Set<EmployeeDetailsForTransferList>().FromSqlRaw("EXEC STP_GetAdditionalEmployeeTransferDataAndPromotionData @employeeId,@movementType", employeeIdParameter, movementTypeParameter).ToListAsync();
             return result.FirstOrDefault();
+        }
+
+        public ZOTransferListReponse InsertIntoTransferListForZo(List<TransferListVM> list)
+        {
+            DataTable dataTable = new DataTable(typeof(TransferListVM).Name);
+            //Get all the properties
+            PropertyInfo[] Props = typeof(TransferListVM).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name);
+            }
+            foreach (TransferListVM item in list)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+
+            SqlParameter dataTableParameter = new SqlParameter() { ParameterName = "@transferListData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "COTransferListTableType" };
+            SqlParameter successCount = new SqlParameter() { ParameterName = "@successCount", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+            SqlParameter uploadStatus = new SqlParameter() { ParameterName = "@status", SqlDbType = SqlDbType.VarChar, Size = 20, Direction = ParameterDirection.Output };
+
+            var result = _dbContext.Database.ExecuteSqlRaw("EXEC STP_InsertIntoZOListTbl @transferListData, @successCount OUTPUT, @status OUTPUT",
+            dataTableParameter, successCount, uploadStatus);
+            int successcount = Convert.ToInt32(successCount.Value);
+            string status = Convert.ToString(uploadStatus.Value);
+            return new ZOTransferListReponse() { SuccessCount = successcount, Status = status };
         }
     }
 }

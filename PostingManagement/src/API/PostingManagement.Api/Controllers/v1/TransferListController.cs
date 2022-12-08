@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PostingManagement.Application.Features.ExcelUpload.Command;
+using PostingManagement.Application.Features.TransferList.Commands.InsertIntoTransferListForZO;
 using PostingManagement.Application.Features.TransferList.Queries.GetEmployeeDetailsById;
 using PostingManagement.Application.Features.TransferList.Queries.GetTransferList;
+using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Api.Controllers.v1
 {
@@ -30,6 +32,13 @@ namespace PostingManagement.Api.Controllers.v1
         public async Task<IActionResult> GetAdditionalEmployeeDetails(int employeeId, string movementType)
         {
             var request = new GetEmployeeDetailsByIdQuery() { EmployeeId = employeeId, MovementType = movementType};
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+        [HttpPost("TransferListForZO")]
+        public async Task<IActionResult> TransferListForZO(List<TransferListVM> transferList)
+        {
+            var request = new TransferListForZOCommand() { TransferList = transferList };
             var response = await _mediator.Send(request);
             return Ok(response);
         }

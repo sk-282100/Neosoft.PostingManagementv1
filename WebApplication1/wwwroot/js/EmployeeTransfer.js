@@ -3,8 +3,8 @@
         type: "GET",
         url: "/Transfer/GetEmployeesDataForTransfer/",
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: GetEmployeesListTransfer,
+        dataType: "json",        
+        success: GetEmployeesListTransfer,        
         failure: function (response) {
             window.location.replace("/Error/Error500");
         },
@@ -26,9 +26,30 @@ function GetEmployeesListTransfer(response) {
             bSort: true,
             bPaginate: true,
             data: response,
-            //columnDefs: [
-                columns: [
-
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'pdf',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-file-earmark-pdf"></i>',                    
+                },
+                {
+                    extend: 'copy',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-clipboard"></i>'
+                },
+                {
+                    extend: 'print',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-printer"></i>'
+                },
+                {
+                    extend: 'csv',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-file-earmark-excel"></i>'
+                }                
+            ]  , 
+            columns: [
                 {
                     targets: 0,
                     className: 'dt-control',
@@ -91,7 +112,6 @@ function GetEmployeesListTransfer(response) {
     //        }
     //    }
     //});
-
     // Add event listener for opening and closing details
     $('#employeeTransfer tbody').on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
