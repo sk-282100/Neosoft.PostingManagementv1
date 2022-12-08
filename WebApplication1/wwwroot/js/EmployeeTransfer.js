@@ -19,11 +19,12 @@
 function GetEmployeesListTransfer(response) {
     var table = $("#employeeTransfer").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-            bFilter: true,
-            bSort: true,
-            bPaginate: true,
+            searching: false,
+            bLengthChange: false,
+            //lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            //bFilter: true,
+            //bSort: true,
+            //bPaginate: true,
             data: response,
             dom: 'lBfrtip',
             buttons: [

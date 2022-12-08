@@ -32,14 +32,18 @@
     }
 }
 
+#employeeTransfer_wrapper {
+    display: flex;
+    flex-direction: column;
+}
 div.dataTables_wrapper {
-    position: relative
+    position: relative;    
 }
 
 div.dt-buttons {
     position: initial;
-    padding-left:15%;
-
+    display: flex;
+    justify-content: flex-end;
 }
 
     div.dt-buttons .dt-button {
