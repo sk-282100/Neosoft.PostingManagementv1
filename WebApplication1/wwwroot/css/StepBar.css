@@ -1,0 +1,19 @@
+﻿#wrapper .baricon {
+    display: inline-block;
+    border-radius: 75%;
+    padding: 6px;
+    background-color: #acacad;
+    color: white;
+}
+
+#wrapper .progress_bar {
+    width: 52px;
+    height: 2px;
+    border-radius: 20px;
+    background-color: #D8D8D8;
+    display: inline-block;
+}
+
+span.baricon.active {
+    background-color: #1aa93f !important;
+}
