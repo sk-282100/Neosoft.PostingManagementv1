@@ -5,6 +5,7 @@ using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using System.Data;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using PostingManagement.UI.CustomActionFilters;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -37,6 +38,13 @@ namespace PostingManagement.UI.Controllers
         {
             EmployeeDetailsForTransferList employeeDetails = await _transferService.GetEmployeeAddidtionalDetails(employeeId, movementType);
             return Json(employeeDetails);
-        }        
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEmployeesSelectedByCo(int[] employeesId)
+        {
+            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetSelectedEmployeesByCo(employeesId);
+            return View(selectedEmployeeByCo);
+        }
     }
 }
