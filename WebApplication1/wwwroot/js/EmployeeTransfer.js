@@ -19,14 +19,13 @@
 function GetEmployeesListTransfer(response) {
     var table = $("#employeeTransfer").DataTable(
         {
-
             bLengthChange: true,
             lengthMenu: [[5, 10, -1], [5, 10, "All"]],
             bFilter: true,
             bSort: true,
             bPaginate: true,
             data: response,
-            dom: 'Bfrtip',
+            dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'pdf',
@@ -48,7 +47,7 @@ function GetEmployeesListTransfer(response) {
                     title: 'Employee Transfer List',
                     text: '<i class="bi bi-file-earmark-excel"></i>'
                 }                
-            ]  , 
+            ], 
             columns: [
                 {
                     targets: 0,
