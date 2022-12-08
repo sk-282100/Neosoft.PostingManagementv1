@@ -6,7 +6,7 @@
 }
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" type="text/css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
-
+<link rel="stylesheet" type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" />
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
 
@@ -16,20 +16,26 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 
 <div class="col-xxl-12 col-xl-12">
 
     <div class="card info-card customers-card">
 
         <div class="card-body">
-
-            <h5 class="card-title">Generate Employee TransferList<span></span></h5>
+            <div class="d-flex flex-row justify-content-between">
+                <h5 class="card-title">Generate Employee Transfer List<span></span></h5>
+                <a class="btn btn-success" onclick="GenerateList()">Generate List</a>
+            </div>
             <hr />
             <div class="row">
+                
                 <div class="col-md-12">
                     <table class="table responsive" id="employeeTransfer">
                         <thead>
                             <tr>
+                                <th></th>
+                                @*<th><input type="checkbox" name="select_all" id="example-select-all"></th>*@
                                 <th></th>
                                 <th>Employee Id</th>
                                 <th>Name</th>  
@@ -49,7 +55,6 @@
         </div>
     </div>
 </div>
-@*<button id="pdfButton" class="btn btn-primary" value="PDF"><i class="k-icon k-i-file-pdf" style="color:white;"></i> PDF </button>*@
 <script src="~/js/EmployeeTransfer.js"></script>
 
 @*<script>

@@ -8,6 +8,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace PostingManagement.UI.Controllers
 {
+    [LoginFilter]
     public class TransferController : Controller
     {
         private readonly IHostingEnvironment _environment;

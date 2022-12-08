@@ -5,11 +5,7 @@ using PostingManagement.UI.Helpers.Constants;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.ExcelFileTypes;
 using PostingManagement.UI.Services.ExcelUploadService.Contracts;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
-using Newtonsoft.Json.Linq;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -129,9 +125,8 @@ namespace PostingManagement.UI.Controllers
         //Upload Excel
         public async Task<IActionResult> ExcelUpload(ExcelUploadViewModel model)
         {
-            string wwPath = this._environment.WebRootPath;
-            string contentPath = this._environment.ContentRootPath;
-            string uploadedBy = "AdminDarshan";
+
+            string uploadedBy = HttpContext.Session.GetString("Username");
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model, uploadedBy);
             var excelType = HttpContext.Session.GetString("ExcelUploadFiletype");
             ViewBag.ExcelUploadFiletype = excelType;
@@ -144,18 +139,14 @@ namespace PostingManagement.UI.Controllers
                 {
                     Directory.CreateDirectory(path);
                 }
-                // List<string> uploadedFiles = new List<string>();
                 IFormFile postedFiles = model.ExcelFile;
                 string fileName = Path.GetFileName(postedFiles.FileName);
                 using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
                 {
                     postedFiles.CopyTo(stream);
-                    ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
                 }
             }
            
-
-
             return View("ExcelUploadView");
         }
 
@@ -207,6 +198,7 @@ namespace PostingManagement.UI.Controllers
             return BadRequest();
         }
 
+        #region Action Methods for Get Records by the batchId and FileTypeCode
         [HttpGet]
         //Get All Employee History Data of Uploaded Record By Using BatchId 
         public async Task<IActionResult> GetEmployeeMasterUploadedRecords()
@@ -305,5 +297,6 @@ namespace PostingManagement.UI.Controllers
             var response = JsonConvert.DeserializeObject<List<InterRegionRequestTransfer>>(result);
             return Json(response);
         }
+        #endregion
     }
 }

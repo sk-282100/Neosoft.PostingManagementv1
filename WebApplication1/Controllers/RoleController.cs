@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PostingManagement.UI.CustomActionFilters;
 using PostingManagement.UI.Models;
 using PostingManagement.UI.Services.RoleService;
 
 namespace PostingManagement.UI.Controllers
 {
+    [LoginFilter]
     public class RoleController : Controller
     {
         private readonly IRoleService roleService;
@@ -40,6 +42,7 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> Addrole(RoleModel roleModel)
         {
             var response = await roleService.AddRole(roleModel);
+            //storing the response to tempData for showing status message in view
             if (response.Data != null)
             {
                 TempData["addRoleResponse"] = response.Data == true ? "true" : "false";
@@ -56,7 +59,7 @@ namespace PostingManagement.UI.Controllers
         //Delete Role.
         public async Task<IActionResult> RemoveRole(string id)
         {
-            var response = await roleService.RemoveRole(id);
+            await roleService.RemoveRole(id);
             return RedirectToAction("Addrole");
         }
 
@@ -81,7 +84,6 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> IsRoleAlreadyExist(string roleName)
         {
             var response = await roleService.IsRoleAlreadyExist(roleName);
-            Console.WriteLine(response.Data);
             return Json(response.Data);
         }
     }
