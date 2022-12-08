@@ -26,23 +26,31 @@ function GetEmployeesListTransfer(response) {
             bSort: true,
             bPaginate: true,
             data: response,
-            columns: [
-                
+            //columnDefs: [
+                columns: [
+
                 {
-                    targets:0,
+                    targets: 0,
                     className: 'dt-control',
                     orderable: false,
                     data: null,
                     defaultContent: '',
                 },
                 {
+                    
                     'targets': 1,
-                    'searchable': false,
-                    'orderable': false,
-                    'className': 'dt-body-center',
-                    'render': function (data, type, full, meta) {
-                        return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+                    'data': null,
+                    'checkboxes': {
+                        'selectRow': true
                     }
+                    //'targets': 1,
+                    //'searchable': false,
+                    //'orderable': false,
+                    //'data': null,
+                    //'className': 'dt-body-center',
+                    //'render': function (data, type, full, meta) {
+                    //    return '<input type="checkbox" class="SelectedEmployee" value='+data.employeeId+'>';
+                    //}
                 },
                 { data: 'employeeId' },  
                 { data: 'employeeName' },   
@@ -55,32 +63,34 @@ function GetEmployeesListTransfer(response) {
 
 
             ],
-
+            'select': {
+                'style': 'multi'
+            },
 
         });
 
 
-    // Handle click on "Select all" control
-    $('#example-select-all').on('click', function () {
-        // Get all rows with search applied
-        var rows = table.rows({ 'search': 'applied' }).nodes();
-        // Check/uncheck checkboxes for all rows in the table
-        $('input[type="checkbox"]', rows).prop('checked', this.checked);
-    });
+    //// Handle click on "Select all" control
+    //$('#example-select-all').on('click', function () {
+    //    // Get all rows with search applied
+    //    var rows = table.rows({ 'search': 'applied' }).nodes();
+    //    // Check/uncheck checkboxes for all rows in the table
+    //    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+    //});
 
-    // Handle click on checkbox to set state of "Select all" control
-    $('#example tbody').on('change', 'input[type="checkbox"]', function () {
-        // If checkbox is not checked
-        if (!this.checked) {
-            var el = $('#example-select-all').get(0);
-            // If "Select all" control is checked and has 'indeterminate' property
-            if (el && el.checked && ('indeterminate' in el)) {
-                // Set visual state of "Select all" control
-                // as 'indeterminate'
-                el.indeterminate = true;
-            }
-        }
-    });
+    //// Handle click on checkbox to set state of "Select all" control
+    //$('#example tbody').on('change', 'input[type="checkbox"]', function () {
+    //    // If checkbox is not checked
+    //    if (!this.checked) {
+    //        var el = $('#example-select-all').get(0);
+    //        // If "Select all" control is checked and has 'indeterminate' property
+    //        if (el && el.checked && ('indeterminate' in el)) {
+    //            // Set visual state of "Select all" control
+    //            // as 'indeterminate'
+    //            el.indeterminate = true;
+    //        }
+    //    }
+    //});
 
     // Add event listener for opening and closing details
     $('#employeeTransfer tbody').on('click', 'td.dt-control', function () {
@@ -124,7 +134,7 @@ function GetEmployeesListTransfer(response) {
             success: function (response) {
                 //cellpadding = "5" cellspacing = "0" border = "0" style = "padding-left:50px;"
                 var table = $(
-                    '<table class="table table-striped">' +
+                    '<table class="table table-stripped">' +
                     '<tr>' +
                     '<th>' +
                     '<table border="2px" class="table table-striped">' +
@@ -254,3 +264,22 @@ function GetEmployeesListTransfer(response) {
     }
 
 }
+
+function GenerateList() {
+    //$("input[type=checkbox]").each(function () {
+    //    if(this).is()
+    //}
+    //var employeeCode = new Array();
+    //$.each($("input[type=checkbox]:checked"), function () {
+    //    employeeCode.push($(this).val())
+    //        value = $(this).val();
+
+    //});
+    //console.log(employeeCode);
+
+    var rows_selected = table.column(1).checkboxes.selected();
+    console.log(rows_selected);
+  
+}
+
+

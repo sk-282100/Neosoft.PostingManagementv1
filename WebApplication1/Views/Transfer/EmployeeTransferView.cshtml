@@ -5,8 +5,11 @@
     Layout = "~/Views/Shared/MainView.cshtml";
 }
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" />
+
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 
 <div class="col-xxl-12 col-xl-12">
 
@@ -15,7 +18,7 @@
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
                 <h5 class="card-title">Generate Employee Transfer List<span></span></h5>
-                <a class="btn btn-success" href="#">Generate List</a>
+                <a class="btn btn-success" onclick="GenerateList()">Generate List</a>
             </div>
             <hr />
             <div class="row">
@@ -25,7 +28,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
+                                @*<th><input type="checkbox" name="select_all" id="example-select-all"></th>*@
+                                <th></th>
                                 <th>Employee Id</th>
                                 <th>Name</th>  
                                 <th>Scale Name</th>  
@@ -44,6 +48,7 @@
         </div>
     </div>
 </div>
+
 <script src="~/js/EmployeeTransfer.js"></script>
 
 @*<script>
