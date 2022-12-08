@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "GetEmployeesForTransfer";
     Layout = "~/Views/Shared/MainView.cshtml";
+    var step = 1;
 }
 
 <link href="~/css/datatables-1.13.1.css" rel="stylesheet" />
@@ -19,8 +20,38 @@
 <script src="~/lib/jquery/dist/datatable.buttons.print.min - 2.3.2.js"></script>
 <script src="~/lib/jquery/dist/jquery.datatables.checkboxes-1.2.12.js"></script>
 
-<div class="col-xxl-12 col-xl-12">
+<style>
+    #wrapper .baricon {
+        display: inline-block;
+        border-radius: 75%;
+        padding: 6px;
+        background-color: #acacad;
+        color: white;
+    }
 
+    #wrapper .progress_bar {
+        width: 52px;
+        height: 2px;
+        border-radius: 20px;
+        background-color: #D8D8D8;
+        display: inline-block;
+    }
+
+    span.baricon.active {
+        background-color: #1aa93f !important;
+    }
+</style>
+
+<div class="col-xxl-12 col-xl-12">
+    <div id="wrapper" class="align-content-end d-flex justify-content-end p-3">
+        <div class="">
+            <span class="baricon @(step>=1?"active":" ")">1</span>
+            <span id="bar1" class="progress_bar"></span>
+            <span class="baricon @(step>=2?"active":" ")">2</span>
+            <span id="bar2" class="progress_bar"></span>
+            <span class="baricon @(step>=3?"active":" ")">3</span>
+        </div>
+    </div>
     <div class="card info-card customers-card">
 
         <div class="card-body">
