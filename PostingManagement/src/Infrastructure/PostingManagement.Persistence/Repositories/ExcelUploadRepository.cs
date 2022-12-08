@@ -139,7 +139,7 @@ namespace PostingManagement.Persistence.Repositories
             if (fileTypeCode == (int)ExcelFileType.BranchMaster)
             {
                 var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var branchMasterList = await _dbContext.Set<BranchMasterRecordsDto>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
+                var branchMasterList = _dbContext.Set<BranchMasterRecordsDto>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToList();
                 if (branchMasterList.Count > 0)
                 {
                     return JsonConvert.SerializeObject(branchMasterList);

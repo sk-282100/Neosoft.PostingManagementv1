@@ -3,8 +3,8 @@
         type: "GET",
         url: "/Transfer/GetEmployeesDataForTransfer/",
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: GetEmployeesListTransfer,
+        dataType: "json",        
+        success: GetEmployeesListTransfer,        
         failure: function (response) {
             window.location.replace("/Error/Error500");
         },
@@ -26,6 +26,29 @@ function GetEmployeesListTransfer(response) {
             bSort: true,
             bPaginate: true,
             data: response,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'pdf',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-file-earmark-pdf"></i>',                    
+                },
+                {
+                    extend: 'copy',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-clipboard"></i>'
+                },
+                {
+                    extend: 'print',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-printer"></i>'
+                },
+                {
+                    extend: 'csv',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-file-earmark-excel"></i>'
+                }                
+            ]  , 
             columns: [
                 {
                     className: 'dt-control',
@@ -40,14 +63,11 @@ function GetEmployeesListTransfer(response) {
                 { data: 'ubijobRole' },  
                 { data: 'regionName' },  
                 { data: 'zoneName' },  
-                { data: 'movementType' },  
-
-
-            ],
-
-
+                { data: 'movementType' },
+            ]
+                    
         });
-
+    
     // Add event listener for opening and closing details
     $('#employeeTransfer tbody').on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
