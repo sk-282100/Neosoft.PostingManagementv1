@@ -38,6 +38,13 @@ namespace PostingManagement.UI.Controllers
         {
             EmployeeDetailsForTransferList employeeDetails = await _transferService.GetEmployeeAddidtionalDetails(employeeId, movementType);
             return Json(employeeDetails);
-        }        
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEmployeesSelectedByCo(int[] employeesId)
+        {
+            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetSelectedEmployeesByCo(employeesId);
+            return View(selectedEmployeeByCo);
+        }
     }
 }

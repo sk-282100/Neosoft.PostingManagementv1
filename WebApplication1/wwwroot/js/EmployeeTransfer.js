@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var table
+$(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/Transfer/GetEmployeesDataForTransfer/",
@@ -13,11 +14,11 @@
         }
     });
 
-    
+
 });
 
 function GetEmployeesListTransfer(response) {
-    var table = $("#employeeTransfer").DataTable(
+    table = $("#employeeTransfer").DataTable(
         {
             bLengthChange: true,
             lengthMenu: [[5, 10, -1], [5, 10, "All"]],
@@ -48,6 +49,7 @@ function GetEmployeesListTransfer(response) {
                     text: '<i class="bi bi-file-earmark-excel"></i>'
                 }                
             ], 
+
             columns: [
                 {
                     targets: 0,
@@ -57,60 +59,30 @@ function GetEmployeesListTransfer(response) {
                     defaultContent: '',
                 },
                 {
-                    
-                    'targets': 1,
-                    'data': null,
-                    'checkboxes': {
-                        'selectRow': true
+                    targets: 1,
+                    data: 'employeeId',
+                    checkboxes: {
+                        selectRow: true
                     }
-                    //'targets': 1,
-                    //'searchable': false,
-                    //'orderable': false,
-                    //'data': null,
-                    //'className': 'dt-body-center',
-                    //'render': function (data, type, full, meta) {
-                    //    return '<input type="checkbox" class="SelectedEmployee" value='+data.employeeId+'>';
-                    //}
-                },
-                { data: 'employeeId' },  
-                { data: 'employeeName' },   
-                { data: 'scale' },  
-                { data: 'scaleCode' },
-                { data: 'ubijobRole' },  
-                { data: 'regionName' },  
-                { data: 'zoneName' },  
-                { data: 'movementType' },  
+                }, 
+                { targets: 2, data: 'employeeId' },  
+                { targets: 3, data: 'employeeName' },   
+                { targets: 4, data: 'scale' },  
+                { targets: 5, data: 'scaleCode' },
+                { targets: 6, data: 'ubijobRole' },  
+                { targets: 7, data: 'regionName' },  
+                { targets: 8, data: 'zoneName' },  
+                { targets: 9, data: 'movementType' },  
 
 
             ],
             'select': {
                 'style': 'multi'
             },
+            'order': [[2, 'asc']]
 
         });
 
-
-    //// Handle click on "Select all" control
-    //$('#example-select-all').on('click', function () {
-    //    // Get all rows with search applied
-    //    var rows = table.rows({ 'search': 'applied' }).nodes();
-    //    // Check/uncheck checkboxes for all rows in the table
-    //    $('input[type="checkbox"]', rows).prop('checked', this.checked);
-    //});
-
-    //// Handle click on checkbox to set state of "Select all" control
-    //$('#example tbody').on('change', 'input[type="checkbox"]', function () {
-    //    // If checkbox is not checked
-    //    if (!this.checked) {
-    //        var el = $('#example-select-all').get(0);
-    //        // If "Select all" control is checked and has 'indeterminate' property
-    //        if (el && el.checked && ('indeterminate' in el)) {
-    //            // Set visual state of "Select all" control
-    //            // as 'indeterminate'
-    //            el.indeterminate = true;
-    //        }
-    //    }
-    //});
     // Add event listener for opening and closing details
     $('#employeeTransfer tbody').on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
@@ -118,16 +90,11 @@ function GetEmployeesListTransfer(response) {
 
         if (row.child.isShown()) {
             // This row is already open - close it
-            //old one
-            /* row.child.hide();*/
-
-            //new one
             destroyChild(row);
             tr.removeClass('shown');
         } else {
             // Open this row
-            //row.child(format(row.data())).show();
-
+           
             GetEmployeeDetails(row);
             tr.addClass('shown');
         }
@@ -285,20 +252,30 @@ function GetEmployeesListTransfer(response) {
 }
 
 function GenerateList() {
-    //$("input[type=checkbox]").each(function () {
-    //    if(this).is()
-    //}
-    //var employeeCode = new Array();
-    //$.each($("input[type=checkbox]:checked"), function () {
-    //    employeeCode.push($(this).val())
-    //        value = $(this).val();
-
-    //});
-    //console.log(employeeCode);
-
+    
     var rows_selected = table.column(1).checkboxes.selected();
-    console.log(rows_selected);
-  
+
+    var employeeIdList = new Array()
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, rowId) {
+        employeeIdList.push(rowId)        
+    });
+
+    console.log(employeeIdList)
+    $.ajax({
+        type: "GET",
+        url: "/Transfer/GetEmployeesSelectedByCo/",
+        data: { employeeCode: employeeIdList },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: response,
+        failure: "",
+        error: function (response) {
+            window.location.replace("/Error/Error500");
+        },
+    });
+    
+
 }
 
 

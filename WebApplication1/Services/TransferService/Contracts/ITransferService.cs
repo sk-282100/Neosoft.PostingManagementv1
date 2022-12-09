@@ -19,12 +19,13 @@ namespace PostingManagement.UI.Services.TransferService.Contracts
         /// <param name="movementType">string</param>
         /// <returns>returns an object of type EmployeeDetailsForTransfer </returns>
         public Task<EmployeeDetailsForTransferList> GetEmployeeAddidtionalDetails(int employeeId, string movementType);
+
         /// <summary>
-        /// Converts List of Employee into Datatable
+        /// Get the EmployeesList By employeeId selected by CoAdmin
         /// </summary>
-        /// <param name="employeeList">List of employees in transfer list</param>
-        /// <returns>DataTable of EmployeeList</returns>
-        public DataTable ListToDataTable(List<EmployeeTransferModel> employeeList);
+        /// <param name="emoloyeeIdList"></param>
+        /// <returns>List of EmployeeTransferModel</returns>
+        public Task<List<EmployeeTransferModel>> GetSelectedEmployeesByCo(int[] emoloyeeIdList);
 
 
     }
