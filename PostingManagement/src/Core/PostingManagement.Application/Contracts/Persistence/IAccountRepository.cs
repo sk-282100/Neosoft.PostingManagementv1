@@ -11,7 +11,7 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <param name="RoleId">Role Id to be assigned to the user</param>
         /// <param name="createdBy">Name of the Creator of the user</param>
         /// <returns>returns true if user is added</returns>
-        public Task<bool> AddUser(string userName, int RoleId, string createdBy);
+        public Task<bool> AddUser(string userName, int roleId,string email, string createdBy);
         /// <summary>
         /// Delete user from the Table
         /// </summary>
@@ -27,7 +27,7 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <param name="roleId">updated Role Id</param>
         /// <param name="updatedBy">user Updated By</param>
         /// <returns>returns true if updated successfully</returns>
-        public Task<bool> UpdateUser(int uId, string userName, int roleId, string updatedBy);
+        public Task<bool> UpdateUser(int uId, string userName, int roleId,string email, string updatedBy);
         /// <summary>
         /// Get all the users present in the User details table
         /// </summary>
@@ -38,7 +38,14 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// </summary>
         /// <param name="UserId">user id to get the user details</param>
         /// <returns>Returns model of UserDetails if found</returns>
-        public Task<UserDetails> GetUserDetailsById(int UserId);
+        public Task<UserDetails?> GetUserDetailsById(int UserId);
+        /// <summary>
+        /// Get details of an user using username
+        /// </summary>
+        /// <param name="userName">username to get the user details</param>
+        /// <returns>Returns model of UserDetails if found else return null</returns>
+        public Task<UserDetails?> GetUserByUserName(string userName);
+
         /// <summary>
         /// To check if username is already present
         /// </summary>
