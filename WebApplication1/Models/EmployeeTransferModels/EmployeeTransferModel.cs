@@ -12,8 +12,8 @@ namespace PostingManagement.UI.Models.EmployeeTransferModels
         public string RegionName { get; set; }
         public string ZoneName { get; set; }
         public string MovementType { get; set; }
-        [DisplayName("De(Select)")]
-        public bool Select { get; set; }
+        //[DisplayName("De(Select)")]
+        //public bool Select { get; set; }
 
     }
 

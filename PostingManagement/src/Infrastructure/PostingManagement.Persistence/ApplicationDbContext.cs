@@ -50,6 +50,7 @@ namespace PostingManagement.Persistence
         public DbSet<TransferListVM> TransferListTbl { get; set; }
         public DbSet<EmployeeDetailsForTransferList> EmployeeDetailsForTransferListTbl { get; set; }
         public DbSet<OTPModel> OTPTbl { get; set; }
+        public DbSet<JobFamilies> JobFamilyTable { get; set; }
 
         private IDbContextTransaction _transaction;
 

@@ -198,7 +198,7 @@ function GetInterRegionalRequestTransferRecords(response) {
                 { data: 'name' }, 
                 { data: 'designation' }, 
                 { data: 'locationName' },
-                { data: 'currentRO' }, 
+                { data: 'currentRo' }, 
                 { data: 'fromZone' }, 
                 { data: 'requiredState' }, 
                 { data: 'appliedZone' }, 

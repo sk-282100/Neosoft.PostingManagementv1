@@ -85,7 +85,7 @@ function OnSuccess(response){
                "mRender": function (data, type, full) {
     
                    var id = "'" + data.roleId + "'";
-                   return '<a class="btn btn-warning btn-sm mx-4" href="/Role/EditRole?id=' + data.roleId + '" >Edit</a><button class="btn btn-danger btn-sm" id="delete"  onclick="Delete(' + id + ')"  >Delete</a> ';
+                   return '<a class="btn btn-warning btn-sm mx-4" href="/Role/EditRole?id=' + data.roleId + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button class="btn btn-danger btn-sm" id="delete"  onclick="Delete(' + id + ')"  ><i class="bi bi-trash-fill" title="Delete"></i></a> ';
     
                }
            }
@@ -100,7 +100,20 @@ $(function () {
     }
 })
 
-
+function Delete(id) {
+    Swal.fire({
+        title: 'Are you sure you want to Delete Role?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/Role/RemoveRole?id=' + id;
+        }
+    });
+}
 
 
 

@@ -23,7 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!---Partial View Ajax Call->
     <!-- Template Main CSS File -->
-    <link href="css/style.css" rel="stylesheet">
+
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -35,10 +35,11 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
-        <div class="d-flex align-items-center justify-content-between">
-            <a asp-action="MainView" class="logo d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-between" >
+            <a asp-action="ShowDashboard" asp-controller="Dashboard" class="logo d-flex align-items-center">
                 <img src="~/img/logo.png" alt="" />
-                <span class="d-none d-lg-block">Posting Management</span>
+                <span class="d-none d-lg-block" >NS-Posting Management</span>
+                
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -142,6 +143,13 @@
                             <span>Create New Role</span> <!--End Add Role -->
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="AddJobFamily" asp-controller="JobFamily">
+                            <i class="bi bi-plus-square-dotted"></i>
+                            <span>Create Job Family</span> <!--End Add Role -->
+                        </a>
+                    </li>
+
                 }
             }
             <li class="nav-item">

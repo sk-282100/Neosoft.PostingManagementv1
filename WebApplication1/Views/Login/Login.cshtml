@@ -35,7 +35,7 @@
                             <div class="d-flex justify-content-center py-4"> 
                                 <a href="#" class="logo d-flex align-items-center w-auto"> 
                                     <img src="~/img/logo.png" alt=""> 
-                                    <span class="d-none d-lg-block">Posting Management</span>
+                                    <span class="d-none d-lg-block">NS-Posting Management</span>
                                 </a>
                             </div>
                             <div class="card mb-3">
@@ -113,44 +113,8 @@
     else{
         <input type="hidden" value="noResponse" id="loginResponse" />
     }
-
-    <script>
-
-        // alert for invalid Captcha message
-        $(function(){
-        $.notify($(".CaptchaErrorMessage span").html(), "error");
-        });
-        // alert for invalid Password and username 
-        $(function(){
-            let message = $('#loginResponse').val();
-            if (message != "noResponse"){                
-                $.notify("Invalid Username and Password!!", "error");
-            }
-        });
-
-        // Validation for Username and Password
-        $(document).ready(function () {  
-            
-            $("#loginForm").submit(function () {                  
-                var isValid = true;                            
-                if ($("#username").val().trim().length == 0) {
-                    isValid = false;                    
-                    $("#username").notify("UserName cannot be empty!", "error");                    
-                }
-                if ($("#password").val().trim().length == 0) {
-                    isValid = false;
-                    $("#password").notify("Password cannot be empty!", "error");                    
-                }  
-                if ($("#DNTCaptchaInputText").val().trim().length == 0) {
-                    isValid = false;
-                    $("#DNTCaptchaInputText").notify("Captcha cannot be empty!", "error");
-                }
-                return isValid;
-            });
-        });
-
-    </script>
-
+    
+    <script src="~/js/login.js"></script>
 </body>
 
 </html>

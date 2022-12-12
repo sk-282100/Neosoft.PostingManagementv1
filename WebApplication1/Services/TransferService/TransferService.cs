@@ -2,6 +2,8 @@
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.TransferService.Contracts;
+using System.Data;
+using System.Reflection;
 
 namespace PostingManagement.UI.Services.TransferService
 {
@@ -27,7 +29,6 @@ namespace PostingManagement.UI.Services.TransferService
             }
         }
 
-
         public async Task<EmployeeDetailsForTransferList> GetEmployeeAddidtionalDetails(int employeeId,string movementType)
         {
             using (var httpClient = new HttpClient(_clientHandler))
@@ -39,6 +40,29 @@ namespace PostingManagement.UI.Services.TransferService
                     return uploadResult.Data;
                 }
             }
+        }
+
+        public async Task<List<EmployeeTransferModel>> GetSelectedEmployeesByCo(int[] emoloyeeidList)
+        {
+            List<EmployeeTransferModel> allEmployeesAvailableforTransfer = await GetEmployeesForTransfer();
+            var selectedEmployeesByCo = (from employee in allEmployeesAvailableforTransfer
+                                        join 
+                                        selectEmployeeId in emoloyeeidList
+                                        on employee.EmployeeId equals selectEmployeeId
+                                        select new EmployeeTransferModel 
+                                        { 
+                                            EmployeeId = employee.EmployeeId,
+                                            EmployeeName = employee.EmployeeName,
+                                            ScaleCode = employee.ScaleCode,
+                                            Scale=employee.Scale,
+                                            UbijobRole=employee.UbijobRole,
+                                            RegionName=employee.RegionName,
+                                            ZoneName=employee.ZoneName,
+                                            MovementType = employee.MovementType
+                                        }).ToList();
+
+            return selectedEmployeesByCo;  
+
         }
     }
 }

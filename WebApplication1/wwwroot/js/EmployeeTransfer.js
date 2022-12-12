@@ -1,10 +1,11 @@
-﻿$(document).ready(function () {
+﻿var table
+$(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/Transfer/GetEmployeesDataForTransfer/",
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: GetEmployeesListTransfer,
+        dataType: "json",        
+        success: GetEmployeesListTransfer,        
         failure: function (response) {
             window.location.replace("/Error/Error500");
         },
@@ -13,74 +14,75 @@
         }
     });
 
-    
+
 });
 
 function GetEmployeesListTransfer(response) {
-    var table = $("#employeeTransfer").DataTable(
+    table = $("#employeeTransfer").DataTable(
         {
-
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-            bFilter: true,
-            bSort: true,
-            bPaginate: true,
+            searching: false,
+            bLengthChange: false,
+            //lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            //bFilter: true,
+            //bSort: true,
+            //bPaginate: true,
             data: response,
-            columns: [
-                
+            dom: 'lBfrtip',
+            buttons: [
                 {
-                    targets:0,
+                    extend: 'pdf',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-file-earmark-pdf"></i>',                    
+                },
+                {
+                    extend: 'copy',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-clipboard"></i>'
+                },
+                {
+                    extend: 'print',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-printer"></i>'
+                },
+                {
+                    extend: 'csv',
+                    title: 'Employee Transfer List',
+                    text: '<i class="bi bi-file-earmark-excel"></i>'
+                }                
+            ], 
+
+            columns: [
+                {
+                    targets: 0,
                     className: 'dt-control',
                     orderable: false,
                     data: null,
                     defaultContent: '',
                 },
                 {
-                    'targets': 1,
-                    'searchable': false,
-                    'orderable': false,
-                    'className': 'dt-body-center',
-                    'render': function (data, type, full, meta) {
-                        return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+                    targets: 1,
+                    data: 'employeeId',
+                    checkboxes: {
+                        selectRow: true
                     }
-                },
-                { data: 'employeeId' },  
-                { data: 'employeeName' },   
-                { data: 'scale' },  
-                { data: 'scaleCode' },
-                { data: 'ubijobRole' },  
-                { data: 'regionName' },  
-                { data: 'zoneName' },  
-                { data: 'movementType' },  
+                }, 
+                { targets: 2, data: 'employeeId' },  
+                { targets: 3, data: 'employeeName' },   
+                { targets: 4, data: 'scale' },  
+                { targets: 5, data: 'scaleCode' },
+                { targets: 6, data: 'ubijobRole' },  
+                { targets: 7, data: 'regionName' },  
+                { targets: 8, data: 'zoneName' },  
+                { targets: 9, data: 'movementType' },  
 
 
             ],
-
+            'select': {
+                'style': 'multi'
+            },
+            'order': [[2, 'asc']]
 
         });
-
-
-    // Handle click on "Select all" control
-    $('#example-select-all').on('click', function () {
-        // Get all rows with search applied
-        var rows = table.rows({ 'search': 'applied' }).nodes();
-        // Check/uncheck checkboxes for all rows in the table
-        $('input[type="checkbox"]', rows).prop('checked', this.checked);
-    });
-
-    // Handle click on checkbox to set state of "Select all" control
-    $('#example tbody').on('change', 'input[type="checkbox"]', function () {
-        // If checkbox is not checked
-        if (!this.checked) {
-            var el = $('#example-select-all').get(0);
-            // If "Select all" control is checked and has 'indeterminate' property
-            if (el && el.checked && ('indeterminate' in el)) {
-                // Set visual state of "Select all" control
-                // as 'indeterminate'
-                el.indeterminate = true;
-            }
-        }
-    });
 
     // Add event listener for opening and closing details
     $('#employeeTransfer tbody').on('click', 'td.dt-control', function () {
@@ -89,16 +91,11 @@ function GetEmployeesListTransfer(response) {
 
         if (row.child.isShown()) {
             // This row is already open - close it
-            //old one
-            /* row.child.hide();*/
-
-            //new one
             destroyChild(row);
             tr.removeClass('shown');
         } else {
             // Open this row
-            //row.child(format(row.data())).show();
-
+           
             GetEmployeeDetails(row);
             tr.addClass('shown');
         }
@@ -124,7 +121,7 @@ function GetEmployeesListTransfer(response) {
             success: function (response) {
                 //cellpadding = "5" cellspacing = "0" border = "0" style = "padding-left:50px;"
                 var table = $(
-                    '<table class="table table-striped">' +
+                    '<table class="table table-stripped">' +
                     '<tr>' +
                     '<th>' +
                     '<table border="2px" class="table table-striped">' +
@@ -254,3 +251,32 @@ function GetEmployeesListTransfer(response) {
     }
 
 }
+
+function GenerateList() {
+    
+    var rows_selected = table.column(1).checkboxes.selected();
+
+    var employeeIdList = new Array()
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, rowId) {
+        employeeIdList.push(rowId)        
+    });
+
+    console.log(employeeIdList)
+    $.ajax({
+        type: "GET",
+        url: "/Transfer/GetEmployeesSelectedByCo/",
+        data: { employeeCode: employeeIdList },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: response,
+        failure: "",
+        error: function (response) {
+            window.location.replace("/Error/Error500");
+        },
+    });
+    
+
+}
+
+

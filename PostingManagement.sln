@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostingManagement.Auth", "P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C4F75E7E-1756-4542-B04D-EF183B7D97B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostingManagement.UI", "WebApplication1\PostingManagement.UI.csproj", "{0242C918-E714-41DD-BBD0-E0F1C44B6151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostingManagement.UI", "WebApplication1\PostingManagement.UI.csproj", "{0242C918-E714-41DD-BBD0-E0F1C44B6151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
