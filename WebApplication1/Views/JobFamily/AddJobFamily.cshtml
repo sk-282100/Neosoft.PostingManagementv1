@@ -1,16 +1,15 @@
-﻿@model PostingManagement.UI.Models.RoleModel
+﻿@model PostingManagement.UI.Models.JobFamilyModel
 
 @{
-    ViewData["Title"] = "Addrole";
+    ViewData["Title"] = "AddJobFamily";
     Layout = "~/Views/Shared/MainView.cshtml";
-    var Roleid = ViewBag.Roleid;
 
 }
 
-<h1>Add New Role</h1>
+<h1>Add Job Family</h1>
 <hr />
-<input type="hidden" value=@ViewBag.AddRoleResponse id="addRoleResponse" />
-<script src="~/js/Role.js"></script>
+<input type="hidden" value=@ViewBag.AddJobFamilyResponse id="addjobFamilyResponse" />
+<script src="~/js/AddJobFamily.js"></script>
 <div class="col-xxl-4 col-xl-12">
 
     <div class="card info-card customers-card">
@@ -18,16 +17,16 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <form asp-action="Addrole" id="addRoleForm">
+                    <form asp-action="AddJobFamily" id="addJobFamilyForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div style="display:inline-flex;" class="w-100">
                             <div class="form-group my-3">
-                                <label class="control-label">Role Name<i class="text-danger">*</i> </label>
-                                <input asp-for="RoleName" class="form-control" id="RoleName" />
+                                <label class="control-label">Job Family Name<i class="text-danger">*</i> </label>
+                                <input asp-for="JobFamilyName" class="form-control" id="JobFamilyName" />
                             </div>
                             <div class="form-group m-3 d-flex align-items-end">
-                                <input type="button" value="Save" id="addRoleId" class="btn btn-success" />
+                                <input type="button" value="Save" id="addJobFamilyId" class="btn btn-success" />
 
                             </div>
                         </div>
@@ -43,17 +42,16 @@
 
         <div class="card-body">
             <div id="assign">
-                <partial name="GetAllRoles"/>
+                <partial name="GetAllJobFamily">
             </div>
         </div>
     </div>
 </div>
-
 <script>
     //Swal Alert For Confirmation Of Delete Role
     function Delete(id) {
         Swal.fire({
-            title: 'Are you sure you want to Delete Role?',
+            title: 'Are you sure you want to Delete Job family?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -61,7 +59,7 @@
             confirmButtonText: 'Yes!'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '/Role/RemoveRole?id=' + id;
+                window.location.href = '/JobFamily/RemoveJobFamily?id=' + id;
             }
         });
     }
@@ -71,3 +69,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
+
+

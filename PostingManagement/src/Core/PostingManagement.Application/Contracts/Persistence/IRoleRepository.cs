@@ -39,5 +39,6 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <param name="roleName"> Role Name to search in the table</param>
         /// <returns>true if Role Exixts; false if Role does not exist</returns>
         public Task<bool> IsRoleAlreadyExist(string roleName);
+        
     }
 }
