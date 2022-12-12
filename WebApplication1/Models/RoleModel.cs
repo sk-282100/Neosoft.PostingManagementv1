@@ -4,8 +4,7 @@ namespace PostingManagement.UI.Models
 {
     public class RoleModel
     {
-       
-       public string RoleId { get; set; }
+        public string RoleId { get; set; }
         [MaxLength(15)]
         public string RoleName { get; set; }    
     }

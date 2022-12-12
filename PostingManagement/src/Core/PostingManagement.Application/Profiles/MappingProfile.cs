@@ -13,6 +13,8 @@ using PostingManagement.Application.Features.Events.Queries.GetEventsExport;
 using PostingManagement.Application.Features.Events.Queries.GetEventsList;
 using PostingManagement.Application.Features.ExcelUpload.Command;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
+using PostingManagement.Application.Features.JobFamily.Queries.GetAllJobFamilyquery;
+using PostingManagement.Application.Features.JobFamily.Queries.GetJobFamilyById;
 using PostingManagement.Application.Features.Orders.GetOrdersForMonth;
 using PostingManagement.Application.Features.Roles.Commands.EditRole;
 using PostingManagement.Application.Features.Roles.Queries.GetAllRoles;
@@ -55,6 +57,8 @@ namespace PostingManagement.Application.Profiles
             CreateMap<Role, EditRoleCommand>().ReverseMap();
             CreateMap<Role, GetAllRolesDto>().ConvertUsing<GetAllRolesDtoCustomMapper>();
             CreateMap<Role, GetRoleByIdDto>().ConvertUsing<GetRolesByIdCustomMapper>();
+            CreateMap<JobFamilies, GetAllJobFamilyDto>().ConvertUsing<GetAllJobFamiliesDtoCustomMapper>();
+            CreateMap<JobFamilies, GetjobFamilyByIdDto>().ConvertUsing<GetJobFamilyByIdCustomMapper>();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace PostingManagement.Application.Features.Roles.Commands.DeleteRole
 {
     public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand, Response<bool>>
     {
-        private IRoleRepository _roleRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly IDataProtector _dataProtector;
         public DeleteRoleCommandHandler(IRoleRepository roleRepository,IDataProtectionProvider provider)
         {
