@@ -25,7 +25,7 @@ namespace PostingManagement.Application.Features.Account.Command.EditUser
 
             if (userDetails != null)
             {
-                bool response = await _accountRepository.UpdateUser(id, request.UserName,roleId, request.UpdatedBy);
+                bool response = await _accountRepository.UpdateUser(id, request.UserName,roleId,request.Email, request.UpdatedBy);
                 if (response)
                 {
                     return new Response<bool>() { Succeeded = true, Data = response, Message = "Requested User Update successfully " };

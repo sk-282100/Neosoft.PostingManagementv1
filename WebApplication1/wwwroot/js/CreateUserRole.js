@@ -16,7 +16,6 @@
     });
 
 
-
     $('#CreateUserBtn').click(function () {
 
         var inputValue = $('#UserName').val().trim();
@@ -85,7 +84,7 @@ function OnSuccess(response) {
 
                 { data: 'role' },
                 { data: 'userName' },
-
+                { data: 'email'},
                 {
                     data: null,
                     "mRender": function (data, type, full) {

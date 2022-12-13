@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using PostingManagement.UI.Models;
+using PostingManagement.UI.Models.Login;
 using PostingManagement.UI.Services.AccountServices.Contracts;
 using PostingManagement.UI.Services.LoginService.Contracts;
 
@@ -52,7 +53,6 @@ namespace PostingManagement.UI.Controllers
             else
             {
                 ViewBag.LoginResponse = response==null?null:response;
-                
                 return View(model);
             }                        
         }
@@ -66,11 +66,57 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpGet]
-        //Reset Password view
-        public async Task<IActionResult> ResetPassword()
+        public async Task<IActionResult> ForgotPassword()
         {
+            ViewBag.SendOTPResponse = null;
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(SendOTPRequestModel request)
+        {
+            var response = await _loginService.SendOTP(request);
+            if (response.Succeeded == true)
+            {
+                ViewBag.VerifyOTPResponse = null;
+                ViewBag.OTPUserName = request.Username;
+                ViewBag.OTPExpiryTime = response.Data.OTPExpiryTime;
+                return View("VerifyOTP");
+            }
+            ViewBag.SendOTPResponse = response ;
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SendOTP(string userName)
+        {
+            SendOTPRequestModel request = new() { Username = userName };
+            var response = await _loginService.SendOTP(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> VerifyOTP()
+        {
+            ViewBag.VerifyOTPResponse = null;
+            ViewBag.OTPUserName = "test";
+            return View("VerifyOTP");
+        }
+        [HttpPost]
+        public async Task<IActionResult> VerifyOTP(VerifyOTPRequestModel model)
+        {
+            model.OTPSubmitionTime = DateTime.Now;
+            var response = await _loginService.VerifyOTP(model);
+            if(response.Data == true)
+            {
+                var resetPasswordModel = new ResetPasswordRequestModel() { UserName = model.Username };
+                return View("ResetPassword",resetPasswordModel);
+            }
+            ViewBag.VerifyOTPResponse = response ;
+            return View();
+        }
+
+        
 
         [HttpPost]
         //Reset Password Method
@@ -79,6 +125,15 @@ namespace PostingManagement.UI.Controllers
             var response = await _accountService.ResetPassword(requestModel);
             ViewBag.ResetPasswordResponse = response;
             return View("ResetPasswordStatusView");
+        }
+
+        [HttpGet]
+        //Check the UserRole Is Present By Using User Name
+        public async Task<IActionResult> IsUserNamePresent(string userName)
+        {
+            var response = await _accountService.IsUserNamePresent(userName);
+
+            return Json(response.Data);
         }
     }
 }

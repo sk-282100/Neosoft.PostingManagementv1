@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PostingManagement.Application.Features.LogIn.Commands;
 using PostingManagement.Application.Features.LogIn.Queries;
-using PostingManagement.Domain.Entities;
+using PostingManagement.Application.Features.LogIn.Queries.SendOTP;
 
 namespace PostingManagement.Api.Controllers.v1
 {
@@ -22,6 +22,20 @@ namespace PostingManagement.Api.Controllers.v1
         {
             var loginResponse = await _mediator.Send(query);
             return Ok(loginResponse);
+        }
+
+        [HttpPost("SendOTP")]
+        public async Task<IActionResult> SendOTP(SendOTPQuery request)
+        {
+            var response = await _mediator.Send(request);   
+            return Ok(response);
+        }
+
+        [HttpPost("VerifyOTP")]
+        public async Task<IActionResult> VerifyOTP(VerifyOTPCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }

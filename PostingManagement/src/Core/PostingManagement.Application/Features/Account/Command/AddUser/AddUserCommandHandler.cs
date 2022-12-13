@@ -18,7 +18,7 @@ namespace PostingManagement.Application.Features.Account.Command.AddUser
         public async Task<Response<bool>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             int roleId = Convert.ToInt32(_dataProtector.Unprotect(request.RoleId));
-            bool result = await _accountRepository.AddUser(request.UserName,roleId, request.CreatedBy);
+            bool result = await _accountRepository.AddUser(request.UserName,roleId,request.Email, request.CreatedBy);
             return new Response<bool>() { Succeeded = true, Data = result };
         }
     }

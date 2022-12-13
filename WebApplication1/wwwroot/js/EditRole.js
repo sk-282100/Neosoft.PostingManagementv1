@@ -26,8 +26,6 @@ function OnSuccess(response) {
             bPaginate: true,
             data: response,
             columns: [
-
-                //{ data: 'roleId' },
                 { data: 'roleName' },
 
                 {
