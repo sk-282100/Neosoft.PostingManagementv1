@@ -10,7 +10,7 @@ namespace PostingManagement.UI.Services.TransferService.Contracts
         /// Gets the List of all the Employees for transfer
         /// </summary>
         /// <returns>List of employees avaialbale for transfer</returns>
-        public Task<List<EmployeeTransferModel>> GetEmployeesForTransfer();
+        public Task<List<EmployeeTransferModel>> GetEmployeesForTransfer(int pageNumber, int numberOfRecords);        
 
         /// <summary>
         /// Gets the Additional information about the Employee based on EmployeeId

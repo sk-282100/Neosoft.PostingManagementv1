@@ -20,11 +20,11 @@ namespace PostingManagement.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<List<TransferListVM>> GetAllTransferListEmployees(int pageNumber, int numberOfRecords)
+        public async Task<List<TransferListVM>> GetAllTransferListEmployees(int pageNumber, int numberOfRecords)            
         {
             SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = pageNumber };
             SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = numberOfRecords };
-            var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_GetTransferDataAndPromotionData @PageNumber,@NumberOfRecords", 
+            var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_ServerSideGetTransferDataAndPromotionData @PageNumber,@NumberOfRecords", 
                 pageNumerParameter, numberOfRecordsParameter).ToListAsync();
             return result;
         }
