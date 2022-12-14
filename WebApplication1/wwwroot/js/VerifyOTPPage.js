@@ -3,24 +3,30 @@
         $.notify($('#VerifyOTPReponseMessage').val(), "error");
     }
     
-    var myVar = setInterval(myTimer, 1000);
-    function myTimer() {
+    var myVar = setInterval(
+        () => {
+            var currentDate = new Date();
+            var expstring = $('#otpExpiryTime').val();
+            var expiryDate = new Date(expstring);
+            var t1 = currentDate.getTime();
+            var t2 = expiryDate.getTime();
+            if (expiryDate < currentDate) {
+                $('#showOtpExpiryTime h6').html('Your OTP has expired');
+                $('#VerifyOTPBtn').val("Send OTP");
+                $('#showOtpExpiryTime').attr('class', 'd-flex flex-column text-danger text-center border border-danger');
+                $("#otp1").prop("disabled", true);
+                $("#otp2").prop("disabled", true);
+                $("#otp3").prop("disabled", true);
+                $("#otp4").prop("disabled", true);
+                clearInterval(myVar);
+            }
 
-        var currentDate = new Date();
-        var expiryDate = new Date($('#otpExpiryTime').val());
-        var t1 = currentDate.getTime();
-        var t2 = expiryDate.getTime();
-        if (expiryDate < currentDate) {
-            $('#showOtpExpiryTime h6').html('Your OTP has expired');
-            $('#VerifyOTPBtn').val("Send OTP");
-            clearInterval(myVar);
+            var formatted = parseInt((t2 - t1) / 60000) + ":" + parseInt(((t2 - t1) / 1000) - parseInt((t2 - t1) / 60000) * 60);
+
+            $('#showOtpExpiryTime h3').html(formatted);
         }
-
-        var formatted = parseInt((t2 - t1) / 60000) + ":" + parseInt(((t2 - t1) / 1000) - parseInt((t2 - t1) / 60000) * 60);
-
-        $('#showOtpExpiryTime h3').html(formatted);
-    }
-
+        , 1000);
+    
 
     $('#VerifyOTPBtn').click(function () {
 
@@ -29,7 +35,7 @@
                 $.notify("Please enter the OTP", "error");
             }
             else {
-                var otpValue = $('#otp1').val() + $('#otp2').val() + $('#otp3').val() + $('#otp4').val()
+                var otpValue = $('#otp1').val() + $('#otp2').val() + $('#otp3').val() + $('#otp4').val();
                 $('#OTP').val(parseInt(otpValue));
                 $('#VerifyOTPForm').submit();
             }
@@ -43,9 +49,37 @@
                 dataType: "json",
                 success: function (response) {
                     if (response.succeeded == true) {
-                        $('#otpExpiryTime').val(response.data.otpExpiryTime);
-                        $.notify("OTP Sent to your Email Successfully","success")
-                        $('#showOtpExpiryTime').show();
+                        $('#otpExpiryTime').val(response.data.otpExpiryTime.split('.')[0]);
+                        $.notify("OTP Sent to your Email Successfully", "success");
+                        $('#VerifyOTPBtn').val("Verify OTP");
+                        $('#showOtpExpiryTime').attr('class', 'd-flex flex-column text-success text-center border border-success');
+                        $("#otp1").prop("disabled", false);
+                        $("#otp2").prop("disabled", false);
+                        $("#otp3").prop("disabled", false);
+                        $("#otp4").prop("disabled", false);
+                        var myVar = setInterval(
+                            () => {
+                                var currentDate = new Date();
+                                var expstring = $('#otpExpiryTime').val();
+                                var expiryDate = new Date(expstring);
+                                var t1 = currentDate.getTime();
+                                var t2 = expiryDate.getTime();
+                                if (expiryDate < currentDate) {
+                                    $('#showOtpExpiryTime h6').html('Your OTP has expired');
+                                    $('#VerifyOTPBtn').val("Send OTP");
+                                    $('#showOtpExpiryTime').attr('class', 'd-flex flex-column text-danger text-center border border-danger');
+                                    $("#otp1").prop("disabled", true);
+                                    $("#otp2").prop("disabled", true);
+                                    $("#otp3").prop("disabled", true);
+                                    $("#otp4").prop("disabled", true);
+                                    clearInterval(myVar);
+                                }
+
+                                var formatted = parseInt((t2 - t1) / 60000) + ":" + parseInt(((t2 - t1) / 1000) - parseInt((t2 - t1) / 60000) * 60);
+
+                                $('#showOtpExpiryTime h3').html(formatted);
+                            }
+                            , 1000);
                     }
                     else {
                         $('#VerifyOTPReponseMessage').val(response.message);

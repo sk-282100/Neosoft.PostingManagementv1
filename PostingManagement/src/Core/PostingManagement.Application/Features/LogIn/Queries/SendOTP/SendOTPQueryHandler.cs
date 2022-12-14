@@ -12,11 +12,13 @@ namespace PostingManagement.Application.Features.LogIn.Queries.SendOTP
         private readonly IAccountRepository _accountRepository;
         private readonly ILoginRepository _loginRepository;
         private readonly IEmailService _emailService;
-        public SendOTPQueryHandler(IAccountRepository accountRepository, ILoginRepository loginRepository,IEmailService emailService)
+        private readonly ISMTPEmailService _emailService1;
+        public SendOTPQueryHandler(IAccountRepository accountRepository, ILoginRepository loginRepository,IEmailService emailService, ISMTPEmailService emailService1)
         {
             _accountRepository = accountRepository;
             _loginRepository = loginRepository;
             _emailService = emailService;
+            _emailService1 = emailService1;
         }
 
         public async Task<Response<SendOTPDto>> Handle(SendOTPQuery request, CancellationToken cancellationToken)
@@ -29,11 +31,11 @@ namespace PostingManagement.Application.Features.LogIn.Queries.SendOTP
                 DateTime expiryTime = DateTime.Now.AddMinutes(5);// expirytime for OTP 
 
                 //Sending OTP to User's email
-                var email = new Email() { To = userDetails.Email , Body = $"this OTP is for Reset the Password of the Posting Management Users Account , it is valide for 5 minutes only \n \n OTP : {otp} \n above Otp will be Valid till {expiryTime} ", Subject = "OTP for Reset Password" };
 
                 try
                 {
-                    bool emailStatus = await _emailService.SendEmail(email);
+                    
+                    bool emailStatus = await _emailService1.SendOTPEmail(userDetails.Email, otp, expiryTime); 
                     if(emailStatus == true)
                     {
                         OTPModel otpModel = new OTPModel()

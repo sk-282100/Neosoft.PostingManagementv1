@@ -78,9 +78,11 @@ namespace PostingManagement.UI.Controllers
             var response = await _loginService.SendOTP(request);
             if (response.Succeeded == true)
             {
+                var format = "yyyy-MM-ddTHH:mm:ss";
+                
                 ViewBag.VerifyOTPResponse = null;
                 ViewBag.OTPUserName = request.Username;
-                ViewBag.OTPExpiryTime = response.Data.OTPExpiryTime;
+                ViewBag.OTPExpiryTime = response.Data.OTPExpiryTime.ToString(format);
                 return View("VerifyOTP");
             }
             ViewBag.SendOTPResponse = response ;
@@ -95,13 +97,7 @@ namespace PostingManagement.UI.Controllers
             return Json(response);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> VerifyOTP()
-        {
-            ViewBag.VerifyOTPResponse = null;
-            ViewBag.OTPUserName = "test";
-            return View("VerifyOTP");
-        }
+        
         [HttpPost]
         public async Task<IActionResult> VerifyOTP(VerifyOTPRequestModel model)
         {

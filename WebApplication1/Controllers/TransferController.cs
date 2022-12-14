@@ -1,11 +1,9 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using PostingManagement.UI.CustomActionFilters;
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
-using System.Data;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
-using PostingManagement.UI.CustomActionFilters;
 
 namespace PostingManagement.UI.Controllers
 {
