@@ -96,6 +96,7 @@
                     if (response.succeeded == true) {
                         $('#otpExpiryTime').val(response.data.otpExpiryTime.split('.')[0]);
                         $.notify("OTP Sent to your Email Successfully", "success");
+                        $('#showOtpExpiryTime h6').html('OTP Expires in ');
                         $('#VerifyOTPBtn').val("Verify OTP");
                         $('#showOtpExpiryTime').attr('class', 'd-flex flex-column text-success text-center border border-success');
                         $("#otp1").prop("disabled", false);
