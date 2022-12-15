@@ -20,12 +20,9 @@ namespace PostingManagement.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<List<TransferListVM>> GetAllTransferListEmployees(int pageNumber, int numberOfRecords)
+        public async Task<List<TransferListVM>> GetAllTransferListEmployees()
         {
-            SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = pageNumber };
-            SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = numberOfRecords };
-            var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_GetTransferDataAndPromotionData @PageNumber,@NumberOfRecords", 
-                pageNumerParameter, numberOfRecordsParameter).ToListAsync();
+            var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_GetTransferDataAndPromotionData").ToListAsync();
             return result;
         }
 
@@ -35,6 +32,22 @@ namespace PostingManagement.Persistence.Repositories
             SqlParameter movementTypeParameter = new SqlParameter() { ParameterName = "@movementType", SqlDbType = SqlDbType.VarChar, Size = 30, Value = movementType };
             var result = await _dbContext.Set<EmployeeDetailsForTransferList>().FromSqlRaw("EXEC STP_GetAdditionalEmployeeTransferDataAndPromotionData @employeeId,@movementType", employeeIdParameter, movementTypeParameter).ToListAsync();
             return result.FirstOrDefault();
+        }
+
+        public async Task<List<TransferListVM>> GetTransferListEmployeesByEmployeeId(List<int> employeeIdList)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add(new DataColumn("Id", typeof(int)));
+
+            // populate DataTable from your List here
+            foreach (var id in employeeIdList)
+            {
+                dataTable.Rows.Add(id);
+            }
+
+            SqlParameter employeeIdListParameter = new SqlParameter() { ParameterName = "@employeeIdList", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "EmployeeIdList" }; 
+            var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_GetTransferDataAndPromotionDataByEmployeeId @employeeIdList", employeeIdListParameter).ToListAsync();
+            return result;
         }
 
         public ZOTransferListReponse InsertIntoTransferListForZo(List<TransferListVM> list)

@@ -6,10 +6,11 @@ using PostingManagement.UI.Services.TransferService.Contracts;
 using System.Data;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using PostingManagement.UI.CustomActionFilters;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace PostingManagement.UI.Controllers
 {
-    [LoginFilter]
+    //[LoginFilter]
     public class TransferController : Controller
     {
         private readonly IHostingEnvironment _environment;
@@ -40,11 +41,25 @@ namespace PostingManagement.UI.Controllers
             return Json(employeeDetails);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetEmployeesSelectedByCo(int[] employeesId)
+        
+        public async Task<IActionResult> GetEmployeesDataForTransferByEmployeeId ([FromBody] List<int> employeeIdList)
         {
-            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetSelectedEmployeesByCo(employeesId);
-            return View(selectedEmployeeByCo);
+            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetEmployeesDataForTransferByEmployeeId(employeeIdList );
+            return Json(selectedEmployeeByCo);    
+        }
+
+        
+        public async Task<IActionResult> FinalizeEmployeeTransferViewCo()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> FinalizeEmployeeTransferCo([FromBody] List<EmployeeTransferModel> finalizeEmployeeListByCo)
+        {
+            var result = await _transferService.GenerateEmployeeTransferListCo(finalizeEmployeeListByCo);
+            return Json(result);
         }
     }
 }

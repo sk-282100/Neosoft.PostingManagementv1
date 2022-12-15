@@ -15,7 +15,7 @@ namespace PostingManagement.Application.Features.TransferList.Queries.GetTransfe
         }
         public async Task<Response<List<TransferListVM>>> Handle(GetTransferListQuery request, CancellationToken cancellationToken)
         {
-            var employees = await _employeeTransferRepository.GetAllTransferListEmployees(request.PageNumber, request.NumberOfRecords);
+            var employees = await _employeeTransferRepository.GetAllTransferListEmployees();
             //checking Employee List is empty
             if (employees.Count != 0)
             {                

@@ -6,7 +6,6 @@ namespace PostingManagement.Application.Features.TransferList.Queries.GetTransfe
 {
     public class GetTransferListQuery : IRequest<Response<List<TransferListVM>>>
     {
-        public int PageNumber { get; set; }
-        public int NumberOfRecords { get; set; }
+       
     }
 }
