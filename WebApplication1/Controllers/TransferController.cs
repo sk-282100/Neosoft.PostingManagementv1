@@ -1,9 +1,12 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using PostingManagement.UI.CustomActionFilters;
+
+﻿using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using PostingManagement.UI.CustomActionFilters;
+using PostingManagement.UI.Models;
+using Newtonsoft.Json;
+
 
 namespace PostingManagement.UI.Controllers
 {
@@ -24,12 +27,26 @@ namespace PostingManagement.UI.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetEmployeesDataForTransfer()
+        [HttpPost]
+        public async Task<IActionResult> GetEmployeesDataForTransfer(Pagination pagination)
         {
-            List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer();
-            return Json(employeeList);
+            DTResponse dtResponse = new DTResponse();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer(pageNumber,numberOfRecords);
+            dtResponse.data = JsonConvert.SerializeObject(employeeList);
+            return Json(dtResponse);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetEmployeesDataForTransfer()
+        //{
+        //    int page = 1;
+        //    int pageSize = 5;
+        //    List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer(page, pageSize);
+        //    return Json(employeeList);            
+        //}
+
 
         [HttpGet]
         public async Task<IActionResult> GetAdditionalEmployeeDetails(int employeeId, string movementType)

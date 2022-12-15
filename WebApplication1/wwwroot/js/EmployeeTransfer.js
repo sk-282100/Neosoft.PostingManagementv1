@@ -1,32 +1,66 @@
 ﻿var table
-$(document).ready(function () {
-    $.ajax({
-        type: "GET",
-        url: "/Transfer/GetEmployeesDataForTransfer/",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",        
-        success: GetEmployeesListTransfer,        
-        failure: function (response) {
-            window.location.replace("/Error/Error500");
-        },
-        error: function (response) {
-            window.location.replace("/Error/Error500");
-        }
-    });
+//$(document).ready(function () {
+//    $.ajax({
+//        type: "GET",
+//        url: "/Transfer/GetEmployeesDataForTransfer/",
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: GetEmployeesListTransfer,
+//        failure: function (response) {
+//            window.location.replace("/Error/Error500");
+//        },
+//        error: function (response) {
+//            window.location.replace("/Error/Error500");
+//        }
+//    });
 
 
-});
+//});
 
-function GetEmployeesListTransfer(response) {
+//function GetEmployeesListTransfer(response) {
+$(document).ready(function() {
+    GetEmployeesListTransfer();
+})
+function GetEmployeesListTransfer() {
     table = $("#employeeTransfer").DataTable(
         {
-            searching: false,
-            bLengthChange: false,
-            //lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-            //bFilter: true,
-            //bSort: true,
-            //bPaginate: true,
-            data: response,
+            clear: true,
+            serverSide: true,
+            //searching: false,                 
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            autoFill: false,
+            bFilter: true,
+            bSort: true,
+            bPaginate: true,
+            "initComplete": function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Transfer/GetEmployeesDataForTransfer",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                //dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    debugger;
+                    console.log(JSON.stringify(data));
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    debugger;
+                    var data = json;
+                    json.draw = data.draw;
+                    //json.recordsTotal = data.recordsTotal;
+                    //json.recordsFiltered = data.recordsFiltered;
+                    json.data = JSON.parse(data.data);
+                    return json.data;
+                }
+            },
+            
+            //data: response,
             dom: 'lBfrtip',
             buttons: [
                 {
@@ -48,8 +82,8 @@ function GetEmployeesListTransfer(response) {
                     extend: 'csv',
                     title: 'Employee Transfer List',
                     text: '<i class="bi bi-file-earmark-excel"></i>'
-                }                
-            ], 
+                }
+            ],
 
             columns: [
                 {
