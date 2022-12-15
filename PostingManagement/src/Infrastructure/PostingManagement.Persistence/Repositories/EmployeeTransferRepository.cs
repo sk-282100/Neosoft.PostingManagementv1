@@ -81,7 +81,7 @@ namespace PostingManagement.Persistence.Repositories
             SqlParameter successCount = new SqlParameter() { ParameterName = "@successCount", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
             SqlParameter uploadStatus = new SqlParameter() { ParameterName = "@status", SqlDbType = SqlDbType.VarChar, Size = 20, Direction = ParameterDirection.Output };
 
-            var result = _dbContext.Database.ExecuteSqlRaw("EXEC STP_InsertIntoZOListTbl @transferListData, @successCount OUTPUT, @status OUTPUT",
+            var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_InsertIntoZOListTbl @transferListData, @successCount OUTPUT, @status OUTPUT",
             dataTableParameter, successCount, uploadStatus);
             int successcount = Convert.ToInt32(successCount.Value);
             string status = Convert.ToString(uploadStatus.Value);

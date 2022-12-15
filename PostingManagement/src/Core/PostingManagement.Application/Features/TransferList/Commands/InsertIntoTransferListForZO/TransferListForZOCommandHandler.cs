@@ -14,7 +14,7 @@ namespace PostingManagement.Application.Features.TransferList.Commands.InsertInt
         }
         public async Task<Response<ZOTransferListReponse>> Handle(TransferListForZOCommand request, CancellationToken cancellationToken)
         {
-            var response = _employeeTransferRepository.InsertIntoTransferListForZo(request.TransferList);
+            var response = await _employeeTransferRepository.InsertIntoTransferListForZo(request.TransferList);
             if(response.SuccessCount > 0)
             {
                 return new Response<ZOTransferListReponse>() { Data = response, Succeeded = true };

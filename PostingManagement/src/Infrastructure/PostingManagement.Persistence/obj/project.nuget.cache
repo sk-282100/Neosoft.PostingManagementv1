@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BMd0cdfDn8WhQUaknno7AYtpk6ztBtiPAZItAjUjIEYvLzCsioiLXsnA1sZhITpGvhQ30OeKPmxs31R9Ot7K/Q==",
+  "dgSpecHash": "0dHsvlHUhZe7CYctlHJpXvzwwfyAaMguNNlcmAH/aXEPTYDDFtCLGW7UhRUlvlq2Ju/AW11seFgLUSGVtTpNYQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Persistence\\PostingManagement.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Infrastructure\\PostingManagement.Persistence\\PostingManagement.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
