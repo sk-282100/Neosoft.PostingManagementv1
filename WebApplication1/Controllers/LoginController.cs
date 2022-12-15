@@ -48,7 +48,7 @@ namespace PostingManagement.UI.Controllers
             {
                 HttpContext.Session.SetString("Username", response.UserName);
                 HttpContext.Session.SetString("UserRole", response.Role);
-                return RedirectToAction("EmployeeMasterUpload", "Posting");
+                return RedirectToAction("ShowDashboard", "Dashboard");
             }
             else
             {

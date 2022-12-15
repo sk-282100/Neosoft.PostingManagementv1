@@ -12,7 +12,7 @@
             var t2 = expiryDate.getTime();
             if (expiryDate < currentDate) {
                 $('#showOtpExpiryTime h6').html('Your OTP has expired');
-                $('#VerifyOTPBtn').val("Send OTP");
+                $('#VerifyOTPBtn').val("Resend OTP");
                 $('#showOtpExpiryTime').attr('class', 'd-flex flex-column text-danger text-center border border-danger');
                 $("#otp1").prop("disabled", true);
                 $("#otp2").prop("disabled", true);
@@ -56,7 +56,7 @@
                                     var t2 = expiryDate.getTime();
                                     if (expiryDate < currentDate) {
                                         $('#showOtpExpiryTime h6').html('Your OTP has expired');
-                                        $('#VerifyOTPBtn').val("Send OTP");
+                                        $('#VerifyOTPBtn').val("Resend OTP");
                                         $('#showOtpExpiryTime').attr('class', 'd-flex flex-column text-danger text-center border border-danger');
                                         $("#otp1").prop("disabled", true);
                                         $("#otp2").prop("disabled", true);
@@ -85,7 +85,7 @@
                 });
             }
         }
-        else if ($('#VerifyOTPBtn').val() == 'Send OTP') {
+        else if ($('#VerifyOTPBtn').val() == 'Resend OTP') {
             $.ajax({
                 type: "GET",
                 url: "/Login/SendOTP?userName=" + $('#Username').val(),
