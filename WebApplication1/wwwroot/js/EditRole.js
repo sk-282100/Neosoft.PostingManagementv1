@@ -26,15 +26,13 @@ function OnSuccess(response) {
             bPaginate: true,
             data: response,
             columns: [
-
-                //{ data: 'roleId' },
                 { data: 'roleName' },
 
                 {
                     data: null,
                     "mRender": function (data, type, full) {
                         var id = "'" + data.roleId + "'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/Role/EditRole?id=' + data.roleId + '&currentRole=' + data.role + '" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="Delete(' + id + ')" >Delete</a> ';
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/Role/EditRole?id=' + data.roleId + '&currentRole=' + data.role + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button id="delete" class="btn btn-danger btn-sm " onclick="Delete(' + id + ')" ><i class="bi bi-trash-fill" title="Delete"></i></a> ';
 
                     }
                 }

@@ -16,13 +16,22 @@
     });
 
 
-
     $('#CreateUserBtn').click(function () {
-
+        var isValide = true;
         var inputValue = $('#UserName').val().trim();
 
         if ($('#RoleId').val() == '') {
             $('#RoleId').notify("Please select the Role", "error");
+            isValide = false;
+        }
+        var emailRegex = new RegExp(/^[a-zA-Z]+[a-zA-Z0-9_.-]+[a-zA-Z0-9]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$/)
+        if ($('#Email').val() == '') {
+            $('#Email').notify("Email is Requried", 'error');
+        }
+        else if (!emailRegex.test($('#Email').val())) {
+
+            $('#Email').notify("Email should be in correct formate ", "error");
+            isValide = false;
         }
 
         var regx = new RegExp(/^[a-zA-Z][\w.-_]{2,15}$/);
@@ -54,7 +63,7 @@
 
                     }
                     else if (response == false) {
-                        if ($('#RoleId').val() != '') {
+                        if (isValide) {
                             $('#CreateUserNameForm').submit();
                         }
                     }
@@ -85,7 +94,7 @@ function OnSuccess(response) {
 
                 { data: 'role' },
                 { data: 'userName' },
-
+                { data: 'email'},
                 {
                     data: null,
                     "mRender": function (data, type, full) {

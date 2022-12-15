@@ -20,7 +20,8 @@ namespace PostingManagement.Application.Profiles
             {
                 UId = _dataProtector.Protect(source.UId.ToString()),
                 UserName = source.UserName,
-                Role = source.Role
+                Role = source.Role,
+                Email = source.Email
             };
             return dto;
         }

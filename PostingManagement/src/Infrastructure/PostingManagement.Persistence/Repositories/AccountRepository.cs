@@ -13,13 +13,14 @@ namespace PostingManagement.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<bool> AddUser(string userName, int RoleId, string createdBy)
+        public async Task<bool> AddUser(string userName, int roleId,string email, string createdBy)
         {
             UserDetails userModel = new UserDetails();
             
-            userModel.RoleId = RoleId;
+            userModel.RoleId = roleId;
             userModel.UserName = userName;
             userModel.Password = EncryptionDecryption.EncryptString("Pass@123");
+            userModel.Email = email;
             userModel.CreatedBy = createdBy;
             userModel.CreatedOn = DateTime.Now;
             await _context.UserDetailsTbl.AddAsync(userModel);
@@ -46,22 +47,30 @@ namespace PostingManagement.Persistence.Repositories
                                     {
                                         UId = user.UId,
                                         UserName = user.UserName,
-                                        Role = role.RoleName
+                                        Role = role.RoleName,
+                                        Email = user.Email
                                     }).OrderByDescending(x=>x.UId).ToListAsync();
             return userDetails;
         }
 
-        public async Task<UserDetails> GetUserDetailsById(int UserRoleId)
+        public async Task<UserDetails?> GetUserDetailsById(int UserRoleId)
         {
             var userDetails = await _context.UserDetailsTbl.FirstOrDefaultAsync(x => x.UId == UserRoleId && x.DeletedBy == null);
             return userDetails;
         }
 
-        public async Task<bool> UpdateUser(int uId, string userName, int roleId, string updatedBy)
+        public async Task<UserDetails?> GetUserByUserName(string userName)
+        {
+            var userDetails = await _context.UserDetailsTbl.FirstOrDefaultAsync(x => x.UserName == userName && x.DeletedBy == null);
+            return userDetails;
+        }
+
+        public async Task<bool> UpdateUser(int uId, string userName, int roleId,string email, string updatedBy)
         {
             var userDetails = await _context.UserDetailsTbl.FirstOrDefaultAsync(x => x.UId == uId && x.DeletedBy == null);
             userDetails.UserName=userName;
             userDetails.RoleId = roleId;
+            userDetails.Email=email;
             userDetails.UpdatedBy = updatedBy;
             userDetails.UpdatedOn = DateTime.Now;
             //Update
@@ -82,6 +91,7 @@ namespace PostingManagement.Persistence.Repositories
             _context.Entry(userDetails).State = EntityState.Modified;
             return _context.SaveChanges() == 1 ? true : false;
         }
+
     }
 }
 

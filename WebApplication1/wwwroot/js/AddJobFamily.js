@@ -19,25 +19,25 @@
 
         var regx = new RegExp(/^[A-Z][\w_@*]{1,15}$/);
         var inputValue = $('#JobFamilyName').val().trim();
-        //Alert If In Role Name Is Not Entered Any Thing
+        //Alert If In Job Family Name Is Not Entered Any Thing
         if (inputValue == '') {
             $('#JobFamilyName').notify("Job Family Name is required !!!", "error");
         }
-        //Alert If Role Name Length Is Less Than 2 Character
+        //Alert If Job Family Name Length Is Less Than 2 Character
         else if (inputValue.length < 2) {
             $('#JobFamilyName').notify("Job Family Name should contain more than 1 characters", "error");
         }
-        //Alert If Role Name Length Is More Than 15 
+        //Alert If Job Family Name Length Is More Than 15 
         else if (inputValue.length > 15) {
             $('#JobFamilyName').notify("Job Family Name should not contain more than 15 characters", "error");
         }
-        //Alert for Role Name Usinh Regular Expression
+        //Alert for Job Family Name Usinh Regular Expression
         else if (!regx.test(inputValue)) {
             $('#JobFamilyName').notify("Job Family Name should start with Uppercase alphabatical character and \n it contain only aplhanumeric and _ @ *", "error");
         }
 
         else if (inputValue != "") {
-            //Call RoleAlreadyExist Action 
+            //Call JobFamilyAlreadyExist Action 
             $.ajax({
                 type: "GET",
                 url: "/JobFamily/IsJobFamilyAlreadyExist?jobFamilyName=" + inputValue,
@@ -46,7 +46,7 @@
                 dataType: "json",
                 success: function (response) {
                     if (response == true) {
-                        //Alert For Role Name Which is Already Exist
+                        //Alert For Job Family Name Which is Already Exist
                         $('#JobFamilyName').notify(" This Job Family Name is already Present!!!", "error");
                         isValid = false;
                     }
@@ -66,7 +66,7 @@
         }
     });
 });
-//Data Table Get All Roles  Using Input Table Id 
+//Data Table Get All JobFamilies  Using Input Table Id 
 function OnSuccess(response) {
     $("#getAllJobFamilyId").DataTable(
         {
@@ -86,8 +86,8 @@ function OnSuccess(response) {
                     "mRender": function (data, type, full) {
 
                         var id = "'" + data.jobFamilyId + "'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/JobFamily/EditJobFamily?id=' + data.jobFamilyId + '" >Edit</a><button class="btn btn-danger btn-sm" id="delete"  onclick="Delete(' + id + ')"  >Delete</a> ';
-
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/JobFamily/EditJobFamily?id=' + data.jobFamilyId + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button class="btn btn-danger btn-sm" id="delete"  onclick="Delete(' + id + ')"  ><i class="bi bi-trash-fill" title="Delete"></i></a> ';
+                        
                     }
                 }
             ],

@@ -51,7 +51,6 @@ namespace PostingManagement.UI.Services.AccountServices
             //Client Handler Part
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/Account/GetUserById?Id=" + userId))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

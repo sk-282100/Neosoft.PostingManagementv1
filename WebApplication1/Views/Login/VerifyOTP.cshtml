@@ -1,0 +1,156 @@
+﻿@model PostingManagement.UI.Models.Login.VerifyOTPRequestModel
+
+@{
+    ViewData["Title"] = "VerifyOTP";
+}
+
+@if (@ViewBag.VerifyOTPResponse != null)
+{
+    <input type="hidden" id="VerifyOTPReponseMessage" value="@ViewBag.VerifyOTPResponse.Message" />
+}
+else
+{
+    <input type="hidden" id="VerifyOTPReponseMessage" value="" />
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Login</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <script src="~/js/verifyotppage.js?v=1.2"></script>
+    <style>
+        /*------------------  */
+        .otp-form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .otp-inputbar {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        #errmsg {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <div class="container">
+
+            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-start py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="d-flex justify-content-center py-4">
+                                <a href="#" class="logo d-flex align-items-center w-auto">
+                                    <img src="~/img/logo.png" alt="">
+                                    <span class="d-none d-lg-block">NS-Posting Management</span>
+                                </a>
+                            </div>
+                            <div class="card mb-3 ">
+
+                                <div class="card-body">
+
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Verify OTP</h5>
+                                        <p class="text-center small">OTP sent to your email , Please enter your OTP for Authentication </p>
+                                    </div>
+                                    <form class="row g-3" asp-action="SubmitOTPForm" id="VerifyOTPForm">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input asp-for="Username" type="hidden" value="@ViewBag.OTPUserName" />
+                                        <div class="col-12">
+                                           
+                                                <label class="control-label w-100 text-center pb-3 ">Enter OTP</label>
+                                           
+                                            <input asp-for="OTP" class="form-control" type="hidden" />
+                                            <div class="form-group-input otp-form-group mb-3">
+                                                <input type="text" minlength="1" maxlength="1" id="otp1" class="form-control otp-inputbar">
+                                                <input type="text" minlength="1" maxlength="1" id="otp2" class="form-control otp-inputbar">
+                                                <input type="text" minlength="1" maxlength="1" id="otp3" class="form-control otp-inputbar">
+                                                <input type="text" minlength="1" maxlength="1" id="otp4" class="form-control otp-inputbar">
+                                            </div>
+
+                                        </div>
+                                        <input id="otpExpiryTime" type="hidden" value="@ViewBag.OTPExpiryTime" />
+
+                                        <div id="showOtpExpiryTime" class="d-flex flex-column text-success text-center border border-success">
+                                            <h6 >OTP Expires in </h6>
+                                            <h3 ></h3>
+
+                                        </div>
+                                           
+                                       
+                                        <div class="col-12 d-flex btn-group ">
+                                            <input type="button" value="Verify OTP" id="VerifyOTPBtn" class="btn btn-warning rounded-start w-50" />
+                                            <a class="btn btn-primary rounded-end w-50" asp-action="Login" asp-controller="Login">Cancel</a>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+    <script>
+        // --------otp section------
+        $(".otp-inputbar").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+        $(".otp-inputbar").on("keyup keydown keypress", function (e) {
+            if ($(this).val()) {
+                $(this).next().focus();
+            }
+            var KeyID = e.keyCode;
+            switch (KeyID) {
+                case 8:
+                    $(this).val("");
+                    $(this).prev().focus();
+                    break;
+                case 46:
+                    $(this).val("");
+                    $(this).prev().focus();
+                    break;
+                default:
+                    break;
+            }
+        });
+       
+    </script>
+</body>
+
+</html>
+
+
+
+
+
