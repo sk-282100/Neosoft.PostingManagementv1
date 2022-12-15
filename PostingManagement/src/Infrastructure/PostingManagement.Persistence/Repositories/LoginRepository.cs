@@ -29,8 +29,10 @@ namespace PostingManagement.Persistence.Repositories
             var existingOTP = await _context.OTPTbl.FirstOrDefaultAsync(x => x.UId == otpModel.UId);
             if (existingOTP != null)
             {
-                _context.OTPTbl.Remove(existingOTP);
-                _context.SaveChanges();
+                existingOTP.ExpiryTime = otpModel.ExpiryTime;
+                existingOTP.OTP = otpModel.OTP;
+                _dbContext.Entry(existingOTP).State = EntityState.Modified;
+                return await _dbContext.SaveChangesAsync() == 1 ? true :false;
             }
             await _context.OTPTbl.AddAsync(otpModel);
             return await _context.SaveChangesAsync() == 1 ? true : false;
