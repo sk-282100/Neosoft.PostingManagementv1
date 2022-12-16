@@ -1,4 +1,4 @@
-﻿namespace PostingManagement.UI.Models.EmployeeTransferModels
+﻿namespace PostingManagement.UI.Models.Responses
 {
     public class ZOTransferListReponse
     {

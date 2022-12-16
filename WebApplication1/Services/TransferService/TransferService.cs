@@ -18,14 +18,15 @@ namespace PostingManagement.UI.Services.TransferService
             _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
-        public async Task<List<EmployeeTransferModel>> GetEmployeesForTransfer()
+        public async Task<TransferListReponseMVC> GetEmployeesForTransfer(int pageNumber, int numberOfRecords)
         {
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/TransferList/GetTransferList"))
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/TransferList/GetTransferList?pageNumber=" + pageNumber + "&numberOfRecords=" + numberOfRecords))
+                //using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/TransferList/GetTransferList"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    var uploadResult = JsonConvert.DeserializeObject<Response<List<EmployeeTransferModel>>>(apiResponse);
+                    var uploadResult = JsonConvert.DeserializeObject<Response<TransferListReponseMVC>>(apiResponse);
                     return uploadResult.Data;
                 }
             }
@@ -57,24 +58,6 @@ namespace PostingManagement.UI.Services.TransferService
                     return uploadResult.Data;
                 }
             }
-
-            //List<EmployeeTransferModel> allEmployeesAvailableforTransfer = await GetEmployeesForTransfer();
-            //var selectedEmployeesByCo = (from employee in allEmployeesAvailableforTransfer
-            //                            join 
-            //                            selectEmployeeId in emoloyeeidList
-            //                            on employee.EmployeeId equals selectEmployeeId
-            //                            select new EmployeeTransferModel 
-            //                            { 
-            //                                EmployeeId = employee.EmployeeId,
-            //                                EmployeeName = employee.EmployeeName,
-            //                                ScaleCode = employee.ScaleCode,
-            //                                Scale=employee.Scale,
-            //                                UbijobRole=employee.UbijobRole,
-            //                                RegionName=employee.RegionName,
-            //                                ZoneName=employee.ZoneName,
-            //                                MovementType = employee.MovementType
-            //                            }).ToList();
-            //return selectedEmployeesByCo;  
 
         }
 

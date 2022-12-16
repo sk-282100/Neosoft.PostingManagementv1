@@ -1,38 +1,53 @@
 ﻿var table
 $(document).ready(function () {
-    $.ajax({
-        type: "GET",
-        url: "/Transfer/GetEmployeesDataForTransfer/",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",        
-        success: GetEmployeesListTransfer,        
-        failure: function (response) {
-            window.location.replace("/Error/Error500");
-        },
-        error: function (response) {
-            window.location.replace("/Error/Error500");
-        }
-    });
-
-
+    GetEmployeesListTransfer();
 });
 
-function GetEmployeesListTransfer(response) {
+function GetEmployeesListTransfer() {
     table = $("#employeeTransfer").DataTable(
         {
+            clear: true,
+            serverSide: true,
             searching: false,
-            bLengthChange: false,
-            //lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-            //bFilter: true,
-            //bSort: true,
-            //bPaginate: true,
-            data: response,
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
+            autoFill: false,
+            bFilter: true,
+            bSort: true,
+            bPaginate: true,
+            //"initComplete": function (settings, json) {
+            //    $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            //},
+            ajax: {
+                url: "/Transfer/GetEmployeesDataForTransfer",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    debugger;
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    debugger;
+                    return json.data;
+                }
+            },
+
+            //data: response,
             dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'pdf',
                     title: 'Employee Transfer List',
-                    text: '<i class="bi bi-file-earmark-pdf"></i>',                    
+                    text: '<i class="bi bi-file-earmark-pdf"></i>',
                 },
                 {
                     extend: 'copy',
@@ -48,8 +63,8 @@ function GetEmployeesListTransfer(response) {
                     extend: 'csv',
                     title: 'Employee Transfer List',
                     text: '<i class="bi bi-file-earmark-excel"></i>'
-                }                
-            ], 
+                }
+            ],
 
             columns: [
                 {
@@ -65,22 +80,22 @@ function GetEmployeesListTransfer(response) {
                     checkboxes: {
                         selectRow: true
                     }
-                }, 
-                { targets: 2, data: 'employeeId' },  
-                { targets: 3, data: 'employeeName' },   
-                { targets: 4, data: 'scale' },  
+                },
+                { targets: 2, data: 'employeeId' },
+                { targets: 3, data: 'employeeName' },
+                { targets: 4, data: 'scale' },
                 { targets: 5, data: 'scaleCode' },
-                { targets: 6, data: 'ubijobRole' },  
-                { targets: 7, data: 'regionName' },  
-                { targets: 8, data: 'zoneName' },  
-                { targets: 9, data: 'movementType' },  
+                { targets: 6, data: 'ubijobRole' },
+                { targets: 7, data: 'regionName' },
+                { targets: 8, data: 'zoneName' },
+                { targets: 9, data: 'movementType' },
 
 
             ],
             'select': {
                 'style': 'multi'
             },
-            'order': [[2, 'asc']]
+            'order': [[0, 'asc']]
 
         });
 

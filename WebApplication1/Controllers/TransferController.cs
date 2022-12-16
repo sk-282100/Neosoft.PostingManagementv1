@@ -7,6 +7,7 @@ using System.Data;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using PostingManagement.UI.CustomActionFilters;
 using Microsoft.AspNetCore.Mvc.Routing;
+using PostingManagement.UI.Models;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -27,11 +28,17 @@ namespace PostingManagement.UI.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetEmployeesDataForTransfer()
+        [HttpPost]
+        public async Task<IActionResult> GetEmployeesDataForTransfer([FromBody] Pagination pagination)
         {
-            List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer();
-            return Json(employeeList);
+            DTResponse dtResponse = new DTResponse();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            var result = await _transferService.GetEmployeesForTransfer(pageNumber, numberOfRecords);
+            dtResponse.recordsFiltered = numberOfRecords;
+            dtResponse.recordsTotal = result.TotalRecords;
+            dtResponse.data = result.Data;
+            return Json(dtResponse);
         }
 
         [HttpGet]
