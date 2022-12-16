@@ -15,6 +15,28 @@
         }
     });
 
+    $('#EditUserBtn').click(function () {
+        var isValide = true;
+        if ($('#RoleId').val() == '') {
+            $('#RoleId').notify("Please select the Role", "error");
+            isValide = false;
+        }
+        var emailRegex = new RegExp(/^[a-zA-Z]+[a-zA-Z0-9_.-]+[a-zA-Z0-9]+@([a-zA-Z0-9-]+.)+[a-zA-Z]{2,6}$/)
+        if ($('#Email').val() == '') {
+            $('#Email').notify("Email is Requried", 'error');
+        }
+        else if (!emailRegex.test($('#Email').val())) {
+
+            $('#Email').notify("Email should be in correct formate ", "error");
+            isValide = false;
+        }
+
+        if (isValide == true) {
+            $('#EditUserForm').submit();
+        }
+
+    });
+
 });
 
 function OnSuccess(response) {
@@ -37,7 +59,7 @@ function OnSuccess(response) {
                     data: null,
                     "mRender": function (data, type, full) {
                         var id = "'" + data.uId + "'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole='+data.role+'" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" >Delete</button> ';
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole=' + data.role + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button id="delete" class="btn btn-danger btn-sm " onclick="onDelete(' + id + ')" ><i class="bi bi-trash-fill" title="Delete"></i></button> ';
 
                     }
                 }

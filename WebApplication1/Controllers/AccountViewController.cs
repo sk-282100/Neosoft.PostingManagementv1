@@ -80,6 +80,7 @@ namespace PostingManagement.UI.Controllers
             request.UId = model.UId;
             request.UserName = model.UserName;
             request.RoleId = model.RoleId;
+            request.Email = model.Email;
             request.UpdatedBy = HttpContext.Session.GetString("Username");
 
             await _accountService.UpdateUserDetails(request);
@@ -99,7 +100,6 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> IsUserNamePresent(string userName)
         {
             var response = await _accountService.IsUserNamePresent(userName);
-
             return Json(response.Data);
         }
 

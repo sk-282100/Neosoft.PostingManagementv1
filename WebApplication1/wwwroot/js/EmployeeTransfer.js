@@ -16,17 +16,13 @@ function GetEmployeesListTransfer() {
             bFilter: true,
             bSort: true,
             bPaginate: true,
-            //"initComplete": function (settings, json) {
-            //    $(this.api().table().container()).find('input').attr('autocomplete', 'off');
-            //},
             ajax: {
                 url: "/Transfer/GetEmployeesDataForTransfer",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: function (d) {
-                    var data = { data: d };
-                    debugger;
+                    var data = { data: d };                    
                     return JSON.stringify(data);
                 },
                 AutoWidth: false,
@@ -34,14 +30,10 @@ function GetEmployeesListTransfer() {
                     var jsonData = json;
                     json.draw = jsonData.draw;
                     json.recordsTotal = jsonData.recordsTotal;
-                    json.recordsFiltered = jsonData.recordsFiltered;
-                    //json.data = JSON.parse(jsonData.data);   
-                    debugger;
+                    json.recordsFiltered = jsonData.recordsFiltered;                                        
                     return json.data;
                 }
-            },
-
-            //data: response,
+            },            
             dom: 'lBfrtip',
             buttons: [
                 {

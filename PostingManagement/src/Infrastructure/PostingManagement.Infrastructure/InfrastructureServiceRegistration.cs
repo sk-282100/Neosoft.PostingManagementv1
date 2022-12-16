@@ -15,8 +15,10 @@ namespace PostingManagement.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+            services.Configure<SendOTPEmailSetting>(configuration.GetSection("SendOTPEmailSetting"));
             services.AddTransient<ICsvExporter, CsvExporter>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ISMTPEmailService, SMTPEmailService>();
             services.Configure<CacheConfiguration>(configuration.GetSection("CacheConfiguration"));
             services.AddMemoryCache();
             services.AddTransient<ICacheService, MemoryCacheService>();

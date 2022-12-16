@@ -20,6 +20,7 @@ namespace PostingManagement.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
+
         public async Task<TransferListReponse> GetAllTransferListEmployees(int pageNumber, int numberOfRecords)
         {
             SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = pageNumber };
