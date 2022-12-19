@@ -57,7 +57,13 @@ function GetEmployeesListTransfer() {
                     text: '<i class="bi bi-file-earmark-excel"></i>'
                 }
             ],
-
+            columnDefs: [
+                {
+                    targets: [2, 3, 4, 5, 6, 7, 8, 9],
+                    orderable: true,
+                    sorting: true
+                }
+            ],
             columns: [
                 {
                     targets: 0,
