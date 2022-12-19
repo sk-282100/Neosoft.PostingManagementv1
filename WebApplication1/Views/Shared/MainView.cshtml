@@ -1,5 +1,3 @@
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor Accessor
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,28 +6,24 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>@ViewData["Title"] - UI.PostingManagement</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />*@
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" type="text/css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <meta content="" name="description">
     <meta content="" name="keywords">
+
+    <title>@ViewData["Title"] - UI.PostingManagement</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/datatables-1.13.1.css" rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
     <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!---Partial View Ajax Call->
-    <!-- Template Main CSS File -->
 
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <!-- Template JS Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.datatables-1.13.1.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -50,7 +44,7 @@
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block ps-2">@Accessor.HttpContext.Session.GetString("Username")</span>
+                        <span class="d-none d-md-block ps-2">@Context.Session.GetString("Username")</span>
                     </a><!-- End Profile Iamge Icon -->
                 </li>
                 <li class="nav-item dropdown pe-3">

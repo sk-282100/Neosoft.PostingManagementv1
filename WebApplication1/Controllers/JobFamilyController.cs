@@ -49,10 +49,12 @@ namespace PostingManagement.UI.Controllers
             return RedirectToAction("AddJobFamily");
 
         }
+
+        [HttpGet]
         public async Task<IActionResult> RemoveJobFamily(string id)
         {
-            await _jobFamilyService.RemoveJobFamily(id);
-            return RedirectToAction("AddJobFamily");
+            var response = await _jobFamilyService.RemoveJobFamily(id);
+            return Json(response);
         }
         [HttpGet]
         public async Task<IActionResult> EditJobFamily(string id)

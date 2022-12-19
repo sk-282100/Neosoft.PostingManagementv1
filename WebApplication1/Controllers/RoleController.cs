@@ -56,11 +56,12 @@ namespace PostingManagement.UI.Controllers
 
         }
 
+        [HttpGet]
         //Delete Role.
         public async Task<IActionResult> RemoveRole(string id)
         {
-            await roleService.RemoveRole(id);
-            return RedirectToAction("Addrole");
+            var response = await roleService.RemoveRole(id);
+            return Json(response);
         }
 
         [HttpGet]

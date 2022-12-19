@@ -1,4 +1,5 @@
 ﻿using DNTCaptcha.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using PostingManagement.UI.Models;
@@ -75,6 +76,12 @@ namespace PostingManagement.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(SendOTPRequestModel request)
         {
+            if(HttpContext.Session.GetString("IsOTPGenerated") == "TRUE")
+            {
+                HttpContext.Session.Remove("IsOTPGenerated");
+                return RedirectToAction("ForgotPassword");
+            }
+            
             var response = await _loginService.SendOTP(request);
             if (response.Succeeded == true)
             {
@@ -83,6 +90,7 @@ namespace PostingManagement.UI.Controllers
                 ViewBag.VerifyOTPResponse = null;
                 ViewBag.OTPUserName = request.Username;
                 ViewBag.OTPExpiryTime = response.Data.OTPExpiryTime.ToString(format);
+                HttpContext.Session.SetString("IsOTPGenerated", "TRUE");
                 return View("VerifyOTP");
             }
             ViewBag.SendOTPResponse = response ;
