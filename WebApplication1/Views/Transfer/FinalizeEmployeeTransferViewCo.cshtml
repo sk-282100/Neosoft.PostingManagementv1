@@ -1,13 +1,12 @@
 ﻿@model IEnumerable<PostingManagement.UI.Models.EmployeeTransferModels.EmployeeTransferModel>
 
 @{
-    ViewData["Title"] = "GetEmployeesForTransfer";
+    ViewData["Title"] = "FinalizeEmployeeTransferViewCo";
     Layout = "~/Views/Shared/MainView.cshtml";
-    var step = 1;
+    var step = 2;
 }
 
 <link href="~/css/datatables-1.13.1.css" rel="stylesheet" />
-<link href="~/css/datatables.buttons-2.3.2.css" rel="stylesheet" />
 <link href="~/css/datatables-checkboxes-1.2.12.css" rel="stylesheet" />
 
 <script src="~/lib/jquery/dist/jquery.datatables-1.13.1.js"></script>
@@ -18,7 +17,6 @@
 <script src="~/lib/jquery/dist/datatable.buttons.flash.min - 1.6.1.js"></script>
 <script src="~/lib/jquery/dist/datatable.buttons.html5.min - 2.3.2.js"></script>
 <script src="~/lib/jquery/dist/datatable.buttons.print.min - 2.3.2.js"></script>
-<script src="~/lib/jquery/dist/jquery.datatables.checkboxes-1.2.12.js"></script>
 
 <style>
     #wrapper .baricon {
@@ -56,26 +54,25 @@
 
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
-                <h5 class="card-title">Generate Employee Transfer List<span></span></h5>
-                <a class="btn btn-success" onclick="GenerateList()">Generate List</a>
+                <h5 class="card-title">Finalize Transfer List<span></span></h5>
+                <a class="btn btn-success" onclick="FinalizeList()" >Finalize List</a>
             </div>
             <hr />
             <div class="row">
-                
+
                 <div class="col-md-12">
-                    <table class="table responsive" id="employeeTransfer">
+                    <table class="display responsive nowrap" id="finalizeEmployeeTransfer">
                         <thead>
                             <tr>
                                 <th></th>
-                                <th></th>
                                 <th>Employee Id</th>
-                                <th>Name</th>  
-                                <th>Scale Name</th>  
-                                <th>Scale</th>  
-                                <th>Designation</th>  
-                                <th>Region</th>  
-                                <th>Zone</th>  
-                                <th>Movement Type</th>  
+                                <th>Name</th>
+                                <th>Scale Name</th>
+                                <th>Scale</th>
+                                <th>Designation</th>
+                                <th>Region</th>
+                                <th>Zone</th>
+                                <th>Movement Type</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -85,28 +82,7 @@
         </div>
     </div>
 </div>
-<script src="~/js/EmployeeTransfer.js"></script>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<script src="~/js/FinalizeEmployeeTransferCo.js"></script>
 <script src="~/js/ChildTable.js"></script>
-
-@*<script>
-    $(document).ready(function () {
-        $('#employeeTransfer').DataTable({
-
-        });
-    });
-</script>*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

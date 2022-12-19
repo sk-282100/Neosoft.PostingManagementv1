@@ -9,8 +9,8 @@ namespace PostingManagement.UI.Services.TransferService.Contracts
         /// <summary>
         /// Gets the List of all the Employees for transfer
         /// </summary>
-        /// <returns>List of employees avaialbale for transfer</returns>
-        public Task<List<EmployeeTransferModel>> GetEmployeesForTransfer(int pageNumber, int numberOfRecords);        
+        /// <returns>List of employees avaialbale for transfer and total number of records</returns>
+        public Task<TransferListReponseMVC> GetEmployeesForTransfer(int pageNumber, int numberOfRecords);
 
         /// <summary>
         /// Gets the Additional information about the Employee based on EmployeeId
@@ -25,8 +25,13 @@ namespace PostingManagement.UI.Services.TransferService.Contracts
         /// </summary>
         /// <param name="emoloyeeIdList"></param>
         /// <returns>List of EmployeeTransferModel</returns>
-        public Task<List<EmployeeTransferModel>> GetSelectedEmployeesByCo(int[] emoloyeeIdList);
+        public Task<List<EmployeeTransferModel>> GetEmployeesDataForTransferByEmployeeId(List<int> emoloyeeIdList);
 
-
+        /// <summary>
+        /// Insert the Data into TRansferListForZo
+        /// </summary>
+        /// <param name="EmployeesSelectedByCo"></param>
+        /// <returns>Returns a Serialized Object which includes the no of rows inserted and Status  </returns>
+        public Task<ZOTransferListReponse> GenerateEmployeeTransferListCo(List<EmployeeTransferModel> EmployeesSelectedByCo);
     }
 }

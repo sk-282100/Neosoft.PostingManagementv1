@@ -1,72 +1,45 @@
 ﻿var table
-//$(document).ready(function () {
-//    $.ajax({
-//        type: "GET",
-//        url: "/Transfer/GetEmployeesDataForTransfer/",
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: GetEmployeesListTransfer,
-//        failure: function (response) {
-//            window.location.replace("/Error/Error500");
-//        },
-//        error: function (response) {
-//            window.location.replace("/Error/Error500");
-//        }
-//    });
-
-
-//});
-
-//function GetEmployeesListTransfer(response) {
-$(document).ready(function() {
+$(document).ready(function () {
     GetEmployeesListTransfer();
-})
+});
+
 function GetEmployeesListTransfer() {
     table = $("#employeeTransfer").DataTable(
         {
             clear: true,
             serverSide: true,
-            //searching: false,                 
+            searching: false,
             destroy: true,
             pageLength: 5,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
             autoFill: false,
             bFilter: true,
             bSort: true,
             bPaginate: true,
-            "initComplete": function (settings, json) {
-                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
-            },
             ajax: {
                 url: "/Transfer/GetEmployeesDataForTransfer",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                //dataType: "json",
+                dataType: "json",
                 data: function (d) {
-                    var data = { data: d };
-                    debugger;
-                    console.log(JSON.stringify(data));
+                    var data = { data: d };                    
                     return JSON.stringify(data);
                 },
                 AutoWidth: false,
                 dataSrc: function (json) {
-                    debugger;
-                    var data = json;
-                    json.draw = data.draw;
-                    //json.recordsTotal = data.recordsTotal;
-                    //json.recordsFiltered = data.recordsFiltered;
-                    json.data = JSON.parse(data.data);
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;                                        
                     return json.data;
                 }
-            },
-            
-            //data: response,
+            },            
             dom: 'lBfrtip',
             buttons: [
                 {
                     extend: 'pdf',
                     title: 'Employee Transfer List',
-                    text: '<i class="bi bi-file-earmark-pdf"></i>',                    
+                    text: '<i class="bi bi-file-earmark-pdf"></i>',
                 },
                 {
                     extend: 'copy',
@@ -99,22 +72,22 @@ function GetEmployeesListTransfer() {
                     checkboxes: {
                         selectRow: true
                     }
-                }, 
-                { targets: 2, data: 'employeeId' },  
-                { targets: 3, data: 'employeeName' },   
-                { targets: 4, data: 'scale' },  
+                },
+                { targets: 2, data: 'employeeId' },
+                { targets: 3, data: 'employeeName' },
+                { targets: 4, data: 'scale' },
                 { targets: 5, data: 'scaleCode' },
-                { targets: 6, data: 'ubijobRole' },  
-                { targets: 7, data: 'regionName' },  
-                { targets: 8, data: 'zoneName' },  
-                { targets: 9, data: 'movementType' },  
+                { targets: 6, data: 'ubijobRole' },
+                { targets: 7, data: 'regionName' },
+                { targets: 8, data: 'zoneName' },
+                { targets: 9, data: 'movementType' },
 
 
             ],
             'select': {
                 'style': 'multi'
             },
-            'order': [[2, 'asc']]
+            'order': [[0, 'asc']]
 
         });
 
@@ -135,155 +108,6 @@ function GetEmployeesListTransfer() {
         }
     });
 
-    function destroyChild(row) {
-        var table = $("table", row.child());
-        table.detach();
-        /*table.destroy();*/
-
-        // And then hide the row
-        row.child.hide();
-    }
-
-
-    function GetEmployeeDetails(row) {
-        var d = row.data()
-        $.ajax({
-            type: "GET",
-            url: "/Transfer/GetAdditionalEmployeeDetails?employeeId=" + parseInt(d.employeeId) + "&movementType=" + d.movementType,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                //cellpadding = "5" cellspacing = "0" border = "0" style = "padding-left:50px;"
-                var table = $(
-                    '<table class="table table-stripped">' +
-                    '<tr>' +
-                    '<th>' +
-                    '<table border="2px" class="table table-striped">' +
-                    '<thead >' +
-                    '<tr>' +
-                    '<th colspan="2">Employee details</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + 'Age/Gender' + '</td>' +
-                    '<td>' + response.age + '/' + response.gender + '</td >' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Job Family' + '</td>' +
-                    '<td>' + response.jobRole + '</td >' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Disability' + '</td>' +
-                    '<td>' + response.disability + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Transfer Type' + '</td>' +
-                    '<td>' + response.transferType + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Transfer Reason' + '</td>' +
-                    '<td>' + response.transferReason + '</td >' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>' +
-                    '</th>' +
-                    '<th>' +
-                    '<table border="1px" class="table table-striped">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th colspan="5">' + 'Location Preferences' + '</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<th>' + 'Sr No.' + '</th>' +
-                    '<th>' + 'Zone' + '</th>' +
-                    '<th>' + 'Region 1' + '</th>' +
-                    '<th>' + 'Region 2' + '</th>' +
-                    '<th>' + 'Region 3' + '</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + '1' + '</td>' +
-                    '<td>' + response.zonePreference1 + '</td>' +
-                    '<td>' + response.zone1RegionPreference1 + '</td >' +
-                    '<td>' + response.zone1RegionPreference2 + '</td>' +
-                    '<td>' + response.zone1RegionPreference3 + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + '2' + '</td>' +
-                    '<td>' + response.zonePreference2 + '</td>' +
-                    '<td>' + response.zone2RegionPreference1 + '</td>' +
-                    '<td>' + response.zone2RegionPreference2 + '</td>' +
-                    '<td>' + response.zone2RegionPreference3 + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + '3' + '</td>' +
-                    '<td>' + response.zonePreference3 + '</td>' +
-                    '<td>' + response.zone3RegionPreference1 + '</td>' +
-                    '<td>' + response.zone3RegionPreference2 + '</td>' +
-                    '<td>' + response.zone3RegionPreference3 + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + '4' + '</td>' +
-                    '<td>' + response.zonePreference4 + '</td>' +
-                    '<td>' + response.zone4RegionPreference1 + '</td>' +
-                    '<td>' + response.zone4RegionPreference2 + '</td>' +
-                    '<td>' + response.zone4RegionPreference3 + '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + '5' + '</td>' +
-                    '<td>' + response.zonePreference5 + '</td>' +
-                    '<td>' + response.zone5RegionPreference1 + '</td>' +
-                    '<td>' + response.zone5RegionPreference2 + '</td>' +
-                    '<td>' + response.zone5RegionPreference3 + '</td>' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>' +
-                    '</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<th>' +
-                    '<table border="2px" class= "table table-striped">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>' + ' ' +'</th>' +
-                    '<th>' + 'Current Posting' + '</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tr>' +
-                    '<td>' + 'Role' + '</td>' +
-                    '<td>' + response.currentRole + '</td >' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Region' + '</td>' +
-                    '<td>' + response.currentRegion + '</td >' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' + 'Zone' + '</td>' +
-                    '<td>' + response.currentZone + '</td >' +
-                    '</tr>' +
-                    '</table>'+
-                        '</th>' +
-                    '</tr>' +
-                    '</table>'
-                );
-
-                // Display it the child row
-                row.child(table).show();
-                
-            },
-            failure: function (response) {
-                window.location.replace("/Error/Error500");
-            },
-            error: function (response) {
-                window.location.replace("/Error/Error500");
-            }
-        });
-
-
-    }
-
 }
 
 function GenerateList() {
@@ -295,22 +119,18 @@ function GenerateList() {
     $.each(rows_selected, function (index, rowId) {
         employeeIdList.push(rowId)        
     });
-
-    console.log(employeeIdList)
-    $.ajax({
-        type: "GET",
-        url: "/Transfer/GetEmployeesSelectedByCo/",
-        data: { employeeCode: employeeIdList },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: response,
-        failure: "",
-        error: function (response) {
-            window.location.replace("/Error/Error500");
-        },
-    });
+    if (employeeIdList.length == 0) {
+        $.notify("No employees selected, please select at least one employee to generate list", "error");
+    }
+    else {
+        console.log(employeeIdList)
+        sessionStorage.setItem("EmployeeIdList", JSON.stringify(employeeIdList));
+        
+        window.location.assign("/Transfer/FinalizeEmployeeTransferViewCo/")
+        
+    }
     
-
 }
+
 
 

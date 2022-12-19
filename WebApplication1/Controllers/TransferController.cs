@@ -4,13 +4,12 @@ using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using PostingManagement.UI.CustomActionFilters;
+using Microsoft.AspNetCore.Mvc.Routing;
 using PostingManagement.UI.Models;
-using Newtonsoft.Json;
-
 
 namespace PostingManagement.UI.Controllers
 {
-    [LoginFilter]
+    //[LoginFilter]
     public class TransferController : Controller
     {
         private readonly IHostingEnvironment _environment;
@@ -28,13 +27,15 @@ namespace PostingManagement.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetEmployeesDataForTransfer(Pagination pagination)
+        public async Task<IActionResult> GetEmployeesDataForTransfer([FromBody] Pagination pagination)
         {
             DTResponse dtResponse = new DTResponse();
             int numberOfRecords = pagination.data.length;
             int pageNumber = (pagination.data.start / numberOfRecords) + 1;
-            List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer(pageNumber,numberOfRecords);
-            dtResponse.data = JsonConvert.SerializeObject(employeeList);
+            var result = await _transferService.GetEmployeesForTransfer(pageNumber, numberOfRecords);
+            dtResponse.recordsFiltered = numberOfRecords;
+            dtResponse.recordsTotal = result.TotalRecords;
+            dtResponse.data = result.Data;
             return Json(dtResponse);
         }
 
@@ -55,11 +56,25 @@ namespace PostingManagement.UI.Controllers
             return Json(employeeDetails);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetEmployeesSelectedByCo(int[] employeesId)
+        
+        public async Task<IActionResult> GetEmployeesDataForTransferByEmployeeId ([FromBody] List<int> employeeIdList)
         {
-            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetSelectedEmployeesByCo(employeesId);
-            return View(selectedEmployeeByCo);
+            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetEmployeesDataForTransferByEmployeeId(employeeIdList );
+            return Json(selectedEmployeeByCo);    
+        }
+
+        
+        public async Task<IActionResult> FinalizeEmployeeTransferViewCo()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> FinalizeEmployeeTransferCo([FromBody] List<EmployeeTransferModel> finalizeEmployeeListByCo)
+        {
+            var result = await _transferService.GenerateEmployeeTransferListCo(finalizeEmployeeListByCo);
+            return Json(result);
         }
     }
 }
