@@ -51,12 +51,13 @@ namespace PostingManagement.UI.Controllers
             return RedirectToAction("CreateUserName");
         }
 
+        [HttpGet]
         //Delete The UserRole By Using RoleId
         public async Task<IActionResult> DeleteUserName(string id)
         {
             var deletedBy = HttpContext.Session.GetString("Username");
-            await _accountService.DeleteUserDetails(id, deletedBy);
-            return RedirectToAction("CreateUserName");
+            var deleteResponse = await _accountService.DeleteUserDetails(id, deletedBy);
+            return Json(deleteResponse);
         }
 
         [HttpGet]
