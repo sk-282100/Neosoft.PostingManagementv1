@@ -35,8 +35,8 @@ namespace PostingManagement.UI.Controllers
             int numberOfRecords = pagination.data.length;
             int pageNumber = (pagination.data.start / numberOfRecords) + 1;
             var result = await _transferService.GetEmployeesForTransfer(pageNumber, numberOfRecords);
-            dtResponse.recordsFiltered = numberOfRecords;
-            dtResponse.recordsTotal = result.TotalRecords;
+            dtResponse.recordsFiltered = result.TotalRecords;
+            dtResponse.recordsTotal = numberOfRecords;
             dtResponse.data = result.Data;
             return Json(dtResponse);
         }
