@@ -22,15 +22,16 @@ function GetEmployeesListTransfer() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: function (d) {
-                    var data = { data: d };                    
-                    return JSON.stringify(data);
+                    var data = { data: d };
+                   return JSON.stringify(data);
                 },
                 AutoWidth: false,
                 dataSrc: function (json) {
                     var jsonData = json;
                     json.draw = jsonData.draw;
                     json.recordsTotal = jsonData.recordsTotal;
-                    json.recordsFiltered = jsonData.recordsFiltered;                                        
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
                     return json.data;
                 }
             },            
@@ -57,7 +58,13 @@ function GetEmployeesListTransfer() {
                     text: '<i class="bi bi-file-earmark-excel"></i>'
                 }
             ],
-
+            columnDefs: [
+                {
+                    targets: [2, 3, 4, 5, 6, 7, 8, 9],
+                    orderable: true,
+                    sorting: true
+                }
+            ],
             columns: [
                 {
                     targets: 0,
