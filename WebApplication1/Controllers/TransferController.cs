@@ -1,9 +1,7 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text;
-using Microsoft.AspNetCore.Mvc;
+
+﻿using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
-using System.Data;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using PostingManagement.UI.CustomActionFilters;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -40,6 +38,16 @@ namespace PostingManagement.UI.Controllers
             dtResponse.data = result.Data;
             return Json(dtResponse);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetEmployeesDataForTransfer()
+        //{
+        //    int page = 1;
+        //    int pageSize = 5;
+        //    List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer(page, pageSize);
+        //    return Json(employeeList);            
+        //}
+
 
         [HttpGet]
         public async Task<IActionResult> GetAdditionalEmployeeDetails(int employeeId, string movementType)

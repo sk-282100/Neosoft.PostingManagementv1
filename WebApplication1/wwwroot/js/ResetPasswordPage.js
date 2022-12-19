@@ -8,7 +8,7 @@
             isPasswordValid = false;
         }
         else if ($('#ConfirmPassword').val() != $('#NewPassword').val()) {
-            $('#ConfirmPassword').notify("Confirm Password is not Matched",  "error");
+            $('#ConfirmPassword').notify("Confirm Password is not Matched", "error");
             isPasswordValid = false;
         }
 
@@ -31,37 +31,39 @@
             $('#NewPassword').notify("Password should contains aleast one Uppercase and one lowercase alphabate and \n one numeric character and \n one spacial character @#$%^&-+=() ", "error");
             isPasswordValid = false;
         }
-
-        if ($('#UserName').val().trim() == '') {
-            $('#UserName').notify("Please Enter the Username", "error");
+        if (isPasswordValid) {
+            $('#ResetPasswordForm').submit();
         }
-        else if ($('#UserName').val().trim() != "") {
+        //if ($('#UserName').val().trim() == '') {
+        //    $('#UserName').notify("Please Enter the Username", "error");
+        //}
+        //else if ($('#UserName').val().trim() != "") {
 
-            $.ajax({
-                type: "GET",
-                url: "/AccountView/IsUserNamePresent?userName=" + $('#UserName').val().trim(),
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    if (response == false) {
-                        $('#UserName').notify(" This User name is not Present !!!", "error");
-                    }
-                    else if (response == true) {
-                        if (isPasswordValid) {
-                            $('#ResetPasswordForm').submit();
-                        }
-                       
-                    }
-                },
-                failure: function (response) {
-                    alert(response.d);
-                },
-                error: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/AccountView/IsUserNamePresent?userName=" + $('#UserName').val().trim(),
+        //        data: '{}',
+        //        contentType: "application/json; charset=utf-8",
+        //        dataType: "json",
+        //        success: function (response) {
+        //            if (response == false) {
+        //                $('#UserName').notify(" This User name is not Present !!!", "error");
+        //            }
+        //            else if (response == true) {
+        //                if (isPasswordValid) {
+        //                    $('#ResetPasswordForm').submit();
+        //                }
+
+        //            }
+        //        },
+        //        failure: function (response) {
+        //            alert(response.d);
+        //        },
+        //        error: function (response) {
+        //            alert(response.d);
+        //        }
+        //    });
+        //}
 
     });
 })

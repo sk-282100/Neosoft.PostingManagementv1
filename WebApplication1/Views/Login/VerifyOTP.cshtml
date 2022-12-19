@@ -65,7 +65,7 @@ else
                             <div class="d-flex justify-content-center py-4">
                                 <a href="#" class="logo d-flex align-items-center w-auto">
                                     <img src="~/img/logo.png" alt="">
-                                    <span class="d-none d-lg-block">Posting Management</span>
+                                    <span class="d-none d-lg-block">NS-Posting Management</span>
                                 </a>
                             </div>
                             <div class="card mb-3 ">
@@ -76,7 +76,7 @@ else
                                         <h5 class="card-title text-center pb-0 fs-4">Verify OTP</h5>
                                         <p class="text-center small">OTP sent to your email , Please enter your OTP for Authentication </p>
                                     </div>
-                                    <form class="row g-3" asp-action="VerifyOTP" id="VerifyOTPForm">
+                                    <form class="row g-3" asp-action="SubmitOTPForm" id="VerifyOTPForm">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <input asp-for="Username" type="hidden" value="@ViewBag.OTPUserName" />
                                         <div class="col-12">
@@ -94,9 +94,9 @@ else
                                         </div>
                                         <input id="otpExpiryTime" type="hidden" value="@ViewBag.OTPExpiryTime" />
 
-                                        <div id="showOtpExpiryTime" class="d-flex flex-column text-center border border-success">
-                                            <h6 class="text-success">OTP Expires in </h6>
-                                            <h3 class ="text-success"></h3>
+                                        <div id="showOtpExpiryTime" class="d-flex flex-column text-success text-center border border-success">
+                                            <h6 >OTP Expires in </h6>
+                                            <h3 ></h3>
 
                                         </div>
                                            

@@ -16,9 +16,6 @@ function GetEmployeesListTransfer() {
             bFilter: true,
             bSort: true,
             bPaginate: true,
-            //"initComplete": function (settings, json) {
-            //    $(this.api().table().container()).find('input').attr('autocomplete', 'off');
-            //},
             ajax: {
                 url: "/Transfer/GetEmployeesDataForTransfer",
                 type: "POST",
@@ -37,9 +34,7 @@ function GetEmployeesListTransfer() {
                     //json.data = JSON.parse(jsonData.data);   
                     return json.data;
                 }
-            },
-
-            //data: response,
+            },            
             dom: 'lBfrtip',
             buttons: [
                 {

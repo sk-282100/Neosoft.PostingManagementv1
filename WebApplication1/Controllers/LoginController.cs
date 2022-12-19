@@ -48,7 +48,7 @@ namespace PostingManagement.UI.Controllers
             {
                 HttpContext.Session.SetString("Username", response.UserName);
                 HttpContext.Session.SetString("UserRole", response.Role);
-                return RedirectToAction("EmployeeMasterUpload", "Posting");
+                return RedirectToAction("ShowDashboard", "Dashboard");
             }
             else
             {
@@ -78,9 +78,11 @@ namespace PostingManagement.UI.Controllers
             var response = await _loginService.SendOTP(request);
             if (response.Succeeded == true)
             {
+                var format = "yyyy-MM-ddTHH:mm:ss";
+                
                 ViewBag.VerifyOTPResponse = null;
                 ViewBag.OTPUserName = request.Username;
-                ViewBag.OTPExpiryTime = response.Data.OTPExpiryTime;
+                ViewBag.OTPExpiryTime = response.Data.OTPExpiryTime.ToString(format);
                 return View("VerifyOTP");
             }
             ViewBag.SendOTPResponse = response ;
@@ -95,28 +97,29 @@ namespace PostingManagement.UI.Controllers
             return Json(response);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> VerifyOTP()
-        {
-            ViewBag.VerifyOTPResponse = null;
-            ViewBag.OTPUserName = "test";
-            return View("VerifyOTP");
-        }
+        
         [HttpPost]
-        public async Task<IActionResult> VerifyOTP(VerifyOTPRequestModel model)
+        public async Task<IActionResult> SubmitOTPForm(VerifyOTPRequestModel model)
         {
-            model.OTPSubmitionTime = DateTime.Now;
-            var response = await _loginService.VerifyOTP(model);
-            if(response.Data == true)
-            {
                 var resetPasswordModel = new ResetPasswordRequestModel() { UserName = model.Username };
                 return View("ResetPassword",resetPasswordModel);
-            }
-            ViewBag.VerifyOTPResponse = response ;
-            return View();
+            
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> VerifyOTP(string username ,int otp)
+        {
+            VerifyOTPRequestModel model = new() { Username = username, OTP = otp, OTPSubmitionTime = DateTime.Now }; 
+            var response = await _loginService.VerifyOTP(model);
+            if (response.Data == true)
+            {
+                return Json(true);
+            }
+            ViewBag.VerifyOTPResponse = response;
+            return Json(false);
+        }
+
+
 
         [HttpPost]
         //Reset Password Method

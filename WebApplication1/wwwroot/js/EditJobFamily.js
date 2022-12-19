@@ -32,7 +32,7 @@ function OnSuccess(response) {
                     data: null,
                     "mRender": function (data, type, full) {
                         var id = "'" + data.jobFamilyId + "'";
-                        return '<a class="btn btn-warning btn-sm mx-4" href="/JobFamily/EditJobFamily?id=' + data.jobFamilyId + '&currentRole=' + data.jobFamily + '" >Edit</a><button id="delete" class="btn btn-danger btn-sm " onclick="Delete(' + id + ')" >Delete</a> ';
+                        return '<a class="btn btn-warning btn-sm mx-4" href="/JobFamily/EditJobFamily?id=' + data.jobFamilyId + '&currentRole=' + data.jobFamily + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button id="delete" class="btn btn-danger btn-sm " onclick="Delete(' + id + ')" ><i class="bi bi-trash-fill" title="Delete"></i></a> ';
 
                     }
                 }
@@ -40,7 +40,7 @@ function OnSuccess(response) {
         });
 };
 
-//Swal Alert For Confirmation Of Delete Role
+//Swal Alert For Confirmation Of Delete JobFamily
 function Delete(id) {
     Swal.fire({
         title: 'Are you sure you want to Delete Job family?',
