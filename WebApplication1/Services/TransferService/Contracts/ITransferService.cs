@@ -33,5 +33,12 @@ namespace PostingManagement.UI.Services.TransferService.Contracts
         /// <param name="EmployeesSelectedByCo"></param>
         /// <returns>Returns a Serialized Object which includes the no of rows inserted and Status  </returns>
         public Task<ZOTransferListReponse> GenerateEmployeeTransferListCo(List<EmployeeTransferModel> EmployeesSelectedByCo);
+
+        /// <summary>
+        /// This Method Matches the employee transfer Vacancy 
+        /// </summary>
+        /// <param name="emoloyeeidList"></param>
+        /// <returns>A Model which includes the region wise vacancy count and Number of employees selected for respective region</returns>
+        public Task<List<MatchingRequestTransferVacancy>> MatchingEmployeeRequestTransferVacancy(List<int> emoloyeeidList);
     }
 }

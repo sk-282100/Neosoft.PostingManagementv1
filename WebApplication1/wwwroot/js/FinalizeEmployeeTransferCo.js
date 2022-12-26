@@ -23,10 +23,11 @@ function FillDatatTable(response) {
         {
             searching: false,
             bLengthChange: false,
-            //lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-            //bFilter: true,
-            //bSort: true,
-            //bPaginate: true,
+            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            bFilter: true,
+            bSort: true,
+            bPaginate: true,
+            processing: true,
             data: response,
             dom: 'lBfrtip',
             buttons: [

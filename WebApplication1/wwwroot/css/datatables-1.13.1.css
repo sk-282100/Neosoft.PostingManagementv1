@@ -404,8 +404,8 @@ table.dataTable {
         }
 
     .dataTables_wrapper .dataTables_filter {
-        float: right;
-        text-align: right
+        float: left;
+        text-align: left
     }
 
         .dataTables_wrapper .dataTables_filter input {

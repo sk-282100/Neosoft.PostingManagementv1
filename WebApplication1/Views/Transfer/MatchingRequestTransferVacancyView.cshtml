@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PostingManagement.Domain.Entities.MatchingRequestTransferVacancy>
+
+@{
+    ViewData["Title"] = "MatchingRequestTransferVacancyView";
+    Layout = "~/Views/Shared/MainView.cshtml";
+    var step = 2;
+}
+
+<style>
+    #wrapper .baricon {
+        display: inline-block;
+        border-radius: 75%;
+        padding: 6px;
+        background-color: #acacad;
+        color: white;
+    }
+
+    #wrapper .progress_bar {
+        width: 52px;
+        height: 2px;
+        border-radius: 20px;
+        background-color: #D8D8D8;
+        display: inline-block;
+    }
+
+    span.baricon.active {
+        background-color: #1aa93f !important;
+    }
+</style>
+
+<div class="col-xxl-12 col-xl-12">
+    <div id="wrapper" class="align-content-end d-flex justify-content-end p-3">
+        <div class="">
+            <span class="baricon @(step>=1?"active":" ")">1</span>
+            <span id="bar1" class="progress_bar"></span>
+            <span class="baricon @(step>=2?"active":" ")">2</span>
+            <span id="bar2" class="progress_bar"></span>
+            <span class="baricon @(step>=3?"active":" ")">3</span>
+        </div>
+    </div>
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+            <div class="d-flex flex-row justify-content-between">
+                <h5 class="card-title">Matching Employee Transfer Request(Region Wise)<span></span></h5>
+                <a class="btn btn-success" onclick="GenerateList()">Proceed</a>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="display responsive nowrap" id="matchingVacancy">
+                        <thead>
+                            <tr>
+                                <th>Zone</th>
+                                <th>Region</th>
+                                <th>No. Of Vacancies</th>
+                                <th>Selected Employees</th>
+                                <th>Matched / UnMatched</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/MatchingVacancy.js"></script>

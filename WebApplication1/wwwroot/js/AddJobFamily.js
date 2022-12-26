@@ -124,7 +124,7 @@ function OnSuccess(response) {
 
                 { data: 'jobFamilyName'},
                 {
-                   
+                    orderable: false,
                     data: null,
                     "mRender": function (data, type, full) {
                         return '<a class="btn btn-warning btn-sm mx-4" href="/JobFamily/EditJobFamily?id=' + data.jobFamilyId + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button id="delete" class="btn btn-danger btn-sm DatatableDeleteBtn "  value="' + data.jobFamilyId +'" ><i class="bi bi-trash-fill" title="Delete"></i></a> ';

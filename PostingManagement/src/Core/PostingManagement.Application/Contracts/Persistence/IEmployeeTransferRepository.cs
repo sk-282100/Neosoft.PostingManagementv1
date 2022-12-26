@@ -7,6 +7,7 @@ namespace PostingManagement.Application.Contracts.Persistence
     {
         public Task<TransferListReponse> GetAllTransferListEmployees(int pageNumber, int numberOfRecords);
         public Task<EmployeeDetailsForTransferList> GetEmployeeByIdAndMovementType(int employeeId, string movementType);
+        public Task<List<MatchingRequestTransferVacancy>> GetMatchingRequestTransferList(List<int> employeeIdList);
         public Task<List<TransferListVM>> GetTransferListEmployeesByEmployeeId(List<int> employeeIdList);
         public ZOTransferListReponse InsertIntoTransferListForZo(List<TransferListVM> list);
     }

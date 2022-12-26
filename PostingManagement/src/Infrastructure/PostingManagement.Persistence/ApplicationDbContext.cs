@@ -46,6 +46,7 @@ namespace PostingManagement.Persistence
         public DbSet<InterZonalPromotionRecordsDto> InterZonalPromotionTbl { get; set; }
         public DbSet<InterZonalRequestRecordsDto> InterZonalRequestTransferTbl { get; set; }
         public DbSet<UploadHistoryDetails> UploadHistoryDetails { get; set; }
+        public DbSet<MatchingRequestTransferVacancy> MatchingRequestTransferVacancyTbl { get; set; }
         public DbSet<UserDetails> UserDetailsTbl { get; set; }
         public DbSet<TransferListVM> TransferListTbl { get; set; }
         public DbSet<EmployeeDetailsForTransferList> EmployeeDetailsForTransferListTbl { get; set; }

@@ -11,6 +11,7 @@
         public const string InterRegionRequestTransfer = "Inter-Region Request Transfer";
         public const string InterZonalPromotion = "Inter-Zonal Promotion";
         public const string InterZonalRequestTranfer = "Inter-Zonal Request Transfer";
+        public const string VacancyPool = "Vacancy Pool";
 
     }
 }

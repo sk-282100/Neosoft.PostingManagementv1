@@ -8,7 +8,7 @@ function GetEmployeesListTransfer() {
         {
             clear: true,
             serverSide: true,
-            searching: false,
+            searching: true,
             destroy: true,
             pageLength: 5,
             lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
@@ -70,12 +70,14 @@ function GetEmployeesListTransfer() {
                     targets: 0,
                     className: 'dt-control',
                     orderable: false,
+                    searchable:false,
                     data: null,
                     defaultContent: '',
                 },
                 {
                     targets: 1,
                     data: 'employeeId',
+                    searchable:false,
                     checkboxes: {
                         selectRow: true
                     }
@@ -94,7 +96,7 @@ function GetEmployeesListTransfer() {
             'select': {
                 'style': 'multi'
             },
-            'order': [[0, 'asc']]
+            'order': [[2, 'asc']]
 
         });
 
@@ -117,7 +119,7 @@ function GetEmployeesListTransfer() {
 
 }
 
-function GenerateList() {
+function MatchVacancy() {
     
     var rows_selected = table.column(1).checkboxes.selected();
 
@@ -133,7 +135,7 @@ function GenerateList() {
         console.log(employeeIdList)
         sessionStorage.setItem("EmployeeIdList", JSON.stringify(employeeIdList));
         
-        window.location.assign("/Transfer/FinalizeEmployeeTransferViewCo/")
+        window.location.assign("/Transfer/MatchingRequestTransferVacancyView/")
         
     }
     

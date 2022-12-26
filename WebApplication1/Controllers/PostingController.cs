@@ -121,11 +121,21 @@ namespace PostingManagement.UI.Controllers
             return View("ExcelUploadView");
         }
 
+        [HttpGet]
+        //Vacancy Pool Excel Upload Using FileType Code
+        public async Task<IActionResult> VacancyPoolUpload()
+        {
+            HttpContext.Session.SetString("ExcelUploadFiletype", ExcelFileUploadName.VacancyPool);
+            HttpContext.Session.SetInt32("ExcelFileTypeCode", Convert.ToInt32(ExcelFileType.VacancyPool));
+            ViewBag.ExcelUploadFiletype = HttpContext.Session.GetString("ExcelUploadFiletype");
+            ViewBag.ExcelFileTypeCode = HttpContext.Session.GetInt32("ExcelFileTypeCode");
+            return View("ExcelUploadView");
+        }
+
         [HttpPost]
         //Upload Excel
         public async Task<IActionResult> ExcelUpload(ExcelUploadViewModel model)
         {
-
             string uploadedBy = HttpContext.Session.GetString("Username");
             ExcelUploadResponseModel responseModel = await _service.UploadExcel(model, uploadedBy);
             var excelType = HttpContext.Session.GetString("ExcelUploadFiletype");

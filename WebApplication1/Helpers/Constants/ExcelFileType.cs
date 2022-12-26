@@ -10,7 +10,7 @@
         InterZonalPromotion=6,
         InterZonalRequestTranfer=7,
         RegionMaster=8,
-        ZoneMaster=9
-
+        ZoneMaster=9,
+        VacancyPool = 10
     }
 }

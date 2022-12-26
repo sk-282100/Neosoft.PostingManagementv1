@@ -124,6 +124,12 @@ namespace PostingManagement.Persistence.Repositories
                    , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
                     break;
 
+                case nameof(VacancyPool):
+                    dataTableParameter = new SqlParameter() { ParameterName = "@vacancyPoolData", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "VacancyPoolTableType" };
+                    result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_VacancyPool_BulkUpload @vacancyPoolData,@uploadedBy,@fileName, @batchId OUTPUT,@successCount OUTPUT, @status OUTPUT"
+                   , dataTableParameter, uploadedByParameter, fileNameParameter, batchId, successCount, uploadStatus);
+                    break;
+
                 default: throw new ArgumentException("This file type is note present");
             }
 
