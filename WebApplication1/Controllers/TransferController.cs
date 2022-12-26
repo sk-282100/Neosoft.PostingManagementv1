@@ -37,17 +37,7 @@ namespace PostingManagement.UI.Controllers
             dtResponse.recordsTotal = numberOfRecords;
             dtResponse.data = result.Data;
             return Json(dtResponse);
-        }
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetEmployeesDataForTransfer()
-        //{
-        //    int page = 1;
-        //    int pageSize = 5;
-        //    List<EmployeeTransferModel> employeeList = await _transferService.GetEmployeesForTransfer(page, pageSize);
-        //    return Json(employeeList);            
-        //}
-
+        }        
 
         [HttpGet]
         public async Task<IActionResult> GetAdditionalEmployeeDetails(int employeeId, string movementType)

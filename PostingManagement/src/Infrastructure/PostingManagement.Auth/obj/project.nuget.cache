@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "12NUhR3/D9zJxB1T7K7USKf1Rha0mEAQXM85jSEY81yezLIVKKzocZNrk9ym9+O0btBCQWkGF0laMpc+pPpqqA==",
+  "dgSpecHash": "x0AZOwd6EoPj0P4UNaT+XDRUtMtDFoByAvr6hRlj8302B3bCoF/TGoFqw6DnsS5mTELjyMqIOUQd+tXsXMxX7Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Infrastructure\\PostingManagement.Auth\\PostingManagement.Auth.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Infrastructure\\PostingManagement.Auth\\PostingManagement.Auth.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {}
+    "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {
+    "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
         "projectName": "PostingManagement.Domain",
-        "projectPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Core\\PostingManagement.Domain\\PostingManagement.Domain.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\v2\\PostingManagement\\src\\Core\\PostingManagement.Domain\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\v3\\PostingManagement\\src\\Core\\PostingManagement.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
