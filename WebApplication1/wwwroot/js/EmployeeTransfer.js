@@ -8,29 +8,33 @@ function GetEmployeesListTransfer() {
         {
             clear: true,
             serverSide: true,
-            searching: false,
+            /*searching: false,*/
             destroy: true,
             pageLength: 5,
-            lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
             autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
             ajax: {
                 url: "/Transfer/GetEmployeesDataForTransfer",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: function (d) {
-                    var data = { data: d };                    
-                    return JSON.stringify(data);
+                    var data = { data: d };
+                   return JSON.stringify(data);
                 },
                 AutoWidth: false,
                 dataSrc: function (json) {
                     var jsonData = json;
                     json.draw = jsonData.draw;
                     json.recordsTotal = jsonData.recordsTotal;
-                    json.recordsFiltered = jsonData.recordsFiltered;                                        
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
                     return json.data;
                 }
             },            
@@ -57,18 +61,27 @@ function GetEmployeesListTransfer() {
                     text: '<i class="bi bi-file-earmark-excel"></i>'
                 }
             ],
-
+            columnDefs: [
+                {
+                    targets: [2, 3, 4, 5, 6, 7, 8, 9],
+                    className: "text-center",
+                    searchable: false,
+                    orderable: true
+                }
+            ],
             columns: [
                 {
                     targets: 0,
                     className: 'dt-control',
                     orderable: false,
+                    searchable:false,
                     data: null,
                     defaultContent: '',
                 },
                 {
                     targets: 1,
                     data: 'employeeId',
+                    searchable:false,
                     checkboxes: {
                         selectRow: true
                     }
@@ -87,7 +100,6 @@ function GetEmployeesListTransfer() {
             'select': {
                 'style': 'multi'
             },
-            'order': [[0, 'asc']]
 
         });
 
@@ -110,7 +122,7 @@ function GetEmployeesListTransfer() {
 
 }
 
-function GenerateList() {
+function MatchVacancy() {
     
     var rows_selected = table.column(1).checkboxes.selected();
 
@@ -126,7 +138,7 @@ function GenerateList() {
         console.log(employeeIdList)
         sessionStorage.setItem("EmployeeIdList", JSON.stringify(employeeIdList));
         
-        window.location.assign("/Transfer/FinalizeEmployeeTransferViewCo/")
+        window.location.assign("/Transfer/MatchingRequestTransferVacancyView/")
         
     }
     

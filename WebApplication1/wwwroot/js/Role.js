@@ -123,6 +123,7 @@ function OnSuccess(response){
     
            { data: 'roleName' },
            {
+               orderable: false,
                data: null,
                orderable: false,
                "mRender": function (data, type, full) {

@@ -73,6 +73,7 @@ function OnSuccess(response) {
                 { data: 'jobFamilyName' },
 
                 {
+                    orderable: false,
                     data: null,
                     orderable: false,
                     "mRender": function (data, type, full) {

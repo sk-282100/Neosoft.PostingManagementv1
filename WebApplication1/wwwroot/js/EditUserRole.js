@@ -98,6 +98,7 @@ function OnSuccess(response) {
                 { data: 'userName' },
                 { data: 'email'},
                 {
+                    orderable: false,
                     data: null,
                     orderable: false,
                     "mRender": function (data, type, full) {

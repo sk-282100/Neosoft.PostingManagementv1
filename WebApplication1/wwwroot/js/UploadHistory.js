@@ -43,6 +43,7 @@ function OnSuccess(response) {
                     }
                 },
                 {
+                    orderable: false,
                     data: null,
                     "mRender": function (data, type, full) {
                         if (data.uploadStatus.toLowerCase() == "success") {
