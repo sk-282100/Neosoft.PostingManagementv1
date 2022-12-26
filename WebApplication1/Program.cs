@@ -12,6 +12,8 @@ using PostingManagement.UI.Services.RoleService;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using PostingManagement.UI.Services.TransferService;
 using PostingManagement.UI.Services.JobFamilyServices;
+using PostingManagement.UI.Services.TriggerServices.Contracts;
+using PostingManagement.UI.Services.TriggerServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,7 @@ builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<ITransferService, TransferService>();
 builder.Services.AddScoped<IJobFamilyService, JobFamilyService>();
+builder.Services.AddScoped<ITriggerService, TriggerService>();
 builder.Services.AddScoped<HttpClientHandler>();
 builder.Services.AddSession();
 builder.Services.AddDNTCaptcha(options =>

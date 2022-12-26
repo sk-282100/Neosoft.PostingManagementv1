@@ -139,6 +139,7 @@ function OnSuccess(response) {
                 {
                     orderable: false,
                     data: null,
+                    orderable: false,
                     "mRender": function (data, type, full) {
                         return '<a class="btn btn-warning btn-sm mx-4" href="/AccountView/EditUserRoleDetails?id=' + data.uId + '&currentRole=' + data.role + '" ><i class="bi bi-pencil-fill" title="Edit"></i></a><button id="delete" class="btn btn-danger btn-sm DatatableDeleteBtn "  value="' + data.uId +'" ><i class="bi bi-trash-fill" title="Delete"></i></button> ';
 

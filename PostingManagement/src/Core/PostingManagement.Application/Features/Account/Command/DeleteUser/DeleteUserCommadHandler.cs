@@ -17,7 +17,7 @@ namespace PostingManagement.Application.Features.Account.Command.DeleteUser
 
         public async Task<Response<bool>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            //Decripting the UserId
+            //Decrypting the UserId
             int id = Convert.ToInt32(_dataProtector.Unprotect(request.UserId));
             bool response =await _repository.DeleteUser(id, request.DeleteBy);
 

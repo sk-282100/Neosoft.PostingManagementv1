@@ -1,5 +1,4 @@
 ﻿using PostingManagement.Application.Contracts.Persistence;
-using PostingManagement.Infrastructure.EncryptDecrypt;
 using PostingManagement.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +22,10 @@ namespace PostingManagement.Persistence
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IEmployeeTransferRepository, EmployeeTransferRepository>();
-            services.AddScoped<IJobFamilyRepository, JobFamilyRepository>();    
+            services.AddScoped<IJobFamilyRepository, JobFamilyRepository>();
+            services.AddScoped<ITriggerRepository, TriggerRepository>();
+            services.AddScoped<IScaleRepository, ScaleRepository>();
+
             return services;
         }
     }
