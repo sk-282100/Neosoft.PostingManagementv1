@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "ShowTriggerTable";
+    Layout = "MainView";
+}
+<script src="~/lib/jquery/dist/datatable.buttons - 2.3.2.js"></script>
+<script src="~/js/triggerpage.js"></script>
+<h1 class="card-title">Manage Trigger</h1>
+</hr>
+<div>
+    <div class="card info-card customers-card">
+
+        <div class="card-body">
+
+            <h5 class="card-title"> All Triggers Details <span></span></h5>
+            <hr />
+            <div>
+                <table id="triggerDetailsTable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Scale Name</th>
+                            <th>Tenure</th>
+                            <th>Mandatory</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="createModalLabel">Create new Trigger</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="d-flex flex-column justify-content-center modal-body p-5">
+                <form id="createTriggerForm">
+                <div>
+                    <label for="ScaleId1">Scale :</label>
+                    <select id="ScaleId1" class="form-select ScaleId">
+                    </select>
+                </div>
+                <div class="my-4">
+                    <label>Tnrue :</label>
+                    <div class="d-flex ">
+                        <label for="createScaleYears">Year </label>
+                        <input type="number" id="createScaleYears" min="0" class="form-control mx-3"/>
+                        <label for="createScaleMonth">Month </label>
+                        <input type="number" id="createScaleMonth" min="0" max="12" class="form-control mx-3" />
+                    </div>
+                </div>
+                <div class="d-flex py-4">
+                    <label class="me-3">Mandatory :</label>
+                    <input type="radio" class="btn-check" name="createMandatoryOption" id="success-outlined" value="Yes" autocomplete="off" checked>
+                    <label class="btn btn-outline-success me-2" for="success-outlined">Yes</label>
+
+                    <input type="radio" class="btn-check" name="createMandatoryOption" id="danger-outlined" value="No" autocomplete="off">
+                    <label class="btn btn-outline-danger" for="danger-outlined">No</label>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="SaveTriggerBtn" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-2" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModalLabel">Update Trigger</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="d-flex flex-column justify-content-center modal-body p-5">
+                <form id="updateTriggerForm">
+                <input type="hidden" id="TriggerId" />
+                <div>
+                    <label for="ScaleId2">Scale :</label>
+                        <select id="ScaleId2" class="form-select ScaleId">
+                    </select>
+                </div>
+                <div class="my-4">
+                    <label>Tnrue :</label>
+                    <div class="d-flex ">
+                        <label for="updateScaleYears">Year </label>
+                        <input type="number" id="updateScaleYears" min="0" class="form-control mx-3" />
+                        <label for="upadateScaleMonth">Month </label>
+                        <input type="number" id="upadateScaleMonth" min="0"  max="12" class="form-control mx-3" />
+                    </div>
+                </div>
+                <div class="d-flex py-4">
+                    <label class="me-3">Mandatory :</label>
+                    <input type="radio" class="btn-check" name="updateMandatoryOption" id="success-outlined1" value="Yes" autocomplete="off"  >
+                    <label class="btn btn-outline-success me-2" for="success-outlined1">Yes</label>
+
+                    <input type="radio" class="btn-check" name="updateMandatoryOption" id="danger-outlined2" value="No" autocomplete="off">
+                    <label class="btn btn-outline-danger" for="danger-outlined2">No</label>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="updateTriggerBtn" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

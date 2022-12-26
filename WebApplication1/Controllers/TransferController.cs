@@ -1,11 +1,9 @@
 
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using PostingManagement.UI.Models;
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
-using PostingManagement.UI.CustomActionFilters;
-using Microsoft.AspNetCore.Mvc.Routing;
-using PostingManagement.UI.Models;
 
 namespace PostingManagement.UI.Controllers
 {

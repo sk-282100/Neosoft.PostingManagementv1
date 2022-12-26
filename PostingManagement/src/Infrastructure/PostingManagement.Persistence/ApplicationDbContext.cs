@@ -51,7 +51,8 @@ namespace PostingManagement.Persistence
         public DbSet<EmployeeDetailsForTransferList> EmployeeDetailsForTransferListTbl { get; set; }
         public DbSet<OTPModel> OTPTbl { get; set; }
         public DbSet<JobFamilies> JobFamilyTable { get; set; }
-
+        public DbSet<Trigger> TriggerTbl { get; set; }
+        public DbSet<Scale> ScaleTbl { get; set; }
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

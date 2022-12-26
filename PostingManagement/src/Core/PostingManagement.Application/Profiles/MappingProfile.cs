@@ -19,6 +19,9 @@ using PostingManagement.Application.Features.Orders.GetOrdersForMonth;
 using PostingManagement.Application.Features.Roles.Commands.EditRole;
 using PostingManagement.Application.Features.Roles.Queries.GetAllRoles;
 using PostingManagement.Application.Features.Roles.Queries.GetRoleById;
+using PostingManagement.Application.Features.Scales.Queries.GetAllScales;
+using PostingManagement.Application.Features.Triggers.Queries.GetAllTrigger;
+using PostingManagement.Application.Features.Triggers.Queries.GetTriggerById;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Application.Profiles
@@ -52,7 +55,12 @@ namespace PostingManagement.Application.Profiles
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
 
             CreateMap<UserDetails, UserDetailsDto>().ConvertUsing<UserDetailsCustomMapper>();
-            CreateMap<UserDetailsVm, GetAllUserDetailsDto>().ConvertUsing<GetAllUserDetailsCustomMapper>(); ;
+            CreateMap<UserDetailsVm, GetAllUserDetailsDto>().ConvertUsing<GetAllUserDetailsCustomMapper>();
+
+            CreateMap<Trigger, GetTriggerByIdDto>().ConvertUsing<GetTriggerByIdCustomMapper>();
+            CreateMap<TriggerVm, GetAllTriggerDto>().ConvertUsing<GetAllTriggerCustomMapper>();
+
+            CreateMap<Scale, ScaleDto>().ConvertUsing<GetScaleCustomMapper>();
 
             CreateMap<Role, EditRoleCommand>().ReverseMap();
             CreateMap<Role, GetAllRolesDto>().ConvertUsing<GetAllRolesDtoCustomMapper>();
