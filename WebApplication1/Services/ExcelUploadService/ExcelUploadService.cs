@@ -87,6 +87,10 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 {
                     return await DepartmentMasterFileUpload(model.ExcelFile, uploadedBy);
                 }
+                else if (model.FileType == ExcelFileUploadName.VacancyPool)
+                {
+                    return await VacancyPoolFileUpload(model.ExcelFile, uploadedBy);
+                }
                 else
                 {
                     return new ExcelUploadResponseModel() { Succeeded = false, Message = "File type not found" };
@@ -997,6 +1001,96 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
         }
+
+        private async Task<ExcelUploadResponseModel> VacancyPoolFileUpload(IFormFile excelFile, string uploadedBy)
+        {
+
+            //Excel Format
+            string[] excelColumns = new string[]
+                        {
+                "ZoneCode","ZoneName","RegionCode","RegionName","No Of Vacancy(Zone)","No Of Vacancy(Region)"
+                        };
+            //Intializing List for storing the Excel data 
+            List<VacancyPool> VacancyPoolList = new List<VacancyPool>();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var stream = new MemoryStream())
+            {
+                await excelFile.CopyToAsync(stream);
+                using (var package = new ExcelPackage(stream))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+                    //Checking the format of the Excel file 
+                    for (int col = 1; col <= 6; col++)
+                    {
+                        if (excelColumns[col - 1] != Convert.ToString(worksheet.Cells[1, col].Value))
+                        {
+                            throw new InvalideExcelFormatException("Excel is not in correct format");
+                        }
+                    }
+
+                    //Removing Empty Rows
+                    var rowCount = worksheet.Dimension.Rows;
+                    var maxColumns = worksheet.Dimension.Columns;
+                    for (int row = rowCount; row > 1; row--)
+                    {
+                        bool isRowEmpty = true;
+                        for (int column = 1; column <= maxColumns; column++)
+                        {
+                            var cellEntry = Convert.ToString(worksheet.Cells[row, column].Value);
+                            if (!string.IsNullOrEmpty(cellEntry))
+                            {
+                                isRowEmpty = false;
+                                break;
+                            }
+                        }
+                        if (!isRowEmpty)
+                            continue;
+                        else
+                            worksheet.DeleteRow(row);
+                    }
+                    rowCount = worksheet.Dimension.Rows;
+
+                    //Converting Excel data to List
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        VacancyPool obj = new VacancyPool();
+
+                        #region Vacancy Pool object Assigned
+                        obj.ZoneCode = Convert.ToString(worksheet.Cells[row, 1].Value).Trim();
+                        obj.ZoneName = Convert.ToString(worksheet.Cells[row, 2].Value).Trim();
+                        obj.RegionCode = Convert.ToString(worksheet.Cells[row, 3].Value).Trim();
+                        obj.RegionName = Convert.ToString(worksheet.Cells[row, 4].Value).Trim();
+                        obj.NoOfVacancyZone = Convert.ToInt32(worksheet.Cells[row, 5].Value);
+                        obj.NoOfVacancyRegion = Convert.ToInt32(worksheet.Cells[row, 6].Value);
+                        #endregion
+
+                        VacancyPoolList.Add(obj);
+                    }
+
+                    //create the request for data upload
+                    string fileName = excelFile.FileName;
+                    ExcelUploadRequest<VacancyPool> request = new ExcelUploadRequest<VacancyPool>() { FileName = fileName, FileData = VacancyPoolList };
+
+                    //Client Handler Part
+                    using (var httpClient = new HttpClient(_clientHandler))
+                    {
+                        StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                        string name = uploadedBy;
+                        using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/VacancyPoolUpload?username=" + name, content))
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            var uploadResult = JsonConvert.DeserializeObject<ExcelUploadResponseModel>(apiResponse);
+                            return uploadResult;
+                        }
+                    }
+                }
+            }
+            
+        }
+        
         #endregion
     }
 }
