@@ -51,12 +51,11 @@ namespace PostingManagement.Persistence.Repositories
                 dataTable.Rows.Add(id);
             }
 
-            SqlParameter employeeIdListParameter = new SqlParameter() { ParameterName = "@employeeIdList", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "EmployeeIdList" }; 
+            SqlParameter employeeIdListParameter = new SqlParameter() { ParameterName = "@employeeIdList", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "EmployeeIdList" };
             var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_GetTransferDataAndPromotionDataByEmployeeId @employeeIdList", employeeIdListParameter).ToListAsync();
             return result;
         }
-
-        public ZOTransferListReponse InsertIntoTransferListForZo(List<TransferListVM> list)
+        public async Task<ZOTransferListReponse> InsertIntoTransferListForZo(List<TransferListVM> list)
         {
             DataTable dataTable = new DataTable(typeof(TransferListVM).Name);
             //Get all the properties

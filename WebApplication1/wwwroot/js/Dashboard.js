@@ -1,5 +1,4 @@
-﻿
-$(function () {
+﻿$(function () {
     $.ajax({
         type: "GET",
         url: "/Dashboard/GetUploadHistory?id=1",
@@ -13,7 +12,6 @@ $(function () {
             alert(response.d);
         }
     });
-
     $('#ReportFiletype').change(function () {
 
         var filetypeCode = $('#ReportFiletype').val()
@@ -24,7 +22,7 @@ $(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: OnSuccess,
-            
+
             failure: function (response) {
                 alert(response.d);
             },
@@ -37,7 +35,7 @@ $(function () {
 function OnSuccess(response) {
     //var records = JSON.parse(response);
     console.log(response);
-    
+
     var totalRow = [];
     var uploadDate = new Array();
     for (records of response) {
@@ -46,19 +44,19 @@ function OnSuccess(response) {
     }
     var options = {
         series: [{
-            name:"Total Uploded rows",
+            name: "Total Uploded rows",
             data: totalRow
         }],
         chart: {
             type: 'bar',
             height: 350,
-           
+
         },
         plotOptions: {
             bar: {
                 borderRadius: 4,
                 horizontal: false,
-                
+
             }
         },
         dataLabels: {
@@ -100,5 +98,14 @@ function OnSuccess(response) {
     $('#chart').empty();
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
-
 }
+
+function ShowWorkFlow() {
+    $('#demo').show();
+    $('#itemModal3').modal('show');
+};
+
+function HideWorkFlow() {
+    $('#demo').hide();
+    $('#itemModal3').modal('hide');
+};

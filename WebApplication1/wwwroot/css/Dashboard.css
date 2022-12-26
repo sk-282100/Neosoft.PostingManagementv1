@@ -1,0 +1,54 @@
+﻿body {
+    background-color: #eee;
+    font-weight: 300;
+}
+
+.container {
+    height: 40vh;
+}
+
+.progresses {
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    width: 120px;
+    height: 6px;
+    background: #808b86;
+}
+
+.steps {
+    display: flex;
+    background-color: green;
+    color: #fff;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+#monthAndYear {
+    font-weight: 600;
+    color: #4154f1;
+}
+
+.close {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+}
+
+button.close {
+    background-color: #5641c200;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+.textbelowstep {
+    width: 20%;
+}

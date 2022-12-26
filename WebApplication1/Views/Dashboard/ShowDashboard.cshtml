@@ -1,46 +1,113 @@
 ﻿@{
-    ViewData["Title"] = "ShowDeshboard";
+    ViewData["Title"] = "ShowDashboard";
     Layout = "MainView";
 }
 
-<script src="~/js/dashboard.js"></script>
-<div class="pagetitle">
-    <h1>Dashboard</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-    </nav>
+<head>
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+    <script src="~/js/dashboard.js"></script>
+</head>
+
+
+<div class="pagetitle d-flex justify-content-between">
+    <div>
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <button id="workFlow" type="button" onclick="ShowWorkFlow()" class="btn btn-success">View Work Flow</button>
+    </div>
+</div>
+
+<div id="demo" style="display: none">
+    <div id="itemModal3" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Work Flow</h4>
+                    <button onclick="HideWorkFlow()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <span class="fs-3" id="monthAndYear">@DateTime.Today.ToString("MMMM yyyy")</span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button id="resetButton" type="button" onclick="" class="btn btn-danger mx-4">Reset</button>
+                        <button id="completeButton" type="button" onclick="" class="btn btn-success">Complete</button>
+                    </div>
+                    <div class="container d-flex flex-column justify-content-center align-items-center">
+                        <div class="progresses">
+                            <div class="steps">
+                                <span><i class="bi bi-check-lg"></i></span>
+                            </div>
+                            <span class="line"></span>
+
+                            <div class="steps">
+                                <span><i class="bi bi-check-lg"></i></span>
+                            </div>
+
+                            <span class="line"></span>
+
+                            <div class="steps">
+                                <span><i class="bi bi-check-lg"></i></span>
+                            </div>
+
+                            <span class="line"></span>
+
+                            <div class="steps">
+                                <span class="font-weight-bold">4</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-evenly w-100 pt-2">
+                            <div class="text-center textbelowstep">
+                                <span> Employee Transfer List</span>
+                            </div>
+                            <div class="text-center textbelowstep">
+                                <span> Vacancy List</span>
+                            </div>
+                            <div class="text-center textbelowstep">
+                                <span> Request Transfer List (Zonal)</span>
+                            </div>
+                            <div class="text-center textbelowstep">
+                                <span> Promotion Transfer List (Zonal)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="col-12">
     <div class="card">
-        
-       
         <div class="card-body">
             <h5 class="card-title">Excel Upload Reports </h5>
             <div class="w-25 my-3">
-            <select id="ReportFiletype" class="form-select ">
-                <option value="1">Branch Master</option>
-                <option value="2">Department Master</option>
-                <option value="3">Employee Master</option>
-                <option value="4">Inter-Region Promotion</option>
-                <option value="5">Inter-Region Request Transfer</option>
-                <option value="6">Inter-Zonal Promotion</option>
-                <option value="7">Inter-Zonal Request Tranfer</option>
-                <option value="8">Region Master</option>
-                <option value="9">Zone Master</option>
-            </select>
+                <select id="ReportFiletype" class="form-select ">
+                    <option value="1">Branch Master</option>
+                    <option value="2">Department Master</option>
+                    <option value="3">Employee Master</option>
+                    <option value="4">Inter-Region Promotion</option>
+                    <option value="5">Inter-Region Request Transfer</option>
+                    <option value="6">Inter-Zonal Promotion</option>
+                    <option value="7">Inter-Zonal Request Tranfer</option>
+                    <option value="8">Region Master</option>
+                    <option value="9">Zone Master</option>
+                </select>
             </div>
             <!-- Line Chart -->
-            <div id="chart"></div>
-
+            <div id="chart">
+            </div>
             <!-- End Line Chart -->
-            
         </div>
-
     </div>
 </div>
-
 
