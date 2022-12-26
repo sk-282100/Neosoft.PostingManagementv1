@@ -46,6 +46,19 @@ namespace PostingManagement.UI.Services.TransferService
             }
         }
 
+        public async Task<List<MatchingRequestTransferVacancy>> MatchingEmployeeRequestTransferVacancy(List<int> emoloyeeidList)
+        {
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(emoloyeeidList), Encoding.UTF8, "application/json");
+                using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/TransferList/MatchRequestTransferVacancy", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var uploadResult = JsonConvert.DeserializeObject<Response<List<MatchingRequestTransferVacancy>>>(apiResponse);
+                    return uploadResult.Data;
+                }
+            }
+        }
 
         public async Task<List<EmployeeTransferModel>> GetEmployeesDataForTransferByEmployeeId(List<int> emoloyeeidList)
         {

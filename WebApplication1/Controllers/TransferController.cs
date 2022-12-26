@@ -1,5 +1,4 @@
-
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
@@ -46,14 +45,14 @@ namespace PostingManagement.UI.Controllers
             return Json(employeeDetails);
         }
 
-        
-        public async Task<IActionResult> GetEmployeesDataForTransferByEmployeeId ([FromBody] List<int> employeeIdList)
+
+        public async Task<IActionResult> GetEmployeesDataForTransferByEmployeeId([FromBody] List<int> employeeIdList)
         {
-            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetEmployeesDataForTransferByEmployeeId(employeeIdList );
-            return Json(selectedEmployeeByCo);    
+            List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetEmployeesDataForTransferByEmployeeId(employeeIdList);
+            return Json(selectedEmployeeByCo);
         }
 
-        
+
         public async Task<IActionResult> FinalizeEmployeeTransferViewCo()
         {
             return View();
@@ -64,6 +63,19 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> FinalizeEmployeeTransferCo([FromBody] List<EmployeeTransferModel> finalizeEmployeeListByCo)
         {
             var result = await _transferService.GenerateEmployeeTransferListCo(finalizeEmployeeListByCo);
+            return Json(result);
+        }
+
+        [HttpGet]
+        public IActionResult MatchingRequestTransferVacancyView()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MatchingRequestTransferVacancyData([FromBody] List<int> selectedEmployeeIdLList)
+        {
+            var result = await _transferService.MatchingEmployeeRequestTransferVacancy(selectedEmployeeIdLList);
             return Json(result);
         }
     }

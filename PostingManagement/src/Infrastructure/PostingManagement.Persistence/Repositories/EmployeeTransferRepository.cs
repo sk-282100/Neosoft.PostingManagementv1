@@ -40,6 +40,22 @@ namespace PostingManagement.Persistence.Repositories
             return result.FirstOrDefault();
         }
 
+        public async Task<List<MatchingRequestTransferVacancy>> GetMatchingRequestTransferList(List<int> employeeIdList)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add(new DataColumn("Id", typeof(int)));
+
+            // populate DataTable from your List here
+            foreach (var id in employeeIdList)
+            {
+                dataTable.Rows.Add(id);
+            }
+
+            SqlParameter employeeIdListParameter = new SqlParameter() { ParameterName = "@employeeIdList", SqlDbType = SqlDbType.Structured, Value = dataTable, TypeName = "EmployeeIdList" };
+            var result = await _dbContext.Set<MatchingRequestTransferVacancy>().FromSqlRaw("EXEC STP_MatchingRequestVacancy @employeeIdList", employeeIdListParameter).ToListAsync();
+            return result;
+        }
+
         public async Task<List<TransferListVM>> GetTransferListEmployeesByEmployeeId(List<int> employeeIdList)
         {
             DataTable dataTable = new DataTable();

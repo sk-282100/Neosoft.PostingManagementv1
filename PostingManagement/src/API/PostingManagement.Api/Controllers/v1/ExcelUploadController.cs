@@ -110,6 +110,16 @@ namespace PostingManagement.Api.Controllers.v1
             var response = await _mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpPost("VacancyPoolUpload")]
+        public async Task<IActionResult> VacancyPoolUpload(string username, ExcelUploadRequest<VacancyPool> excelData)
+        {
+            var request = new ExcelUploadCommand<VacancyPool>() { UploadedBy = username, ExcelDataList = excelData.FileData, FileName = excelData.FileName };
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+
         [HttpGet ("GetUploadHistoryList")]
         public async Task<IActionResult> GetUploadHistoryList (int fileTypeCode)
         {
