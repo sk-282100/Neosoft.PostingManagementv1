@@ -8,14 +8,17 @@ function GetEmployeesListTransfer() {
         {
             clear: true,
             serverSide: true,
-            searching: true,
+            /*searching: false,*/
             destroy: true,
             pageLength: 5,
-            lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
             autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
             ajax: {
                 url: "/Transfer/GetEmployeesDataForTransfer",
                 type: "POST",
@@ -61,8 +64,9 @@ function GetEmployeesListTransfer() {
             columnDefs: [
                 {
                     targets: [2, 3, 4, 5, 6, 7, 8, 9],
-                    orderable: true,
-                    sorting: true
+                    className: "text-center",
+                    searchable: false,
+                    orderable: true
                 }
             ],
             columns: [
@@ -96,7 +100,6 @@ function GetEmployeesListTransfer() {
             'select': {
                 'style': 'multi'
             },
-            'order': [[2, 'asc']]
 
         });
 
