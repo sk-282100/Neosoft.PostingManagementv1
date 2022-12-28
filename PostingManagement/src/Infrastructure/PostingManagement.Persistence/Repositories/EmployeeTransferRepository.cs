@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PostingManagement.Application.Contracts.Persistence;
+using PostingManagement.Application.Features.TransferList.Queries.GetTransferList;
 using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
 using System;
@@ -21,13 +22,15 @@ namespace PostingManagement.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<TransferListReponse> GetAllTransferListEmployees(int pageNumber, int numberOfRecords)
+        public async Task<TransferListReponse> GetAllTransferListEmployees(GetTransferListQuery request)
         {
-            SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = pageNumber };
-            SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = numberOfRecords };
-            SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-            var result = await _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_ServerSideGetTransferDataAndPromotionData @PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
-                pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToListAsync();
+            SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+            SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+            SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar,Size=20, Value = request.SortDirection };
+            SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar,Size=30, Value = request.SortColumn };
+            SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int , Direction = ParameterDirection.Output };
+            var result =  _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_ServerSideGetTransferDataAndPromotionData @PageNumber, @NumberOfRecords, @SortDirection,@SortColumn,@TotalRecords OUTPUT",
+                pageNumerParameter, numberOfRecordsParameter,sortDirectionParameter,sortColumnParameter, totalRecordsParameter).ToList();
             int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
             return new TransferListReponse() { Data = result, TotalRecords = totalRecords };
         }
