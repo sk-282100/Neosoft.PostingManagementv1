@@ -29,5 +29,11 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <param name="batchId">int</param>
         /// <returns>a  serialized list of the respective Excel Model</returns>
         public Task<string> GetAllRecords<T>(int fileTypeCode, int batchId);
+        /// <summary>
+        /// Get the status of Employee transfer workflow
+        /// </summary>
+        /// <returns>returns object of status of four status strings</returns>
+        public Task<WorkFlowStatusModel> GetWorkFlowStatus();
+
     }
 }

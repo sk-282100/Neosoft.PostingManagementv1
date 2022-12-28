@@ -25,5 +25,11 @@ namespace PostingManagement.UI.Controllers
             var historyList = await _excelUploadService.GetUploadHistories(id);
             return Json(historyList.Data);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetWorkFlowStatus()
+        {
+            var response = await _excelUploadService.GetWorkFlowStaus();
+            return Json(response);
+        }
     }
 }

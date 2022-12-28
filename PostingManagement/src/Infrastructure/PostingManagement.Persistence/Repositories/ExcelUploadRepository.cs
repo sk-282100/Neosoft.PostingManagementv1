@@ -12,7 +12,6 @@ using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.In
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.RegionMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
 using PostingManagement.Application.Helper.Constants;
-using PostingManagement.Application.Responses;
 using PostingManagement.Domain.Entities;
 using System.Data;
 using System.Reflection;
@@ -230,6 +229,27 @@ namespace PostingManagement.Persistence.Repositories
             var fileTypeCodeParameter = new SqlParameter() { ParameterName = "@fileTypeCode", SqlDbType = SqlDbType.Int, Value = fileTypeCode };
             var historyList = await _dbContext.Set<UploadHistoryDetails>().FromSqlRaw("EXEC STP_GetUploadHistoryDetails @fileTypeCode", fileTypeCodeParameter).ToListAsync();
             return historyList;
+        }
+        
+        public async Task<WorkFlowStatusModel> GetWorkFlowStatus()
+        {
+            SqlParameter employeeTransferListStatus = new SqlParameter() { ParameterName = "@employeeTransferListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter vacancyListStatus = new SqlParameter() { ParameterName = "@vacancyListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter interZonalRequestStatus = new SqlParameter() { ParameterName = "@interZonalRequestStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter interZonalPromotionStatus = new SqlParameter() { ParameterName = "@interZonalPromotionStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+
+            var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_CheckIfListsUploadedForCurrentMonth @employeeTransferListStatus OUTPUT,@vacancyListStatus OUTPUT,@interZonalRequestStatus OUTPUT,@interZonalPromotionStatus OUTPUT",
+                employeeTransferListStatus, vacancyListStatus, interZonalRequestStatus, interZonalPromotionStatus);
+
+            WorkFlowStatusModel status = new WorkFlowStatusModel()
+            {
+                EmployeeTransferListStatus = Convert.ToString(employeeTransferListStatus.Value),
+                VacancyListStatus = Convert.ToString(vacancyListStatus.Value),
+                InterZonalPromotionStatus = Convert.ToString(interZonalPromotionStatus.Value),
+                InterZonalRequestStatus = Convert.ToString(interZonalRequestStatus.Value)
+            };
+            return status;
+
         }
     }
 }

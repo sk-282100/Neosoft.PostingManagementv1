@@ -29,9 +29,9 @@
             error: function (response) {
                 alert(response.d);
             }
-        })
-    })
-})
+        });
+    });
+});
 function OnSuccess(response) {
     //var records = JSON.parse(response);
     console.log(response);
@@ -101,10 +101,57 @@ function OnSuccess(response) {
 }
 
 function ShowWorkFlow() {
+
+    $.ajax({
+        type: "GET",
+        url: "/Dashboard/GetWorkFlowStatus",
+        contentType: "application/json ; charset = utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response.data != null) {
+                var responseData = response.data;
+                if (responseData.interZonalPromotionStatus == "true") {
+                    AnimateProgressBar(1,4);
+                }
+                else if (responseData.interZonalRequestStatus == "true") {
+                    AnimateProgressBar(1, 3);
+                }
+                else if (responseData.vacancyListStatus == "true") {
+                    AnimateProgressBar(1, 2);
+                }
+                else if (responseData.employeeTransferListStatus == "true") {
+                    AnimateProgressBar(1, 1);
+                }
+                console.log(response);
+            }
+        },
+        failure: function () {
+
+        },
+        error: function () {
+
+        }
+    });
     $('#demo').show();
     $('#itemModal3').modal('show');
 };
-
+function AnimateProgressBar(i , count) {
+    $("#steps" + i + "").empty();
+    $("#steps" + i + "").append('<span><i class="bi bi-check-lg"></i><span>');
+    $("#steps" + i + "").addClass("active");
+    i++;
+    if (i > 1 && i<=count) {
+        $("#line" + (i - 1)+" div").animate({ width: "100%" }, {
+            duration: 700,
+            easing: "linear",
+            complete: function () {
+                if (i <= count) {
+                    AnimateProgressBar(i, count);
+                }
+            }
+        });
+    }
+}
 function HideWorkFlow() {
     $('#demo').hide();
     $('#itemModal3').modal('hide');

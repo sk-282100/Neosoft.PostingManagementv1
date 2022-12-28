@@ -12,6 +12,7 @@ using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.In
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalRequestRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.RegionMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelWorkFlowSTatus;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Application.Helper.Constants;
 using PostingManagement.Domain.Entities;
@@ -221,6 +222,14 @@ namespace PostingManagement.Api.Controllers.v1
                     return Ok(response);
             }
             return Ok();
+        }
+
+        [HttpGet("GetWorkflowStatus")]
+        public async Task<IActionResult> GetWorkFlowSatus()
+        {
+            GetWorkFlowStatusQuery request = new GetWorkFlowStatusQuery();
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }

@@ -12,6 +12,7 @@ using PostingManagement.Application.Features.Events.Queries.GetEventDetail;
 using PostingManagement.Application.Features.Events.Queries.GetEventsExport;
 using PostingManagement.Application.Features.Events.Queries.GetEventsList;
 using PostingManagement.Application.Features.ExcelUpload.Command;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelWorkFlowSTatus;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Application.Features.JobFamily.Queries.GetAllJobFamilyquery;
 using PostingManagement.Application.Features.JobFamily.Queries.GetJobFamilyById;
@@ -51,6 +52,7 @@ namespace PostingManagement.Application.Profiles
 
             CreateMap<UploadHistoryDetails, GetUploadHistoryDto>().ReverseMap();
 
+            CreateMap<WorkFlowStatusModel, GetWorkFlowStatusDto>().ReverseMap();
 
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
 

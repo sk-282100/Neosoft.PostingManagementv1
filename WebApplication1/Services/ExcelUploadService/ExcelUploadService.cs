@@ -32,6 +32,19 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
         }
+        public async Task<Response<GetWorkFlowStatus>> GetWorkFlowStaus()
+        {
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetWorkflowStatus"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var uploadResult = JsonConvert.DeserializeObject<Response<GetWorkFlowStatus>>(apiResponse);
+                    return uploadResult;
+                }
+            }
+        }
+
         public async Task<string> GetUploadedRecordsByBatchId(int batchId, int fileTypeCode)
         {
             var request = new UploadedRecords() { BatchId = batchId, FileTypeCode = fileTypeCode };

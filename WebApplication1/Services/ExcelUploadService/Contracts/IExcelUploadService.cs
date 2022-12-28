@@ -24,6 +24,8 @@ namespace PostingManagement.UI.Services.ExcelUploadService.Contracts
         /// <param name="fileTypeCode">File type Id</param>
         /// <returns> Records of the Upload History in JSON string Format</returns>
         public Task<string> GetUploadedRecordsByBatchId(int batchId, int fileTypeCode);
+        public Task<Response<GetWorkFlowStatus>> GetWorkFlowStaus();
+
 
     }
 }
