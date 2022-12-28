@@ -5,6 +5,8 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using PostingManagement.UI.CustomActionFilters;
 using Microsoft.AspNetCore.Mvc.Routing;
 using PostingManagement.UI.Models;
+using DocumentFormat.OpenXml.Office.Word;
+using PostingManagement.UI.Models.EmployeeTransferModels.RequestModels;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -31,7 +33,16 @@ namespace PostingManagement.UI.Controllers
             DTResponse dtResponse = new DTResponse();
             int numberOfRecords = pagination.data.length;
             int pageNumber = (pagination.data.start / numberOfRecords) + 1;
-            var result = await _transferService.GetEmployeesForTransfer(pageNumber, numberOfRecords);
+            var sort = pagination.data.columns[pagination.data.order[0].column].name == null ?
+             "EmployeeId asc" : pagination.data.columns[pagination.data.order[0].column].name + " " +
+                 pagination.data.order[0].dir;
+            string[] sortArray = sort.Split(" ");
+            string sortColumn = sortArray[0];
+            string sortDirection = sortArray[1];
+
+            //Request
+            var request = new TransferListRequestModel() { NumberOfRecords = numberOfRecords,PageNumber=pageNumber,SortColumn=sortColumn,SortDirection=sortDirection}; 
+            var result = await _transferService.GetEmployeesForTransfer(request);
             dtResponse.recordsFiltered = result.TotalRecords;
             dtResponse.recordsTotal = numberOfRecords;
             dtResponse.data = result.Data;
@@ -45,7 +56,7 @@ namespace PostingManagement.UI.Controllers
             return Json(employeeDetails);
         }
 
-
+        [HttpPost]
         public async Task<IActionResult> GetEmployeesDataForTransferByEmployeeId([FromBody] List<int> employeeIdList)
         {
             List<EmployeeTransferModel> selectedEmployeeByCo = await _transferService.GetEmployeesDataForTransferByEmployeeId(employeeIdList);
