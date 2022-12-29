@@ -28,6 +28,8 @@ builder.Services.AddScoped<IExcelUploadService, ExcelUploadService>();
 builder.Services.AddScoped<ITransferService, TransferService>();
 builder.Services.AddScoped<IJobFamilyService, JobFamilyService>();
 builder.Services.AddScoped<ITriggerService, TriggerService>();
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<HttpClientHandler>();
 builder.Services.AddSession();
 builder.Services.AddDNTCaptcha(options =>

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using PostingManagement.Application.Contracts.Persistence;
 using PostingManagement.Application.Features.ExcelUpload.Command;
 using PostingManagement.Application.Responses;
+using PostingManagement.Domain;
 using PostingManagement.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,8 @@ namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelDat
         }
 
         public async Task<string> Handle(GetExcelDataQuery<T> request, CancellationToken cancellationToken)
-        {
-            string dataList = await _repository.GetAllRecords<T>(request.FileTypeCode, request.BatchId);            
+        {            
+            var dataList = await _repository.GetAllRecords<T>(request);
             return dataList;
         }        
     }

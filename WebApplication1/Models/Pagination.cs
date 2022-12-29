@@ -1,4 +1,5 @@
 ﻿using PostingManagement.UI.Models.EmployeeTransferModels;
+using PostingManagement.UI.Models.ExcelFileTypes;
 
 namespace PostingManagement.UI.Models
 {
@@ -38,5 +39,11 @@ namespace PostingManagement.UI.Models
         public int recordsTotal { get; set; }
         public int recordsFiltered { get; set; }
         public List<EmployeeTransferModel> data { get; set; }
+    }
+    public class ViewRecordsResponse<T>
+    {
+        public int recordsTotal { get; set; }
+        public int recordsFiltered { get; set; }
+        public List<T> data { get; set; }
     }
 }

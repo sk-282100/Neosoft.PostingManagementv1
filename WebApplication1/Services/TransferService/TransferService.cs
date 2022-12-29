@@ -25,8 +25,7 @@ namespace PostingManagement.UI.Services.TransferService
         {
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/TransferList/GetTransferList",content))
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/TransferList/GetTransferList?pageNumber=" + pageNumber + "&numberOfRecords=" + numberOfRecords))               
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var uploadResult = JsonConvert.DeserializeObject<Response<TransferListReponseMVC>>(apiResponse);

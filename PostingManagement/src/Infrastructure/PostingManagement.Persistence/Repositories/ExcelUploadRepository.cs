@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PostingManagement.Application.Contracts.Persistence;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.DepartmentMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.EmployeeMasterRecords;
@@ -13,6 +14,7 @@ using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.Re
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
 using PostingManagement.Application.Helper.Constants;
 using PostingManagement.Application.Responses;
+using PostingManagement.Domain;
 using PostingManagement.Domain.Entities;
 using System.Data;
 using System.Reflection;
@@ -140,91 +142,165 @@ namespace PostingManagement.Persistence.Repositories
             return new ExcelUploadResult() { SuccessCount = successcount, UploadStatus = status, BatchId = batchid };
         }
 
-        public async Task<string> GetAllRecords<T>(int fileTypeCode, int batchId)
+        public async Task<string> GetAllRecords<T>(GetExcelDataQuery<T> request) where T : class
         {
-            if (fileTypeCode == (int)ExcelFileType.BranchMaster)
+            if (request.FileTypeCode == (int)ExcelFileType.BranchMaster)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var branchMasterList = _dbContext.Set<BranchMasterRecordsDto>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToList();
-                if (branchMasterList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var branchMasterList = _dbContext.Set<BranchMasterRecordsDto>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<BranchMasterRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(branchMasterList);
-                }
+                    Data = branchMasterList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.DepartmentMaster)
+            else if (request.FileTypeCode == (int)ExcelFileType.DepartmentMaster)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var departmentMasterList = await _dbContext.Set<DepartmentMasterRecordsDto>().FromSqlRaw("EXEC STP_DepartmentMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (departmentMasterList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var departmentMasterList = _dbContext.Set<DepartmentMasterRecordsDto>().FromSqlRaw("EXEC STP_DepartmentMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<DepartmentMasterRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(departmentMasterList);
-                }
+                    Data = departmentMasterList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.EmployeeMaster)
+            else if (request.FileTypeCode == (int)ExcelFileType.EmployeeMaster)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var employeeMasterList = _dbContext.Set<EmployeeMasterRecordsDto>().FromSqlRaw("EXEC STP_EmployeeMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToList();
-                if (employeeMasterList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var employeeMasterList = _dbContext.Set<EmployeeMasterRecordsDto>().FromSqlRaw("EXEC STP_EmployeeMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<EmployeeMasterRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(employeeMasterList);
-                }
+                    Data = employeeMasterList,
+                    TotalRecords = totalRecords
+                };               
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.InterRegionPromotion)
+            else if (request.FileTypeCode == (int)ExcelFileType.InterRegionPromotion)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var interRegionalPromotionList = await _dbContext.Set<InterRegionalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterRegionalPromotionTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (interRegionalPromotionList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var interRegionPromotionList = _dbContext.Set<InterRegionalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterRegionalPromotionTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<InterRegionalPromotionRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(interRegionalPromotionList);
-                }
+                    Data = interRegionPromotionList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.InterRegionRequestTransfer)
+            else if (request.FileTypeCode == (int)ExcelFileType.InterRegionRequestTransfer)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var interRegionalRequestList = await _dbContext.Set<InterRegionalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterRegionRequestTransferTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (interRegionalRequestList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var interRegionRequestList = _dbContext.Set<InterRegionalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterRegionRequestTransferTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<InterRegionalRequestRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(interRegionalRequestList);
-                }
+                    Data = interRegionRequestList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.InterZonalPromotion)
+            else if (request.FileTypeCode == (int)ExcelFileType.InterZonalPromotion)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var interZonalPromotionList = await _dbContext.Set<InterZonalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterZonalPromotionTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (interZonalPromotionList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var interZonalPromotionList = _dbContext.Set<InterZonalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterZonalPromotionTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<InterZonalPromotionRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(interZonalPromotionList);
-                }
+                    Data = interZonalPromotionList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.InterZonalRequestTranfer)
+            else if (request.FileTypeCode == (int)ExcelFileType.InterZonalRequestTranfer)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var interZonalRequestList = await _dbContext.Set<InterZonalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterZonalRequestTransferTbl_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (interZonalRequestList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var interZonalRequestList = _dbContext.Set<InterZonalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterZonalRequestTransferTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<InterZonalRequestRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(interZonalRequestList);
-                }
+                    Data = interZonalRequestList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.RegionMaster)
+            else if (request.FileTypeCode == (int)ExcelFileType.RegionMaster)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var regionMasterList = await _dbContext.Set<RegionMasterRecordsDto>().FromSqlRaw("EXEC STP_RegionMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (true)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var regionMasterList = _dbContext.Set<RegionMasterRecordsDto>().FromSqlRaw("EXEC STP_RegionMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<RegionMasterRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(regionMasterList);
-                }
+                    Data = regionMasterList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            else if (fileTypeCode == (int)ExcelFileType.ZoneMaster)
+            else if (request.FileTypeCode == (int)ExcelFileType.ZoneMaster)
             {
-                var BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = batchId };
-                var zoneMasterList = await _dbContext.Set<ZoneMasterRecordsDto>().FromSqlRaw("EXEC STP_ZoneMasterDataTable_DisplayRecordsByBatch @batchId", BatchId).ToListAsync();
-                if (zoneMasterList.Count > 0)
+                SqlParameter BatchId = new SqlParameter() { ParameterName = "@batchId", SqlDbType = SqlDbType.Int, Value = request.BatchId };
+                SqlParameter pageNumerParameter = new SqlParameter() { ParameterName = "@PageNumber", SqlDbType = SqlDbType.Int, Value = request.PageNumber };
+                SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
+                SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var zoneMasterList = _dbContext.Set<ZoneMasterRecordsDto>().FromSqlRaw("EXEC STP_ZoneMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, totalRecordsParameter).ToList();
+                int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
+                UploadedRecordsResponse<ZoneMasterRecordsDto> result = new()
                 {
-                    return JsonConvert.SerializeObject(zoneMasterList);
-                }
+                    Data = zoneMasterList,
+                    TotalRecords = totalRecords
+                };
+                var response = JsonConvert.SerializeObject(result);
+                return response;
             }
-            return "No Records Found!";
+
+            return "No Records Found";
         }
+
         public async Task<List<UploadHistoryDetails>> GetUploadHistoryList(int fileTypeCode)
         {
             var fileTypeCodeParameter = new SqlParameter() { ParameterName = "@fileTypeCode", SqlDbType = SqlDbType.Int, Value = fileTypeCode };
