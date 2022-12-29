@@ -3,7 +3,7 @@
 }
 
 .container {
-    height: 40vh;
+    height: 30vh;
 }
 
 .progresses {
@@ -31,6 +31,13 @@
     padding: 0;
 }
 #line3 div {
+    background: green;
+    height: 100%;
+    width: 0%;
+    margin: 0;
+    padding: 0;
+}
+#line4 div {
     background: green;
     height: 100%;
     width: 0%;

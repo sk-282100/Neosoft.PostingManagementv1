@@ -34,6 +34,7 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// </summary>
         /// <returns>returns object of status of four status strings</returns>
         public Task<WorkFlowStatusModel> GetWorkFlowStatus();
-
+        public Task<bool> ResetWorkflow();
     }
 }
+

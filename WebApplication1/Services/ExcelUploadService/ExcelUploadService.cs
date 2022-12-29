@@ -39,8 +39,20 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetWorkflowStatus"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    var uploadResult = JsonConvert.DeserializeObject<Response<GetWorkFlowStatus>>(apiResponse);
-                    return uploadResult;
+                    var result = JsonConvert.DeserializeObject<Response<GetWorkFlowStatus>>(apiResponse);
+                    return result;
+                }
+            }
+        }
+        public async Task<Response<bool>> ResetWorkflow()
+        {
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/ResetWorkflow"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<Response<bool>>(apiResponse);
+                    return result;
                 }
             }
         }

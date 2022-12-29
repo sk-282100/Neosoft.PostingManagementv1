@@ -1,4 +1,5 @@
 ﻿$(function () {
+
     $.ajax({
         type: "GET",
         url: "/Dashboard/GetUploadHistory?id=1",
@@ -12,6 +13,7 @@
             alert(response.d);
         }
     });
+
     $('#ReportFiletype').change(function () {
 
         var filetypeCode = $('#ReportFiletype').val()
@@ -28,6 +30,39 @@
             },
             error: function (response) {
                 alert(response.d);
+            }
+        });
+    });
+
+    $('#resetWorkflowBtn').click(function () {
+        Swal.fire({
+            title: 'Are you sure you want to Reset the WorkFlow?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/Dashboard/ResetWorkflow",
+                    success: function (response) {
+                        if (response.succeeded == true && response.data == true) {
+                            HideWorkFlow();
+                            $.notify("workflow has been Reset successfully", "success");
+                            window.setTimeout(() => { location.reload(true); }, 3000);
+                        }
+                    },
+                    failure: function () {
+                        $.notify("opration has been failed, try again later ", "error");
+                    },
+                    error: function () {
+                        $.notify("Something is wrong contect to Dev Team", "error");
+                    }
+                });
             }
         });
     });
@@ -108,32 +143,52 @@ function ShowWorkFlow() {
         contentType: "application/json ; charset = utf-8",
         dataType: "json",
         success: function (response) {
+            $('#demo').show();
+            $('#itemModal3').modal('show');
             if (response.data != null) {
                 var responseData = response.data;
-                if (responseData.interZonalPromotionStatus == "true") {
-                    AnimateProgressBar(1,4);
+                if (responseData.workFlowstatus == "ZO") {
+                    $('#workflowStatus').html("Completed");
+                    $('#workflowStatus').addClass('text-success bg-success border-success');
                 }
-                else if (responseData.interZonalRequestStatus == "true") {
+                else {
+                    $('#workflowStatus').html("Pending");
+                    $('#workflowStatus').addClass('text-warning bg-warning border-warning');
+                }
+                if (responseData.workFlowstatus == "ZO") {
+                    AnimateProgressBar(1, 5);
+                    $('#resetWorkflowBtn').prop("disabled", true);
+                }
+                else if (responseData.generateEmployeeTransfer == "true") {
+                    AnimateProgressBar(1, 4);
+                    $('#resetWorkflowBtn').prop("disabled", false);
+                }
+                else if (responseData.interRequestStatus == "true") {
                     AnimateProgressBar(1, 3);
+                    $('#resetWorkflowBtn').prop("disabled", false);
                 }
                 else if (responseData.vacancyListStatus == "true") {
                     AnimateProgressBar(1, 2);
+                    $('#resetWorkflowBtn').prop("disabled", false);
                 }
-                else if (responseData.employeeTransferListStatus == "true") {
+                else if (responseData.employeeMasterListStatus == "true") {
                     AnimateProgressBar(1, 1);
+                    $('#resetWorkflowBtn').prop("disabled", false);
                 }
-                console.log(response);
+                else {
+                    $('#resetWorkflowBtn').prop("disabled", true);
+                }
+               
             }
         },
         failure: function () {
-
+            $.notify("opration has been failed, try again later ", "error");
         },
         error: function () {
-
+            $.notify("Something is wrong contect to Dev Team", "error");
         }
     });
-    $('#demo').show();
-    $('#itemModal3').modal('show');
+   
 };
 function AnimateProgressBar(i , count) {
     $("#steps" + i + "").empty();
@@ -155,4 +210,5 @@ function AnimateProgressBar(i , count) {
 function HideWorkFlow() {
     $('#demo').hide();
     $('#itemModal3').modal('hide');
+ 
 };

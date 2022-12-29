@@ -233,23 +233,37 @@ namespace PostingManagement.Persistence.Repositories
         
         public async Task<WorkFlowStatusModel> GetWorkFlowStatus()
         {
-            SqlParameter employeeTransferListStatus = new SqlParameter() { ParameterName = "@employeeTransferListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter employeeMasterListStatus = new SqlParameter() { ParameterName = "@employeeMasterListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
             SqlParameter vacancyListStatus = new SqlParameter() { ParameterName = "@vacancyListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
-            SqlParameter interZonalRequestStatus = new SqlParameter() { ParameterName = "@interZonalRequestStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
-            SqlParameter interZonalPromotionStatus = new SqlParameter() { ParameterName = "@interZonalPromotionStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter interRequestStatus = new SqlParameter() { ParameterName = "@interRequestStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter generateEmployeeTransfer = new SqlParameter() { ParameterName = "@generateEmployeeTransfer", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter workFlowStatus = new SqlParameter() { ParameterName = "@workflowStatus", SqlDbType = SqlDbType.VarChar, Size = 20, Direction = ParameterDirection.Output };
 
-            var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_CheckIfListsUploadedForCurrentMonth @employeeTransferListStatus OUTPUT,@vacancyListStatus OUTPUT,@interZonalRequestStatus OUTPUT,@interZonalPromotionStatus OUTPUT",
-                employeeTransferListStatus, vacancyListStatus, interZonalRequestStatus, interZonalPromotionStatus);
+            var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_CheckIfListsUploadedForCurrentMonth @employeeMasterListStatus OUTPUT,@vacancyListStatus OUTPUT,@interRequestStatus OUTPUT,@generateEmployeeTransfer OUTPUT,@workflowStatus OUTPUT",
+                employeeMasterListStatus, vacancyListStatus, interRequestStatus, generateEmployeeTransfer, workFlowStatus);
 
             WorkFlowStatusModel status = new WorkFlowStatusModel()
             {
-                EmployeeTransferListStatus = Convert.ToString(employeeTransferListStatus.Value),
+
+                EmployeeMasterListStatus = Convert.ToString(employeeMasterListStatus.Value),
                 VacancyListStatus = Convert.ToString(vacancyListStatus.Value),
-                InterZonalPromotionStatus = Convert.ToString(interZonalPromotionStatus.Value),
-                InterZonalRequestStatus = Convert.ToString(interZonalRequestStatus.Value)
+                InterRequestStatus = Convert.ToString(interRequestStatus.Value),
+                GenerateEmployeeTransfer = Convert.ToString(generateEmployeeTransfer.Value),
+                WorkFlowstatus = Convert.ToString(workFlowStatus.Value)
             };
             return status;
-
+        }
+        public async Task<bool> ResetWorkflow()
+        {
+            try
+            {
+                var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_ResetWorkFlow");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

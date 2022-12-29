@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.CustomActionFilters;
 using PostingManagement.UI.Services.ExcelUploadService.Contracts;
+using System.Runtime.InteropServices;
 
 namespace PostingManagement.UI.Controllers
 {
@@ -29,6 +30,12 @@ namespace PostingManagement.UI.Controllers
         public async Task<IActionResult> GetWorkFlowStatus()
         {
             var response = await _excelUploadService.GetWorkFlowStaus();
+            return Json(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ResetWorkflow()
+        {
+            var response = await _excelUploadService.ResetWorkflow();
             return Json(response);
         }
     }
