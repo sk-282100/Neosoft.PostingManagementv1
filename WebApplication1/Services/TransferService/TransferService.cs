@@ -1,6 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 using PostingManagement.UI.Models.EmployeeTransferModels;
+using PostingManagement.UI.Models.EmployeeTransferModels.RequestModels;
 using PostingManagement.UI.Models.Responses;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using System.Data;
@@ -19,11 +21,11 @@ namespace PostingManagement.UI.Services.TransferService
             _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
-        public async Task<TransferListReponseMVC> GetEmployeesForTransfer(int pageNumber, int numberOfRecords)
+        public async Task<TransferListReponseMVC> GetEmployeesForTransfer(TransferListRequestModel request)
         {
             using (var httpClient = new HttpClient(_clientHandler))
             {
-                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/TransferList/GetTransferList?pageNumber=" + pageNumber + "&numberOfRecords=" + numberOfRecords))                
+                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/TransferList/GetTransferList?pageNumber=" + pageNumber + "&numberOfRecords=" + numberOfRecords))               
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var uploadResult = JsonConvert.DeserializeObject<Response<TransferListReponseMVC>>(apiResponse);
