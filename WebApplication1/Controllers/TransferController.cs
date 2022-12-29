@@ -24,7 +24,7 @@ namespace PostingManagement.UI.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost]        
         public async Task<IActionResult> GetEmployeesDataForTransfer([FromBody] Pagination pagination)
         {
             DTResponse dtResponse = new DTResponse();

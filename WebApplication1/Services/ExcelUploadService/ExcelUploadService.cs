@@ -14,10 +14,12 @@ namespace PostingManagement.UI.Services.ExcelUploadService
     public class ExcelUploadService : IExcelUploadService
     {
         readonly HttpClientHandler _clientHandler = new HttpClientHandler();
+        readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ExcelUploadService()
+        public ExcelUploadService(IHttpContextAccessor httpContextAccessor)
         {
             _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Response<List<UploadHistoryDetails>>> GetUploadHistories(int fileTypeCode)
@@ -32,13 +34,13 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
         }
-        public async Task<string> GetUploadedRecordsByBatchId(int batchId, int fileTypeCode)
+        public async Task<string> GetUploadedRecordsByBatchId(UploadedRecordsRequest request)
         {
-            var request = new UploadedRecords() { BatchId = batchId, FileTypeCode = fileTypeCode };
+            //var request = new UploadedRecords() { BatchId = batchId, FileTypeCode = fileTypeCode };
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                using (var response = await httpClient.GetAsync("https://localhost:5000/api/v1/ExcelUpload/GetAllRecords?fileTypeCode=" + request.FileTypeCode + "&batchId=" + request.BatchId))
+                using (var response = await httpClient.PostAsync("https://localhost:5000/api/v1/ExcelUpload/GetAllRecords", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     return apiResponse;
@@ -103,7 +105,149 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             }
 
         }
+        public async Task<ViewRecordsResponse<EmployeeMaster>> EmployeeMasterRecords(int id, Pagination pagination)
+        {            
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<EmployeeMaster> viewRecordsResponse = new ViewRecordsResponse<EmployeeMaster>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<EmployeeMaster>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
 
+        public async Task<ViewRecordsResponse<BranchMaster>> BranchMasterRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<BranchMaster> viewRecordsResponse = new ViewRecordsResponse<BranchMaster>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<BranchMaster>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+
+        public async Task<ViewRecordsResponse<DepartmentMaster>> DepartmentMasterRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<DepartmentMaster> viewRecordsResponse = new ViewRecordsResponse<DepartmentMaster>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<DepartmentMaster>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+
+        public async Task<ViewRecordsResponse<InterRegionalPromotion>> InterRegionPromotionRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<InterRegionalPromotion> viewRecordsResponse = new ViewRecordsResponse<InterRegionalPromotion>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterRegionalPromotion>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+        
+        public async Task<ViewRecordsResponse<InterRegionRequestTransfer>> InterRegionRequestTransferRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<InterRegionRequestTransfer> viewRecordsResponse = new ViewRecordsResponse<InterRegionRequestTransfer>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterRegionRequestTransfer>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+
+        public async Task<ViewRecordsResponse<InterZonalPromotion>> InterZonalPromotionRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<InterZonalPromotion> viewRecordsResponse = new ViewRecordsResponse<InterZonalPromotion>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterZonalPromotion>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+
+        public async Task<ViewRecordsResponse<InterZonalRequestTransfer>> InterZonalRequestTranferRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<InterZonalRequestTransfer> viewRecordsResponse = new ViewRecordsResponse<InterZonalRequestTransfer>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterZonalRequestTransfer>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+
+        public async Task<ViewRecordsResponse<RegionMaster>> RegionMasterRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<RegionMaster> viewRecordsResponse = new ViewRecordsResponse<RegionMaster>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<RegionMaster>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
+
+        public async Task<ViewRecordsResponse<ZoneMaster>> ZoneMasterRecords(int id, Pagination pagination)
+        {
+            int fileTypeCode = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("ExcelFileTypeCode"));
+            int batchId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetInt32("batchId"));
+            ViewRecordsResponse<ZoneMaster> viewRecordsResponse = new ViewRecordsResponse<ZoneMaster>();
+            int numberOfRecords = pagination.data.length;
+            int pageNumber = (pagination.data.start / numberOfRecords) + 1;
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            var result = await GetUploadedRecordsByBatchId(request);
+            var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<ZoneMaster>>(result);
+            viewRecordsResponse.recordsFiltered = response.TotalRecords;
+            viewRecordsResponse.recordsTotal = numberOfRecords;
+            viewRecordsResponse.data = response.Data;
+            return viewRecordsResponse;
+        }
         #region Functions for Excel Format Validation and Upload 
         private async Task<ExcelUploadResponseModel> DepartmentMasterFileUpload(IFormFile excelFile, string uploadedBy)
         {
@@ -1089,8 +1233,7 @@ namespace PostingManagement.UI.Services.ExcelUploadService
                 }
             }
             
-        }
-        
+        }        
         #endregion
     }
 }

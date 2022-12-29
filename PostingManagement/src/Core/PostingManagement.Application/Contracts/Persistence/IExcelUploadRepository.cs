@@ -1,3 +1,5 @@
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData;
+using PostingManagement.Domain;
 using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Application.Contracts.Persistence
@@ -28,6 +30,6 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <param name="fileTypeCode">int</param>
         /// <param name="batchId">int</param>
         /// <returns>a  serialized list of the respective Excel Model</returns>
-        public Task<string> GetAllRecords<T>(int fileTypeCode, int batchId);
+        public Task<string> GetAllRecords<T>(GetExcelDataQuery<T> request) where T : class;
     }
 }

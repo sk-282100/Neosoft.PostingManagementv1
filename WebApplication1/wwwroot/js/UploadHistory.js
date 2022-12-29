@@ -46,7 +46,7 @@ function OnSuccess(response) {
                     orderable: false,
                     data: null,
                     "mRender": function (data, type, full) {
-                        if (data.uploadStatus.toLowerCase() == "success") {
+                        if (data.uploadStatus.toLowerCase() == "success") {                            
                             return '<a id="viewButton" class="btn btn-success btn-sm" onclick=ViewRecords(' + data.batchId + ')>View</a>';
                         } else if (data.uploadStatus.toLowerCase() == "failed") {
                             var failedMessage = "'"+ data.reasonOfFailure +"'";
