@@ -307,6 +307,41 @@ namespace PostingManagement.Persistence.Repositories
             var historyList = await _dbContext.Set<UploadHistoryDetails>().FromSqlRaw("EXEC STP_GetUploadHistoryDetails @fileTypeCode", fileTypeCodeParameter).ToListAsync();
             return historyList;
         }
+        
+        public async Task<WorkFlowStatusModel> GetWorkFlowStatus()
+        {
+            SqlParameter employeeMasterListStatus = new SqlParameter() { ParameterName = "@employeeMasterListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter vacancyListStatus = new SqlParameter() { ParameterName = "@vacancyListStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter interRequestStatus = new SqlParameter() { ParameterName = "@interRequestStatus", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter generateEmployeeTransfer = new SqlParameter() { ParameterName = "@generateEmployeeTransfer", SqlDbType = SqlDbType.VarChar, Size = 10, Direction = ParameterDirection.Output };
+            SqlParameter workFlowStatus = new SqlParameter() { ParameterName = "@workflowStatus", SqlDbType = SqlDbType.VarChar, Size = 20, Direction = ParameterDirection.Output };
+
+            var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_CheckIfListsUploadedForCurrentMonth @employeeMasterListStatus OUTPUT,@vacancyListStatus OUTPUT,@interRequestStatus OUTPUT,@generateEmployeeTransfer OUTPUT,@workflowStatus OUTPUT",
+                employeeMasterListStatus, vacancyListStatus, interRequestStatus, generateEmployeeTransfer, workFlowStatus);
+
+            WorkFlowStatusModel status = new WorkFlowStatusModel()
+            {
+
+                EmployeeMasterListStatus = Convert.ToString(employeeMasterListStatus.Value),
+                VacancyListStatus = Convert.ToString(vacancyListStatus.Value),
+                InterRequestStatus = Convert.ToString(interRequestStatus.Value),
+                GenerateEmployeeTransfer = Convert.ToString(generateEmployeeTransfer.Value),
+                WorkFlowstatus = Convert.ToString(workFlowStatus.Value)
+            };
+            return status;
+        }
+        public async Task<bool> ResetWorkflow()
+        {
+            try
+            {
+                var result = await _dbContext.Database.ExecuteSqlRawAsync("EXEC STP_ResetWorkFlow");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
 

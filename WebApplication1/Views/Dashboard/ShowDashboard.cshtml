@@ -38,45 +38,55 @@
                     <div class="text-center">
                         <span class="fs-3" id="monthAndYear">@DateTime.Today.ToString("MMMM yyyy")</span>
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <button id="resetButton" type="button" onclick="" class="btn btn-danger mx-4">Reset</button>
-                        <button id="completeButton" type="button" onclick="" class="btn btn-success">Complete</button>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <b>status : </b><i class="px-2 py-1 mx-2 fw-semibold bg-opacity-10 border border-opacity-10 rounded-2" id="workflowStatus"></i>
+                        </div>
+                        <button id="resetWorkflowBtn" type="button" onclick="" class="btn btn-danger mx-4">Reset</button>
                     </div>
                     <div class="container d-flex flex-column justify-content-center align-items-center">
                         <div class="progresses">
-                            <div class="steps">
-                                <span><i class="bi bi-check-lg"></i></span>
+                            <div id="steps1" class="steps">
+                                <span>1</span>
                             </div>
-                            <span class="line"></span>
+                            <span id="line1" class="line"><div></div></span>
 
-                            <div class="steps">
-                                <span><i class="bi bi-check-lg"></i></span>
-                            </div>
-
-                            <span class="line"></span>
-
-                            <div class="steps">
-                                <span><i class="bi bi-check-lg"></i></span>
+                            <div id="steps2" class="steps">
+                                <span>2</span>
                             </div>
 
-                            <span class="line"></span>
+                            <span id="line2" class="line"><div></div></span>
 
-                            <div class="steps">
-                                <span class="font-weight-bold">4</span>
+                            <div id="steps3" class="steps">
+                                <span>3</span>
+                            </div>
+
+                            <span id="line3" class="line"><div></div></span>
+
+                            <div id="steps4" class="steps">
+                                <span >4</span>
+                            </div>
+                            <span id="line4" class="line"><div></div></span>
+
+                            <div id="steps5" class="steps">
+                                <span>5</span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-evenly w-100 pt-2">
                             <div class="text-center textbelowstep">
-                                <span> Employee Transfer List</span>
+                                <span> Employee Master List</span>
                             </div>
                             <div class="text-center textbelowstep">
                                 <span> Vacancy List</span>
                             </div>
                             <div class="text-center textbelowstep">
-                                <span> Request Transfer List (Zonal)</span>
+                                <span> Request Transfer List (Zonal/Region)</span>
                             </div>
                             <div class="text-center textbelowstep">
-                                <span> Promotion Transfer List (Zonal)</span>
+                                <span> Generate Employee Transfer List</span>
+                            </div>
+                            <div class="text-center textbelowstep">
+                                <span>Completed</span>
                             </div>
                         </div>
                     </div>

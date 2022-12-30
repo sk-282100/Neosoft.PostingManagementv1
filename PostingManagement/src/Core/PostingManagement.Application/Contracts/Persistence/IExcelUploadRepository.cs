@@ -27,9 +27,15 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// A Generic Method which gets the uploaded records by batchId and respective excelfile 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="fileTypeCode">int</param>
-        /// <param name="batchId">int</param>
         /// <returns>a  serialized list of the respective Excel Model</returns>
         public Task<string> GetAllRecords<T>(GetExcelDataQuery<T> request) where T : class;
+        
+        /// <summary>
+        /// Get the status of Employee transfer workflow
+        /// </summary>
+        /// <returns>returns object of status of four status strings</returns>
+        public Task<WorkFlowStatusModel> GetWorkFlowStatus();
+        public Task<bool> ResetWorkflow();
     }
 }
+

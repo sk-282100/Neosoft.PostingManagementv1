@@ -34,5 +34,17 @@ namespace PostingManagement.UI.Services.ExcelUploadService.Contracts
         Task<ViewRecordsResponse<InterZonalRequestTransfer>> InterZonalRequestTranferRecords(int id, Pagination pagination);
         Task<ViewRecordsResponse<RegionMaster>> RegionMasterRecords(int id, Pagination pagination);
         Task<ViewRecordsResponse<ZoneMaster>> ZoneMasterRecords(int id, Pagination pagination);
+        
+        /// <summary>
+        /// Get the status of the employee transfer workflow of current month
+        /// </summary>
+        /// <returns>response model contain's the staus of workflow </returns>
+        public Task<Response<GetWorkFlowStatus>> GetWorkFlowStaus();
+        
+        /// <summary>
+        /// delete the Uploaded excel for reset the workflow 
+        /// </summary>
+        /// <returns>response model containing the deletion status </returns>
+        public Task<Response<bool>> ResetWorkflow();
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PostingManagement.Application.Features.ExcelUpload.Command;
+using PostingManagement.Application.Features.ExcelUpload.Command.ResetWorkflowCommand;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.DepartmentMasterRecords;
@@ -12,6 +13,7 @@ using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.In
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.InterZonalRequestRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.RegionMasterRecords;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.ZoneMasterRecords;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelWorkFlowSTatus;
 using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
 using PostingManagement.Application.Helper.Constants;
 using PostingManagement.Domain;
@@ -193,6 +195,22 @@ namespace PostingManagement.Api.Controllers.v1
                     return Ok(response);
             }
             return Ok();
+        }
+
+        [HttpGet("GetWorkflowStatus")]
+        public async Task<IActionResult> GetWorkFlowSatus()
+        {
+            GetWorkFlowStatusQuery request = new GetWorkFlowStatusQuery();
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("ResetWorkflow")]
+        public async Task<IActionResult> ResetWorkflow()
+        {
+            ResetWorkflowCommand request = new ResetWorkflowCommand();
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }
