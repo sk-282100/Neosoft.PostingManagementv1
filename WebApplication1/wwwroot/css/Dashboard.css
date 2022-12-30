@@ -66,9 +66,13 @@
     justify-content: center;
     border-radius: 50%;
 }
-    .steps.active {
+.steps.active {
         color: #fff;
         background-color:green;
+    }
+    .steps.activeError {
+        color: #fff;
+        background-color: #cb1616;
     }
 #monthAndYear {
     font-weight: 600;

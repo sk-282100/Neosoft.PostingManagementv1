@@ -147,6 +147,7 @@ function ShowWorkFlow() {
             $('#itemModal3').modal('show');
             if (response.data != null) {
                 var responseData = response.data;
+                
                 if (responseData.workFlowstatus == "ZO") {
                     $('#workflowStatus').html("Completed");
                     $('#workflowStatus').addClass('text-success bg-success border-success');
@@ -155,24 +156,25 @@ function ShowWorkFlow() {
                     $('#workflowStatus').html("Pending");
                     $('#workflowStatus').addClass('text-warning bg-warning border-warning');
                 }
+                var status = [responseData.employeeMasterListStatus, responseData.vacancyListStatus, responseData.interRequestStatus,"true","true"]
                 if (responseData.workFlowstatus == "ZO") {
-                    AnimateProgressBar(1, 5);
+                    AnimateProgressBar(1, 5, status);
                     $('#resetWorkflowBtn').prop("disabled", true);
                 }
                 else if (responseData.generateEmployeeTransfer == "true") {
-                    AnimateProgressBar(1, 4);
+                    AnimateProgressBar(1, 4, status);
                     $('#resetWorkflowBtn').prop("disabled", false);
                 }
                 else if (responseData.interRequestStatus == "true") {
-                    AnimateProgressBar(1, 3);
+                    AnimateProgressBar(1, 3, status);
                     $('#resetWorkflowBtn').prop("disabled", false);
                 }
                 else if (responseData.vacancyListStatus == "true") {
-                    AnimateProgressBar(1, 2);
+                    AnimateProgressBar(1, 2, status);
                     $('#resetWorkflowBtn').prop("disabled", false);
                 }
                 else if (responseData.employeeMasterListStatus == "true") {
-                    AnimateProgressBar(1, 1);
+                    AnimateProgressBar(1, 1, status);
                     $('#resetWorkflowBtn').prop("disabled", false);
                 }
                 else {
@@ -190,10 +192,18 @@ function ShowWorkFlow() {
     });
    
 };
-function AnimateProgressBar(i , count) {
+function AnimateProgressBar(i, count,status) {
+    
     $("#steps" + i + "").empty();
-    $("#steps" + i + "").append('<span><i class="bi bi-check-lg"></i><span>');
-    $("#steps" + i + "").addClass("active");
+    if (status[i - 1] == "true") {
+        $("#steps" + i + "").append('<span><i class="bi bi-check-lg"></i><span>');
+        $("#steps" + i + "").addClass("active");
+    }
+    else {
+        $("#steps" + i + "").append('<span><i class="bi bi-x"></i><span>');
+        $("#steps" + i + "").addClass("activeError");
+    }
+   
     i++;
     if (i > 1 && i<=count) {
         $("#line" + (i - 1)+" div").animate({ width: "100%" }, {
@@ -201,7 +211,7 @@ function AnimateProgressBar(i , count) {
             easing: "linear",
             complete: function () {
                 if (i <= count) {
-                    AnimateProgressBar(i, count);
+                    AnimateProgressBar(i, count,status);
                 }
             }
         });
