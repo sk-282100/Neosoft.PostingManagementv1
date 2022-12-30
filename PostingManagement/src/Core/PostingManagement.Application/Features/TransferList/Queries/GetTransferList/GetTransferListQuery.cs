@@ -10,5 +10,6 @@ namespace PostingManagement.Application.Features.TransferList.Queries.GetTransfe
         public int NumberOfRecords { get; set; }
         public string SortDirection { get; set; }
         public string SortColumn { get; set; }
+        public string Search { get; set; }
     }
 }

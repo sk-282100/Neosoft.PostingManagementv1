@@ -28,9 +28,10 @@ namespace PostingManagement.Persistence.Repositories
             SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
             SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar,Size=20, Value = request.SortDirection };
             SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar,Size=30, Value = request.SortColumn };
+            SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
             SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int , Direction = ParameterDirection.Output };
-            var result =  _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_ServerSideGetTransferDataAndPromotionData @PageNumber, @NumberOfRecords, @SortDirection,@SortColumn,@TotalRecords OUTPUT",
-                pageNumerParameter, numberOfRecordsParameter,sortDirectionParameter,sortColumnParameter, totalRecordsParameter).ToList();
+            var result =  _dbContext.Set<TransferListVM>().FromSqlRaw("EXEC STP_ServerSideGetTransferDataAndPromotionData @PageNumber, @NumberOfRecords, @SortDirection,@SortColumn,@search,@TotalRecords OUTPUT",
+                pageNumerParameter, numberOfRecordsParameter,sortDirectionParameter,sortColumnParameter,searchParameter, totalRecordsParameter).ToList();
             int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
             return new TransferListReponse() { Data = result, TotalRecords = totalRecords };
         }
