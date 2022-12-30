@@ -1,13 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PostingManagement.UI.Models;
-
 using PostingManagement.UI.Models.EmployeeTransferModels;
 using PostingManagement.UI.Services.TransferService.Contracts;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
-using PostingManagement.UI.CustomActionFilters;
-using Microsoft.AspNetCore.Mvc.Routing;
-using PostingManagement.UI.Models;
-using DocumentFormat.OpenXml.Office.Word;
 using PostingManagement.UI.Models.EmployeeTransferModels.RequestModels;
 
 namespace PostingManagement.UI.Controllers
@@ -46,9 +41,12 @@ namespace PostingManagement.UI.Controllers
             //Request
             var request = new TransferListRequestModel() { NumberOfRecords = numberOfRecords,PageNumber=pageNumber,SortColumn=sortColumn,SortDirection=sortDirection,Search=search}; 
             var result = await _transferService.GetEmployeesForTransfer(request);
-            dtResponse.recordsFiltered = result.TotalRecords;
-            dtResponse.recordsTotal = result.Data.Count();
-            dtResponse.data = result.Data;
+            if(result != null)
+            {
+                dtResponse.recordsFiltered = result.TotalRecords;
+                dtResponse.recordsTotal = result.Data.Count();
+                dtResponse.data = result.Data;
+            }
             return Json(dtResponse);
         }        
 

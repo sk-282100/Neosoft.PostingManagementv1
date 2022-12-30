@@ -66,13 +66,16 @@ function GetEmployeesListTransfer() {
                     className: "text-center",
                     searchable: false,
                     orderable: true
+                },
+                {
+                    targets: [0, 1],
+                    orderable: false
                 }
             ],
             columns: [
                 {
                     targets: 0,
                     className: 'dt-control',
-                    orderable: false,
                     searchable:false,
                     data: null,
                     defaultContent: '',
