@@ -86,14 +86,14 @@ function GetEmployeesListTransfer() {
                         selectRow: true
                     }
                 },
-                { targets: 2, data: 'employeeId' },
-                { targets: 3, data: 'employeeName' },
-                { targets: 4, data: 'scale' },
-                { targets: 5, data: 'scaleCode' },
-                { targets: 6, data: 'ubijobRole' },
-                { targets: 7, data: 'regionName' },
-                { targets: 8, data: 'zoneName' },
-                { targets: 9, data: 'movementType' },
+                {  data: 'employeeId' ,name:'EmployeeId'},
+                {  data: 'employeeName' ,name:'EmployeeName'},
+                {  data: 'scale' ,name:'scale'},
+                {  data: 'scaleCode' ,name:'scaleCode'},
+                { data: 'ubijobRole', name:'ubijobRole'},
+                {  data: 'regionName',name:'regionName' },
+                {  data: 'zoneName' ,name:'zoneName'},
+                {  data: 'movementType' ,name:'movementType'},
 
 
             ],

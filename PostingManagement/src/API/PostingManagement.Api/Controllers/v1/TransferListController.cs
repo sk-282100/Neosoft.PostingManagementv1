@@ -23,10 +23,10 @@ namespace PostingManagement.Api.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpGet("GetTransferList")]
-        public async Task<IActionResult> GetTransferList(int pageNumber, int numberOfRecords)
+        [HttpPost("GetTransferList")]
+        public async Task<IActionResult> GetTransferList(GetTransferListQuery request)
         {
-            var request = new GetTransferListQuery() { PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
+            //var request = new GetTransferListQuery() { PageNumber = pageNumber, NumberOfRecords = numberOfRecords };
             var response = await _mediator.Send(request);
             return Ok(response);
         }

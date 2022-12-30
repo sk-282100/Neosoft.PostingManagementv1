@@ -1,61 +1,90 @@
-﻿function ViewRecords(BatchId) {
-    $.ajax({
-        type: "GET",
-        url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
-        data: '{}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: GetRecords,
-        failure: function (response) {
-            window.location.replace("/Error/Error500");
-        },
-        error: function (response) {
-            window.location.replace("/Error/Error500");
-        }
-    });
+﻿//$.ajax({
+//    type: "GET",
+//    url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+//    data: '{}',
+//    contentType: "application/json; charset=utf-8",
+//    dataType: "json",
+//    success: GetRecords,
+//    failure: function (response) {
+//        window.location.replace("/Error/Error500");
+//    },
+//    error: function (response) {
+//        window.location.replace("/Error/Error500");
+//    }
+//});
+
+function ViewRecords(BatchId) {
+    GetRecords(BatchId);    
 }
-function GetRecords(response) {
+function GetRecords(BatchId) {
     $('#itemModel').modal('show');
     if ($("#excelUploadType").val() == 3) {
-        GetEmployeeMasterRecords(response);
+        GetEmployeeMasterRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 2) {
-        GetDepartmentMasterRecords(response);
+        GetDepartmentMasterRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 1) {
-        GetBranchMasterRecords(response);
+        GetBranchMasterRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 4) {
-        GetInterRegionalPromotionRecords(response);
+        GetInterRegionalPromotionRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 5) {
-        GetInterRegionalRequestTransferRecords(response);
+        GetInterRegionalRequestTransferRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 6) {
-        GetInterZonalPromotionRecords(response);
+        GetInterZonalPromotionRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 7) {
-        GetInterZonalRequestTransferRecords(response)
+        GetInterZonalRequestTransferRecords(BatchId)
     }
     else if ($("#excelUploadType").val() == 8) {
-        GetRegionMasterRecords(response);
+        GetRegionMasterRecords(BatchId);
     }
     else if ($("#excelUploadType").val() == 9) {
-        GetZoneMasterRecords(response);
+        GetZoneMasterRecords(BatchId);
     }
 };
-function GetDepartmentMasterRecords(response) {
+function GetDepartmentMasterRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#departmentMasterRecords')) {
         $('#departmentMasterRecords').DataTable().destroy();
     }
     $("#departmentMasterRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },
                 { data: 'departmentCode' },
@@ -66,18 +95,45 @@ function GetDepartmentMasterRecords(response) {
     $("#departmentMasterRecords").show();
     ShowRecords();
 }
-function GetEmployeeMasterRecords(response) {
+function GetEmployeeMasterRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#employeeMasterRecords')) {
         $('#employeeMasterRecords').DataTable().destroy();
     }
     $("#employeeMasterRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },
                 { data: 'employeeId' },
@@ -110,18 +166,45 @@ function GetEmployeeMasterRecords(response) {
     $("#employeeMasterRecords").show();
     ShowRecords();
 }
-function GetBranchMasterRecords(response) {
+function GetBranchMasterRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#branchMasterRecords')) {
         $('#branchMasterRecords').DataTable().destroy();
     }
     $("#branchMasterRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },
                 { data: 'oldBranchCode' },
@@ -149,18 +232,45 @@ function GetBranchMasterRecords(response) {
     $("#branchMasterRecords").show();
     ShowRecords();
 }
-function GetInterRegionalPromotionRecords(response) {
+function GetInterRegionalPromotionRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#interRegionalPromotionRecords')) {       
         $('#interRegionalPromotionRecords').DataTable().destroy();
     }
     $("#interRegionalPromotionRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },                     
                 { data: 'employeeId' },
@@ -175,18 +285,45 @@ function GetInterRegionalPromotionRecords(response) {
     $("#interRegionalPromotionRecords").show();
     ShowRecords();
 }
-function GetInterRegionalRequestTransferRecords(response) {
+function GetInterRegionalRequestTransferRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#interRegionalRequestRecords')) {
         $('#interRegionalRequestRecords').DataTable().destroy();
     }
     $("#interRegionalRequestRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },
                 { data: 'employeeId'},
@@ -227,18 +364,45 @@ function GetInterRegionalRequestTransferRecords(response) {
     $("#interRegionalRequestRecords").show();
     ShowRecords();
 }
-function GetInterZonalPromotionRecords(response) {
+function GetInterZonalPromotionRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#interZonalPromotionRecords')) {
         $('#interZonalPromotionRecords').DataTable().destroy();
     }
     $("#interZonalPromotionRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },
                 { data: 'employeeId' },
@@ -269,18 +433,45 @@ function GetInterZonalPromotionRecords(response) {
     $("#interZonalPromotionRecords").show();
     ShowRecords();
 }
-function GetInterZonalRequestTransferRecords(response) {
+function GetInterZonalRequestTransferRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#interZonalRequestRecords')) {
         $('#interZonalRequestRecords').DataTable().destroy();
     }
     $("#interZonalRequestRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
                 { data: 'batchId' },
                 { data: 'employeeId' },
@@ -328,18 +519,45 @@ function GetInterZonalRequestTransferRecords(response) {
     $("#interZonalRequestRecords").show();
     ShowRecords();
 }
-function GetRegionMasterRecords(response) {
+function GetRegionMasterRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#regionMasterRecords')) {
         $('#regionMasterRecords').DataTable().destroy();
     }
     $("#regionMasterRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
 
                 { data: 'batchId' },    
@@ -360,18 +578,45 @@ function GetRegionMasterRecords(response) {
     $("#regionMasterRecords").show();
     ShowRecords();
 }
-function GetZoneMasterRecords(response) {
+function GetZoneMasterRecords(BatchId) {
     if ($.fn.dataTable.isDataTable('#zoneMasterRecords')) {
         $('#zoneMasterRecords').DataTable().destroy();
     }
     $("#zoneMasterRecords").DataTable(
         {
-            bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            clear: true,
+            serverSide: true,
+            /*searching: false,*/
+            destroy: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],
+            autoFill: false,
             bFilter: true,
-            bSort: true,
+            /*bSort: true,*/
             bPaginate: true,
-            data: response,
+            initComplete: function (settings, json) {
+                $(this.api().table().container()).find('input').attr('autocomplete', 'off');
+            },
+            ajax: {
+                url: "/Posting/GetUploadedDataByBatchId/" + parseInt(BatchId),
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: function (d) {
+                    var data = { data: d };
+                    return JSON.stringify(data);
+                },
+                AutoWidth: false,
+                dataSrc: function (json) {
+                    var jsonData = json;
+                    json.draw = jsonData.draw;
+                    json.recordsTotal = jsonData.recordsTotal;
+                    json.recordsFiltered = jsonData.recordsFiltered;
+                    //json.data = JSON.parse(jsonData.data);   
+                    return json.data;
+                }
+            },
+            dom: 'lBfrtip',
             columns: [
 
                 { data: 'batchId' },
