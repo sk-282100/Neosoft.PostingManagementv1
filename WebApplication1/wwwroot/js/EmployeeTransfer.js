@@ -7,8 +7,7 @@ function GetEmployeesListTransfer() {
     table = $("#employeeTransfer").DataTable(
         {
             clear: true,
-            serverSide: true,
-            /*searching: false,*/
+            serverSide: true,            
             destroy: true,
             pageLength: 5,
             lengthMenu: [[5, 10, 25, 50, 1000000], [5, 10, 25, 50, 'all']],

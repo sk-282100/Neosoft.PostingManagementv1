@@ -130,8 +130,7 @@ namespace PostingManagement.Api.Controllers.v1
             var response = await _mediator.Send(request);
             return Ok(response);
         }
-
-        //[HttpPost("GetAllRecords")]
+        
         [HttpPost("GetAllRecords")]
         public async Task<IActionResult> GetExcelData(UploadedRecordsRequestAPI request)
         {
@@ -141,55 +140,55 @@ namespace PostingManagement.Api.Controllers.v1
             switch (request.FileTypeCode)
             {
                 case (int)ExcelFileType.BranchMaster:
-                    request2 = new GetExcelDataQuery<BranchMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<BranchMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<BranchMasterRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.DepartmentMaster:
-                    request2 = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<DepartmentMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<DepartmentMasterRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.EmployeeMaster:
-                    request2 = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<EmployeeMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);                    
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<EmployeeMasterRecordsDto>>((string)result);                    
                     return Ok(response);
 
                 case (int)ExcelFileType.InterRegionPromotion:
-                    request2 = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<InterRegionalPromotion>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<InterRegionalPromotionRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.InterRegionRequestTransfer:
-                    request2 = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<InterRegionRequestTransfer>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<InterRegionalRequestRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.InterZonalPromotion:
-                    request2 = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<InterZonalPromotion>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<InterZonalPromotionRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.InterZonalRequestTranfer:
-                    request2 = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<InterZonalRequestTransfer>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<InterZonalRequestRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.RegionMaster:
-                    request2 = new GetExcelDataQuery<RegionMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<RegionMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<RegionMasterRecordsDto>>((string)result);
                     return Ok(response);
 
                 case (int)ExcelFileType.ZoneMaster:
-                    request2 = new GetExcelDataQuery<ZoneMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords };
+                    request2 = new GetExcelDataQuery<ZoneMaster>() { FileTypeCode = request.FileTypeCode, BatchId = request.BatchId, PageNumber = request.PageNumber, NumberOfRecords = request.NumberOfRecords, SortDirection = request.SortDirection, SortColumn = request.SortColumn };
                     result = await _mediator.Send(request2);
                     response = JsonConvert.DeserializeObject<UploadedRecordsResponse<ZoneMasterRecordsDto>>((string)result);
                     return Ok(response);
