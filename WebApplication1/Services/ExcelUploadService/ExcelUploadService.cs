@@ -144,8 +144,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<EmployeeMaster>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -167,8 +168,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search =  search};
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<BranchMaster>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -190,8 +192,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };            
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };            
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<DepartmentMaster>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -213,8 +216,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterRegionalPromotion>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -236,8 +240,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterRegionRequestTransfer>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -259,8 +264,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterZonalPromotion>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -282,8 +288,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<InterZonalRequestTransfer>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -305,8 +312,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<RegionMaster>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;
@@ -328,8 +336,9 @@ namespace PostingManagement.UI.Services.ExcelUploadService
             string[] sortArray = sort.Split(" ");
             string sortColumn = sortArray[0];
             string sortDirection = sortArray[1];
+            string search = pagination.data.search.value;
 
-            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn };
+            UploadedRecordsRequest request = new UploadedRecordsRequest() { FileTypeCode = fileTypeCode, BatchId = batchId, PageNumber = pageNumber, NumberOfRecords = numberOfRecords, SortDirection = sortDirection, SortColumn = sortColumn, Search = search };
             var result = await GetUploadedRecordsByBatchId(request);
             var response = JsonConvert.DeserializeObject<ViewRecordsResponseMVC<ZoneMaster>>(result);
             viewRecordsResponse.recordsFiltered = response.TotalRecords;

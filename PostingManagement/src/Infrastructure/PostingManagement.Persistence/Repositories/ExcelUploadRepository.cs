@@ -151,9 +151,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var branchMasterList = _dbContext.Set<BranchMasterRecordsDto>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection,@SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var branchMasterList = _dbContext.Set<BranchMasterRecordsDto>().FromSqlRaw("EXEC STP_BranchMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<BranchMasterRecordsDto> result = new()
                 {
@@ -170,9 +171,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var departmentMasterList = _dbContext.Set<DepartmentMasterRecordsDto>().FromSqlRaw("EXEC STP_DepartmentMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var departmentMasterList = _dbContext.Set<DepartmentMasterRecordsDto>().FromSqlRaw("EXEC STP_DepartmentMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<DepartmentMasterRecordsDto> result = new()
                 {
@@ -189,9 +191,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var employeeMasterList = _dbContext.Set<EmployeeMasterRecordsDto>().FromSqlRaw("EXEC STP_EmployeeMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection,@SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var employeeMasterList = _dbContext.Set<EmployeeMasterRecordsDto>().FromSqlRaw("EXEC STP_EmployeeMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection,@SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<EmployeeMasterRecordsDto> result = new()
                 {
@@ -208,9 +211,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var interRegionPromotionList = _dbContext.Set<InterRegionalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterRegionalPromotionTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var interRegionPromotionList = _dbContext.Set<InterRegionalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterRegionalPromotionTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<InterRegionalPromotionRecordsDto> result = new()
                 {
@@ -227,9 +231,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var interRegionRequestList = _dbContext.Set<InterRegionalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterRegionRequestTransferTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var interRegionRequestList = _dbContext.Set<InterRegionalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterRegionRequestTransferTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<InterRegionalRequestRecordsDto> result = new()
                 {
@@ -246,9 +251,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var interZonalPromotionList = _dbContext.Set<InterZonalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterZonalPromotionTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var interZonalPromotionList = _dbContext.Set<InterZonalPromotionRecordsDto>().FromSqlRaw("EXEC STP_InterZonalPromotionTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<InterZonalPromotionRecordsDto> result = new()
                 {
@@ -265,9 +271,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var interZonalRequestList = _dbContext.Set<InterZonalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterZonalRequestTransferTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var interZonalRequestList = _dbContext.Set<InterZonalRequestRecordsDto>().FromSqlRaw("EXEC STP_InterZonalRequestTransferTbl_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<InterZonalRequestRecordsDto> result = new()
                 {
@@ -284,9 +291,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var regionMasterList = _dbContext.Set<RegionMasterRecordsDto>().FromSqlRaw("EXEC STP_RegionMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var regionMasterList = _dbContext.Set<RegionMasterRecordsDto>().FromSqlRaw("EXEC STP_RegionMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<RegionMasterRecordsDto> result = new()
                 {
@@ -303,9 +311,10 @@ namespace PostingManagement.Persistence.Repositories
                 SqlParameter numberOfRecordsParameter = new SqlParameter() { ParameterName = "@NumberOfRecords", SqlDbType = SqlDbType.Int, Value = request.NumberOfRecords };
                 SqlParameter sortDirectionParameter = new SqlParameter() { ParameterName = "@SortDirection", SqlDbType = SqlDbType.VarChar, Size = 20, Value = request.SortDirection };
                 SqlParameter sortColumnParameter = new SqlParameter() { ParameterName = "@SortColumn", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.SortColumn };
+                SqlParameter searchParameter = new SqlParameter() { ParameterName = "@search", SqlDbType = SqlDbType.VarChar, Size = 30, Value = request.Search };
                 SqlParameter totalRecordsParameter = new SqlParameter() { ParameterName = "@TotalRecords", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-                var zoneMasterList = _dbContext.Set<ZoneMasterRecordsDto>().FromSqlRaw("EXEC STP_ZoneMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @TotalRecords OUTPUT",
-                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, totalRecordsParameter).ToList();
+                var zoneMasterList = _dbContext.Set<ZoneMasterRecordsDto>().FromSqlRaw("EXEC STP_ZoneMasterDataTable_DisplayRecordsByBatch @batchId,@PageNumber,@NumberOfRecords, @SortDirection, @SortColumn, @search, @TotalRecords OUTPUT",
+                    BatchId, pageNumerParameter, numberOfRecordsParameter, sortDirectionParameter, sortColumnParameter, searchParameter, totalRecordsParameter).ToList();
                 int totalRecords = Convert.ToInt32(totalRecordsParameter.Value);
                 UploadedRecordsResponse<ZoneMasterRecordsDto> result = new()
                 {

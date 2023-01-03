@@ -17,5 +17,6 @@ namespace PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelDat
         public int NumberOfRecords { get; set; }
         public string SortDirection { get; set; }
         public string SortColumn { get; set; }
+        public string Search { get; set; }
     }
 }
