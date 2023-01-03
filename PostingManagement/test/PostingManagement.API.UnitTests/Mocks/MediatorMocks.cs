@@ -17,6 +17,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using PostingManagement.Application.Features.ExcelUpload.Command;
+using PostingManagement.Domain.Entities;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetUploadHistoryList;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelData.BranchMasterRecords;
+using PostingManagement.Domain;
+using Newtonsoft.Json;
+using PostingManagement.Application.Features.ExcelUpload.Command.ResetWorkflowCommand;
+using PostingManagement.Application.Features.ExcelUpload.Queries.GetExcelWorkFlowSTatus;
 using PostingManagement.Application.Features.TransferList.Queries.GetTransferList;
 using PostingManagement.Domain.Entities;
 using PostingManagement.Application.Features.TransferList.Queries.GetEmployeeDetailsById;
@@ -46,12 +55,26 @@ namespace PostingManagement.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<TransactionCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Guid>());
 
             mockMediator.Setup(m => m.Send(It.IsAny<GetOrdersForMonthQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new PagedResponse<IEnumerable<OrdersForMonthDto>>(null, 10, 1, 2));
+
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<BranchMaster>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<EmployeeMaster>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<InterRegionalPromotion>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<InterRegionRequestTransfer>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<InterZonalPromotion>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<InterZonalRequestTransfer>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<RegionMaster>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<ZoneMaster>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<DepartmentMaster>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ExcelUploadCommand<VacancyPool>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ExcelUploadDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetUploadHistoryQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<GetUploadHistoryDto>>());           
+            mockMediator.Setup(m => m.Send(It.IsAny<GetWorkFlowStatusQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<GetWorkFlowStatusDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<ResetWorkflowCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<bool>());
+
             mockMediator.Setup(m => m.Send(It.IsAny<GetTransferListQuery>(),It.IsAny<CancellationToken>())).ReturnsAsync(new Response<TransferListReponse>());
             mockMediator.Setup(m => m.Send(It.IsAny<GetEmployeeDetailsByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<EmployeeDetailsForTransferList>());
             mockMediator.Setup(m => m.Send(It.IsAny<GetSelectedTransferListByCoQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<TransferListVM>>());
             mockMediator.Setup(m => m.Send(It.IsAny<GetMatchingRequestTransferListQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<MatchingRequestTransferVacancy>>());
             mockMediator.Setup(m => m.Send(It.IsAny<TransferListForZOCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<ZOTransferListReponse>());
-
 
             return mockMediator;
         }
