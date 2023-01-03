@@ -59,10 +59,6 @@ namespace PostingManagement.Api.Controllers.v1
         {
             GetUserByIdQuery request = new GetUserByIdQuery() { UId=Id};
             var response = await _mediator.Send(request);
-            if (response.Succeeded == false && response.Data.UserName==null)
-            {
-                 return NotFound(response);
-            } ;
             return Ok(response);
         }
         [HttpGet("IsUserNamePresent")]
