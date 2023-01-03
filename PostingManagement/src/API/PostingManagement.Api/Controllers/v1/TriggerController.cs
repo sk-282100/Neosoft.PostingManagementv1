@@ -32,10 +32,6 @@ namespace PostingManagement.Api.Controllers.v1
         public async Task<IActionResult> UpdateTrigger(UpdateTriggerCommand request)
         {
             var response = await _mediator.Send(request);
-            if (response.Succeeded == false && response.Message == "This Trigger is not Present")
-            {
-                return NotFound(response);
-            }
             return Ok(response);
         }
 
@@ -60,10 +56,7 @@ namespace PostingManagement.Api.Controllers.v1
         {
             GetTriggerByIdQuery request = new GetTriggerByIdQuery() { TriggerId = Id };
             var response = await _mediator.Send(request);
-            if (response.Succeeded == false && response.Data.TriggerId == null)
-            {
-                return NotFound(response);
-            };
+           
             return Ok(response);
         }
         
