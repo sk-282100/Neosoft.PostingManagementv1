@@ -5,11 +5,11 @@ using PostingManagement.Domain.Entities;
 
 namespace PostingManagement.Persistence.Repositories
 {
-    public class RoleRepository : BaseRepository<Role>, IRoleRepository
+    public class RoleRepository : IRoleRepository
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly ILogger _logger;
-        public RoleRepository(ApplicationDbContext applicationDbContext, ILogger<Role> logger) : base(applicationDbContext, logger)
+        public RoleRepository(ApplicationDbContext applicationDbContext, ILogger<Role> logger)
         {
             _applicationDbContext = applicationDbContext;
             _logger = logger;
@@ -44,6 +44,15 @@ namespace PostingManagement.Persistence.Repositories
         public async Task<bool> IsRoleAlreadyExist(string roleName)
         {
             return await _applicationDbContext.RoleTable.AnyAsync(x => x.RoleName == roleName);
+        }
+        public async Task<bool> UpdateRole(int roleId, string roleName)
+        {
+            var role = await _applicationDbContext.RoleTable.FirstOrDefaultAsync(x => x.RoleId == roleId);
+            role.RoleId = roleId;
+            role.RoleName = roleName;            
+            //Update
+            _applicationDbContext.Entry(role).State = EntityState.Modified;
+            return _applicationDbContext.SaveChanges() == 1 ? true : false;
         }
     }
 }

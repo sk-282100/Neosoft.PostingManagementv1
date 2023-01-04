@@ -7,7 +7,7 @@ namespace PostingManagement.Application.Features.Roles.Commands.AddRole
 {
     public class AddRoleCommandHandler : IRequestHandler<AddRoleCommand, Response<bool>>
     {
-        private IRoleRepository _roleRepository;        
+        private IRoleRepository _roleRepository;
         public AddRoleCommandHandler(IRoleRepository roleRepository)
         {
             _roleRepository = roleRepository;            

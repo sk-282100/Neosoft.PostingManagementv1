@@ -2,7 +2,7 @@
 
 namespace PostingManagement.Application.Contracts.Persistence
 {
-    public interface IRoleRepository : IAsyncRepository<Role>
+    public interface IRoleRepository
     {
         /// <summary>
         /// Add Role using Role Name
@@ -39,6 +39,13 @@ namespace PostingManagement.Application.Contracts.Persistence
         /// <param name="roleName"> Role Name to search in the table</param>
         /// <returns>true if Role Exixts; false if Role does not exist</returns>
         public Task<bool> IsRoleAlreadyExist(string roleName);
-        
+        /// <summary>
+        /// Updates the existing role with new id and name
+        /// </summary>
+        /// <param name="roleId">role Id to be updated</param>
+        /// <param name="roleName">role name to be updated</param>
+        /// <returns></returns>
+        public Task<bool> UpdateRole(int roleId, string roleName);
+
     }
 }
