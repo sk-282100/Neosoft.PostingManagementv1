@@ -68,7 +68,7 @@ namespace PostingManagement.Application.Profiles
             CreateMap<Role, GetAllRolesDto>().ConvertUsing<GetAllRolesDtoCustomMapper>();
             CreateMap<Role, GetRoleByIdDto>().ConvertUsing<GetRolesByIdCustomMapper>();
             CreateMap<JobFamilies, GetAllJobFamilyDto>().ConvertUsing<GetAllJobFamiliesDtoCustomMapper>();
-            CreateMap<JobFamilies, GetjobFamilyByIdDto>().ConvertUsing<GetJobFamilyByIdCustomMapper>();
+            CreateMap<JobFamilies, GetjobFamilyByIdDto>().ConvertUsing<GetJobFamilyByIdCustomMapper>();            
         }
     }
 }

@@ -22,10 +22,17 @@ namespace PostingManagement.Application.Features.Roles.Commands.EditRole
             string id = _dataProtector.Unprotect(request.RoleId);
             //getting the Role object by RoleId
             Role roleToUpdate = await _roleRepository.GetRoleById(Convert.ToInt32(id));
-            roleToUpdate.RoleName=request.RoleName;// assign the new value
-            //Updating the Records
-            await _roleRepository.UpdateAsync(roleToUpdate);
-            return new Response<bool>() { Data = true, Message = "Role Updated Successfully", Succeeded = true };
+            
+            if(roleToUpdate != null)
+            {
+                bool response = await _roleRepository.UpdateRole(Convert.ToInt32(id), request.RoleName);
+                if (response)
+                {
+                    return new Response<bool>() { Data = true, Message = "Role Updated Successfully", Succeeded = true };
+                }
+                return new Response<bool>() { Message = "Update Failed.", Succeeded = false };
+            }
+            return new Response<bool>() { Message = "Role Does Not Exist.", Succeeded = false };
         }
     }
 }
