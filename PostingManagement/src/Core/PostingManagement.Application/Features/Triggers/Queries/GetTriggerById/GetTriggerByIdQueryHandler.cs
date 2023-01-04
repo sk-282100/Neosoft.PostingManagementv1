@@ -27,11 +27,11 @@ namespace PostingManagement.Application.Features.Triggers.Queries.GetTriggerById
             Trigger trigger = await _triggerRepository.GetTriggerDetailsById(id);
             var response = _mapper.Map<GetTriggerByIdDto>(trigger);
 
-            if (response.TriggerId == null)
+            if (trigger == null)
             {
                 return new Response<GetTriggerByIdDto>() { Succeeded = false, Data = response, Message = "Trigger Not Found " };
             }
-            else if (response.TriggerId != null)
+            else if (trigger != null)
             {
                 return new Response<GetTriggerByIdDto>() { Succeeded = true, Data = response };
             }
